@@ -1,7 +1,10 @@
 import styled, { css, DefaultTheme } from 'styled-components'
 import { ButtonProps } from '.'
 
-type WrappeProps = Pick<ButtonProps, 'size' | 'background' | 'radius'>
+type WrappeProps = Pick<
+  ButtonProps,
+  'size' | 'background' | 'radius' | 'fullWidth'
+>
 
 const wrapperModifiersSize = {
   xxsmall: (theme: DefaultTheme) => css`
@@ -59,8 +62,15 @@ const wrapperModifiersRadius = {
     border-radius: ${theme.border.radius300};
   `
 }
+
+const wrapperModifiersFullWidth = {
+  fullWidth: () =>
+    css`
+      width: 100%;
+    `
+}
 export const Wrapper = styled.button<WrappeProps>`
-  ${({ theme, size, background, radius }) => css`
+  ${({ theme, size, background, radius, fullWidth }) => css`
     color: ${theme.colors.white};
     border: 0;
 
@@ -69,5 +79,7 @@ export const Wrapper = styled.button<WrappeProps>`
     wrapperModifiersBackground[background](theme)}
     ${!!radius &&
     wrapperModifiersRadius[radius](theme)}
+    ${!!fullWidth &&
+    wrapperModifiersFullWidth.fullWidth()}
   `}
 `

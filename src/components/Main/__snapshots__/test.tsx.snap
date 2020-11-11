@@ -70,4 +70,4 @@ exports[`<Main/> should render the heading 1`] = `
     src="/img/hero-illustration.svg"
   />
 </main>
-`
+`;
