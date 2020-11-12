@@ -4,8 +4,9 @@ export const Wrapper = styled.menu`
   ${({ theme }) => css`
     display: flex;
     align-items: center;
-    padding: ${theme.spacings.small} 0;
+    padding: ${theme.spacings.xxsmall} 0;
     justify-content: space-between;
+    background-color: rgba(211, 211, 211, 0.2);
   `}
 `
 
@@ -19,6 +20,7 @@ export const IconWrapper = styled.div`
 `
 export const LogoWrapper = styled.div`
   img {
+    padding-top: 1rem;
     width: 21rem;
     height: 6rem;
   }
@@ -32,6 +34,7 @@ export const MenuNav = styled.div``
 export const MenuLink = styled.a`
   ${({ theme }) => css`
     position: relative;
+    color: ${theme.colors.black};
     font-size: ${theme.font.sizes.small};
     margin: 0.3rem ${theme.spacings.small} 0;
     text-decoration: none;
@@ -43,7 +46,7 @@ export const MenuLink = styled.a`
         position: absolute;
         display: block;
         height: 0.3rem;
-        background-color: ${theme.colors.orange};
+        background-color: ${theme.colors.black};
         animation: hoverAnimation 0.2s forwards;
       }
       @keyframes hoverAnimation {
@@ -103,6 +106,12 @@ export const MenuFull = styled.nav<MenufullProps>`
 
       transform: ${isOpen ? 'translateY(0)' : 'translateY(3rem)'};
       transition: transform 0.3s ease-in-out;
+
+      &:hover {
+        &::after {
+          background-color: ${theme.colors.orange};
+        }
+      }
     }
 
     ${RegisterBox} {
