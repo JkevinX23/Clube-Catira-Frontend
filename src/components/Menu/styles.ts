@@ -4,9 +4,9 @@ export const Wrapper = styled.menu`
   ${({ theme }) => css`
     display: flex;
     align-items: center;
-    padding: ${theme.spacings.xxsmall} 0;
+    padding: ${theme.spacings.xxsmall} 2rem;
     justify-content: space-between;
-    background-color: rgba(211, 211, 211, 0.2);
+    background-color: rgba(211, 211, 211, 0.8);
   `}
 `
 
@@ -79,6 +79,7 @@ export const MenuFull = styled.nav<MenufullProps>`
     transition: opacity 0.3s ease-in-out;
     opacity: ${isOpen ? 1 : 0};
     pointer-events: ${isOpen ? 'all' : 'none'};
+    z-index: 4;
 
     > svg {
       position: absolute;

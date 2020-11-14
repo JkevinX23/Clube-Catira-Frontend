@@ -1,32 +1,47 @@
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
+import media from 'styled-media-query'
 
-export const Wrapper = styled.main`
-  background-color: #06092b;
-  color: #fff;
-  width: 100%;
-  height: 100%;
-  padding: 3rem;
-  display: flex;
-  flex-direction: column;
-  text-align: center;
-  align-items: center;
-  justify-content: center;
+export const Wrapper = styled.div`
+  position: relative;
 `
-export const Logo = styled.img`
-  width: 25rem;
-  /* margin-bottom: 2rem; */
+export const HomeSectionWrapper = styled.div`
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
+`
+type MenuProps = {
+  position: number
+}
+export const MenuWrapper = styled.div<MenuProps>`
+  ${({ position }) => css`
+    position: fixed;
+    opacity: ${position !== 0 ? 1 : 0.8};
+
+    background-color: ${position !== 0
+      ? 'rgba(250, 250, 250, 1)'
+      : 'rgba(250, 250, 240, 0.8)'};
+    top: 0;
+    left: 0;
+    z-index: 2;
+    width: 100%;
+  `}
+`
+export const SobrepositionWrapper = styled.div`
+  position: relative;
 `
 
-export const Title = styled.h1`
-  font-size: 2.5rem;
+export const WhatsSectionWrapper = styled.div`
+  padding-top: 100vh;
 `
 
-export const Desctiption = styled.h2`
-  font-size: 2rem;
-  font-weight: 400;
+export const HowWorksWrapper = styled.div`
+  ${media.lessThan('medium')`
+    margin-top: 30rem;
+  `}
 `
 
-export const Illustration = styled.img`
-  margin-top: 3rem;
-  width: min-content(30rem, 100%);
+export const BackToTopWrapper = styled.div`
+  position: absolute;
+  z-index: 10;
 `

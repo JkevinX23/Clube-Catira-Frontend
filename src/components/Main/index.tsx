@@ -1,21 +1,83 @@
+import React, { useState, useEffect, useRef, createRef } from 'react'
+import AssociateSection from 'components/AssociateSection'
+import BackToTop from 'components/BackToTop'
+import Footer from 'components/Footer'
+import HomeSection from 'components/HomeSection'
+import HowWorks from 'components/HowWorks'
+import Menu from 'components/Menu'
+import SociaisSection from 'components/SociaisSection'
+import WhatsSection from 'components/WhatsSection'
 import * as S from './styles'
 
-const Main = ({
-  title = 'React Avançado',
-  description = 'TypeScript, ReactJS, NextJS e Styled Components'
-}) => (
-  <S.Wrapper>
-    <S.Logo
-      src="/img/logo.svg"
-      alt="Imagem de um átomo e o texto React Avançado escrito ao lado"
-    />
-    <S.Title>{title}</S.Title>
-    <S.Desctiption>{description}</S.Desctiption>
-    <S.Illustration
-      src="/img/hero-illustration.svg"
-      alt="Um desenvolvedor de frente para uma tela com um código."
-    />
-  </S.Wrapper>
-)
+const Main = () => {
+  const [scrollY, setScrollY] = useState(0)
+  const [section, setSection] = useState('')
+  const sectionHomeRef = useRef<null | HTMLDivElement>(null)
+  const sectionOClubeRef = useRef<null | HTMLDivElement>(null)
+  const sectionComoFuncionaRef = useRef<null | HTMLDivElement>(null)
 
+  function logit() {
+    setScrollY(window.pageYOffset)
+  }
+
+  useEffect(() => {
+    function watchScroll() {
+      window.addEventListener('scroll', logit)
+    }
+    watchScroll()
+    return () => {
+      window.removeEventListener('scroll', logit)
+    }
+  }, [])
+
+  useEffect(() => {
+    switch (section) {
+      case 'sectionHomeRef':
+        sectionHomeRef.current?.scrollIntoView({
+          behavior: 'smooth'
+        })
+        return
+      case 'sectionOClubeRef':
+        sectionOClubeRef.current?.scrollIntoView({
+          behavior: 'smooth',
+          block: 'end'
+        })
+        return
+      case 'sectionComoFuncionaRef':
+        sectionComoFuncionaRef.current?.scrollIntoView({
+          behavior: 'smooth'
+        })
+        return
+    }
+  }, [section])
+
+  function handleChange(newValue: string) {
+    setSection(newValue)
+  }
+
+  return (
+    <S.Wrapper>
+      <S.BackToTopWrapper>
+        <BackToTop />
+      </S.BackToTopWrapper>
+      <S.SobrepositionWrapper>
+        <S.MenuWrapper position={scrollY}>
+          <Menu handleChange={handleChange} />
+        </S.MenuWrapper>
+        <S.HomeSectionWrapper id="home-section" ref={sectionHomeRef}>
+          <HomeSection />
+        </S.HomeSectionWrapper>
+      </S.SobrepositionWrapper>
+      <S.WhatsSectionWrapper ref={sectionOClubeRef}>
+        <WhatsSection />
+      </S.WhatsSectionWrapper>
+      <S.HowWorksWrapper ref={sectionComoFuncionaRef}>
+        <HowWorks />
+      </S.HowWorksWrapper>
+      <AssociateSection />
+      <SociaisSection />
+      <Footer />
+    </S.Wrapper>
+  )
+}
 export default Main
