@@ -37,7 +37,8 @@ export default {
     orange: '#f7941e',
     blue: '#007bff',
     gray: '#e0e0e0',
-    black: '#111111'
+    black: '#111111',
+    danger: '#ED4337'
   },
   spacings: {
     xxsmall: '0.8rem',

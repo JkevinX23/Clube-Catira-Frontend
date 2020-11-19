@@ -3,6 +3,7 @@ import Head from 'next/head'
 import { ThemeProvider } from 'styled-components'
 import GlobalStyles from 'styles/global'
 import theme from 'styles/theme'
+import '../../node_modules/react-back-to-top/dist/BackToTop.css'
 
 function App({ Component, pageProps }: AppProps) {
   return (

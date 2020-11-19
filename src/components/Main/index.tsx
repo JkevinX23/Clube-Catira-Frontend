@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef, createRef } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import AssociateSection from 'components/AssociateSection'
 import BackToTop from 'components/BackToTop'
 import Footer from 'components/Footer'
