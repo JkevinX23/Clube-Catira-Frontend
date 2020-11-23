@@ -1,15 +1,11 @@
-import React, { useState, useEffect, useRef } from 'react'
-import AssociateSection from 'components/AssociateSection'
-// import BackToTop from 'components/BackToTop'
+import Button from 'components/Button'
 import Footer from 'components/Footer'
-import HomeSection from 'components/HomeSection'
-import HowWorks from 'components/HowWorks'
 import Menu from 'components/Menu'
 import SociaisSection from 'components/SociaisSection'
-import WhatsSection from 'components/WhatsSection'
+import { useEffect, useRef, useState } from 'react'
 import * as S from './styles'
 
-const Main = () => {
+const CreateAccountSwitch = () => {
   const [scrollY, setScrollY] = useState(0)
   const [section, setSection] = useState('')
   const sectionHomeRef = useRef<null | HTMLDivElement>(null)
@@ -57,25 +53,36 @@ const Main = () => {
 
   return (
     <S.Wrapper>
-      {/* <S.BackToTopWrapper><BackToTop /></S.BackToTopWrapper> */}
-      <S.SobrepositionWrapper>
-        <S.MenuWrapper position={scrollY}>
-          <Menu handleChange={handleChange} />
-        </S.MenuWrapper>
-        <S.HomeSectionWrapper id="home-section" ref={sectionHomeRef}>
-          <HomeSection />
-        </S.HomeSectionWrapper>
-      </S.SobrepositionWrapper>
-      <S.WhatsSectionWrapper ref={sectionOClubeRef}>
-        <WhatsSection />
-      </S.WhatsSectionWrapper>
-      <S.HowWorksWrapper ref={sectionComoFuncionaRef}>
-        <HowWorks />
-      </S.HowWorksWrapper>
-      <AssociateSection />
-      <SociaisSection />
-      <Footer />
+      <S.MenuWrapper>
+        <Menu handleChange={handleChange} background="white" />
+      </S.MenuWrapper>
+      <S.TitleWrapper>
+        <S.Title>Cadastre-se</S.Title>
+        <div>
+          <S.DecorationLineWrapper isPrimary />
+          <S.DecorationLineWrapper />
+        </div>
+      </S.TitleWrapper>
+      <S.FormWrapper>
+        <S.SubTitle>Tipo de pessoa</S.SubTitle>
+
+        <S.ButtonWrapper>
+          <Button size="large" background="green" radius="radius100">
+            Pessoa Jurídica
+          </Button>
+
+          <Button size="large" background="green" radius="radius100">
+            Pessoa Física
+          </Button>
+        </S.ButtonWrapper>
+      </S.FormWrapper>
+
+      <S.Footer>
+        <SociaisSection />
+        <Footer />
+      </S.Footer>
     </S.Wrapper>
   )
 }
-export default Main
+
+export default CreateAccountSwitch

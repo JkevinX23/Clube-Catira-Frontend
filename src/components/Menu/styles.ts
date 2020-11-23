@@ -1,12 +1,18 @@
 import styled, { css } from 'styled-components'
 
-export const Wrapper = styled.menu`
-  ${({ theme }) => css`
+type MenuProps = {
+  background?: string
+}
+
+export const Wrapper = styled.menu<MenuProps>`
+  ${({ theme, background }) => css`
     display: flex;
     align-items: center;
     padding: ${theme.spacings.xxsmall} 2rem;
     justify-content: space-between;
-    background-color: rgba(211, 211, 211, 0.8);
+    background-color: ${background && background == 'white'
+      ? theme.colors.white
+      : 'rgba(211, 211, 211, 0.8)'};
   `}
 `
 

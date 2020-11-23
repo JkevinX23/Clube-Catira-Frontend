@@ -14,6 +14,11 @@ export const IconWrapper = styled.div`
     width: 2.4rem;
     height: 2.4rem;
     cursor: pointer;
+    transition: 0.5s;
+
+    &:hover {
+      color: ${theme.colors.blue};
+    }
   `}
 `
 export const ContainerWrapper = styled.div`

@@ -9,10 +9,11 @@ import MediaMatch from 'components/MediaMatch'
 
 export type MenuProps = {
   username?: string
+  background?: string
   handleChange: (newValue: string) => void
 }
 
-const Menu = ({ handleChange, username }: MenuProps) => {
+const Menu = ({ handleChange, username, background }: MenuProps) => {
   const [isOpen, setIsOpen] = useState(false)
 
   function setRef(value: number) {
@@ -30,7 +31,7 @@ const Menu = ({ handleChange, username }: MenuProps) => {
   }
 
   return (
-    <S.Wrapper>
+    <S.Wrapper background={background}>
       <S.LogoWrapper>
         <Logo />
       </S.LogoWrapper>

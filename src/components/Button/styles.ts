@@ -36,18 +36,36 @@ const wrapperModifiersSize = {
 const wrapperModifiersBackground = {
   white: (theme: DefaultTheme) => css`
     background: ${theme.colors.white};
+    &:hover {
+      background: ${theme.colors.black};
+      color: ${theme.colors.white};
+    }
   `,
   green: (theme: DefaultTheme) => css`
     background: ${theme.colors.green};
+    &:hover {
+      background: ${theme.colors.darkgreen};
+    }
   `,
   orange: (theme: DefaultTheme) => css`
     background: ${theme.colors.orange};
+    &:hover {
+      background: ${theme.colors.blue};
+    }
   `,
   blue: (theme: DefaultTheme) => css`
     background: ${theme.colors.blue};
+    &:hover {
+      background: ${theme.colors.orange};
+    }
   `,
   black: (theme: DefaultTheme) => css`
     background: ${theme.colors.black};
+    color: ${theme.colors.white};
+    &:hover {
+      background: ${theme.colors.white};
+      color: ${theme.colors.black};
+    }
   `
 }
 
@@ -73,6 +91,8 @@ export const Wrapper = styled.button<WrappeProps>`
   ${({ theme, size, background, radius, fullWidth }) => css`
     color: ${theme.colors.white};
     border: 0;
+    transition-duration: 0.5s;
+    cursor: pointer;
 
     ${!!size && wrapperModifiersSize[size](theme)}
     ${!!background &&

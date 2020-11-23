@@ -6,7 +6,7 @@ export const Wrapper = styled.div`
     background: linear-gradient(
       180deg,
       ${theme.colors.gray} 0%,
-      rgba(250, 238, 250, 1) 100%
+      rgba(250, 250, 250, 1) 100%
     );
   `}
 `
@@ -53,7 +53,6 @@ export const TextFieldWrapper = styled.div`
 
   .kOdHjb {
     background-color: #ffff;
-    border-radius: 5rem;
     cursor: text;
   }
 `
@@ -71,5 +70,40 @@ export const ForgotPassword = styled.a`
     color: ${theme.colors.blue};
     text-align: right;
     cursor: pointer;
+  `}
+`
+export const InlineWrapper = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  select {
+    width: 98%;
+  }
+`
+export const Select = styled.select`
+  display: flex;
+  position: relative;
+  color: #60666d;
+  background: white;
+  cursor: pointer;
+  height: 62.5%;
+  width: 100%;
+  border: none;
+`
+export const Label = styled.p``
+export const SelectWrapper = styled.div`
+  width: 40%;
+`
+
+type TextWrapperProps = {
+  items: number
+}
+export const TextWrapper = styled.div<TextWrapperProps>`
+  ${({ items }) => css`
+    display: block;
+    width: ${items === 2 ? '60%' : '33%'};
+    line-height: 1.25;
+    color: #495057;
+    padding-right: 1rem;
   `}
 `

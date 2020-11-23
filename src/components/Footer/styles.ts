@@ -19,7 +19,7 @@ export const TextWrapper = styled.p<TextProps>`
   ${({ theme, Link }) => css`
     color: ${Link ? theme.colors.blue : theme.colors.white};
     cursor: ${Link ? 'pointer' : 'default'};
-    font-size: ${theme.font.sizes.medium};
+    font-size: ${theme.font.sizes.small};
     text-align: center;
     padding-top: 1rem;
 

@@ -32,8 +32,9 @@ export default {
     xlarge: '1.4rem 35rem'
   },
   colors: {
-    white: '#f5f5f5',
+    white: '#fafafa',
     green: '#074355',
+    darkgreen: '#063847',
     orange: '#f7941e',
     blue: '#007bff',
     gray: '#e0e0e0',

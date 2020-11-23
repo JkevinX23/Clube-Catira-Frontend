@@ -2,11 +2,10 @@ import styled, { css } from 'styled-components'
 
 export const Wrapper = styled.div`
   ${({ theme }) => css`
-    background: rgb(2, 0, 36);
     background: linear-gradient(
       180deg,
       ${theme.colors.gray} 0%,
-      rgba(250, 238, 250, 1) 100%
+      rgba(250, 250, 250, 1) 100%
     );
   `}
 `
@@ -45,31 +44,26 @@ export const Title = styled.p`
     font-weight: ${theme.font.bold};
   `}
 `
-export const TextFieldWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 2rem;
-  margin: 0 auto;
 
-  .kOdHjb {
-    background-color: #ffff;
-    border-radius: 5rem;
-    cursor: text;
-  }
+export const SubTitle = styled.p`
+  ${({ theme }) => css`
+    font-size: ${theme.font.sizes.xlarge};
+    text-align: center;
+  `}
 `
 
 export const FormWrapper = styled.div`
   display: flex;
+  flex-direction: column;
   width: 100%;
   align-items: center;
 `
 export const Footer = styled.footer`
-  margin-top: 6vw;
+  margin-top: 8vw;
 `
-export const ForgotPassword = styled.a`
-  ${({ theme }) => css`
-    color: ${theme.colors.blue};
-    text-align: right;
-    cursor: pointer;
-  `}
+
+export const ButtonWrapper = styled.div`
+  display: flex;
+  margin-top: 5rem;
+  gap: 4rem;
 `
