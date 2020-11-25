@@ -36,6 +36,8 @@ const wrapperModifiersSize = {
 const wrapperModifiersBackground = {
   white: (theme: DefaultTheme) => css`
     background: ${theme.colors.white};
+    color: ${theme.colors.black};
+    border: 1px solid ${theme.colors.black};
     &:hover {
       background: ${theme.colors.black};
       color: ${theme.colors.white};
