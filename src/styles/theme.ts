@@ -33,6 +33,7 @@ export default {
   },
   colors: {
     white: '#fafafa',
+    lightBlue: '#68ACC5',
     green: '#074355',
     darkgreen: '#063847',
     orange: '#f7941e',
