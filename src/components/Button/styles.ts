@@ -64,6 +64,7 @@ const wrapperModifiersBackground = {
   black: (theme: DefaultTheme) => css`
     background: ${theme.colors.black};
     color: ${theme.colors.white};
+    border: 1px solid ${theme.colors.black};
     &:hover {
       background: ${theme.colors.white};
       color: ${theme.colors.black};
