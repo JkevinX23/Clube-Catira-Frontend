@@ -1,0 +1,21 @@
+import * as S from './styles'
+
+const RequestCreditIncrease = () => (
+  <S.Wrapper>
+    <h4> SOLICITAR AUMENTO DE CRÉDITOS </h4>
+
+    <S.WrapperField>
+      <S.Label>Valor do Aumento</S.Label>
+
+      <S.Input />
+    </S.WrapperField>
+
+    <S.WrapperField>
+      <S.Label>Motivo do Aumento</S.Label>
+
+      <S.TextArea />
+    </S.WrapperField>
+  </S.Wrapper>
+)
+
+export default RequestCreditIncrease
