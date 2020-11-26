@@ -1,3 +1,4 @@
+import Button from 'components/Button'
 import * as S from './styles'
 
 const RequestCreditIncrease = () => (
@@ -15,6 +16,10 @@ const RequestCreditIncrease = () => (
 
       <S.TextArea />
     </S.WrapperField>
+
+    <Button background="black" size="xxsmall" radius="radius100">
+      Solicitar
+    </Button>
   </S.Wrapper>
 )
 

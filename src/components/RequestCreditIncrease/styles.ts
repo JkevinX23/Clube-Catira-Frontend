@@ -16,6 +16,13 @@ export const Wrapper = styled.div`
   h4 {
     text-align: center;
   }
+
+  button {
+    margin-bottom: 2rem;
+    margin-top: 1rem;
+    align-self: flex-start;
+    margin-left: 10%;
+  }
 `
 export const Label = styled.p`
   display: inline-block;
