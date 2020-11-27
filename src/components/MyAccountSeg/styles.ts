@@ -4,12 +4,13 @@ export const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.47);
+  box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.47);
   border: 1px solid #ccc;
   background-color: #eee;
   border-radius: 4px;
   max-width: 80rem;
   height: 20rem;
+  border-top: none;
 
   button {
     margin-bottom: 2rem;

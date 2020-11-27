@@ -5,9 +5,11 @@ export const Wrapper = styled.div`
   flex-direction: row;
   padding: 4rem;
   background-color: #eee;
+  box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.47);
   max-width: 70rem;
   height: 50rem;
   padding-bottom: 6rem;
+  border-top: none;
 `
 export const WrapperImage = styled.div`
   width: 32rem;

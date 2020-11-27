@@ -38,7 +38,8 @@ export default {
     darkgreen: '#063847',
     orange: '#f7941e',
     blue: '#007bff',
-    gray: '#e0e0e0',
+    gray: '#eee',
+    gray2: '#e0e0e0',
     lightBlack: '#919191',
     black: '#111111',
     danger: '#ED4337'

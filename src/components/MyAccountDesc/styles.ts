@@ -4,12 +4,14 @@ export const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.47);
+  box-sizing: border-box;
+
+  box-shadow: 0px 10px 10px 0px rgba(0, 0, 0, 0.47);
   border: 1px solid #ccc;
   background-color: #eee;
   border-radius: 4px;
   max-width: 80rem;
-
+  border-top: none;
   h4 {
     text-align: center;
   }
