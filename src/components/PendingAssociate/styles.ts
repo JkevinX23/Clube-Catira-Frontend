@@ -20,19 +20,21 @@ export const Wrapper = styled.div`
 export const Sub = styled.p`
   ${({ theme }) => css`
     color: #333;
-    font-size: ${theme.font.sizes.xsmall};
+    font-size: 1rem;
   `}
 `
 export const Title = styled.p`
   ${({ theme }) => css`
     color: #333;
-    font-size: ${theme.font.sizes.small};
+    font-size: ${theme.font.sizes.xsmall};
   `}
 `
 export const FunctionsWrapper = styled.div`
   ${({ theme }) => css`
     color: #333;
-    font-size: 1rem;
+    font-size: 0.7rem;
+    padding-top: 0.3rem;
+
     a {
       color: ${theme.colors.blue};
       cursor: pointer;

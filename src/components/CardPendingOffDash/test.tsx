@@ -5,9 +5,10 @@ describe('<CardPendingOffDash/>', () => {
   it('should render the heading', () => {
     const { container } = render(<CardPendingOffDash />)
 
-    expect(screen.getByRole('heading', { name: /CardPendingOffDash/i })).toBeInTheDocument()
+    expect(
+      screen.getByRole('heading', { name: /CardPendingOffDash/i })
+    ).toBeInTheDocument()
 
     expect(container.firstChild).toMatchSnapshot()
   })
-
 })

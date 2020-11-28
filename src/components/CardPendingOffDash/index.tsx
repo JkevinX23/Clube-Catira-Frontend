@@ -9,15 +9,19 @@ export type CardPendingOffDashProps = {
 
 const CardPendingOffDash = ({ associates }: CardPendingOffDashProps) => (
   <S.Wrapper>
-    <p>Ofertas Pendentes</p>
-    {!!associates &&
-      associates.map((associate, i) => (
-        <PendingAssociate
-          key={i}
-          associate={associate.associate}
-          franchise={associate.franchise}
-        />
-      ))}
+    <S.Title>Ofertas Pendentes</S.Title>
+    <S.Content>
+      {!!associates &&
+        associates.map((associate, i) => (
+          <PendingAssociate
+            key={i}
+            associate={associate.associate}
+            franchise={associate.franchise}
+          />
+        ))}
+    </S.Content>
+
+    <S.Sub>Ver Mais</S.Sub>
   </S.Wrapper>
 )
 
