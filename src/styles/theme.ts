@@ -34,6 +34,7 @@ export default {
   colors: {
     white: '#fafafa',
     lightBlue: '#68ACC5',
+    lightGreen: '#339034',
     green: '#074355',
     darkgreen: '#063847',
     orange: '#f7941e',
@@ -42,7 +43,8 @@ export default {
     gray2: '#e0e0e0',
     lightBlack: '#919191',
     black: '#111111',
-    danger: '#ED4337'
+    danger: '#ED4337',
+    red: '#a94442'
   },
   spacings: {
     xxsmall: '0.8rem',
