@@ -19,5 +19,3 @@ export default {
 export const Basic: Story<DashCardsMainProps> = (args) => (
   <DashCardsMain {...args} />
 )
-
-export const parameters = {}
