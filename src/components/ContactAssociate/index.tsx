@@ -65,7 +65,7 @@ const ContactAssociate = ({
       </S.WrapperField>
 
       <Button background="black" size="xxsmall" radius="radius100">
-        Atualizar
+        Enviar
       </Button>
     </S.WrapperContact>
   </S.Wrapper>
