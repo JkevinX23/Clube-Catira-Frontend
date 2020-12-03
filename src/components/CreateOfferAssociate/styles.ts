@@ -1,27 +1,35 @@
 import styled from 'styled-components'
 
+export const WrapperField = styled.div`
+  width: 80%;
+  max-width: 50rem;
+  padding: 2%;
+`
+
 export const Wrapper = styled.div`
   line-height: 1.75;
   display: flex;
-  flex-direction: column;
-  align-items: center;
   margin: 0 0 10px;
   background-color: #fff;
   box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.47);
   -webkit-box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.47);
   border: 1px solid #ccc;
   border-radius: 4px;
-  max-width: 60rem;
+  gap: 4rem;
 
   h4 {
-    text-align: center;
+    text-align: left;
   }
 
   button {
-    margin-bottom: 2rem;
-    margin-top: 1rem;
-    align-self: flex-start;
-    margin-left: 10%;
+    margin-top: 2rem;
+    padding: 0.5rem 4rem;
+  }
+
+  ${WrapperField}:nth-child(2) {
+    p:nth-child(1) {
+      margin-top: 8%;
+    }
   }
 `
 export const Label = styled.p`
@@ -65,10 +73,23 @@ export const Input = styled.input`
   box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
   transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
   outline: none;
+  padding-left: 1rem;
 `
 
-export const WrapperField = styled.div`
-  width: 80%;
-  max-width: 50rem;
-  padding-top: 2%;
+export const InputRadio = styled.input``
+export const RadioLabel = styled.label`
+  padding-left: 0.7rem;
+  color: #444;
+  font-size: 1.8rem;
+  &:nth-child(2) {
+    padding-right: 2rem;
+  }
+`
+export const WrapperRadio = styled.div``
+export const WrapperButton = styled.div`
+  display: flex;
+  width: 100%;
+  button {
+    margin-left: auto;
+  }
 `
