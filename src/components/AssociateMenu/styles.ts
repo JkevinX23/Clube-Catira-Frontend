@@ -8,7 +8,44 @@ export const Wrapper = styled.main`
     justify-content: space-between;
   `}
 `
-export const MenuNav = styled.div``
+
+export const Options = styled.ul`
+  ${({ theme }) => css`
+    display: none;
+    position: absolute;
+    background: #00aaff;
+    margin: 1%;
+    margin-top: 0.2rem;
+    padding: 1rem;
+    color: white;
+    list-style: none;
+    border-radius: 0px 0px 0px 9px;
+    animation: fadeIn 0.5s;
+    z-index: 20;
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+      }
+      to {
+        opacity: 1;
+      }
+    }
+
+    li {
+      padding: 0.5rem;
+      cursor: pointer;
+      font-size: 1.4rem;
+      white-space: nowrap;
+
+      &:hover {
+        border-bottom: 2px solid white;
+        font-weight: bold;
+      }
+    }
+  `}
+`
+
 export const MenuLink = styled.a`
   ${({ theme }) => css`
     position: relative;
@@ -17,26 +54,43 @@ export const MenuLink = styled.a`
     margin: 0.3rem ${theme.spacings.small} 0;
     text-decoration: none;
     text-align: center;
+    cursor: pointer;
+    padding: 1rem;
 
     &:hover {
-      &::after {
-        content: '';
-        position: absolute;
-        display: block;
-        height: 0.3rem;
-        background-color: ${theme.colors.black};
-        animation: hoverAnimation 0.2s forwards;
-      }
-      @keyframes hoverAnimation {
+      color: white;
+      background: #00aaff;
+      border-radius: 8px 8px 0px 0px;
+      animation: fadeIn 0.8s;
+
+      @keyframes fadeIn {
         from {
-          width: 0;
-          left: 50%;
+          opacity: 0;
         }
         to {
-          width: 100%;
-          left: 0;
+          opacity: 1;
         }
       }
     }
   `}
+`
+export const MenuNav = styled.div`
+  a:hover {
+    ul {
+      display: block;
+    }
+  }
+  ${MenuLink}:nth-child(1) {
+    ${Options} {
+      right: -59%;
+      width: 158%;
+    }
+  }
+
+  ${MenuLink}:nth-child(2) {
+    ${Options} {
+      right: -150%;
+      width: 250%;
+    }
+  }
 `

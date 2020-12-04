@@ -25,7 +25,7 @@ export const WrapperMenu = styled.div`
   margin-top: 7.5rem;
 `
 export const WrapperContent = styled.div`
-  padding: 5rem 0;
+  padding: 8rem 0;
 `
 export const WrapperCards = styled.div`
   display: grid;

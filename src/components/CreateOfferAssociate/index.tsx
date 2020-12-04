@@ -18,7 +18,7 @@ const CreateOfferAssociate = () => (
       <S.WrapperRadio>
         <S.InputRadio type="radio" id="nao" name="direct" value="nao" />
         <S.RadioLabel>Sim</S.RadioLabel>
-        <S.InputRadio type="radio" id="sim" name="direct" value="sim" />
+        <S.InputRadio type="radio" id="sim" name="direct" value="sim" checked />
         <S.RadioLabel>Não</S.RadioLabel>
       </S.WrapperRadio>
 
@@ -43,6 +43,7 @@ const CreateOfferAssociate = () => (
           id="ilimitada"
           name="limit"
           value="ilimitada"
+          checked
         />
         <S.RadioLabel>Ilimitada</S.RadioLabel>
       </S.WrapperRadio>
