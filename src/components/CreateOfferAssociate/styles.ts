@@ -76,10 +76,14 @@ export const Input = styled.input`
   padding-left: 1rem;
 `
 
-export const InputRadio = styled.input``
+export const InputRadio = styled.input`
+  margin-right: 0.5rem;
+`
 export const RadioLabel = styled.label`
-  padding-left: 0.7rem;
+  padding-left: 1rem;
   color: #444;
+  cursor: pointer;
+
   font-size: 1.8rem;
   &:nth-child(2) {
     padding-right: 2rem;
