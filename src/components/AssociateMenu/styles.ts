@@ -20,8 +20,8 @@ export const Options = styled.ul`
     color: white;
     list-style: none;
     border-radius: 0px 0px 0px 9px;
-    animation: fadeIn 0.5s;
     z-index: 20;
+    /* animation: fadeIn 0.2s;
 
     @keyframes fadeIn {
       from {
@@ -30,7 +30,7 @@ export const Options = styled.ul`
       to {
         opacity: 1;
       }
-    }
+    } */
 
     li {
       padding: 0.5rem;
@@ -61,7 +61,7 @@ export const MenuLink = styled.a`
       color: white;
       background: #00aaff;
       border-radius: 8px 8px 0px 0px;
-      animation: fadeIn 0.8s;
+      /* animation: fadeIn 0.4s;
 
       @keyframes fadeIn {
         from {
@@ -71,7 +71,7 @@ export const MenuLink = styled.a`
           opacity: 1;
         }
       }
-    }
+    } */
   `}
 `
 export const MenuNav = styled.div`

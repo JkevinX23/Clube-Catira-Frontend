@@ -8,3 +8,12 @@ export type ProdTypes = {
   name: string
   title: string
 }
+export type CatirasProps = {
+  id: number
+  type: string
+  associate: string
+  offer: string
+  qtd: number
+  value: number
+  date: string
+}

@@ -1,7 +1,8 @@
-import { useState, useMemo } from 'react'
+import { useState, useMemo, useEffect } from 'react'
 import * as S from './styles'
 import DataTable from 'react-data-table-component'
 import SearchTableField from 'components/SearchTableField'
+import { CatirasProps } from 'utils/types'
 
 const columns = [
   {
@@ -11,24 +12,24 @@ const columns = [
   },
   {
     name: 'Tipo',
-    selector: 'tipo',
+    selector: 'type',
     sortable: true
   },
   {
     name: 'Comprador/Vendedor',
-    selector: 'Comprador/Vendedor',
+    selector: 'associate',
     right: true,
     sortable: true
   },
   {
     name: 'Ofertas',
-    selector: 'Ofertas',
+    selector: 'offer',
     right: true,
     sortable: true
   },
   {
     name: 'Qtd',
-    selector: 'Qtd',
+    selector: 'qtd',
     right: true,
     sortable: true
   },
@@ -39,7 +40,7 @@ const columns = [
   },
   {
     name: 'Data',
-    selector: 'Data',
+    selector: 'date',
     sortable: true
   },
   {
@@ -49,18 +50,22 @@ const columns = [
   }
 ]
 
-type dataProps = {
-  name?: string
-}
-
-const data = [{}]
-
 const TableCatirasAssociate = () => {
+  const [data, setData] = useState<CatirasProps[]>([])
+  const [dataView, setDataView] = useState<CatirasProps[]>([])
   const [filterText, setFilterText] = useState('')
   const [resetPaginationToggle, setResetPaginationToggle] = useState(false)
   const filteredItems = data.filter(
-    (item: dataProps) =>
-      item.name && item.name.toLowerCase().includes(filterText.toLowerCase())
+    (item: CatirasProps) =>
+      (item.type &&
+        item.type.toLowerCase().includes(filterText.toLowerCase())) ||
+      (item.associate &&
+        item.associate.toLowerCase().includes(filterText.toLowerCase())) ||
+      (item.offer &&
+        item.offer.toLowerCase().includes(filterText.toLowerCase())) ||
+      item.qtd ||
+      item.value ||
+      item.date
   )
   const subHeaderComponentMemo = useMemo(() => {
     const handleClear = () => {
@@ -78,12 +83,41 @@ const TableCatirasAssociate = () => {
       />
     )
   }, [filterText, resetPaginationToggle])
+
+  useEffect(() => {
+    setDataView(filteredItems)
+  }, [filterText])
+
+  useEffect(() => {
+    const Catiras = [
+      {
+        id: 1,
+        type: 'Compra',
+        associate: 'JKevin',
+        offer: 'Criação de sites',
+        qtd: 5,
+        value: 152.25,
+        date: '15/06/2020'
+      },
+      {
+        id: 2,
+        type: 'Venda',
+        associate: 'JKevin',
+        offer: 'Criação de sites',
+        qtd: 5,
+        value: 152.25,
+        date: '15/06/2020'
+      }
+    ]
+    setData(Catiras)
+  }, [])
+
   return (
     <S.Wrapper>
       <DataTable
         title="HISTÓRICO DE COMPRA E VENDA"
         columns={columns}
-        data={data}
+        data={dataView}
         pagination
         highlightOnHover
         paginationResetDefaultPage={resetPaginationToggle} // optionally, a hook to reset pagination to page 1
