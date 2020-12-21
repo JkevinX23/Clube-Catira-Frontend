@@ -96,6 +96,7 @@ export const Wrapper = styled.button<WrappeProps>`
     border: 0;
     transition-duration: 0.5s;
     cursor: pointer;
+    outline: none;
 
     ${!!size && wrapperModifiersSize[size](theme)}
     ${!!background &&

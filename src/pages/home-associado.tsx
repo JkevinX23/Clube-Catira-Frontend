@@ -1,6 +1,10 @@
 import Page from 'templates/Home'
 import { ProdTypes } from 'utils/types'
-
+import AuthContext from 'Context/Reduces/Auth'
+import { useContext } from 'react'
+import { useRouter } from 'next/router'
+import { toast } from 'react-toastify'
+import { Associate } from 'Types'
 const produtos: ProdTypes[] = [
   {
     id: 1,
@@ -82,9 +86,24 @@ const produtos: ProdTypes[] = [
 ]
 
 export default function HomeAssociado() {
+  const router = useRouter()
+  const props = useContext(AuthContext)
+  if (!props.signed) {
+    if (process.browser) {
+      router.push('/sign-in')
+    }
+    toast.info('Olá, realize seu login para continuar')
+  }
+
+  const client = props.client as Associate
+  console.log(props)
+
   return (
     <Page
-      HeaderProps={{ associate: 'Kevin', credits: '1500' }}
+      HeaderProps={{
+        associate: client && client.fantasy_name,
+        credits: client && client.credit
+      }}
       Products={produtos}
     />
   )

@@ -6,7 +6,7 @@ export const Wrapper = styled.div`
     background: linear-gradient(
       180deg,
       ${theme.colors.gray} 0%,
-      rgba(250, 238, 250, 1) 100%
+      rgba(250, 250, 250, 1) 100%
     );
   `}
 `
@@ -50,12 +50,6 @@ export const TextFieldWrapper = styled.div`
   flex-direction: column;
   gap: 2rem;
   margin: 0 auto;
-
-  .kOdHjb {
-    background-color: #ffff;
-    border-radius: 5rem;
-    cursor: text;
-  }
 `
 
 export const FormWrapper = styled.div`

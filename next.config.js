@@ -8,3 +8,10 @@ module.exports = withPWA({
     disable: !isProd
   }
 })
+
+module.exports = {
+  publicRuntimeConfig: {
+    // Will be available on both server and client
+    backendUrl: 'http://192.168.1.104:3334/'
+  }
+}

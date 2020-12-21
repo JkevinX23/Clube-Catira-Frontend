@@ -17,3 +17,8 @@ export type CatirasProps = {
   value: number
   date: string
 }
+export type MenuProps = {
+  username?: string
+  background?: string
+  handleChange?: (newValue: string) => void
+}

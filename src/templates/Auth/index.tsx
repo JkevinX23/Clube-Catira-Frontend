@@ -3,12 +3,20 @@ import Footer from 'components/Footer'
 import Menu from 'components/Menu'
 import SociaisSection from 'components/SociaisSection'
 import TextField from 'components/TextField'
-import { useEffect, useRef, useState } from 'react'
+import { useContext, useEffect, useRef, useState } from 'react'
+
 import * as S from './styles'
+import AuthContext from 'Context/Reduces/Auth'
 
 const Auth = () => {
+  const { signIn } = useContext(AuthContext)
+
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
+
   const [scrollY, setScrollY] = useState(0)
   const [section, setSection] = useState('')
+
   const sectionHomeRef = useRef<null | HTMLDivElement>(null)
   const sectionOClubeRef = useRef<null | HTMLDivElement>(null)
   const sectionComoFuncionaRef = useRef<null | HTMLDivElement>(null)
@@ -52,6 +60,10 @@ const Auth = () => {
     setSection(newValue)
   }
 
+  async function handleAuth() {
+    await signIn({ email, password })
+  }
+
   return (
     <S.Wrapper>
       <S.MenuWrapper>
@@ -66,14 +78,24 @@ const Auth = () => {
       </S.TitleWrapper>
       <S.FormWrapper>
         <S.TextFieldWrapper>
-          <TextField label="E-mail" />
-          <TextField label="Senha" type="password" />
+          <TextField
+            label="E-mail"
+            onChange={(e) => setEmail(e.target.value)}
+            value={email}
+          />
+          <TextField
+            label="Senha"
+            type="password"
+            onChange={(e) => setPassword(e.target.value)}
+            value={password}
+          />
           <S.ForgotPassword> Esqueceu a senha? </S.ForgotPassword>
           <Button
             fullWidth
             size="xlarge"
             background="orange"
             radius="radius300"
+            onClick={handleAuth}
           >
             Entrar
           </Button>

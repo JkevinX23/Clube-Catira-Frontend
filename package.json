@@ -25,18 +25,30 @@
     ]
   },
   "dependencies": {
+    "@types/react-router-dom": "^5.1.6",
     "@types/styled-components": "^5.1.2",
     "@typescript-eslint/eslint-plugin": "^3.10.1",
     "@typescript-eslint/parser": "^3.10.1",
+    "axios": "^0.21.0",
     "babel-plugin-styled-components": "^1.11.1",
+    "cookies-js": "^1.2.3",
     "eslint": "^7.7.0",
     "eslint-plugin-react": "^7.20.6",
+    "immer": "^8.0.0",
     "next": "^10.0.3",
     "next-pwa": "^3.1.3",
+    "next-redux-wrapper": "^6.0.2",
     "react": "16.13.1",
     "react-back-to-top": "^1.0.3",
     "react-data-table-component": "^6.11.6",
     "react-dom": "16.13.1",
+    "react-redux": "^7.2.2",
+    "react-router-dom": "^5.2.0",
+    "react-toastify": "^6.2.0",
+    "redux": "^4.0.5",
+    "redux-persist": "^6.0.0",
+    "redux-persist-cookie-storage": "^1.0.0",
+    "redux-saga": "^1.1.3",
     "styled-components": "^5.1.1",
     "styled-icons": "^10.22.0",
     "styled-media-query": "^2.1.2"
@@ -52,6 +64,7 @@
     "@types/jest": "^26.0.10",
     "@types/node": "^14.6.0",
     "@types/react": "^16.9.50",
+    "@types/react-redux": "^7.1.11",
     "babel-loader": "^8.1.0",
     "chromatic": "^5.4.0",
     "eslint-config-prettier": "^6.11.0",
@@ -64,6 +77,7 @@
     "plop": "^2.7.4",
     "prettier": "^2.1.0",
     "react-is": "^16.13.1",
+    "redux-devtools-extension": "^2.13.8",
     "typescript": "^4.0.2"
   }
 }

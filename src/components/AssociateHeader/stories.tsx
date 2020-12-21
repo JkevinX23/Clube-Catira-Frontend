@@ -6,7 +6,7 @@ export default {
   component: AssociateHeader,
   args: {
     associate: 'João Kevin',
-    credits: '1500,00'
+    credits: '1500.00'
   }
 } as Meta
 

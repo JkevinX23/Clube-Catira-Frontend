@@ -2,7 +2,7 @@ import * as S from './styles'
 
 export type AssociateHeaderProps = {
   associate: string
-  credits: string
+  credits: number
 }
 const AssociateHeader = ({ associate, credits }: AssociateHeaderProps) => (
   <S.Wrapper>

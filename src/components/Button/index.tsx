@@ -6,6 +6,7 @@ export type ButtonProps = {
   background?: 'white' | 'green' | 'orange' | 'blue' | 'black'
   radius?: 'radius100' | 'radius200' | 'radius300'
   fullWidth?: boolean
+  onClick?: any
 }
 
 const Button = ({
@@ -13,13 +14,15 @@ const Button = ({
   size = 'small',
   background = 'orange',
   radius = 'radius300',
-  fullWidth = false
+  fullWidth = false,
+  onClick
 }: ButtonProps) => (
   <S.Wrapper
     size={size}
     background={background}
     radius={radius}
     fullWidth={fullWidth}
+    onClick={onClick}
   >
     {!!children && <span>{children}</span>}
   </S.Wrapper>

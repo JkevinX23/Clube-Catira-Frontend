@@ -4,8 +4,8 @@ import { TextFieldProps } from '.'
 export const InputWrapper = styled.div`
   ${({ theme }) => css`
     display: flex;
-    background: ${theme.colors.gray};
-    border-radius: 0.2rem;
+    background: #fff;
+    border-radius: 1rem;
     padding: 0 ${theme.spacings.xsmall};
     border: 0.2rem solid;
     border-color: ${theme.colors.gray};
