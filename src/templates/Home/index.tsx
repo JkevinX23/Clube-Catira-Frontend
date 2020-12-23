@@ -1,28 +1,46 @@
-import AssociateHeader, {
-  AssociateHeaderProps
-} from 'components/AssociateHeader'
+import AssociateHeader from 'components/AssociateHeader'
 import AssociateMenu from 'components/AssociateMenu'
 import CardOffers from 'components/CardOffers'
 import FiltersOffers from 'components/FiltersOffers'
 import Footer from 'components/Footer'
 import { useEffect, useState } from 'react'
-import { ProdTypes } from 'utils/types'
+import { HomeProps, GetOfferProps } from 'Types'
 import * as S from './styles'
 
-export type HomeProps = {
-  HeaderProps: AssociateHeaderProps
-  Products: ProdTypes[]
-}
-
-const Home = ({ HeaderProps, Products }: HomeProps) => {
-  const [produtos, setProdutos] = useState<ProdTypes[]>([])
+const Home = ({ HeaderProps, Products, Filters }: HomeProps) => {
+  const [produtos, setProdutos] = useState<GetOfferProps[]>()
+  const [city, setCity] = useState('')
+  const [associate, setAssociate] = useState('-1')
 
   useEffect(() => {
     function init() {
       setProdutos(Products)
+      console.log(Products)
     }
     init()
   }, [Products])
+
+  useEffect(() => {
+    if (!city || Number(city) < 1) {
+      setProdutos(Products)
+      return
+    }
+    const prods = Products.filter(
+      (value) => value.Associated.Address.city === city
+    )
+    setProdutos(prods)
+  }, [city, Products])
+
+  useEffect(() => {
+    if (!associate || Number(associate) < 1) {
+      setProdutos(Products)
+      return
+    }
+    const prods = Products.filter(
+      (value) => value.Associated.id === Number(associate)
+    )
+    setProdutos(prods)
+  }, [associate, Products])
 
   return (
     <S.Wrapper>
@@ -36,20 +54,30 @@ const Home = ({ HeaderProps, Products }: HomeProps) => {
         <AssociateMenu />
       </S.WrapperMenu>
       <S.WrapperContent>
-        <FiltersOffers />
+        <FiltersOffers
+          citys={Filters.citys}
+          associates={Filters.associates}
+          setCity={setCity}
+          setAssociate={setAssociate}
+        />
         <S.WrapperCards>
-          {produtos.map((prod) => (
-            <CardOffers
-              key={prod.id}
-              associate={prod.associate}
-              city={prod.city}
-              value={prod.value}
-              state={prod.state}
-              name={prod.name}
-              img={prod.img}
-              title={prod.title}
-            />
-          ))}
+          {produtos &&
+            produtos.map((prod) => {
+              return (
+                <CardOffers
+                  key={prod.id}
+                  associate={prod.Associated.fantasy_name}
+                  city={prod.Associated.Address.city}
+                  value={prod.value_offer}
+                  state={prod.Associated.Address.state}
+                  name={prod.title}
+                  img={
+                    'https://www.jamilnicolau.com.br/userfiles/Logo_JK_Face.jpg'
+                  }
+                  title={prod.title}
+                />
+              )
+            })}
         </S.WrapperCards>
       </S.WrapperContent>
       <S.WrapperFooter>

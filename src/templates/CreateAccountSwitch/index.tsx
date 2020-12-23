@@ -6,6 +6,7 @@ import { useEffect, useRef, useState } from 'react'
 import * as S from './styles'
 
 const CreateAccountSwitch = () => {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [scrollY, setScrollY] = useState(0)
   const [section, setSection] = useState('')
   const sectionHomeRef = useRef<null | HTMLDivElement>(null)

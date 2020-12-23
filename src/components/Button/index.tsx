@@ -6,7 +6,7 @@ export type ButtonProps = {
   background?: 'white' | 'green' | 'orange' | 'blue' | 'black'
   radius?: 'radius100' | 'radius200' | 'radius300'
   fullWidth?: boolean
-  onClick?: any
+  onClick?: () => void
 }
 
 const Button = ({

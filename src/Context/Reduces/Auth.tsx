@@ -32,7 +32,7 @@ export const AuthProvider: React.FC = ({ children }: any) => {
   >(process.browser ? clientJSON !== null && JSON.parse(clientJSON) : null)
 
   const [token, setToken] = useState<string | null>(
-    process.browser ? tokenJSON !== null && JSON.parse(tokenJSON) : null
+    process.browser ? tokenJSON : null
   )
 
   const [option, setOption] = useState(
@@ -59,12 +59,11 @@ export const AuthProvider: React.FC = ({ children }: any) => {
       if (process.browser !== null) {
         console.log(JSON.stringify(client))
         localStorage.setItem('client', JSON.stringify(data.client))
-        localStorage.setItem('token', JSON.stringify(data.token))
+        localStorage.setItem('token', data.token)
         localStorage.setItem('option', JSON.stringify(data.option))
         localStorage.setItem('signed', JSON.stringify(true))
       }
 
-      api.defaults.headers.Authorization = `Bearer ${token}`
       Router.push('/home-associado')
       toast.success('Seja bem vindo')
     } catch (error) {

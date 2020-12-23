@@ -1,4 +1,4 @@
-import { render, screen } from '@testing-library/react'
+import { screen } from '@testing-library/react'
 import { renderWidthTheme } from 'utils/tests/helpers'
 import 'jest-styled-components'
 

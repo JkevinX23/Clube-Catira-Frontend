@@ -18,10 +18,8 @@ export const Wrapper = styled.div`
   }
 `
 export const Sub = styled.p`
-  ${({ theme }) => css`
-    color: #333;
-    font-size: 1rem;
-  `}
+  color: #333;
+  font-size: 1rem;
 `
 export const Title = styled.p`
   ${({ theme }) => css`

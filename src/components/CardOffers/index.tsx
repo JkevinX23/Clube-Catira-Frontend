@@ -8,7 +8,7 @@ export type CardOffersProps = {
   associate: string
   city: string
   state: string
-  value: string
+  value: number
 }
 
 const CardOffers = ({

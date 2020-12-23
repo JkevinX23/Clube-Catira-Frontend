@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 
 import { Container } from './styles'
 
 export default function SidebarAdmin() {
-  const [navigator, setNavigator] = useState(0)
+  // const [navigator, setNavigator] = useState(0)
 
   return (
     <Container>

@@ -86,7 +86,7 @@ const TableCatirasAssociate = () => {
 
   useEffect(() => {
     setDataView(filteredItems)
-  }, [filterText])
+  }, [filterText, filteredItems])
 
   useEffect(() => {
     const Catiras = [

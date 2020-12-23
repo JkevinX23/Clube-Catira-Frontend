@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import * as S from './styles'
 import Menu from 'components/Menu'
 import AssociateComponent from 'components/Associates'

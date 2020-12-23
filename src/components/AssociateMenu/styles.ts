@@ -10,18 +10,17 @@ export const Wrapper = styled.main`
 `
 
 export const Options = styled.ul`
-  ${({ theme }) => css`
-    display: none;
-    position: absolute;
-    background: #00aaff;
-    margin: 1%;
-    margin-top: 0.2rem;
-    padding: 1rem;
-    color: white;
-    list-style: none;
-    border-radius: 0px 0px 0px 9px;
-    z-index: 20;
-    /* animation: fadeIn 0.2s;
+  display: none;
+  position: absolute;
+  background: #00aaff;
+  margin: 1%;
+  margin-top: 0.2rem;
+  padding: 1rem;
+  color: white;
+  list-style: none;
+  border-radius: 0px 0px 0px 9px;
+  z-index: 20;
+  /* animation: fadeIn 0.2s;
 
     @keyframes fadeIn {
       from {
@@ -32,18 +31,17 @@ export const Options = styled.ul`
       }
     } */
 
-    li {
-      padding: 0.5rem;
-      cursor: pointer;
-      font-size: 1.4rem;
-      white-space: nowrap;
+  li {
+    padding: 0.5rem;
+    cursor: pointer;
+    font-size: 1.4rem;
+    white-space: nowrap;
 
-      &:hover {
-        border-bottom: 2px solid white;
-        font-weight: bold;
-      }
+    &:hover {
+      border-bottom: 2px solid white;
+      font-weight: bold;
     }
-  `}
+  }
 `
 
 export const MenuLink = styled.a`

@@ -9,7 +9,7 @@ export type DetailsOfferProps = {
 
   associate: string
   date: string
-  quantity: any
+  quantity: number
   sell: number
   description: string
 }
@@ -25,7 +25,7 @@ const DetailsOffer = ({
 }: DetailsOfferProps) => (
   <S.Wrapper>
     <S.Content>
-      <S.Image src={img} role="img" aria-label={name} />
+      <S.Image src={img} role="img" />
       <S.WrapperDetails>
         <S.Title>{offer}</S.Title>
         <S.Value>{value}</S.Value>
