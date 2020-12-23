@@ -13,17 +13,7 @@
     "storybook": "start-storybook -p -s ./public 6006",
     "build-storybook": "build-storybook -s ./public"
   },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged"
-    }
-  },
-  "lint-staged": {
-    "src/**/*": [
-      "yarn lint --fix",
-      "yarn test --findRelatedTests --bail"
-    ]
-  },
+
   "dependencies": {
     "@types/react-router-dom": "^5.1.6",
     "@types/styled-components": "^5.1.2",

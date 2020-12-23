@@ -86,6 +86,11 @@ export interface HomeProps {
   Filters: FilterProps
 }
 
+export interface HomeAdminProps {
+  name: string
+  role: string
+}
+
 export interface GetOfferProps {
   id: number
   title: string

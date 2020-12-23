@@ -9,12 +9,7 @@ type Associate = {
   name: string
 }
 
-const DashNewAssociate = ({
-  associates = [
-    { ref: 'Moc01 ', name: 'Joao kevin' },
-    { ref: '277', name: 'Joao Rodrigues' }
-  ]
-}: DashNewAssociateProps) => (
+const DashNewAssociate = ({ associates }: DashNewAssociateProps) => (
   <S.Wrapper>
     <div>
       <S.Title>Novos Associados</S.Title>

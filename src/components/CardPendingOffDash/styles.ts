@@ -1,16 +1,21 @@
 import styled, { css } from 'styled-components'
 
 export const Wrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  width: 80%;
-  max-width: 20rem;
-  align-items: center;
+  ${({ theme }) => css`
+    background: ${theme.colors.white};
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 35rem;
+    align-items: center;
+    box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.47);
+    height: 35rem;
+  `}
 `
 export const Sub = styled.p`
   ${({ theme }) => css`
     color: ${theme.colors.blue};
-    font-size: 1rem;
+    font-size: 2rem;
     padding: 1rem 2rem;
     cursor: pointer;
   `}

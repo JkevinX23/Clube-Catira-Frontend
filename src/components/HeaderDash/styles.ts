@@ -17,8 +17,8 @@ export const Logo = styled.div`
   height: 100%;
   padding: 1rem;
   img {
-    width: 20rem;
-    height: 5rem;
+    width: 25rem;
+    height: auto;
   }
 `
 export const Content = styled.div`
@@ -26,15 +26,15 @@ export const Content = styled.div`
   flex-direction: row;
   background: #00aaff;
   margin: 2%;
-  padding: 1.5rem;
+  padding: 1rem;
   border-radius: 9px 0px 9px 0px;
   color: white;
 `
 export const Name = styled.p`
-  font-size: 3rem;
+  font-size: 2.5rem;
 `
 export const Role = styled.p`
-  font-size: 2rem;
+  font-size: 1.8rem;
   font-style: italic;
 `
 export const Icon = styled.div`
@@ -45,7 +45,7 @@ export const Icon = styled.div`
 export const Options = styled.ul`
   position: absolute;
   right: 0rem;
-  bottom: -10rem;
+  bottom: -10.5rem;
   background: #00aaff;
   margin: 2%;
   padding: 1.2rem;

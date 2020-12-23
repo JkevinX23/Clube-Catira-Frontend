@@ -14,7 +14,7 @@ export const Wrapper = styled.div<WrapperProps>`
     height: 25%;
     max-height: 30rem;
     align-items: center;
-    padding: 3rem 5rem;
+    padding: 2rem 2rem;
     border-left: 1.5rem solid
       ${icon === 'associates'
         ? theme.colors.orange
@@ -30,10 +30,10 @@ export const Wrapper = styled.div<WrapperProps>`
 
 export const IconWrapper = styled.div``
 export const Title = styled.p`
-  font-size: 2.5rem;
+  font-size: 2rem;
 `
 export const Value = styled.p`
-  font-size: 2.7rem;
+  font-size: 2.5rem;
 `
 
 export const Icon = styled.img`

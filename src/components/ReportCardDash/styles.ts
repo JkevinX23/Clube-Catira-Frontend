@@ -7,8 +7,10 @@ export const Wrapper = styled.div`
     flex-direction: column;
     align-items: center;
     width: 100%;
+    height: 20rem;
     padding: 2rem;
     max-width: 36rem;
+    box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.47);
   `}
 `
 export const WrapperInfo = styled.div`
@@ -19,7 +21,11 @@ export const WrapperInfo = styled.div`
   margin-top: 1rem;
 `
 export const Title = styled.p`
-  font-size: 3rem;
+  font-size: 2rem;
+  font-weight: lighter;
+  margin: 2rem 1rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid #c4c4c4;
 `
 export const Sub = styled.p``
 
