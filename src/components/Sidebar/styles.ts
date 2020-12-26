@@ -11,7 +11,7 @@ export const Container = styled.header`
     background-color: #222;
     transition: width 600ms ease;
     overflow: scroll;
-    z-index: 3;
+    z-index: 20;
     overflow-x: hidden;
   }
   span {
