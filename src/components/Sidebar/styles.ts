@@ -14,6 +14,10 @@ export const Container = styled.header`
     z-index: 20;
     overflow-x: hidden;
   }
+
+  li {
+    cursor: pointer;
+  }
   span {
     color: white;
   }

@@ -1,3 +1,5 @@
+import { AnyAaaaRecord } from 'dns'
+
 export interface Login {
   email: string
   password: string
@@ -131,4 +133,34 @@ export interface PostOfferProps {
   consumer_cards: number
   quantity?: number
   file_id: number
+}
+
+interface EventTarget {
+  files: any
+  addEventListener(
+    type: string,
+    listener: EventListenerOrEventListenerObject,
+    useCapture?: boolean
+  ): void
+  dispatchEvent(evt: Event): boolean
+  removeEventListener(
+    type: string,
+    listener: EventListenerOrEventListenerObject,
+    useCapture?: boolean
+  ): void
+}
+
+export interface SyntheticEvent {
+  bubbles: boolean
+  cancelable: boolean
+  currentTarget: EventTarget
+  defaultPrevented: boolean
+  eventPhase: number
+  isTrusted: boolean
+  nativeEvent: Event
+  preventDefault(): void
+  stopPropagation(): void
+  target: EventTarget
+  timeStamp: Date
+  type: string
 }
