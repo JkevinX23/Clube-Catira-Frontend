@@ -1,6 +1,6 @@
 import HeaderDash from 'components/HeaderDash'
 import Footer from 'components/Footer'
-import { HomeAdminProps } from 'Types'
+import { HomeDashAdminProps } from 'Types'
 import * as S from './styles'
 import DashCardsMain from 'components/DashCardsMain'
 import DashNewAssociate from 'components/DashNewAssociate'
@@ -8,7 +8,7 @@ import ReportCardDash from 'components/ReportCardDash'
 import CardPendingOffDash from 'components/CardPendingOffDash'
 import SidebarAdmin from 'components/Sidebar'
 
-const Franchise = ({ name, role }: HomeAdminProps) => {
+const HomeAdministrador = ({ name, role, page_data }: HomeDashAdminProps) => {
   return (
     <S.Wrapper>
       <S.WrapperContent>
@@ -16,37 +16,42 @@ const Franchise = ({ name, role }: HomeAdminProps) => {
           <HeaderDash name={name} role={role} />
         </S.WrapperHeader>
         <S.WrapperCards>
-          <DashCardsMain title="Associados" icon="associates" value="512" />
+          <DashCardsMain
+            title="Associados"
+            icon="associates"
+            value={page_data && `${page_data.qtd_associates}`}
+          />
           <DashCardsMain
             title="Transações Pagas"
             icon="transactions"
-            value="Ctz 32.412,10"
+            value={page_data && `Ctz ${page_data.paid}`}
           />
           <DashCardsMain
             title="Transações Pendentes"
             icon="pending"
-            value="Ctz 32.412,10"
+            value={page_data && `Ctz ${page_data.pending}`}
           />
-          <DashCardsMain title="Ofertas" icon="offers" value="431" />
+          <DashCardsMain
+            title="Ofertas"
+            icon="offers"
+            value={page_data && `${page_data.qtd_offers}`}
+          />
         </S.WrapperCards>
 
         <S.WrapperReports>
           <S.DashNewAssociate>
-            <DashNewAssociate
-              associates={[
-                { ref: 'Moc01 ', name: 'Joao kevin' },
-                { ref: '277', name: 'Joao Rodrigues' }
-              ]}
-            />
+            <DashNewAssociate associates={page_data.new_associates} />
           </S.DashNewAssociate>
 
           <S.DashNewAssociate>
-            <ReportCardDash direct={32} pending={4} />
+            <ReportCardDash
+              direct={page_data.paid_vouchers}
+              pending={page_data.pending_vouchers}
+            />
           </S.DashNewAssociate>
           <S.DashNewAssociate>
-            <CardPendingOffDash
-              associates={[{ associate: 'Kevin', franchise: 'Moc' }]}
-            />
+            {/* @ts-ignore: Unreachable code error */}
+            <CardPendingOffDash pending_offers={page_data.pending_offers} />
           </S.DashNewAssociate>
         </S.WrapperReports>
       </S.WrapperContent>
@@ -58,4 +63,4 @@ const Franchise = ({ name, role }: HomeAdminProps) => {
   )
 }
 
-export default Franchise
+export default HomeAdministrador

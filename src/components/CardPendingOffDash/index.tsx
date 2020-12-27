@@ -4,18 +4,19 @@ import PendingAssociate, {
 import * as S from './styles'
 
 export type CardPendingOffDashProps = {
-  associates: PendingAssociateProps[]
+  pending_offers: PendingAssociateProps[]
 }
 
-const CardPendingOffDash = ({ associates }: CardPendingOffDashProps) => (
+const CardPendingOffDash = ({ pending_offers }: CardPendingOffDashProps) => (
   <S.Wrapper>
     <S.Title>Ofertas Pendentes</S.Title>
     <S.Content>
-      {!!associates &&
-        associates.map((associate, i) => (
+      {pending_offers &&
+        pending_offers.map((associate, i) => (
           <PendingAssociate
             key={i}
-            associate={associate.associate}
+            id={associate.id}
+            associated={associate.associated}
             franchise={associate.franchise}
           />
         ))}

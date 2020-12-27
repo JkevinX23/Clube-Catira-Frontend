@@ -5,8 +5,8 @@ export type DashNewAssociateProps = {
 }
 
 type Associate = {
-  ref: string
-  name: string
+  id: number
+  fantasy_name: string
 }
 
 const DashNewAssociate = ({ associates }: DashNewAssociateProps) => (
@@ -21,13 +21,14 @@ const DashNewAssociate = ({ associates }: DashNewAssociateProps) => (
             <S.Th>AÇÃO</S.Th>
           </S.Tr>
           <>
-            {associates.map((val, i) => (
-              <S.Tr key={i}>
-                <S.Td>{val.ref}</S.Td>
-                <S.Td>{val.name}</S.Td>
-                <S.Td>Ativar</S.Td>
-              </S.Tr>
-            ))}
+            {associates &&
+              associates.map((val, i) => (
+                <S.Tr key={i}>
+                  <S.Td>{val.id}</S.Td>
+                  <S.Td>{val.fantasy_name}</S.Td>
+                  <S.Td>Ativar</S.Td>
+                </S.Tr>
+              ))}
           </>
 
           <S.TFoot>

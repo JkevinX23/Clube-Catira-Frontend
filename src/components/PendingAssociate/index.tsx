@@ -1,13 +1,14 @@
 import * as S from './styles'
 
 export type PendingAssociateProps = {
+  id: number
   franchise: string
-  associate: string
+  associated: string
 }
-const PendingAssociate = ({ franchise, associate }: PendingAssociateProps) => (
+const PendingAssociate = ({ franchise, associated }: PendingAssociateProps) => (
   <S.Wrapper>
     <S.Sub>{franchise}</S.Sub>
-    <S.Title>{associate}</S.Title>
+    <S.Title>{associated}</S.Title>
     <S.FunctionsWrapper>
       <a>APROVAR</a>
       <span> | </span>

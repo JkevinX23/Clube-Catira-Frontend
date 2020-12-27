@@ -1,4 +1,4 @@
-import { AnyAaaaRecord } from 'dns'
+import { CardPendingOffDashProps } from 'components/CardPendingOffDash'
 
 export interface Login {
   email: string
@@ -52,6 +52,7 @@ export interface Associate {
   credit: number
   status: number
   type: number
+  createdAt?: Date
 }
 
 export interface Option {
@@ -91,6 +92,11 @@ export interface HomeProps {
 export interface HomeAdminProps {
   name: string
   role: string
+}
+export interface HomeDashAdminProps {
+  name: string
+  role: string
+  page_data: GetHomeAdmin
 }
 
 export interface GetOfferProps {
@@ -133,6 +139,9 @@ export interface PostOfferProps {
   consumer_cards: number
   quantity?: number
   file_id: number
+  associate_id?: number
+  createdAt?: Date
+  directed_associate_id?: number
 }
 
 interface EventTarget {
@@ -163,4 +172,20 @@ export interface SyntheticEvent {
   target: EventTarget
   timeStamp: Date
   type: string
+}
+
+export interface newAssociate {
+  id: number
+  fantasy_name: string
+}
+
+export interface GetHomeAdmin {
+  qtd_associates: number
+  pending: number
+  paid: number
+  qtd_offers: number
+  paid_vouchers: number
+  pending_vouchers: number
+  new_associates: newAssociate[]
+  pending_offers: CardPendingOffDashProps[]
 }

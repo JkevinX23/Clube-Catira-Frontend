@@ -4,7 +4,6 @@ import { postLogin } from 'Context/Action/Login'
 import { Administrador, Login, Franquia, Associate } from 'Types'
 import Router from 'next/router'
 import { toast } from 'react-toastify'
-import api from 'services/api'
 interface IAuthContext {
   signed: boolean
   option: number
@@ -64,7 +63,13 @@ export const AuthProvider: React.FC = ({ children }: any) => {
         localStorage.setItem('signed', JSON.stringify(true))
       }
 
-      Router.push('/home-associado')
+      switch (data.option) {
+        case 4:
+          Router.push('/home-associado')
+          break
+        case 1:
+          Router.push('/administrador')
+      }
       toast.success('Seja bem vindo')
     } catch (error) {
       toast.warn('Credenciais incorretas, tente novamente')

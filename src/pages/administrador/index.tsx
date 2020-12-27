@@ -1,11 +1,13 @@
 import Page from 'templates/HomeAdministrador'
 import AuthContext from 'Context/Reduces/Auth'
-import { useContext } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
 import { toast } from 'react-toastify'
-import { Associate } from 'Types'
+import { Administrador } from 'Types'
+import { getHomeAdmin } from 'Context/Action/HomeAdmin'
 
 export default function HomeAdmin() {
+  const [content, setContent] = useState({})
   const router = useRouter()
 
   const props = useContext(AuthContext)
@@ -16,7 +18,27 @@ export default function HomeAdmin() {
     toast.info('Olá, realize seu login para continuar')
   }
 
-  const client = props.client as Associate
+  const client = props.client as Administrador
 
-  return <Page name="kevin" role="Administrador" />
+  useEffect(() => {
+    async function loadHomeData() {
+      try {
+        const { data } = await getHomeAdmin()
+        setContent(data)
+      } catch (err) {
+        console.log(err)
+      }
+    }
+    loadHomeData()
+  }, [])
+
+  return (
+    <Page
+      name={client && client.name}
+      role="Administrador"
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-ignore: Unreachable code error
+      page_data={content}
+    />
+  )
 }
