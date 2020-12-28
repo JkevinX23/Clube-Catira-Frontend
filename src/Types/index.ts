@@ -34,6 +34,18 @@ export interface Franquia {
   im?: number
   getway_email: string
   getway_token: string
+  address?: Address
+}
+
+export interface Address {
+  id: number
+  cep: string
+  state: string
+  city: string
+  street: string
+  neighborhood: string
+  number: string
+  complement: string
 }
 
 export interface Associate {
@@ -188,4 +200,13 @@ export interface GetHomeAdmin {
   pending_vouchers: number
   new_associates: newAssociate[]
   pending_offers: CardPendingOffDashProps[]
+}
+
+export interface GetFranchises {
+  id: number
+  name: string
+  email: string
+  status: number
+  percentage: number
+  qtd_associados: number
 }
