@@ -100,8 +100,6 @@ export default function ListFranchise({ setId }: props) {
             onClick: (event, rowData) => {
               const row = rowData as GetFranchises
               setId(row.id)
-              console.log('clicou')
-              console.log(row.id)
             }
           }
         ]}

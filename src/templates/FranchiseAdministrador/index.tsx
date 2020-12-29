@@ -15,7 +15,6 @@ const Home = ({ name, role }: HomeAdminProps) => {
   const [id, setId] = useState<number>(0)
 
   useEffect(() => {
-    console.log(id)
     if (id !== 0) {
       setSelector(3)
     }

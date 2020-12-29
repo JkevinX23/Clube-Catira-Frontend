@@ -49,6 +49,7 @@ export interface Address {
 }
 
 export interface Associate {
+  id?: number
   description: string
   site?: string
   facebook?: string
@@ -209,4 +210,56 @@ export interface GetFranchises {
   status: number
   percentage: number
   qtd_associados: number
+}
+
+export interface GetConsultant {
+  id: number
+  identification: string
+  contact1: string
+  status: number
+  Franchise: {
+    id: number
+    name: string
+  }
+  qtd_associados: number
+}
+
+export interface Consultant {
+  id: number
+  email: string
+  name: string
+  identification: string
+  document: string
+  contact1: string
+  contact2?: null
+  status: number
+  percentage: number
+  createdAt: string
+  updatedAt: string
+  franchise_id: number
+  address_id: number
+  Address: Address
+  Franchise: {
+    id: number
+    name: string
+  }
+}
+
+export interface GetOfferAdmin {
+  id: number
+  status: number
+  title: string
+  value_offer: number
+  Associated: {
+    id: number
+    fantasy_name: string
+    Consultant: {
+      id: number
+      name: string
+      Franchise: {
+        id: number
+        name: string
+      }
+    }
+  }
 }

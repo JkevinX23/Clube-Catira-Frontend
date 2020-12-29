@@ -50,18 +50,23 @@ export default function ListAssociates() {
         options={{ exportButton: true }}
         localization={{
           header: { actions: 'Ações' },
+          body: {
+            emptyDataSourceMessage: 'Nenhum registro para exibir'
+          },
           toolbar: {
-            exportAriaLabel: 'Exportar como CSV',
+            exportCSVName: 'Exportar como CSV',
+            exportPDFName: 'Exportar como PDF',
+            exportTitle: 'Exportar',
             searchPlaceholder: 'Buscar',
             searchTooltip: 'Buscar na tabela'
           },
           pagination: {
-            labelRowsSelect: 'Registros por página'
-          },
-          body: {
-            editRow: {
-              deleteText: 'Deseja mesmo apagar essa ong?'
-            }
+            labelRowsSelect: 'Registros por página',
+            labelDisplayedRows: '{count} de {from}-{to}',
+            firstTooltip: 'Primeira página',
+            previousTooltip: 'Página anterior',
+            nextTooltip: 'Próxima página',
+            lastTooltip: 'Última página'
           }
         }}
       />

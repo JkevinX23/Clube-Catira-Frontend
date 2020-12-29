@@ -1,8 +1,14 @@
 import * as S from './styles'
 import MaterialTable from 'material-table'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
+import { GetConsultant } from 'Types'
+import { getConsultants } from 'Context/Action/Consultant'
 
-export default function ListConsultants() {
+type props = {
+  setId: (id: number) => void
+}
+
+export default function ListConsultants({ setId }: props) {
   type IType =
     | 'string'
     | 'boolean'
@@ -20,7 +26,7 @@ export default function ListConsultants() {
     },
     {
       title: 'Franquia',
-      field: 'franchise',
+      field: 'Franchise.name',
       type: string
     },
     {
@@ -35,38 +41,67 @@ export default function ListConsultants() {
     },
     {
       title: 'Nº Associados',
-      field: 'qtd_associates',
+      field: 'qtd_associados',
       type: string
     },
     {
       title: 'Status',
       field: 'status',
-      type: string
+      lookup: {
+        0: 'Pendente',
+        1: 'Ativo',
+        2: 'Bloqueado'
+      }
     }
   ]
+
+  const [data, setData] = useState<GetConsultant[]>([])
+
+  useEffect(() => {
+    async function loadData() {
+      const { data } = await getConsultants()
+      setData(data)
+    }
+    loadData()
+  }, [])
   return (
     <S.Wrapper>
       <MaterialTable
-        title="Associados"
+        title="Consultores"
         columns={columns}
-        data={[]}
+        data={data}
         options={{ exportButton: true }}
         localization={{
           header: { actions: 'Ações' },
+          body: {
+            emptyDataSourceMessage: 'Nenhum registro para exibir'
+          },
           toolbar: {
-            exportAriaLabel: 'Exportar como CSV',
+            exportCSVName: 'Exportar como CSV',
+            exportPDFName: 'Exportar como PDF',
+            exportTitle: 'Exportar',
             searchPlaceholder: 'Buscar',
             searchTooltip: 'Buscar na tabela'
           },
           pagination: {
-            labelRowsSelect: 'Registros por página'
-          },
-          body: {
-            editRow: {
-              deleteText: 'Deseja mesmo apagar essa ong?'
-            }
+            labelRowsSelect: 'Registros por página',
+            labelDisplayedRows: '{count} de {from}-{to}',
+            firstTooltip: 'Primeira página',
+            previousTooltip: 'Página anterior',
+            nextTooltip: 'Próxima página',
+            lastTooltip: 'Última página'
           }
         }}
+        actions={[
+          {
+            icon: 'visibility',
+            tooltip: 'Ver Detalhes',
+            onClick: (event, rowData) => {
+              const row = rowData as GetConsultant
+              setId(row.id)
+            }
+          }
+        ]}
       />
     </S.Wrapper>
   )

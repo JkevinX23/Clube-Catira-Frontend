@@ -1,6 +1,8 @@
 import * as S from './styles'
 import MaterialTable from 'material-table'
-// import { useState } from 'react'
+import { GetOfferAdmin } from 'Types'
+import { useState, useEffect } from 'react'
+import { getOffersAdmin } from 'Context/Action/Offer'
 
 export default function OfferTable() {
   type IType =
@@ -21,51 +23,70 @@ export default function OfferTable() {
     {
       title: 'Status',
       field: 'status',
-      type: string
+      lookup: {
+        0: 'Pendente',
+        1: 'Ativo',
+        2: 'Bloqueado'
+      }
     },
     {
       title: 'Franquia',
-      field: 'franchise',
+      field: 'Associated.Consultant.Franchise.name',
       type: string
     },
     {
       title: 'Vendedor',
-      field: 'associate',
+      field: 'Associated.fantasy_name',
       type: string
     },
     {
       title: 'Oferta',
-      field: 'offer',
+      field: 'title',
       type: string
     },
     {
       title: 'Valor',
-      field: 'value',
+      field: 'value_offer',
       type: string
     }
   ]
+
+  const [data, setData] = useState<GetOfferAdmin[]>([])
+
+  useEffect(() => {
+    async function loadData() {
+      const { data } = await getOffersAdmin()
+      setData(data)
+    }
+    loadData()
+  }, [])
 
   return (
     <S.Wrapper>
       <MaterialTable
         title="Ofertas"
         columns={columns}
-        data={[]}
+        data={data}
         options={{ exportButton: true }}
         localization={{
           header: { actions: 'Ações' },
+          body: {
+            emptyDataSourceMessage: 'Nenhum registro para exibir'
+          },
           toolbar: {
-            exportAriaLabel: 'Exportar como CSV',
+            exportCSVName: 'Exportar como CSV',
+            exportPDFName: 'Exportar como PDF',
+            exportTitle: 'Exportar',
             searchPlaceholder: 'Buscar',
             searchTooltip: 'Buscar na tabela'
           },
           pagination: {
-            labelRowsSelect: 'Registros por página'
-          },
-          body: {
-            editRow: {
-              deleteText: 'Deseja mesmo apagar essa ong?'
-            }
+            labelRowsSelect: 'Registros por página',
+            labelDisplayedRows: '{count} de {from}-{to}',
+            firstTooltip: 'Primeira página',
+            previousTooltip: 'Página anterior',
+            nextTooltip: 'Próxima página',
+            lastTooltip: 'Última página'
           }
         }}
       />
