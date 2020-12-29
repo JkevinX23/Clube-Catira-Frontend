@@ -1,6 +1,7 @@
 import * as S from './styles'
 import MaterialTable from 'material-table'
-// import { useState } from 'react'
+import { useEffect, useState } from 'react'
+import { getAssociatesAdmin } from 'Context/Action/Associates'
 
 export default function ListAssociates() {
   type IType =
@@ -19,13 +20,18 @@ export default function ListAssociates() {
       type: string
     },
     {
+      title: 'Associado',
+      field: 'fantasy_name',
+      type: string
+    },
+    {
       title: 'Franquia',
-      field: 'franchise',
+      field: 'Consultant.Franchise.name',
       type: string
     },
     {
       title: 'Consultor',
-      field: 'consultant',
+      field: 'Consultant.identification',
       type: string
     },
     {
@@ -36,17 +42,31 @@ export default function ListAssociates() {
     {
       title: 'Status',
       field: 'status',
-      type: string
+      lookup: {
+        0: 'Pendente',
+        1: 'Ativo',
+        2: 'Bloqueado'
+      }
     }
   ]
 
   ///Tel. Fixo Tel. Celular Email CNPJ Localidade Consultor
+
+  const [data, setData] = useState<any>()
+  useEffect(() => {
+    async function loadData() {
+      const { data } = await getAssociatesAdmin()
+      setData(data)
+    }
+    loadData()
+  }, [])
+
   return (
     <S.Wrapper>
       <MaterialTable
         title="Associados"
         columns={columns}
-        data={[]}
+        data={data}
         options={{ exportButton: true }}
         localization={{
           header: { actions: 'Ações' },

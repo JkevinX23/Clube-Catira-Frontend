@@ -263,3 +263,18 @@ export interface GetOfferAdmin {
     }
   }
 }
+
+export interface GetAssociatesAdmin {
+  id: number
+  fantasy_name: string
+  credit: number
+  status: number
+  Consultant: {
+    id: number
+    identification: string
+    Franchise: {
+      id: number
+      name: string
+    }
+  }
+}
