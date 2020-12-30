@@ -1,4 +1,5 @@
 import { CardPendingOffDashProps } from 'components/CardPendingOffDash'
+import { StringifyOptions } from 'querystring'
 
 export interface Login {
   email: string
@@ -367,4 +368,50 @@ export interface PutConsultantProps {
   percentage?: number
   franchise_id?: number
   status?: number
+}
+export interface PostAssociateProps {
+  description: string
+  site?: string
+  facebook?: string
+  instagram?: string
+  fantasy_name: string
+  company_name: string
+  document: string
+  representative: string
+  contact1: string
+  contact2?: string
+  email: string
+  password: string
+  percentage: number
+  status: number
+  type: number
+  cep: string
+  street: string
+  number: string
+  neighborhood: string
+  city: string
+  state: string
+  complement?: string
+  reference_point?: string
+  credit: number
+  file_id: number
+  category_id: number
+  consultant_id: number
+  category_suggestion?: string
+}
+
+export interface CategoriesProps {
+  id: number
+  name: string
+  isvalid: boolean
+  createdAt: string
+  updatedAt: string
+}
+export interface PostCategoryProps {
+  name: string
+}
+export interface PutCategoryProps {
+  id: number
+  name: string
+  isvalid: boolean
 }

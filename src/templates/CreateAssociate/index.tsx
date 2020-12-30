@@ -6,6 +6,7 @@ import * as S from './styles'
 
 const CreateAssociate = () => {
   const [file, setFile] = useState('')
+  const [hidden, setHidden] = useState(false)
   const [imagePreviewUrl, setImagePreviewUrl] = useState<
     string | ArrayBuffer | null
   >('/img/preview-clube.png')
@@ -25,6 +26,7 @@ const CreateAssociate = () => {
       }
     }
   }
+
   return (
     <S.Wrapper>
       <S.FormWrapper>
@@ -145,7 +147,7 @@ const CreateAssociate = () => {
               </S.Select>
             </S.SelectWrapper>
             <S.TextWrapper items={3}>
-              <TextField label="Porcentagem de Compra" />
+              <TextField label="Porcentagem" />
             </S.TextWrapper>
             <S.TextWrapper items={3}>
               <TextField label="Crédito Inicial" />
@@ -181,6 +183,26 @@ const CreateAssociate = () => {
                     value="nao"
                   />
                   Inativo
+                </S.RadioLabel>
+              </S.WrapperRadio>
+            </S.TextWrapper>
+
+            <S.TextWrapper items={3}>
+              <S.WrapperRadio>
+                <S.Label>TIPO</S.Label>
+                <S.RadioLabel>
+                  <S.InputRadio type="radio" id="oculto" name="oculto" />
+                  Oculto
+                </S.RadioLabel>
+
+                <S.RadioLabel>
+                  <S.InputRadio
+                    type="radio"
+                    id="visivel"
+                    name="oculto"
+                    defaultChecked
+                  />
+                  Vísivel
                 </S.RadioLabel>
               </S.WrapperRadio>
             </S.TextWrapper>
