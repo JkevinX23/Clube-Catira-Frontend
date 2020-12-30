@@ -8,7 +8,6 @@ import SidebarAdmin from 'components/Sidebar'
 import CreateConsultant from 'templates/CreateConsultant'
 import { useEffect, useState } from 'react'
 import Button from 'components/Button'
-import ShowFranchise from 'templates/Show/Administrador/Franchise'
 import ShowConsultant from 'templates/Show/Administrador/Consultant'
 
 const ConsultantAdmin = ({ name, role }: HomeAdminProps) => {

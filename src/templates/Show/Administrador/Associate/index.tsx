@@ -1,30 +1,39 @@
 import Button from 'components/Button'
 import TextField from 'components/TextField'
-import { postConsultant } from 'Context/Action/Consultant'
-import { getFranchise } from 'Context/Action/Franchise'
 import { useEffect, useState } from 'react'
-import { toast } from 'react-toastify'
+import { SyntheticEvent } from 'Types'
+import * as S from './styles'
 import searchCep from 'cep-promise'
-import { GetFranchises, PostConsultantProps } from 'Types'
 import { cellphoneeMask, cepMask, cpfCnpjMask } from 'utils/Masks'
 import { isEmail, validarCPF, validarCNPJ, cleanObject } from 'utils/Validation'
-import * as S from './styles'
+import { toast } from 'react-toastify'
+import { getCategoriesAdmin } from 'Context/Action/Category'
+import { getConsultants } from 'Context/Action/Consultant'
+import { postFile } from 'Context/Action/File'
+import { createAssociateAdmin, showAssociate } from 'Context/Action/Associates'
 
-const CreateConsultant = () => {
-  const [franchises, setFranchises] = useState<any>([])
-  const [name, setName] = useState('')
-  const [identification, SetIdentification] = useState('')
-  const [email, setEmail] = useState('')
+type props = {
+  id: number
+}
+
+const ShowAssociate = ({ id }: props) => {
+  const [associate, setAssociate] = useState<any>()
+  const [categories, setCategories] = useState<any>([])
+  const [consultants, setConsultants] = useState<any>([])
+  const [file, setFile] = useState<any>()
+
+  const [hidden, setHidden] = useState(false)
+
+  const [description, setDescription] = useState('')
+  const [site, setSite] = useState('')
+  const [facebook, setFacebook] = useState('')
+  const [instagram, setInstagram] = useState('')
+  const [category_id, setCategory_id] = useState('')
   const [company_name, setCompanyName] = useState('')
+  const [fantasy_name, setFantasy_name] = useState('')
   const [document, setDocument] = useState('')
-  const [contact1, setContact1] = useState('')
-  const [contact2, setContact2] = useState('')
-  const [password, setPassword] = useState('')
-  const [passwordConfirm, setPasswordConfirm] = useState('')
-  const [percentage, setPercentage] = useState(10)
-  const [franchise_id, setFranchise_id] = useState(10)
-  const [status, setStatus] = useState(1)
-
+  const [response_name, setResponseName] = useState('')
+  const [email, setEmail] = useState('')
   const [cep, setCep] = useState('')
   const [state, setState] = useState('none')
   const [city, setCity] = useState('')
@@ -32,6 +41,69 @@ const CreateConsultant = () => {
   const [street, setStreet] = useState('')
   const [number, setNumber] = useState('')
   const [complement, setComplement] = useState('')
+  const [contact1, setContact1] = useState('')
+  const [contact2, setContact2] = useState('')
+  const [password, setPassword] = useState('')
+  const [passwordConfirm, setPasswordConfirm] = useState('')
+  const [percentage, setPercentage] = useState(10)
+  const [credit, setCredit] = useState(0)
+  const [status, setStatus] = useState(1)
+  const [type, setType] = useState(1)
+  const [consultant_id, setconsultant_id] = useState(0)
+  const [file_id, setFile_id] = useState(0)
+
+  const [imagePreviewUrl, setImagePreviewUrl] = useState<
+    string | ArrayBuffer | null
+  >('/img/preview-clube.png')
+
+  function handleImageChange(e: SyntheticEvent) {
+    e.preventDefault()
+    if (window.FileReader) {
+      if (e.target.files[0]) {
+        const reader = new FileReader()
+        const file = e.target.files[0]
+        const data = new FormData()
+        data.append('file', e.target.files[0])
+        setFile(data)
+        reader.onloadend = () => {
+          setImagePreviewUrl(reader.result)
+        }
+        reader.readAsDataURL(file)
+      }
+    }
+  }
+
+  useEffect(() => {
+    async function loadAssociate() {
+      const { data } = await showAssociate(id)
+      setAssociate(data)
+      setDescription(data.description)
+      setFantasy_name(data.fantasy_name)
+      setDocument(data.document)
+      setCompanyName(data.company_name)
+      setResponseName(data.representative)
+      setContact1(data.contact1)
+      setSite(data.site || '')
+      setFacebook(data.facebook || '')
+      setInstagram(data.instagram || '')
+      setCompanyName(data.company_name)
+      setEmail(data.email)
+      setCep(data.Address.cep)
+      setState(data.Address.state)
+      setCity(data.Address.city)
+      setNeighborhood(data.Address.neighborhood)
+      setStreet(data.Address.street)
+      setNumber(data.Address.number)
+      setComplement(data.Address.complement || '')
+      setContact1(data.contact1)
+      setContact2(data.contact2 || '')
+      setPercentage(data.percentage)
+      setCredit(data.credit)
+      setStatus(data.status)
+      setType(data.type)
+    }
+    loadAssociate()
+  }, [id])
 
   function refreshPage() {
     window.location.reload()
@@ -75,6 +147,23 @@ const CreateConsultant = () => {
     }
   }, [cep])
 
+  useEffect(() => {
+    async function loadCategories() {
+      const { data } = await getCategoriesAdmin()
+      setCategories(data)
+    }
+
+    async function loadConsultants() {
+      const { data } = await getConsultants()
+      setConsultants(
+        data.filter((a) => a.status === 1).sort((a, b) => b.id - a.id)
+      )
+    }
+
+    loadCategories()
+    loadConsultants()
+  }, [])
+
   async function handlesubmit() {
     if (!isEmail(email)) {
       toast.error('Email Invalido')
@@ -100,29 +189,40 @@ const CreateConsultant = () => {
       toast.info('Sua senha deve ter pelo menos 6 caracteres.')
       return
     }
-    const data = {
-      cep,
-      city,
-      company_name,
-      contact1,
-      document,
-      email,
-      franchise_id,
-      identification,
-      name,
-      neighborhood,
-      number,
-      password,
-      percentage,
-      state,
-      status,
-      street,
-      complement,
-      contact2
-    } as PostConsultantProps
 
     try {
-      await postConsultant(cleanObject(data))
+      const { data } = await postFile(file)
+      const payload = {
+        description,
+        fantasy_name,
+        document,
+        company_name,
+        representative: response_name,
+        contact1,
+        email,
+        password,
+
+        cep,
+        city,
+        neighborhood,
+        number,
+        state,
+        complement,
+        credit,
+        file_id: data.id,
+        category_id,
+
+        percentage,
+        status,
+        street,
+        contact2,
+        consultant_id,
+        type,
+        facebook,
+        instagram,
+        site
+      }
+      await createAssociateAdmin(cleanObject(payload))
       toast.success('Consultor criado com sucesso')
     } catch (err) {
       toast.error(
@@ -131,44 +231,90 @@ const CreateConsultant = () => {
     }
   }
 
-  useEffect(() => {
-    async function loadFranchises() {
-      const { data } = await getFranchise()
-      setFranchises(data)
-    }
-
-    loadFranchises()
-  }, [])
   return (
     <S.Wrapper>
       <S.FormWrapper>
         <S.TextFieldWrapper>
           <S.InlineWrapper>
             <S.TextWrapper items={3}>
-              <TextField
-                label="Nome Completo"
+              <input
+                type="file"
+                accept="image/*"
+                onChange={
+                  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+                  // @ts-ignore: Unreachable code error
+                  (e) => handleImageChange(e)
+                }
+              />
+              {/* // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+                // @ts-ignore: Unreachable code error */}
+              <S.Image src={imagePreviewUrl} />
+            </S.TextWrapper>
+            <S.TextWrapper items={1}>
+              <S.Label>Descrição</S.Label>
+              <S.TextArea
+                isDescription
                 required
-                onChange={(e) => setName(e.target.value)}
-                value={name}
+                onChange={(e) => setDescription(e.target.value)}
+                value={description}
+              />
+            </S.TextWrapper>
+          </S.InlineWrapper>
+
+          <S.InlineWrapper>
+            <S.TextWrapper items={3}>
+              <TextField
+                label="Site"
+                onChange={(e) => setSite(e.target.value)}
+                value={site}
               />
             </S.TextWrapper>
             <S.TextWrapper items={3}>
               <TextField
-                label="Identificação"
-                required
-                onChange={(e) => SetIdentification(e.target.value)}
-                value={identification}
+                label="Facebook"
+                onChange={(e) => setFacebook(e.target.value)}
+                value={facebook}
               />
             </S.TextWrapper>
             <S.TextWrapper items={3}>
               <TextField
-                label="E-mail"
-                required
-                onChange={(e) => setEmail(e.target.value)}
-                value={email}
-                onKeyPress={(e) => {
-                  e.key === 'Enter' && e.preventDefault()
-                }}
+                label="Instagram"
+                onChange={(e) => setInstagram(e.target.value)}
+                value={instagram}
+              />
+            </S.TextWrapper>
+          </S.InlineWrapper>
+
+          <S.InlineWrapper>
+            <S.SelectWrapper>
+              <S.Label>Categoria</S.Label>
+              <S.Select
+                onChange={(e) => setCategory_id(e.target.value)}
+                value={category_id}
+              >
+                <option value="none" selected disabled hidden>
+                  Selecione
+                </option>
+                {categories &&
+                  categories.map((cat: any) => (
+                    <option key={cat.id} value={cat.id}>
+                      {cat.name}
+                    </option>
+                  ))}
+              </S.Select>
+            </S.SelectWrapper>
+            <S.TextWrapper items={3}>
+              <TextField
+                label="Nome Fantasia"
+                onChange={(e) => setFantasy_name(e.target.value)}
+                value={fantasy_name}
+              />
+            </S.TextWrapper>
+            <S.TextWrapper items={3}>
+              <TextField
+                label="Razão Social"
+                onChange={(e) => setCompanyName(e.target.value)}
+                value={company_name}
               />
             </S.TextWrapper>
           </S.InlineWrapper>
@@ -185,17 +331,21 @@ const CreateConsultant = () => {
             </S.TextWrapper>
             <S.TextWrapper items={3}>
               <TextField
-                label="Contato 1"
+                label="Nome Responsável"
                 required
-                onChange={(e) => setContact1(e.target.value)}
-                value={contact1}
+                onChange={(e) => setResponseName(e.target.value)}
+                value={response_name}
               />
             </S.TextWrapper>
             <S.TextWrapper items={3}>
               <TextField
-                label="Contato 2"
-                onChange={(e) => setContact2(e.target.value)}
-                value={contact2}
+                label="Email"
+                required
+                onChange={(e) => setEmail(e.target.value)}
+                value={email}
+                onKeyPress={(e) => {
+                  e.key === 'Enter' && e.preventDefault()
+                }}
               />
             </S.TextWrapper>
           </S.InlineWrapper>
@@ -212,6 +362,7 @@ const CreateConsultant = () => {
                 required
               />
             </S.TextWrapper>
+
             <S.SelectWrapper>
               <S.Label>Estado</S.Label>
               <S.Select
@@ -299,28 +450,56 @@ const CreateConsultant = () => {
             </S.TextWrapper>
             <S.TextWrapper items={3}>
               <TextField
-                label="Percentual Comissão"
+                label="Contato 1"
+                required
+                onChange={(e) => setContact1(e.target.value)}
+                value={contact1}
+              />
+            </S.TextWrapper>
+            <S.TextWrapper items={3}>
+              <TextField
+                label="Contato 2"
+                onChange={(e) => setContact2(e.target.value)}
+                value={contact2}
+              />
+            </S.TextWrapper>
+          </S.InlineWrapper>
+
+          <S.InlineWrapper>
+            <S.SelectWrapper>
+              <S.Label>Consultor</S.Label>
+              <S.Select
+                required
+                onChange={(e) => setconsultant_id(Number(e.target.value))}
+                value={consultant_id}
+              >
+                <option value="none" selected disabled hidden>
+                  Selecione
+                </option>
+                {consultants &&
+                  consultants.map((cons: any) => (
+                    <option key={cons.id} value={cons.id}>
+                      {cons.id} - {cons.identification}
+                    </option>
+                  ))}
+              </S.Select>
+            </S.SelectWrapper>
+            <S.TextWrapper items={3}>
+              <TextField
+                label="Percentual"
                 required
                 onChange={(e) => setPercentage(Number(e.target.value))}
                 value={percentage}
               />
             </S.TextWrapper>
-            <S.SelectWrapper>
-              <S.Label>Atribuir Franquia</S.Label>
-              <S.Select
-                onChange={(e) => setFranchise_id(Number(e.target.value))}
-              >
-                <option value="none" selected disabled hidden>
-                  Selecione
-                </option>
-                {franchises &&
-                  franchises.map((f: GetFranchises) => (
-                    <option key={f.id} value={f.id}>
-                      {f.name}
-                    </option>
-                  ))}
-              </S.Select>
-            </S.SelectWrapper>
+            <S.TextWrapper items={3}>
+              <TextField
+                label="Crédito Inicial"
+                required
+                onChange={(e) => setCredit(Number(e.target.value))}
+                value={credit}
+              />
+            </S.TextWrapper>
           </S.InlineWrapper>
 
           <S.InlineWrapper>
@@ -367,6 +546,26 @@ const CreateConsultant = () => {
                 </S.RadioLabel>
               </S.WrapperRadio>
             </S.TextWrapper>
+
+            <S.TextWrapper items={3}>
+              <S.WrapperRadio>
+                <S.Label>TIPO</S.Label>
+                <S.RadioLabel onClick={() => setType(2)}>
+                  <S.InputRadio type="radio" id="oculto" name="oculto" />
+                  Oculto
+                </S.RadioLabel>
+
+                <S.RadioLabel onClick={() => setType(1)}>
+                  <S.InputRadio
+                    type="radio"
+                    id="visivel"
+                    name="oculto"
+                    defaultChecked
+                  />
+                  Vísivel
+                </S.RadioLabel>
+              </S.WrapperRadio>
+            </S.TextWrapper>
           </S.InlineWrapper>
 
           <S.InlineWrapper>
@@ -400,4 +599,4 @@ const CreateConsultant = () => {
   )
 }
 
-export default CreateConsultant
+export default ShowAssociate

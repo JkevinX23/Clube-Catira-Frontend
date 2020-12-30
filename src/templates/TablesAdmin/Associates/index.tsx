@@ -3,7 +3,15 @@ import MaterialTable from 'material-table'
 import { useEffect, useState } from 'react'
 import { getAssociatesAdmin } from 'Context/Action/Associates'
 
-export default function ListAssociates() {
+type props = {
+  setId: (id: number) => void
+}
+
+type props2 = {
+  id: number
+}
+
+export default function ListAssociates({ setId }: props) {
   type IType =
     | 'string'
     | 'boolean'
@@ -56,7 +64,7 @@ export default function ListAssociates() {
   useEffect(() => {
     async function loadData() {
       const { data } = await getAssociatesAdmin()
-      setData(data)
+      setData(data.sort((a, b) => b.id - a.id))
     }
     loadData()
   }, [])
@@ -89,6 +97,16 @@ export default function ListAssociates() {
             lastTooltip: 'Última página'
           }
         }}
+        actions={[
+          {
+            icon: 'visibility',
+            tooltip: 'Ver Detalhes',
+            onClick: (event, rowData) => {
+              const row = rowData as props2
+              setId(row.id)
+            }
+          }
+        ]}
       />
     </S.Wrapper>
   )

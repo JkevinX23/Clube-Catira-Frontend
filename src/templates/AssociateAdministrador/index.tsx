@@ -6,11 +6,25 @@ import * as S from './styles'
 
 import SidebarAdmin from 'components/Sidebar'
 import CreateAssociate from 'templates/CreateAssociate'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import Button from 'components/Button'
+import ShowAssociate from 'templates/Show/Administrador/Associate'
 
 const AssociatesAdmin = ({ name, role }: HomeAdminProps) => {
-  const [selector, setSelector] = useState(false)
+  const [selector, setSelector] = useState(1)
+  const [id, setId] = useState<number>(0)
+
+  useEffect(() => {
+    if (id !== 0) {
+      setSelector(3)
+    }
+  }, [id])
+
+  function handleChange() {
+    setSelector(1)
+    setId(0)
+  }
+
   return (
     <S.Wrapper>
       <S.WrapperContent>
@@ -18,17 +32,45 @@ const AssociatesAdmin = ({ name, role }: HomeAdminProps) => {
           <HeaderDash name={name} role={role} />
         </S.WrapperHeader>
         <S.ButtonChange>
-          <Button
-            radius="radius100"
-            background="green"
-            onClick={() => setSelector(!selector)}
-          >
-            {!selector ? 'Cadastrar novo associado' : 'Gerenciar Associados'}
-          </Button>
+          {selector === 1 ? (
+            <Button
+              radius="radius100"
+              background="green"
+              onClick={() => setSelector(2)}
+            >
+              Cadastrar novo associado
+            </Button>
+          ) : selector === 2 ? (
+            <Button
+              radius="radius100"
+              background="green"
+              onClick={() => setSelector(1)}
+            >
+              Gerenciar Associados
+            </Button>
+          ) : (
+            <Button
+              radius="radius100"
+              background="green"
+              onClick={handleChange}
+            >
+              Voltar
+            </Button>
+          )}
         </S.ButtonChange>
-        <S.CreateFranchise>
-          {selector ? <CreateAssociate /> : <AssociatesTable />}
-        </S.CreateFranchise>
+        {selector === 2 ? (
+          <S.CreateFranchise>
+            <CreateAssociate />
+          </S.CreateFranchise>
+        ) : selector === 1 ? (
+          <S.Table>
+            <AssociatesTable setId={setId} />
+          </S.Table>
+        ) : (
+          <S.CreateFranchise>
+            <ShowAssociate id={id} />
+          </S.CreateFranchise>
+        )}
       </S.WrapperContent>
       <SidebarAdmin />
       <S.WrapperFooter>

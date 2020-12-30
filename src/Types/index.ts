@@ -415,3 +415,58 @@ export interface PutCategoryProps {
   name: string
   isvalid: boolean
 }
+
+export interface GetFileProps {
+  id: number
+  url: string
+  name: string
+  path: string
+}
+
+export interface ShowAssociateProps {
+  id: number
+  description: string
+  site?: string
+  facebook?: string
+  instagram?: string
+  fantasy_name: string
+  company_name: string
+  document: string
+  representative: string
+  contact1: string
+  contact2?: string
+  email: string
+  percentage: number
+  credit: number
+  status: number
+  type: number
+  createdAt?: string
+  updatedAt?: string
+  file_id: number
+  category_id: number
+  category_suggestion_id: number
+  consultant_id: number
+  address_id: number
+  Address: {
+    id: number
+    cep: string
+    street: string
+    number: string
+    neighborhood: string
+    city: string
+    state: string
+    complement?: string
+    reference_point?: string
+    createdAt?: string
+    updatedAt?: string
+  }
+  Consultant: {
+    id: number
+    name: string
+    identification: string
+    Franchise: {
+      id: number
+      name: string
+    }
+  }
+}
