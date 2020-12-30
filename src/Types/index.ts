@@ -34,11 +34,58 @@ export interface Franquia {
   im?: number
   getway_email: string
   getway_token: string
-  address?: Address
+  Address?: Address
+}
+
+export interface PostFranchiseProps {
+  email: string
+  name: string
+  document: string
+  company_name: string
+  ie?: number
+  im?: number
+  cep: string
+  state: string
+  city: string
+  street: string
+  neighborhood: string
+  number: string
+  complement: string
+  contact1: string
+  contact2?: string
+  getway_email: string
+  getway_token: string
+  percentage: number
+  password: string
+  status: number
+}
+
+export interface PutFranchiseProps {
+  id?: number
+  email?: string
+  name?: string
+  document?: string
+  company_name?: string
+  ie?: number
+  im?: number
+  cep?: string
+  state?: string
+  city?: string
+  street?: string
+  neighborhood?: string
+  number?: string
+  complement?: string
+  contact1?: string
+  contact2?: string
+  getway_email?: string
+  getway_token?: string
+  percentage?: number
+  password?: string
+  status?: number
 }
 
 export interface Address {
-  id: number
+  id?: number
   cep: string
   state: string
   city: string
@@ -231,7 +278,7 @@ export interface Consultant {
   identification: string
   document: string
   contact1: string
-  contact2?: null
+  contact2?: string
   status: number
   percentage: number
   createdAt: string
@@ -277,4 +324,47 @@ export interface GetAssociatesAdmin {
       name: string
     }
   }
+}
+
+export interface PostConsultantProps {
+  name: string
+  identification: string
+  email: string
+  company_name: string
+  document: string
+  contact1: string
+  contact2?: string
+  password: string
+  cep: string
+  state: string
+  city: string
+  street: string
+  neighborhood: string
+  number: string
+  complement?: string
+  percentage: number
+  franchise_id: number
+  status: number
+}
+
+export interface PutConsultantProps {
+  id: number
+  name?: string
+  identification?: string
+  email?: string
+  company_name?: string
+  document?: string
+  contact1?: string
+  contact2?: string
+  password?: string
+  cep?: string
+  state?: string
+  city?: string
+  street?: string
+  neighborhood?: string
+  number?: string
+  complement?: string
+  percentage?: number
+  franchise_id?: number
+  status?: number
 }

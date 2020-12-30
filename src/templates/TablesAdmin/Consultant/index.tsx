@@ -60,7 +60,7 @@ export default function ListConsultants({ setId }: props) {
   useEffect(() => {
     async function loadData() {
       const { data } = await getConsultants()
-      setData(data)
+      setData(data.sort((a, b) => b.id - a.id))
     }
     loadData()
   }, [])
