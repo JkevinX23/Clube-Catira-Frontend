@@ -294,19 +294,31 @@ export interface Consultant {
 }
 
 export interface GetOfferAdmin {
-  id: number
-  status: number
-  title: string
-  value_offer: number
-  Associated: {
+  sell: number
+  offer: {
+    createdAt: string
     id: number
-    fantasy_name: string
-    Consultant: {
+    status: number
+    title: string
+    value_offer: number
+    description?: string
+    consumer_cards: number
+    quantity: number
+    File: {
+      url: string
       id: number
-      name: string
-      Franchise: {
+      path: string
+    }
+    Associated: {
+      id: number
+      fantasy_name: string
+      Consultant: {
         id: number
         name: string
+        Franchise: {
+          id: number
+          name: string
+        }
       }
     }
   }
@@ -400,6 +412,38 @@ export interface PostAssociateProps {
   category_suggestion?: string
 }
 
+export interface PutAssociateProps {
+  id: number
+  description?: string
+  site?: string
+  facebook?: string
+  instagram?: string
+  fantasy_name?: string
+  company_name?: string
+  document?: string
+  representative?: string
+  contact1?: string
+  contact2?: string
+  email?: string
+  password?: string
+  percentage?: number
+  status?: number
+  type?: number
+  cep?: string
+  street?: string
+  number?: string
+  neighborhood?: string
+  city?: string
+  state?: string
+  complement?: string
+  reference_point?: string
+  credit?: number
+  file_id?: number
+  category_id?: number
+  consultant_id?: number
+  category_suggestion?: string
+}
+
 export interface CategoriesProps {
   id: number
   name: string
@@ -447,6 +491,11 @@ export interface ShowAssociateProps {
   category_suggestion_id: number
   consultant_id: number
   address_id: number
+  File: {
+    url: string
+    id: number
+    path: string
+  }
   Address: {
     id: number
     cep: string
@@ -469,4 +518,56 @@ export interface ShowAssociateProps {
       name: string
     }
   }
+}
+
+export interface PostCatira {
+  associate_id?: number
+  offer_id: number
+  quantity?: number
+}
+
+export interface ResponsePostCatira {
+  checkout: {
+    code: string
+    date: string
+  }
+}
+
+export interface MyOffersProps {
+  id: number
+  title: string
+  value: number
+  quantity: number
+  status: number
+  sell: number
+}
+
+export interface PurchaseSalesProps {
+  id: number
+  type: string
+  title: string
+  value: number
+  quantity: number
+  status: number
+  voucher?: string
+  date: string
+  fat: string
+}
+export interface MyCatiraProps {
+  purchases: PurchaseSalesProps[]
+  sales: PurchaseSalesProps[]
+}
+
+export interface MyAccountInfoProps {
+  img: string
+  fantasy_name: string
+  category: string
+  contact: string
+  city: string
+  state: string
+  street: string
+  number: string
+  neighborhood: string
+  representative_name: string
+  email: string
 }

@@ -65,27 +65,29 @@ export default function HomeAssociado() {
         const ass: Option[] = []
 
         offs.map((off: GetOfferProps) => {
-          cits.indexOf({
-            value: off.Associated.Address.city,
-            key: off.Associated.Address.id
-          }) === -1 &&
+          cits
+            .map(function (e) {
+              return e.key
+            })
+            .indexOf(off.Associated.Address.id) === -1 &&
             cits.push({
               value: off.Associated.Address.city,
               key: off.Associated.Address.id
             })
 
-          ass.indexOf({
-            value: off.Associated.fantasy_name,
-            key: off.Associated.id
-          }) === -1 &&
+          ass
+            .map(function (e) {
+              return e.key
+            })
+            .indexOf(off.Associated.id) === -1 &&
             ass.push({
               value: off.Associated.fantasy_name,
               key: off.Associated.id
             })
-          return
         })
-        setCitys(cits)
+
         setAssociates(ass)
+        setCitys(cits)
       } catch (e) {
         console.log(e)
         toast.error(

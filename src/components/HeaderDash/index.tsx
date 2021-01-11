@@ -1,4 +1,5 @@
-import { useState } from 'react'
+import { useContext, useState } from 'react'
+
 import Logo from 'components/Logo'
 import * as S from './styles'
 import {
@@ -7,6 +8,7 @@ import {
 } from '@styled-icons/evaicons-outline'
 import { Profile as ProfileIcon } from '@styled-icons/icomoon'
 import { Exit as ExitIcon } from '@styled-icons/boxicons-regular'
+import AuthContext from 'Context/Reduces/Auth'
 
 export type HeaderDashProps = {
   name: string
@@ -15,7 +17,11 @@ export type HeaderDashProps = {
 
 const HeaderDash = ({ name, role }: HeaderDashProps) => {
   const [isOpen, setIsOpen] = useState(false)
+  const { signOut } = useContext(AuthContext)
 
+  function handleLogout() {
+    signOut()
+  }
   return (
     <S.Wrapper>
       <S.Logo>
@@ -42,7 +48,7 @@ const HeaderDash = ({ name, role }: HeaderDashProps) => {
             </S.Icon>
             Perfil
           </li>
-          <li>
+          <li onClick={() => handleLogout()}>
             <S.Icon>
               <ExitIcon />
             </S.Icon>

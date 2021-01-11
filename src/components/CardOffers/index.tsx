@@ -1,7 +1,8 @@
 import Button from 'components/Button'
 import * as S from './styles'
-
+import { useRouter } from 'next/router'
 export type CardOffersProps = {
+  id: number
   img: string
   title: string
   name: string
@@ -17,23 +18,33 @@ const CardOffers = ({
   associate,
   city,
   state,
-  value
-}: CardOffersProps) => (
-  <S.Wrapper>
-    <S.Image src={img} role="img" aria-label={name} />
-    <S.Title>{name}</S.Title>
-    <S.subTitle>{associate}</S.subTitle>
-    <S.subTitle>
-      {city}/{state}
-    </S.subTitle>
+  value,
+  id
+}: CardOffersProps) => {
+  const router = useRouter()
+  return (
+    <S.Wrapper>
+      <S.Image src={img} role="img" aria-label={name} />
+      <S.Title>{name}</S.Title>
+      <S.subTitle>{associate}</S.subTitle>
+      <S.subTitle>
+        {city}/{state}
+      </S.subTitle>
 
-    <S.BuyWrapper>
-      <S.Value>CT${value}</S.Value>
-      <Button size="xxsmall" background="white">
-        Comprar
-      </Button>
-    </S.BuyWrapper>
-  </S.Wrapper>
-)
+      <S.BuyWrapper>
+        <S.Value>CT${value}</S.Value>
+        <Button
+          size="xxsmall"
+          background="white"
+          onClick={() => {
+            router.push({ pathname: '/associado/oferta', query: { id } })
+          }}
+        >
+          Comprar
+        </Button>
+      </S.BuyWrapper>
+    </S.Wrapper>
+  )
+}
 
 export default CardOffers

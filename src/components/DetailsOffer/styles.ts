@@ -41,6 +41,8 @@ export const Value = styled.p`
 export const WrapperDetails = styled.div`
   min-width: 25rem;
   width: 100%;
+  white-space: nowrap;
+
   p {
     padding-bottom: 1rem;
   }

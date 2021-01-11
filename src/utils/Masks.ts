@@ -61,3 +61,9 @@ export const cpfCnpjMask = (v: string) => {
 
   return v
 }
+
+import { format } from 'date-fns'
+
+export const FormatDateByFNS = (v: string) => {
+  return format(new Date(v), 'dd/MM/yyyy')
+}

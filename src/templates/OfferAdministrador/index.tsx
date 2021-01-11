@@ -5,13 +5,26 @@ import { HomeAdminProps } from 'Types'
 import * as S from './styles'
 
 import SidebarAdmin from 'components/Sidebar'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import Button from 'components/Button'
 import CreateOfferAdmin from 'components/CreateOfferAdministrador'
 import OfferTable from 'templates/TablesAdmin/Offers'
+import ShowOffer from 'templates/Show/Administrador/Offer'
 
-const Home = ({ name, role }: HomeAdminProps) => {
-  const [selector, setSelector] = useState(false)
+const OfferAdmin = ({ name, role }: HomeAdminProps) => {
+  const [selector, setSelector] = useState(1)
+  const [id, setId] = useState<number>(0)
+
+  useEffect(() => {
+    if (id !== 0) {
+      setSelector(3)
+    }
+  }, [id])
+
+  function handleChange() {
+    setSelector(1)
+    setId(0)
+  }
   return (
     <S.Wrapper>
       <S.WrapperContent>
@@ -19,17 +32,45 @@ const Home = ({ name, role }: HomeAdminProps) => {
           <HeaderDash name={name} role={role} />
         </S.WrapperHeader>
         <S.ButtonChange>
-          <Button
-            radius="radius100"
-            background="green"
-            onClick={() => setSelector(!selector)}
-          >
-            {!selector ? 'Cadastrar nova oferta' : 'Gerenciar Ofertas'}
-          </Button>
+          {selector === 1 ? (
+            <Button
+              radius="radius100"
+              background="green"
+              onClick={() => setSelector(2)}
+            >
+              Cadastrar nova oferta
+            </Button>
+          ) : selector === 2 ? (
+            <Button
+              radius="radius100"
+              background="green"
+              onClick={() => setSelector(1)}
+            >
+              Gerenciar Ofertas
+            </Button>
+          ) : (
+            <Button
+              radius="radius100"
+              background="green"
+              onClick={handleChange}
+            >
+              Voltar
+            </Button>
+          )}
         </S.ButtonChange>
-        <S.CreateFranchise>
-          {selector ? <CreateOfferAdmin /> : <OfferTable />}
-        </S.CreateFranchise>
+        {selector === 2 ? (
+          <S.CreateFranchise>
+            <CreateOfferAdmin />
+          </S.CreateFranchise>
+        ) : selector === 1 ? (
+          <S.Table>
+            <OfferTable setId={setId} />
+          </S.Table>
+        ) : (
+          <S.CreateFranchise>
+            <ShowOffer id={id} />
+          </S.CreateFranchise>
+        )}
       </S.WrapperContent>
       <SidebarAdmin />
       <S.WrapperFooter>
@@ -39,4 +80,4 @@ const Home = ({ name, role }: HomeAdminProps) => {
   )
 }
 
-export default Home
+export default OfferAdmin

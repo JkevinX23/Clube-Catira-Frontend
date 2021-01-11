@@ -4,10 +4,8 @@ export const Wrapper = styled.header`
   ${({ theme }) => css`
     background: ${theme.colors.white};
     display: flex;
-    position: relative;
     width: 100%;
     justify-content: space-between;
-    align-items: center;
   `}
 `
 export const Logo = styled.div`
@@ -15,7 +13,7 @@ export const Logo = styled.div`
   position: relative;
   width: 100%;
   height: 100%;
-  padding: 1rem;
+  padding: 2rem;
   img {
     width: 25rem;
     height: auto;
@@ -44,15 +42,16 @@ export const Icon = styled.div`
 `
 export const Options = styled.ul`
   position: absolute;
-  right: 0rem;
-  bottom: -10.5rem;
+  z-index: 10;
   background: #00aaff;
-  margin: 2%;
   padding: 1.2rem;
   color: white;
   list-style: none;
   border-radius: 0px 0px 0px 9px;
   animation: fadeIn 0.5s;
+  right: 3.65rem;
+  top: 10.5rem;
+
   @keyframes fadeIn {
     from {
       opacity: 0;
@@ -67,6 +66,7 @@ export const Options = styled.ul`
     gap: 0.5rem;
     padding: 1rem;
     cursor: pointer;
+    overflow: visible;
   }
 
   ${Icon} {

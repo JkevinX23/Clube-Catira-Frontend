@@ -17,7 +17,7 @@ const AssociateMenu = () => {
               <li>Criar Ofertas</li>
             </Link>
 
-            <Link href="/my-offer">
+            <Link href="/associado/minhas-ofertas">
               <li>Minhas Ofertas</li>
             </Link>
           </S.Options>
@@ -29,7 +29,9 @@ const AssociateMenu = () => {
             <li>Ofertas Diretas</li>
             <li>Orcamentos de compras</li>
             <li>Orcamentos de vendas</li>
-            <li>Compra/Venda</li>
+            <Link href="/associado/compra-venda">
+              <li>Compra/Venda</li>
+            </Link>
           </S.Options>
         </S.MenuLink>
         <S.MenuLink>Associados</S.MenuLink>

@@ -3,14 +3,13 @@ import TextField from 'components/TextField'
 import { useEffect, useState } from 'react'
 import { SyntheticEvent } from 'Types'
 import * as S from './styles'
-import searchCep from 'cep-promise'
 import { cellphoneeMask, cepMask, cpfCnpjMask } from 'utils/Masks'
 import { isEmail, validarCPF, validarCNPJ, cleanObject } from 'utils/Validation'
 import { toast } from 'react-toastify'
 import { getCategoriesAdmin } from 'Context/Action/Category'
 import { getConsultants } from 'Context/Action/Consultant'
 import { postFile } from 'Context/Action/File'
-import { createAssociateAdmin, showAssociate } from 'Context/Action/Associates'
+import { showAssociate, updateAssociateAdmin } from 'Context/Action/Associates'
 
 type props = {
   id: number
@@ -28,7 +27,7 @@ const ShowAssociate = ({ id }: props) => {
   const [site, setSite] = useState('')
   const [facebook, setFacebook] = useState('')
   const [instagram, setInstagram] = useState('')
-  const [category_id, setCategory_id] = useState('')
+  const [category_id, setCategory_id] = useState(0)
   const [company_name, setCompanyName] = useState('')
   const [fantasy_name, setFantasy_name] = useState('')
   const [document, setDocument] = useState('')
@@ -51,6 +50,7 @@ const ShowAssociate = ({ id }: props) => {
   const [type, setType] = useState(1)
   const [consultant_id, setconsultant_id] = useState(0)
   const [file_id, setFile_id] = useState(0)
+  const [fileUrl, setFileUrl] = useState('')
 
   const [imagePreviewUrl, setImagePreviewUrl] = useState<
     string | ArrayBuffer | null
@@ -101,6 +101,9 @@ const ShowAssociate = ({ id }: props) => {
       setCredit(data.credit)
       setStatus(data.status)
       setType(data.type)
+      setCategory_id(data.category_id || 0)
+      setconsultant_id(data.consultant_id)
+      setFileUrl(data.File.url)
     }
     loadAssociate()
   }, [id])
@@ -130,20 +133,6 @@ const ShowAssociate = ({ id }: props) => {
   useEffect(() => {
     if (cep) {
       setCep(cepMask(cep))
-      if (cep.length === 9) {
-        searchCep(cep.replace(/\D/g, '')).then(setValuesCep).catch(errorCep)
-      }
-    }
-
-    function errorCep() {
-      toast.warn('CEP não encontrado!')
-    }
-    function setValuesCep(data: searchCep.CEP) {
-      console.log(data)
-      setState(data.state)
-      setCity(data.city)
-      setNeighborhood(data.neighborhood)
-      setStreet(data.street)
     }
   }, [cep])
 
@@ -185,14 +174,19 @@ const ShowAssociate = ({ id }: props) => {
       }
     }
 
-    if (password.length < 6) {
+    if (password && password.length < 6) {
       toast.info('Sua senha deve ter pelo menos 6 caracteres.')
       return
     }
 
     try {
-      const { data } = await postFile(file)
+      let file_id
+      if (file) {
+        const { data } = await postFile(file)
+        file_id = data.id
+      }
       const payload = {
+        id,
         description,
         fantasy_name,
         document,
@@ -201,7 +195,6 @@ const ShowAssociate = ({ id }: props) => {
         contact1,
         email,
         password,
-
         cep,
         city,
         neighborhood,
@@ -209,9 +202,8 @@ const ShowAssociate = ({ id }: props) => {
         state,
         complement,
         credit,
-        file_id: data.id,
+        file_id,
         category_id,
-
         percentage,
         status,
         street,
@@ -222,7 +214,7 @@ const ShowAssociate = ({ id }: props) => {
         instagram,
         site
       }
-      await createAssociateAdmin(cleanObject(payload))
+      await updateAssociateAdmin(cleanObject(payload))
       toast.success('Consultor criado com sucesso')
     } catch (err) {
       toast.error(
@@ -248,7 +240,7 @@ const ShowAssociate = ({ id }: props) => {
               />
               {/* // eslint-disable-next-line @typescript-eslint/ban-ts-comment
                 // @ts-ignore: Unreachable code error */}
-              <S.Image src={imagePreviewUrl} />
+              <S.Image src={imagePreviewUrl} width={256} height={144} />
             </S.TextWrapper>
             <S.TextWrapper items={1}>
               <S.Label>Descrição</S.Label>
@@ -289,7 +281,7 @@ const ShowAssociate = ({ id }: props) => {
             <S.SelectWrapper>
               <S.Label>Categoria</S.Label>
               <S.Select
-                onChange={(e) => setCategory_id(e.target.value)}
+                onChange={(e) => setCategory_id(Number(e.target.value))}
                 value={category_id}
               >
                 <option value="none" selected disabled hidden>
@@ -524,13 +516,23 @@ const ShowAssociate = ({ id }: props) => {
             <S.TextWrapper items={3}>
               <S.WrapperRadio>
                 <S.Label>SITUAÇÃO</S.Label>
+                <S.RadioLabel onClick={() => setStatus(0)}>
+                  <S.InputRadio
+                    type="radio"
+                    id="sim"
+                    name="direct"
+                    value="sim"
+                    checked={status === 0}
+                  />
+                  Pendente
+                </S.RadioLabel>
                 <S.RadioLabel onClick={() => setStatus(1)}>
                   <S.InputRadio
                     type="radio"
                     id="sim"
                     name="direct"
                     value="sim"
-                    defaultChecked
+                    checked={status === 1}
                   />
                   Ativo
                 </S.RadioLabel>
@@ -541,6 +543,7 @@ const ShowAssociate = ({ id }: props) => {
                     id="nao"
                     name="direct"
                     value="nao"
+                    checked={status >= 2}
                   />
                   Inativo
                 </S.RadioLabel>
@@ -551,7 +554,12 @@ const ShowAssociate = ({ id }: props) => {
               <S.WrapperRadio>
                 <S.Label>TIPO</S.Label>
                 <S.RadioLabel onClick={() => setType(2)}>
-                  <S.InputRadio type="radio" id="oculto" name="oculto" />
+                  <S.InputRadio
+                    type="radio"
+                    id="oculto"
+                    name="oculto"
+                    checked={type === 2}
+                  />
                   Oculto
                 </S.RadioLabel>
 
@@ -560,7 +568,7 @@ const ShowAssociate = ({ id }: props) => {
                     type="radio"
                     id="visivel"
                     name="oculto"
-                    defaultChecked
+                    checked={type === 1}
                   />
                   Vísivel
                 </S.RadioLabel>
@@ -590,7 +598,7 @@ const ShowAssociate = ({ id }: props) => {
               radius="radius100"
               onClick={handlesubmit}
             >
-              CADASTRAR
+              ATUALIZAR
             </Button>
           </S.InlineWrapper>
         </S.TextFieldWrapper>

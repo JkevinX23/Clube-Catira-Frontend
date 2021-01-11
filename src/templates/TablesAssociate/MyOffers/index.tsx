@@ -1,14 +1,9 @@
 import * as S from './styles'
 import MaterialTable from 'material-table'
-import { GetOfferAdmin } from 'Types'
-import { useState, useEffect } from 'react'
-import { getOffersAdmin } from 'Context/Action/Offer'
+import { useEffect, useState } from 'react'
+import { getMyOffers } from 'Context/Action/Offer'
 
-type props = {
-  setId: (id: number) => void
-}
-
-export default function OfferTable({ setId }: props) {
+export default function TableListMyOffers() {
   type IType =
     | 'string'
     | 'boolean'
@@ -25,42 +20,42 @@ export default function OfferTable({ setId }: props) {
       type: string
     },
     {
-      title: 'Status',
-      field: 'status',
-      lookup: {
-        0: 'Pendente',
-        1: 'Ativo',
-        2: 'Bloqueado'
-      }
-    },
-    {
-      title: 'Franquia',
-      field: 'Associated.Consultant.Franchise.name',
-      type: string
-    },
-    {
-      title: 'Vendedor',
-      field: 'Associated.fantasy_name',
-      type: string
-    },
-    {
-      title: 'Oferta',
+      title: 'Titulo',
       field: 'title',
       type: string
     },
     {
       title: 'Valor',
-      field: 'value_offer',
+      field: 'value',
       type: string
+    },
+    {
+      title: 'Qtd',
+      field: 'quantity',
+      type: string
+    },
+    {
+      title: 'Vendidos',
+      field: 'sell',
+      type: string
+    },
+    {
+      title: 'Status',
+      field: 'status',
+      lookup: {
+        0: 'Pendente',
+        1: 'Ativo',
+        2: 'Inativo'
+      }
     }
   ]
 
-  const [data, setData] = useState<GetOfferAdmin[]>([])
-
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const [data, setData] = useState<any>([])
   useEffect(() => {
     async function loadData() {
-      const { data } = await getOffersAdmin()
-      setData(data)
+      const { data } = await getMyOffers()
+      setData(data.sort((a, b) => b.id - a.id))
     }
     loadData()
   }, [])
@@ -68,7 +63,7 @@ export default function OfferTable({ setId }: props) {
   return (
     <S.Wrapper>
       <MaterialTable
-        title="Ofertas"
+        title="Minhas Ofertas"
         columns={columns}
         data={data}
         options={{ exportButton: true }}
@@ -93,16 +88,16 @@ export default function OfferTable({ setId }: props) {
             lastTooltip: 'Última página'
           }
         }}
-        actions={[
-          {
-            icon: 'visibility',
-            tooltip: 'Ver Detalhes',
-            onClick: (event, rowData) => {
-              const row = rowData as GetOfferAdmin
-              setId(row.id)
-            }
-          }
-        ]}
+        // actions={[
+        //   {
+        //     icon: 'visibility',
+        //     tooltip: 'Ver Detalhes',
+        //     onClick: (event, rowData) => {
+        //       const row = rowData as props2
+        //       setId(row.id)
+        //     }
+        //   }
+        // ]}
       />
     </S.Wrapper>
   )

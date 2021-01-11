@@ -63,17 +63,17 @@ const Home = ({ HeaderProps, Products, Filters }: HomeProps) => {
         <S.WrapperCards>
           {produtos &&
             produtos.map((prod) => {
+              console.log(prod)
               return (
                 <CardOffers
                   key={prod.id}
+                  id={prod.id}
                   associate={prod.Associated.fantasy_name}
                   city={prod.Associated.Address.city}
                   value={prod.value_offer}
                   state={prod.Associated.Address.state}
                   name={prod.title}
-                  img={
-                    'https://www.jamilnicolau.com.br/userfiles/Logo_JK_Face.jpg'
-                  }
+                  img={prod.File.url}
                   title={prod.title}
                 />
               )

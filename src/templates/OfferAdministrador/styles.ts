@@ -25,6 +25,7 @@ export const WrapperMenu = styled.div`
 `
 export const WrapperContent = styled.div`
   padding-left: 7%;
+  transition: opacity 1s ease-out;
 `
 export const WrapperCards = styled.div`
   display: flex;
@@ -53,10 +54,10 @@ export const DashNewAssociate = styled.div`
 `
 export const CreateFranchise = styled.div`
   width: 100%;
-  padding-left: 5%;
-  padding-right: 5%;
+  padding-right: 1rem;
   padding-top: 2rem;
   padding-bottom: 5rem;
+  transition: opacity 1s ease-out;
 `
 export const ButtonChange = styled.div`
   display: flex;
@@ -65,4 +66,11 @@ export const ButtonChange = styled.div`
   padding-left: 5%;
   padding-right: 5%;
   padding-top: 2rem;
+  transition: opacity 1s ease-out;
+`
+export const Table = styled.div`
+  padding-bottom: 2rem;
+  padding-right: 2rem;
+  padding-top: 2rem;
+  transition: opacity 1s ease-out;
 `

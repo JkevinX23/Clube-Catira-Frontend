@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components'
 
-export const Wrapper = styled.main``
+export const Wrapper = styled.div``
 
 export const NavButton = styled.button`
   ${({ theme }) => css`

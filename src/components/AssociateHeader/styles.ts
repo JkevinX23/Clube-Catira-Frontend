@@ -16,5 +16,27 @@ export const Name = styled.p`
 export const Box = styled.div`
   display: flex;
   flex-direction: column;
+  padding-right: 1rem;
+`
+export const Row = styled.div`
+  display: flex;
+  flex-direction: row;
+  span {
+    font-size: 1.2rem;
+  }
 `
 export const Value = styled.p``
+export const Icon = styled.div`
+  width: 4rem;
+  height: 4rem;
+  cursor: pointer;
+  padding-left: 1rem;
+  padding-top: 1rem;
+  padding-right: 1rem;
+  color: #444;
+  &:last-child {
+    width: 4.4rem;
+    height: 4.4rem;
+    padding-top: 0.8rem;
+  }
+`

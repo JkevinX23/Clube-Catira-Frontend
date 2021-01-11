@@ -1,4 +1,4 @@
-import Create from 'templates/MyOffers'
+import Create from 'templates/MyOffersAssociate'
 import AuthContext from 'Context/Reduces/Auth'
 import { useRouter } from 'next/router'
 import { toast } from 'react-toastify'

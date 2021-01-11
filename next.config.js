@@ -15,3 +15,8 @@ module.exports = {
     backendUrl: 'http://192.168.1.104:3334/'
   }
 }
+module.exports = {
+  images: {
+    domains: ['192.168.1.104']
+  }
+}

@@ -1,4 +1,5 @@
 import styled, { css } from 'styled-components'
+import IMG from 'next/image'
 
 export const Wrapper = styled.div`
   ${({ theme }) => css`
@@ -107,14 +108,16 @@ export const TextArea = styled.textarea<AreaProps>`
     padding: 1rem;
   `}
 `
-export const Image = styled.img`
-  margin-top: 1rem;
-  margin-right: 3em;
-  background-color: #fff;
-  border: 1px solid #ddd;
-  border-radius: 4px;
-  transition: all 0.2s ease-in-out;
-  width: 25.6rem;
-  height: 14.4rem;
-  object-fit: cover;
+export const Image = styled(IMG)`
+  img {
+    margin-top: 1rem;
+    margin-right: 3em;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    transition: all 0.2s ease-in-out;
+    width: 25.6rem;
+    height: 14.4rem;
+    object-fit: cover;
+  }
 `

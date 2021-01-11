@@ -118,9 +118,7 @@ export const Select = styled.select`
   width: 100%;
   border: none;
   outline: none;
-  margin-top: 0px;
 `
 export const SelectWrapper = styled.div`
   width: 100%;
-  margin-top: 0px;
 `

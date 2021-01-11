@@ -9,12 +9,12 @@ const ReportCardDash = ({ direct, pending }: ReportCardDashProps) => (
   <S.Wrapper>
     <S.Title>Relatório</S.Title>
     <S.WrapperInfo>
-      <S.Sub>Ofertas diretas</S.Sub>
+      <S.Sub>Voucher recebidos</S.Sub>
       <S.Lead direct>{direct}</S.Lead>
     </S.WrapperInfo>
 
     <S.WrapperInfo>
-      <S.Sub>Ofertas pendentes</S.Sub>
+      <S.Sub>Vouchers pendentes</S.Sub>
       <S.Lead>{pending}</S.Lead>
     </S.WrapperInfo>
   </S.Wrapper>
