@@ -157,7 +157,7 @@ export interface HomeAdminProps {
 export interface HomeDashAdminProps {
   name: string
   role: string
-  page_data: GetHomeAdmin
+  page_data: GetHomeAdmin | any
 }
 
 export interface GetOfferProps {

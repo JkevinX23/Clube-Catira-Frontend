@@ -64,11 +64,15 @@ export const AuthProvider: React.FC = ({ children }: any) => {
       }
 
       switch (data.option) {
+        case 1:
+          Router.push('/administrador')
+          break
+        case 2:
+          Router.push('/franquia')
+          break
         case 4:
           Router.push('/home-associado')
           break
-        case 1:
-          Router.push('/administrador')
       }
       toast.success('Seja bem vindo')
     } catch (error) {
