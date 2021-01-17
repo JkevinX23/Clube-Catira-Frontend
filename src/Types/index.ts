@@ -271,6 +271,10 @@ export interface GetConsultant {
   }
   qtd_associados: number
 }
+export interface GetConsultantsNoAuth {
+  id: number
+  identification: string
+}
 
 export interface Consultant {
   id: number
@@ -324,6 +328,34 @@ export interface GetOfferAdmin {
   }
 }
 
+export interface ShowOfferAdminProps {
+  createdAt: string
+  id: number
+  status: number
+  title: string
+  value_offer: number
+  description?: string
+  consumer_cards: number
+  quantity: number
+  File: {
+    url: string
+    id: number
+    path: string
+  }
+  Associated: {
+    id: number
+    fantasy_name: string
+    Consultant: {
+      id: number
+      name: string
+      Franchise: {
+        id: number
+        name: string
+      }
+    }
+  }
+}
+
 export interface GetAssociatesAdmin {
   id: number
   fantasy_name: string
@@ -337,6 +369,28 @@ export interface GetAssociatesAdmin {
       name: string
     }
   }
+}
+
+export interface GetAssociatesNoAuth {
+  id: number
+  fantasy_name: string
+  img: string
+  city: string
+  state: string
+}
+
+export interface GetAssociatesAuth {
+  id: number
+  fantasy_name: string
+  description: string
+  File: {
+    url: string
+  }
+  contact1: string
+  Address: Address
+  site?: string
+  facebook?: string
+  instagram?: string
 }
 
 export interface PostConsultantProps {
@@ -450,6 +504,10 @@ export interface CategoriesProps {
   isvalid: boolean
   createdAt: string
   updatedAt: string
+}
+export interface GetCategoriesNA {
+  id: number
+  name: string
 }
 export interface PostCategoryProps {
   name: string
@@ -570,4 +628,17 @@ export interface MyAccountInfoProps {
   neighborhood: string
   representative_name: string
   email: string
+}
+
+export interface PutOffer {
+  offer_id: number
+  status: number
+}
+
+export interface GetCreditsProps {
+  credits: number
+  spent: number
+  pendingSpend: number
+  received: number
+  receivable: number
 }

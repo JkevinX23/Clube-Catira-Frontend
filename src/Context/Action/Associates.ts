@@ -4,11 +4,20 @@ import {
   PostAssociateProps,
   ShowAssociateProps,
   PutAssociateProps,
-  MyAccountInfoProps
+  MyAccountInfoProps,
+  GetAssociatesNoAuth,
+  GetAssociatesAuth,
+  GetCreditsProps
 } from 'Types'
 
 export const getAssociatesAdmin = async () =>
   api.get<GetAssociatesAdmin[]>('/associate/admin')
+
+export const GetAssociatesNA = async () =>
+  api.get<GetAssociatesNoAuth[]>('/associates-na')
+
+export const GetAssociates = async () =>
+  api.get<GetAssociatesAuth[]>('/associate')
 
 export const createAssociateAdmin = async (data: PostAssociateProps) =>
   api.post('/associate-auth', data)
@@ -23,3 +32,6 @@ export const getAssociates = async () =>
 
 export const getProfileAssociate = async () =>
   api.get<MyAccountInfoProps>('/profile')
+
+export const getCredits = async () =>
+  api.get<GetCreditsProps>('/associate/credits')

@@ -31,7 +31,7 @@ const CreateOfferAdmin = () => {
       description,
       value_offer,
       consumer_cards,
-      quantity,
+      quantity: !isIlimmited ? quantity : 0,
       file_id
     }
 

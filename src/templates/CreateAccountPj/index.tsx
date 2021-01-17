@@ -3,60 +3,20 @@ import Footer from 'components/Footer'
 import Menu from 'components/Menu'
 import SociaisSection from 'components/SociaisSection'
 import TextField from 'components/TextField'
-import { useEffect, useRef, useState } from 'react'
 import * as S from './styles'
+import Link from 'next/link'
 
-const CreatePJ = () => {
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const [scrollY, setScrollY] = useState(0)
-  const [section, setSection] = useState('')
-  const sectionHomeRef = useRef<null | HTMLDivElement>(null)
-  const sectionOClubeRef = useRef<null | HTMLDivElement>(null)
-  const sectionComoFuncionaRef = useRef<null | HTMLDivElement>(null)
+import { GetCategoriesNA, GetConsultantsNoAuth } from 'Types'
 
-  function logit() {
-    setScrollY(window.pageYOffset)
-  }
-
-  useEffect(() => {
-    function watchScroll() {
-      window.addEventListener('scroll', logit)
-    }
-    watchScroll()
-    return () => {
-      window.removeEventListener('scroll', logit)
-    }
-  }, [])
-
-  useEffect(() => {
-    switch (section) {
-      case 'sectionHomeRef':
-        sectionHomeRef.current?.scrollIntoView({
-          behavior: 'smooth'
-        })
-        return
-      case 'sectionOClubeRef':
-        sectionOClubeRef.current?.scrollIntoView({
-          behavior: 'smooth',
-          block: 'end'
-        })
-        return
-      case 'sectionComoFuncionaRef':
-        sectionComoFuncionaRef.current?.scrollIntoView({
-          behavior: 'smooth'
-        })
-        return
-    }
-  }, [section])
-
-  function handleChange(newValue: string) {
-    setSection(newValue)
-  }
-
+type pageProps = {
+  categories: GetCategoriesNA[]
+  consultants: GetConsultantsNoAuth[]
+}
+const CreatePJ = ({ categories, consultants }: pageProps) => {
   return (
     <S.Wrapper>
       <S.MenuWrapper>
-        <Menu handleChange={handleChange} background="white" />
+        <Menu background="white" />
       </S.MenuWrapper>
       <S.TitleWrapper>
         <S.Title>Pessoa Jurídica</S.Title>
@@ -64,9 +24,11 @@ const CreatePJ = () => {
           <S.DecorationLineWrapper isPrimary />
           <S.DecorationLineWrapper />
         </div>
-        <Button size="large" background="green" radius="radius100">
-          Trocar para Pessoa Física
-        </Button>
+        <Link href="/associar-se-pf">
+          <Button size="large" background="green" radius="radius100">
+            Trocar para Pessoa Física
+          </Button>
+        </Link>
       </S.TitleWrapper>
       <S.FormWrapper>
         <S.TextFieldWrapper>
@@ -77,7 +39,10 @@ const CreatePJ = () => {
                 <option value="none" selected disabled hidden>
                   Selecione
                 </option>
-                <option>Loren Ispun</option>
+                {consultants &&
+                  consultants.map((cons) => (
+                    <option key={cons.id}>{cons.identification}</option>
+                  ))}
               </S.Select>
             </S.SelectWrapper>
             <S.TextWrapper items={2}>
@@ -95,7 +60,10 @@ const CreatePJ = () => {
                 <option value="none" selected disabled hidden>
                   Selecione
                 </option>
-                <option>Loren Ispun</option>
+                {categories &&
+                  categories.map((cat) => (
+                    <option key={cat.id}>{cat.name}</option>
+                  ))}
               </S.Select>
             </S.SelectWrapper>
             <S.TextWrapper items={3}>
@@ -183,7 +151,7 @@ const CreatePJ = () => {
             background="orange"
             radius="radius300"
           >
-            Entrar
+            Confirmar
           </Button>
         </S.TextFieldWrapper>
       </S.FormWrapper>

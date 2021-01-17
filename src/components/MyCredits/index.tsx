@@ -1,12 +1,20 @@
 import * as S from './styles'
 
 export type MyCreditsProps = {
-  credits: string
-  spent: string
-  sold: string
+  credits: number
+  spent: number
+  pendingSpend: number
+  received: number
+  receivable: number
 }
 
-const MyCredits = ({ credits, spent, sold }: MyCreditsProps) => (
+const MyCredits = ({
+  credits,
+  spent,
+  pendingSpend,
+  received,
+  receivable
+}: MyCreditsProps) => (
   <S.Wrapper>
     <S.WrapperTitle>
       <S.Title>Meus Créditos</S.Title>
@@ -17,13 +25,23 @@ const MyCredits = ({ credits, spent, sold }: MyCreditsProps) => (
     </S.InfoBox>
 
     <S.InfoBox>
-      <p>Valor Gasto</p>
+      <p>Créditos Gastos</p>
       <p>Ct${spent}</p>
     </S.InfoBox>
 
     <S.InfoBox>
-      <p>Valor Vendido</p>
-      <p>Ct${sold}</p>
+      <p>Gasto Pendente</p>
+      <p>Ct${pendingSpend}</p>
+    </S.InfoBox>
+
+    <S.InfoBox>
+      <p>Crédito Recebido</p>
+      <p>Ct${received}</p>
+    </S.InfoBox>
+
+    <S.InfoBox>
+      <p>Créditos a receber</p>
+      <p>Ct${receivable}</p>
     </S.InfoBox>
   </S.Wrapper>
 )

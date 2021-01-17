@@ -16,9 +16,7 @@ const CreateAssociate = () => {
   const [categories, setCategories] = useState<any>([])
   const [consultants, setConsultants] = useState<any>([])
   const [file, setFile] = useState<any>()
-
   const [hidden, setHidden] = useState(false)
-
   const [description, setDescription] = useState('')
   const [site, setSite] = useState('')
   const [facebook, setFacebook] = useState('')

@@ -2,7 +2,7 @@ import styled, { css } from 'styled-components'
 
 export const Wrapper = styled.main`
   max-width: 30rem;
-  max-height: 30rem;
+  max-height: 60rem;
   box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.47);
   border-radius: 5px 5px 0px 0px;
   margin: 0 auto;
@@ -10,7 +10,8 @@ export const Wrapper = styled.main`
 export const InfoBox = styled.div`
   ${({ theme }) => css`
     display: flex;
-    align-items: center;
+    align-items: right;
+    padding-left: 1rem;
     flex-direction: column;
     padding-top: 1rem;
     padding-bottom: 1rem;

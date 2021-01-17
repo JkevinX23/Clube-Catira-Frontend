@@ -50,7 +50,6 @@ const HomeAdministrador = ({ name, role, page_data }: HomeDashAdminProps) => {
             />
           </S.DashNewAssociate>
           <S.DashNewAssociate>
-            {/* @ts-ignore: Unreachable code error */}
             <CardPendingOffDash pending_offers={page_data.pending_offers} />
           </S.DashNewAssociate>
         </S.WrapperReports>

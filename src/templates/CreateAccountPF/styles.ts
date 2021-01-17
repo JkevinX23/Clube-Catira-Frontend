@@ -101,9 +101,39 @@ type TextWrapperProps = {
 export const TextWrapper = styled.div<TextWrapperProps>`
   ${({ items }) => css`
     display: block;
-    width: ${items === 2 ? '60%' : '33%'};
+    width: ${items === 2 ? '60%' : items === 3 ? '33%' : '100%'};
     line-height: 1.25;
     color: #495057;
     padding-right: 1rem;
   `}
+`
+
+type AreaProps = {
+  isDescription?: boolean
+}
+export const TextArea = styled.textarea<AreaProps>`
+  ${({ isDescription }) => css`
+    height: ${isDescription ? '15.5rem' : '12rem'};
+    width: 100%;
+    resize: vertical;
+    outline: none;
+    font-size: 2rem;
+    border-radius: 6px;
+    line-height: 1.33;
+    border: 1px solid #ccc;
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+    transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
+    padding: 1rem;
+  `}
+`
+export const Image = styled.img`
+  margin-top: 1rem;
+  margin-right: 3em;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  transition: all 0.2s ease-in-out;
+  width: 25.6rem;
+  height: 14.4rem;
+  object-fit: cover;
 `

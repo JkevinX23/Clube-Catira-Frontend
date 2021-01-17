@@ -9,12 +9,18 @@ import SociaisSection from 'components/SociaisSection'
 import WhatsSection from 'components/WhatsSection'
 import * as S from './styles'
 
-const Main = () => {
+type props = {
+  preSection?: string
+}
+
+const Main = ({ preSection }: props) => {
   const [scrollY, setScrollY] = useState(0)
-  const [section, setSection] = useState('')
+  const [section, setSection] = useState(preSection || '')
   const sectionHomeRef = useRef<null | HTMLDivElement>(null)
   const sectionOClubeRef = useRef<null | HTMLDivElement>(null)
   const sectionComoFuncionaRef = useRef<null | HTMLDivElement>(null)
+
+  useEffect
 
   function logit() {
     setScrollY(window.pageYOffset)

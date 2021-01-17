@@ -2,60 +2,14 @@ import Button from 'components/Button'
 import Footer from 'components/Footer'
 import Menu from 'components/Menu'
 import SociaisSection from 'components/SociaisSection'
-import { useEffect, useRef, useState } from 'react'
+import Link from 'next/link'
 import * as S from './styles'
 
 const CreateAccountSwitch = () => {
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const [scrollY, setScrollY] = useState(0)
-  const [section, setSection] = useState('')
-  const sectionHomeRef = useRef<null | HTMLDivElement>(null)
-  const sectionOClubeRef = useRef<null | HTMLDivElement>(null)
-  const sectionComoFuncionaRef = useRef<null | HTMLDivElement>(null)
-
-  function logit() {
-    setScrollY(window.pageYOffset)
-  }
-
-  useEffect(() => {
-    function watchScroll() {
-      window.addEventListener('scroll', logit)
-    }
-    watchScroll()
-    return () => {
-      window.removeEventListener('scroll', logit)
-    }
-  }, [])
-
-  useEffect(() => {
-    switch (section) {
-      case 'sectionHomeRef':
-        sectionHomeRef.current?.scrollIntoView({
-          behavior: 'smooth'
-        })
-        return
-      case 'sectionOClubeRef':
-        sectionOClubeRef.current?.scrollIntoView({
-          behavior: 'smooth',
-          block: 'end'
-        })
-        return
-      case 'sectionComoFuncionaRef':
-        sectionComoFuncionaRef.current?.scrollIntoView({
-          behavior: 'smooth'
-        })
-        return
-    }
-  }, [section])
-
-  function handleChange(newValue: string) {
-    setSection(newValue)
-  }
-
   return (
     <S.Wrapper>
       <S.MenuWrapper>
-        <Menu handleChange={handleChange} background="white" />
+        <Menu background="white" />
       </S.MenuWrapper>
       <S.TitleWrapper>
         <S.Title>Cadastre-se</S.Title>
@@ -68,13 +22,17 @@ const CreateAccountSwitch = () => {
         <S.SubTitle>Tipo de pessoa</S.SubTitle>
 
         <S.ButtonWrapper>
-          <Button size="large" background="green" radius="radius100">
-            Pessoa Jurídica
-          </Button>
+          <Link href="/associar-se-pj">
+            <Button size="large" background="green" radius="radius100">
+              Pessoa Jurídica
+            </Button>
+          </Link>
 
-          <Button size="large" background="green" radius="radius100">
-            Pessoa Física
-          </Button>
+          <Link href="/associar-se-pf">
+            <Button size="large" background="green" radius="radius100">
+              Pessoa Física
+            </Button>
+          </Link>
         </S.ButtonWrapper>
       </S.FormWrapper>
 

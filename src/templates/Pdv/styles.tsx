@@ -1,14 +1,27 @@
 import styled, { css } from 'styled-components'
-
 export const Wrapper = styled.div`
-  ${({ theme }) => css`
-    background: ${theme.colors.white};
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-    padding-top: 8rem;
-    padding-bottom: 5rem;
-  `}
+  height: 100vh;
+  background: #3b8fc5;
+  background: linear-gradient(180deg, #0073bf 0%, #3b8fc5 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+`
+export const Content = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  padding-right: 10%;
+  padding-left: 10%;
+  width: 100%;
+  gap: 2rem;
+  max-width: 1000px;
+
+  input {
+    width: 100%;
+  }
 `
 type DecorationProps = {
   isPrimary?: boolean
@@ -36,34 +49,13 @@ export const TextWrapper = styled.p`
     color: ${theme.colors.black};
   `}
 `
-export const SelectionSearchWrapper = styled.div`
-  width: 80%;
-  max-width: 600px;
-  min-height: 10rem;
-  display: grid;
-  gap: 2rem;
 
-  select {
-    width: 98%;
-  }
-  Button {
-    &:hover {
-      background-color: #0073ff;
-      transition: 0.5s;
-      outline: none;
-    }
-  }
-`
-
-export const SelectWrapper = styled.select`
-  padding: 0.5rem;
-  position: relative;
-  display: block;
+export const InputWrapper = styled.div`
   width: 100%;
-  margin: 0 auto;
-  font-size: 18px;
-  color: #60666d;
-  cursor: pointer;
-  outline: none;
-  border-radius: 4px;
+  input {
+    text-align: center;
+    padding: 15px;
+    font-size: 2.5rem;
+    text-transform: uppercase;
+  }
 `

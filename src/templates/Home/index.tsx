@@ -61,7 +61,7 @@ const Home = ({ HeaderProps, Products, Filters }: HomeProps) => {
           setAssociate={setAssociate}
         />
         <S.WrapperCards>
-          {produtos &&
+          {produtos && produtos?.length > 0 ? (
             produtos.map((prod) => {
               console.log(prod)
               return (
@@ -77,7 +77,10 @@ const Home = ({ HeaderProps, Products, Filters }: HomeProps) => {
                   title={prod.title}
                 />
               )
-            })}
+            })
+          ) : (
+            <S.Text>Nenhuma oferta encontrada</S.Text>
+          )}
         </S.WrapperCards>
       </S.WrapperContent>
       <S.WrapperFooter>

@@ -23,26 +23,28 @@ export const WrapperHeader = styled.div`
 `
 export const WrapperMenu = styled.div`
   margin-top: 7.5rem;
-`
-export const WrapperContent = styled.div`
-  padding: 8rem 0;
-`
-export const WrapperCards = styled.div`
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, auto));
-  padding: 5rem;
-  row-gap: 3rem;
+  z-index: 20;
 `
 
 export const WrapperFooter = styled.div`
-  margin-top: 8rem;
+  position: relative;
+  width: 100%;
+
   p:nth-child(1) {
     display: none;
   }
 `
-export const Text = styled.h2`
-  color: #444;
+export const WrapperContent = styled.div`
+  padding: 5rem 0;
   width: 100%;
-  font-size: 3rem;
-  text-align: center;
+  z-index: 5;
+  display: flex;
+  justify-content: center;
+  gap: 4rem;
+  height: 100vh;
 `
+export const MyCredits = styled.div`
+  min-width: 30rem;
+  height: 100%;
+`
+export const RequestIncrease = styled.div``

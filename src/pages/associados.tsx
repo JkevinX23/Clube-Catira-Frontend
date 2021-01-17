@@ -1,5 +1,5 @@
 import Create from 'templates/Associates'
 
-export default function CreateAccSwitch() {
+export default function Associates() {
   return <Create />
 }
