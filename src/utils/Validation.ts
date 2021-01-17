@@ -9,6 +9,7 @@ Retorno : true se o endereço de e-mail for válido
 e-mail  : celso.goya@moinho.net
 Author  : Celso Goya
 */
+
 export function isEmail(text: string) {
   let arroba = '@',
     ponto = '.',
@@ -67,7 +68,7 @@ export function validarCPF(value: string) {
   if (rev !== parseInt(cpf.charAt(10))) return false
   return true
 }
-export function validarCNPJ(cnpj: string) {
+export function validarCNPJ(cnpj: any) {
   cnpj = cnpj.replace(/[^\d]+/g, '')
 
   if (cnpj === '') return false

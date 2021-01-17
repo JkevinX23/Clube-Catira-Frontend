@@ -13,10 +13,14 @@ const FiltersOffers = ({
   const [cit, setCit] = useState('')
 
   useEffect(() => {
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore: Unreachable code error
     setCity(cit)
   }, [cit, setCity])
 
   useEffect(() => {
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore: Unreachable code error
     setAssociate(ass)
   }, [ass, setAssociate])
 

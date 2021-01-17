@@ -68,13 +68,13 @@ const ShowOffer = ({ id }: props) => {
   useEffect(() => {
     async function loadOffer() {
       const { data } = await showOffer(id)
-      setTitle(data.title)
-      setValueOffer(data.value_offer)
-      setDescription(data.description || '')
-      setConsumerCards(data.consumer_cards)
-      setQuantity(data.quantity)
-      setAssociate(data.Associated.fantasy_name)
-      setFile(data.File.url)
+      setTitle(data.offer.title)
+      setValueOffer(data.offer.value_offer)
+      setDescription(data.offer.description || '')
+      setConsumerCards(data.offer.consumer_cards)
+      setQuantity(data.offer.quantity)
+      setAssociate(data.offer.Associated.fantasy_name)
+      setFile(data.offer.File.url)
     }
     loadOffer()
   }, [id])

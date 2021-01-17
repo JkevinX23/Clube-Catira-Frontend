@@ -1,5 +1,6 @@
 import { Meta, Story } from '@storybook/react/types-6-0'
-import Menu, { MenuProps } from '.'
+import { MenuProps } from 'utils/types'
+import Menu from '.'
 
 export default {
   title: 'Menu',

@@ -21,12 +21,12 @@ export default function OfferTable({ setId }: props) {
   const columns = [
     {
       title: 'REF.',
-      field: 'id',
+      field: 'offer.id',
       type: string
     },
     {
       title: 'Status',
-      field: 'status',
+      field: 'offer.status',
       lookup: {
         0: 'Pendente',
         1: 'Ativo',
@@ -35,22 +35,22 @@ export default function OfferTable({ setId }: props) {
     },
     {
       title: 'Franquia',
-      field: 'Associated.Consultant.Franchise.name',
+      field: 'offer.Associated.Consultant.Franchise.name',
       type: string
     },
     {
       title: 'Vendedor',
-      field: 'Associated.fantasy_name',
+      field: 'offer.Associated.fantasy_name',
       type: string
     },
     {
       title: 'Oferta',
-      field: 'title',
+      field: 'offer.title',
       type: string
     },
     {
       title: 'Valor',
-      field: 'value_offer',
+      field: 'offer.value_offer',
       type: string
     }
   ]
@@ -99,7 +99,7 @@ export default function OfferTable({ setId }: props) {
             tooltip: 'Ver Detalhes',
             onClick: (event, rowData) => {
               const row = rowData as GetOfferAdmin
-              setId(row.id)
+              setId(row.offer.id)
             }
           }
         ]}
