@@ -3,8 +3,8 @@ import axios from 'axios'
 // const { publicRuntimeConfig } = getConfig()
 
 const instance = axios.create({
-  baseURL: 'http://localhost:3334/'
-  // baseURL: 'https://svr.rededetrocas.com/'
+  //baseURL: 'http://localhost:3334/'
+  baseURL: 'http://162.214.144.130'
 })
 
 instance.interceptors.request.use((config) => {

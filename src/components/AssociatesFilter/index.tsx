@@ -12,7 +12,9 @@ const AssociateSection = ({ citys, setFilter }: pageProps) => (
     <S.DecorationLineWrapper />
     <S.SelectionSearchWrapper>
       {citys && (
-        <S.SelectWrapper onClick={(e) => setFilter(e.target.value)}>
+        <S.SelectWrapper
+          onClick={(e) => setFilter((e.target as HTMLTextAreaElement).value)}
+        >
           <option value="none" selected disabled>
             Selecione
           </option>
