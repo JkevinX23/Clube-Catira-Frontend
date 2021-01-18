@@ -215,7 +215,7 @@ const ShowAssociate = ({ id }: props) => {
         site
       }
       await updateAssociateAdmin(cleanObject(payload))
-      toast.success('Consultor criado com sucesso')
+      toast.success('Associado atualizado com sucesso!')
     } catch (err) {
       toast.error(
         'Algo de errado aconteceu, verifique os dados. Se persistir, contate o administrador do sistema'

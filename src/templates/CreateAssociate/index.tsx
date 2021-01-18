@@ -184,7 +184,7 @@ const CreateAssociate = () => {
         site
       }
       await createAssociateAdmin(cleanObject(payload))
-      toast.success('Consultor criado com sucesso')
+      toast.success('Associado criado com sucesso')
     } catch (err) {
       toast.error(
         'Algo de errado aconteceu, verifique os dados. Se persistir, contate o administrador do sistema'

@@ -35,3 +35,6 @@ export const getProfileAssociate = async () =>
 
 export const getCredits = async () =>
   api.get<GetCreditsProps>('/associate/credits')
+
+export const createAssociateNA = async (data: PostAssociateProps) =>
+  api.post('/associate', data)

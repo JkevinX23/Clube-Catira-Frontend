@@ -6,26 +6,29 @@ import { cellphoneeMask, cepMask, cpfCnpjMask } from 'utils/Masks'
 import { isEmail, validarCPF, validarCNPJ, cleanObject } from 'utils/Validation'
 import { toast } from 'react-toastify'
 import { useEffect, useState } from 'react'
-
+import { SyntheticEvent } from 'Types'
+import { useRouter } from 'next/router'
 import SociaisSection from 'components/SociaisSection'
 import TextField from 'components/TextField'
 import * as S from './styles'
 import Link from 'next/link'
 import { GetCategoriesNA, GetConsultantsNoAuth } from 'Types'
+import { postFile } from 'Context/Action/File'
+import { createAssociateNA } from 'Context/Action/Associates'
 
 type pageProps = {
   categories: GetCategoriesNA[]
   consultants: GetConsultantsNoAuth[]
 }
 
-const CreatePJ = ({ categories, consultants }: pageProps) => {
+const CreatePF = ({ categories, consultants }: pageProps) => {
+  const router = useRouter()
   const [file, setFile] = useState<any>()
-  const [hidden, setHidden] = useState(false)
   const [description, setDescription] = useState('')
   const [site, setSite] = useState('')
   const [facebook, setFacebook] = useState('')
   const [instagram, setInstagram] = useState('')
-  const [category_id, setCategory_id] = useState('')
+  const [category_id, setCategory_id] = useState(0)
   const [company_name, setCompanyName] = useState('')
   const [fantasy_name, setFantasy_name] = useState('')
   const [document, setDocument] = useState('')
@@ -42,16 +45,85 @@ const CreatePJ = ({ categories, consultants }: pageProps) => {
   const [contact2, setContact2] = useState('')
   const [password, setPassword] = useState('')
   const [passwordConfirm, setPasswordConfirm] = useState('')
-  const [percentage, setPercentage] = useState(10)
   const [credit, setCredit] = useState('')
   const [status, setStatus] = useState(1)
-  const [type, setType] = useState(1)
   const [consultant_id, setconsultant_id] = useState(0)
   const [file_id, setFile_id] = useState(0)
 
   const [imagePreviewUrl, setImagePreviewUrl] = useState<
     string | ArrayBuffer | null
   >('/img/preview-clube.png')
+
+  function handleImageChange(e: SyntheticEvent) {
+    e.preventDefault()
+    if (window.FileReader) {
+      if (e.target.files[0]) {
+        const reader = new FileReader()
+        const file = e.target.files[0]
+        const data = new FormData()
+        data.append('file', e.target.files[0])
+        setFile(data)
+        reader.onloadend = () => {
+          setImagePreviewUrl(reader.result)
+        }
+        reader.readAsDataURL(file)
+      }
+    }
+  }
+
+  // function print() {
+  //   const payload = {
+  //     description,
+  //     fantasy_name,
+  //     document,
+  //     company_name,
+  //     representative: response_name,
+  //     contact1,
+  //     email,
+  //     password,
+
+  //     cep,
+  //     city,
+  //     neighborhood,
+  //     number,
+  //     state,
+  //     complement,
+  //     credit,
+  //     category_id,
+
+  //     status,
+  //     street,
+  //     contact2,
+  //     consultant_id,
+  //     facebook,
+  //     instagram,
+  //     site
+  //   }
+  //   console.log(payload)
+  // }
+  useEffect(() => {
+    if (document) {
+      setDocument(cpfCnpjMask(document))
+    }
+  }, [document])
+
+  useEffect(() => {
+    if (category_id) {
+      console.log({ category_id })
+    }
+  }, [category_id])
+
+  useEffect(() => {
+    if (contact1) {
+      setContact1(cellphoneeMask(contact1))
+    }
+  }, [contact1])
+
+  useEffect(() => {
+    if (contact2) {
+      setContact2(cellphoneeMask(contact2))
+    }
+  }, [contact2])
 
   useEffect(() => {
     if (cep) {
@@ -73,6 +145,73 @@ const CreatePJ = ({ categories, consultants }: pageProps) => {
     }
   }, [cep])
 
+  async function handlesubmit() {
+    if (!isEmail(email)) {
+      toast.error('Email Invalido')
+      return
+    }
+    if (password !== passwordConfirm) {
+      toast.warn('As senhas não coorespondem.')
+      return
+    }
+    if (document.length === 14) {
+      if (!validarCPF(document)) {
+        toast.warn('CPF inválido')
+        return
+      }
+    } else {
+      if (!validarCNPJ(document)) {
+        toast.warn('CNPJ inválido')
+        return
+      }
+    }
+
+    if (password.length < 6) {
+      toast.info('Sua senha deve ter pelo menos 6 caracteres.')
+      return
+    }
+
+    try {
+      const { data } = await postFile(file)
+      const payload = {
+        description,
+        fantasy_name,
+        document,
+        company_name: fantasy_name,
+        representative: response_name,
+        contact1,
+        email,
+        password,
+
+        cep,
+        city,
+        neighborhood,
+        number,
+        state,
+        complement,
+        credit,
+        file_id: data.id,
+        category_id,
+
+        status,
+        street,
+        contact2,
+        consultant_id,
+        facebook,
+        instagram,
+        site
+      }
+      await createAssociateNA(cleanObject(payload))
+      router.push('sign-in')
+      toast.success(
+        'Parabens, seu registro foi criado com sucesso. Iremos analisar seus dados e assim que possível aprovaremos seu cadastro.'
+      )
+    } catch (err) {
+      toast.error(
+        'Algo de errado aconteceu, verifique os dados. Se persistir, contate o administrador do sistema'
+      )
+    }
+  }
   return (
     <S.Wrapper>
       <S.MenuWrapper>
@@ -95,13 +234,21 @@ const CreatePJ = ({ categories, consultants }: pageProps) => {
           <S.InlineWrapper>
             <S.SelectWrapper>
               <S.Label>Consultor</S.Label>
-              <S.Select>
+              <S.Select
+                onChange={(e) =>
+                  setconsultant_id(
+                    Number((e.target as HTMLSelectElement).value)
+                  )
+                }
+              >
                 <option value="none" selected disabled hidden>
                   Selecione
                 </option>
                 {consultants &&
                   consultants.map((cons) => (
-                    <option key={cons.id}>{cons.identification}</option>
+                    <option key={cons.id} value={cons.id}>
+                      {cons.identification}
+                    </option>
                   ))}
               </S.Select>
             </S.SelectWrapper>
@@ -117,13 +264,19 @@ const CreatePJ = ({ categories, consultants }: pageProps) => {
           <S.InlineWrapper>
             <S.SelectWrapper>
               <S.Label>Categoria de Serviços</S.Label>
-              <S.Select>
-                <option value="none" selected disabled hidden>
+              <S.Select
+                onChange={(e) =>
+                  setCategory_id(Number((e.target as HTMLSelectElement).value))
+                }
+              >
+                <option value={0} hidden>
                   Selecione
                 </option>
                 {categories &&
                   categories.map((cat) => (
-                    <option key={cat.id}>{cat.name}</option>
+                    <option key={cat.id} value={cat.id}>
+                      {cat.name}
+                    </option>
                   ))}
               </S.Select>
             </S.SelectWrapper>
@@ -364,6 +517,8 @@ const CreatePJ = ({ categories, consultants }: pageProps) => {
             size="xlarge"
             background="orange"
             radius="radius300"
+            onClick={() => handlesubmit()}
+            // onClick={() => print()}
           >
             Confirmar
           </Button>
@@ -378,4 +533,4 @@ const CreatePJ = ({ categories, consultants }: pageProps) => {
   )
 }
 
-export default CreatePJ
+export default CreatePF
