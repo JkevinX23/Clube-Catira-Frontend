@@ -354,6 +354,37 @@ export interface ShowOfferAdminProps {
   }
 }
 
+export interface ShowOfferAssociateProps {
+  sell: number
+  offer: {
+    createdAt: string
+    id: number
+    status: number
+    title: string
+    value_offer: number
+    description?: string
+    consumer_cards: number
+    quantity: number
+    File: {
+      url: string
+      id: number
+      path: string
+    }
+    Associated: {
+      id: number
+      fantasy_name: string
+      Consultant: {
+        id: number
+        name: string
+        Franchise: {
+          id: number
+          name: string
+        }
+      }
+    }
+  }
+}
+
 export interface GetAssociatesAdmin {
   id: number
   fantasy_name: string

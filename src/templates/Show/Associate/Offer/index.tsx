@@ -9,6 +9,7 @@ import AssociateMenu from 'components/AssociateMenu'
 import Footer from 'components/Footer'
 import DetailsOffer from 'components/DetailsOffer'
 import { FormatDateByFNS } from 'utils/Masks'
+import { ShowOfferAssociateProps } from 'Types'
 
 type props = {
   id: number
@@ -29,15 +30,19 @@ const ShowOffer = ({ id, HeaderProps }: props) => {
   useEffect(() => {
     async function loadOffer() {
       const { data } = await showOffer(id)
-      setTitle(data.offer.title)
-      setValueOffer(data.offer.value_offer)
-      setDescription(data.offer.description || '')
-      setConsumerCards(data.offer.consumer_cards)
-      setQuantity(data.offer.quantity)
-      setAssociate(data.offer.Associated.fantasy_name)
-      setFile(data.offer.File.url)
-      setDate(FormatDateByFNS(data.offer.createdAt))
-      setSell(data.sell)
+      setTitle((data as ShowOfferAssociateProps).offer.title)
+      setValueOffer((data as ShowOfferAssociateProps).offer.value_offer)
+      setDescription((data as ShowOfferAssociateProps).offer.description || '')
+      setConsumerCards((data as ShowOfferAssociateProps).offer.consumer_cards)
+      setQuantity((data as ShowOfferAssociateProps).offer.quantity)
+      setAssociate(
+        (data as ShowOfferAssociateProps).offer.Associated.fantasy_name
+      )
+      setFile((data as ShowOfferAssociateProps).offer.File.url)
+      setDate(
+        FormatDateByFNS((data as ShowOfferAssociateProps).offer.createdAt)
+      )
+      setSell((data as ShowOfferAssociateProps).sell)
     }
     loadOffer()
   }, [id])

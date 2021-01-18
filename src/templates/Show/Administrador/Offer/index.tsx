@@ -3,6 +3,7 @@ import * as S from './styles'
 import { useEffect, useState } from 'react'
 import { putOptionOffer, showOffer } from 'Context/Action/Offer'
 import { toast } from 'react-toastify'
+import { ShowOfferAdminProps } from 'Types'
 // import { SyntheticEvent } from 'Types'
 
 type props = {
@@ -55,18 +56,18 @@ const ShowOffer = ({ id }: props) => {
     async function loadOffer() {
       const { data } = await showOffer(id)
       console.log(data)
-      setTitle(data.title)
-      setValueOffer(data.value_offer)
-      setDescription(data.description || '')
-      setConsumerCards(data.consumer_cards)
-      setAssociate(data.Associated.fantasy_name)
-      setImagePreviewUrl(data.File.url)
-      setIlimited(data.quantity === 0)
-      setQuantity(data.quantity)
+      setTitle((data as ShowOfferAdminProps).title)
+      setValueOffer((data as ShowOfferAdminProps).value_offer)
+      setDescription((data as ShowOfferAdminProps).description || '')
+      setConsumerCards((data as ShowOfferAdminProps).consumer_cards)
+      setAssociate((data as ShowOfferAdminProps).Associated.fantasy_name)
+      setImagePreviewUrl((data as ShowOfferAdminProps).File.url)
+      setIlimited((data as ShowOfferAdminProps).quantity === 0)
+      setQuantity((data as ShowOfferAdminProps).quantity)
       setStatus(
-        data.status === 0
+        (data as ShowOfferAdminProps).status === 0
           ? 'PENDENTE'
-          : data.status === 1
+          : (data as ShowOfferAdminProps).status === 1
           ? 'ATIVA'
           : 'SUSPENSA'
       )
