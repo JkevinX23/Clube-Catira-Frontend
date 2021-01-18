@@ -106,7 +106,6 @@ export const Image = styled.img`
   transition: all 0.2s ease-in-out;
   width: 25.6rem;
   height: 14.4rem;
-  object-fit: cover;
 `
 export const Select = styled.select`
   display: flex;

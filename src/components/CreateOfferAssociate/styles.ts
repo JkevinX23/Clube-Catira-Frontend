@@ -124,3 +124,10 @@ export const SelectWrapper = styled.div`
   width: 100%;
   margin-top: 0px;
 `
+export const AlignCenter = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+`

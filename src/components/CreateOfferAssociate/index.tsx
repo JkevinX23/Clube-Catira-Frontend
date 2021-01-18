@@ -4,6 +4,8 @@ import { useEffect, useState } from 'react'
 import { postOffers } from 'Context/Action/Offer'
 import { toast } from 'react-toastify'
 import { getAssociates } from 'Context/Action/Associates'
+import { cleanObject } from 'utils/Validation'
+import ImageInput from 'components/ImageInput'
 
 const CreateOfferAssociate = () => {
   const [isIlimmited, setIlimited] = useState(true)
@@ -12,10 +14,11 @@ const CreateOfferAssociate = () => {
   const [value_offer, setValueOffer] = useState(0)
   const [consumer_cards, setConsumerCards] = useState(1)
   const [quantity, setQuantity] = useState(0)
-  const [file_id, setFileId] = useState(1)
   const [isDirect, setIsDirect] = useState(false)
   const [associates, setAssociates] = useState<any>([])
   const [direct, setDirectID] = useState<any>(null)
+
+  const [file, setFile] = useState(1)
 
   function handleIlimited() {
     setIlimited(true)
@@ -36,12 +39,12 @@ const CreateOfferAssociate = () => {
       value_offer,
       consumer_cards,
       quantity,
-      file_id,
+      file_id: file,
       directed_id: direct
     }
 
     try {
-      await postOffers(data)
+      await postOffers(cleanObject(data))
       toast.success('oferta criada com sucesso!')
     } catch (e) {
       toast.error('Erro ao criar oferta')
@@ -61,6 +64,9 @@ const CreateOfferAssociate = () => {
     <S.Wrapper>
       <S.WrapperField>
         <h4> CADASTRAR OFERTA </h4>
+        <S.AlignCenter>
+          <ImageInput cat={{ setFile }} />
+        </S.AlignCenter>
 
         <S.Label>Título da Oferta</S.Label>
         <S.Input onChange={(e) => setTitle(e.target.value)} />

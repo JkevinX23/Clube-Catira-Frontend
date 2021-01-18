@@ -114,6 +114,7 @@ export interface Associate {
   status: number
   type: number
   createdAt?: Date
+  img?: string
 }
 
 export interface Option {
@@ -298,62 +299,56 @@ export interface Consultant {
 }
 
 export interface GetOfferAdmin {
-  sell: number
-  offer: {
-    createdAt: string
+  createdAt: string
+  id: number
+  status: number
+  title: string
+  value_offer: number
+  description?: string
+  consumer_cards: number
+  quantity: number
+  File: {
+    url: string
     id: number
-    status: number
-    title: string
-    value_offer: number
-    description?: string
-    consumer_cards: number
-    quantity: number
-    File: {
-      url: string
+    path: string
+  }
+  Associated: {
+    id: number
+    fantasy_name: string
+    Consultant: {
       id: number
-      path: string
-    }
-    Associated: {
-      id: number
-      fantasy_name: string
-      Consultant: {
+      name: string
+      Franchise: {
         id: number
         name: string
-        Franchise: {
-          id: number
-          name: string
-        }
       }
     }
   }
 }
 
 export interface ShowOfferAdminProps {
-  sell: number
-  offer: {
-    createdAt: string
+  createdAt: string
+  id: number
+  status: number
+  title: string
+  value_offer: number
+  description?: string
+  consumer_cards: number
+  quantity: number
+  File: {
+    url: string
     id: number
-    status: number
-    title: string
-    value_offer: number
-    description?: string
-    consumer_cards: number
-    quantity: number
-    File: {
-      url: string
+    path: string
+  }
+  Associated: {
+    id: number
+    fantasy_name: string
+    Consultant: {
       id: number
-      path: string
-    }
-    Associated: {
-      id: number
-      fantasy_name: string
-      Consultant: {
+      name: string
+      Franchise: {
         id: number
         name: string
-        Franchise: {
-          id: number
-          name: string
-        }
       }
     }
   }
