@@ -116,9 +116,22 @@ export const Select = styled.select`
   cursor: pointer;
   height: 62.5%;
   width: 100%;
-  border: none;
+  border: 1px solid #aaa;
+  border-radius: 4px;
+  font-size: 15px;
+  overflow: hidden;
+  padding-top: 2px;
+  padding-bottom: 2px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
   outline: none;
   margin-top: 0px;
+  option {
+    font-size: 15px;
+    color: #60666d;
+    padding-top: 4px;
+    padding-bottom: 4px;
+  }
 `
 export const SelectWrapper = styled.div`
   width: 100%;
