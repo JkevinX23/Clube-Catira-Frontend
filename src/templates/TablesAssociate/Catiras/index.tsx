@@ -6,7 +6,13 @@ import { GetMyCatiras } from 'Context/Action/Catira'
 import { PurchaseSalesProps } from 'Types'
 import { FormatDateByFNS } from 'utils/Masks'
 
-export default function MyCatirasTable() {
+type MyCatirasTableProps = {
+  setTrasnsactionId: (id: number) => void
+}
+
+export default function MyCatirasTable({
+  setTrasnsactionId
+}: MyCatirasTableProps) {
   type IType =
     | 'string'
     | 'boolean'
@@ -38,11 +44,6 @@ export default function MyCatirasTable() {
       type: string
     },
     {
-      title: 'Voucher',
-      field: 'voucher',
-      type: string
-    },
-    {
       title: 'Data',
       field: 'date',
       type: string
@@ -53,8 +54,15 @@ export default function MyCatirasTable() {
       field: 'status',
       lookup: {
         0: 'Pendente',
-        1: 'Ativo',
-        2: 'Inativo'
+        1: 'Aguardando pagamento',
+        2: 'Em análise',
+        3: 'Paga',
+        4: 'Paga',
+        5: 'Em disputa',
+        6: 'Cancelada',
+        7: 'Cancelada',
+        8: 'Cancelada',
+        9: 'Em cancelamento'
       }
     }
   ]
@@ -69,14 +77,16 @@ export default function MyCatirasTable() {
       setPurchases(
         p.map((a: PurchaseSalesProps) => ({
           ...a,
-          date: FormatDateByFNS(a.date)
+          date: FormatDateByFNS(a.date),
+          value: `Ctz: ${Number(a.value).toFixed(2)}`
         }))
       )
       const s = data.sales.sort((a, b) => b.id - a.id)
       setSales(
         s.map((a: PurchaseSalesProps) => ({
           ...a,
-          date: FormatDateByFNS(a.date)
+          date: FormatDateByFNS(a.date),
+          value: `Ctz ${Number(a.value).toFixed(2)}`
         }))
       )
     }
@@ -89,12 +99,12 @@ export default function MyCatirasTable() {
         {selector ? 'Minhas Vendas' : 'Minhas Compras'}
       </button>
       <MaterialTable
-        title="Minhas Ofertas"
+        title={selector ? 'Minhas Compras' : 'Minhas Vendas'}
         columns={columns}
         data={selector ? purchases : sales}
         options={{ exportButton: true }}
         localization={{
-          header: { actions: 'Ver Fatura' },
+          header: { actions: selector ? 'Ver fatura' : 'Detalhes' },
           body: {
             emptyDataSourceMessage: 'Nenhum registro para exibir'
           },
@@ -124,6 +134,14 @@ export default function MyCatirasTable() {
               window.open(
                 `https://sandbox.pagseguro.uol.com.br/v2/checkout/payment.html?code=${row.fat}`
               )
+            }
+          },
+          {
+            icon: 'open_in_new',
+            tooltip: 'Detalhes',
+            onClick: (_event, rowData) => {
+              const row = rowData as PurchaseSalesProps
+              setTrasnsactionId(row.id)
             }
           }
         ]}

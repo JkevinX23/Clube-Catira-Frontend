@@ -30,6 +30,7 @@ export const WrapperContent = styled.div`
   width: 80%;
   margin-left: 10%;
   z-index: 5;
+  padding-bottom: 4rem;
 `
 export const WrapperCards = styled.div`
   display: grid;
@@ -39,7 +40,6 @@ export const WrapperCards = styled.div`
 `
 
 export const WrapperFooter = styled.div`
-  position: fixed;
   left: 0;
   bottom: 0;
   width: 100%;

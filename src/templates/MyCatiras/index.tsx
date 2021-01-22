@@ -3,7 +3,9 @@ import AssociateHeader, {
 } from 'components/AssociateHeader'
 import AssociateMenu from 'components/AssociateMenu'
 import Footer from 'components/Footer'
-import MyCatirasTable from 'templates/TablesAssociate/MyOffers'
+import { useState } from 'react'
+import MyCatirasTable from 'templates/TablesAssociate/Catiras'
+import TableListVouchers from 'templates/TablesAssociate/Vouchers'
 import * as S from './styles'
 
 export type MyCatirasProps = {
@@ -11,6 +13,7 @@ export type MyCatirasProps = {
 }
 
 const MyCatiras = ({ HeaderProps }: MyCatirasProps) => {
+  const [transaction_id, setTrasnsactionId] = useState(0)
   return (
     <S.Wrapper>
       <S.WrapperHeader>
@@ -23,7 +26,14 @@ const MyCatiras = ({ HeaderProps }: MyCatirasProps) => {
         <AssociateMenu />
       </S.WrapperMenu>
       <S.WrapperContent>
-        <MyCatirasTable />
+        {transaction_id !== 0 ? (
+          <TableListVouchers
+            setTrasnsactionId={setTrasnsactionId}
+            id={transaction_id}
+          />
+        ) : (
+          <MyCatirasTable setTrasnsactionId={setTrasnsactionId} />
+        )}
       </S.WrapperContent>
       <S.WrapperFooter>
         <Footer />

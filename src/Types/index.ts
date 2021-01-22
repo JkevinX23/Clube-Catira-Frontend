@@ -633,10 +633,9 @@ export interface PurchaseSalesProps {
   id: number
   type: string
   title: string
-  value: number
+  value: string
   quantity: number
   status: number
-  voucher?: string
   date: string
   fat: string
 }
@@ -670,4 +669,30 @@ export interface GetCreditsProps {
   pendingSpend: number
   received: number
   receivable: number
+}
+
+export interface GetVoucherProps {
+  id: number
+  code: string
+  ctz_value: number
+  status: number
+  createdAt: string
+  updatedAt: string
+  offer_id: number
+  associate_id: number
+  transaction_id: number
+  Offer: {
+    id: number
+    title: string
+    description: string
+    value_offer: number
+    consumer_cards: number
+    quantity: number
+    status: number
+    createdAt: string
+    updatedAt: string
+    file_id: number
+    associate_id: number
+    directed_associate_id: null
+  }
 }
