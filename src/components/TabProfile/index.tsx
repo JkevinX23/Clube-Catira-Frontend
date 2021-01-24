@@ -1,10 +1,26 @@
 import { useState } from 'react'
 import MyAccountDesc from 'components/MyAccountDesc'
 import MyAccountInfo from 'components/MyAccountInfo'
-import { MyAccountInfoProps } from 'components/MyAccountInfo'
 import MyAccountSeg from 'components/MyAccountSeg'
 import * as S from './styles'
 
+export type TabProfileProps = {
+  img: string
+  fantasy_name: string
+  category: string
+  contact: string
+  city: string
+  state: string
+  street: string
+  number: string
+  neighborhood: string
+  representative_name: string
+  email: string
+  site?: string
+  facebook?: string
+  instagram?: string
+  description: string
+}
 const TabProfile = ({
   img,
   fantasy_name,
@@ -16,8 +32,12 @@ const TabProfile = ({
   number,
   neighborhood,
   representative_name,
-  email
-}: MyAccountInfoProps) => {
+  email,
+  site,
+  facebook,
+  instagram,
+  description
+}: TabProfileProps) => {
   const [selected, setSelected] = useState(1)
 
   return (
@@ -61,7 +81,14 @@ const TabProfile = ({
             email={email}
           />
         )}
-        {selected === 2 && <MyAccountDesc />}
+        {selected === 2 && (
+          <MyAccountDesc
+            site={site}
+            facebook={facebook}
+            instagram={instagram}
+            description={description}
+          />
+        )}
         {selected === 3 && <MyAccountSeg />}
       </S.WrapperContent>
     </S.Wrapper>

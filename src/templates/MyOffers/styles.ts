@@ -48,3 +48,17 @@ export const WrapperFooter = styled.div`
     display: none;
   }
 `
+export const Breadcrumbs = styled.div`
+  a,
+  p {
+    font-size: 2rem;
+    color: #444;
+  }
+  padding-left: 3rem;
+`
+export const WrapperBreadcrumbs = styled.div`
+  width: 100%;
+  background: #fff;
+  width: 100%;
+  padding: 20px 0;
+`

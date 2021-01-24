@@ -9,6 +9,7 @@ export const Wrapper = styled.div`
   max-height: 55rem;
   align-items: center;
   padding: 1rem 5rem;
+  background-color: #fff;
 `
 export const Name = styled.p`
   font-size: 2rem;

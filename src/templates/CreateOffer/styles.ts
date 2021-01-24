@@ -1,14 +1,7 @@
 import styled, { css } from 'styled-components'
 
 export const Wrapper = styled.div`
-  ${({ theme }) => css`
-    background: rgb(2, 0, 36);
-    background: linear-gradient(
-      180deg,
-      ${theme.colors.gray} 0%,
-      rgba(250, 250, 250, 1) 100%
-    );
-  `}
+  background-color: #f9fafa;
 `
 export const WrapperHeader = styled.div`
   ${({ theme }) => css`
@@ -25,7 +18,7 @@ export const WrapperMenu = styled.div`
   margin-top: 7.5rem;
 `
 export const WrapperContent = styled.div`
-  padding: 1rem 0;
+  padding: 2rem 0;
   width: 80%;
   margin-left: 10%;
 `
@@ -37,7 +30,22 @@ export const WrapperCards = styled.div`
 `
 
 export const WrapperFooter = styled.div`
+  padding-top: 2rem;
   p:nth-child(1) {
     display: none;
   }
+`
+export const Breadcrumbs = styled.div`
+  a,
+  p {
+    font-size: 2rem;
+    color: #444;
+  }
+  padding-left: 3rem;
+`
+export const WrapperBreadcrumbs = styled.div`
+  width: 100%;
+  background: #fff;
+  width: 100%;
+  padding: 20px 0;
 `

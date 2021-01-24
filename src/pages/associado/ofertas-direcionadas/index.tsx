@@ -18,37 +18,7 @@ export default function OfertasDirecionadas() {
 
   const client = props.client as Associate
 
-  const [offers, setOffers] = useState<GetOfferProps[]>([
-    {
-      id: -1,
-      title: 'Massagen',
-      description: '1 sessao de massagem',
-      value_offer: 0,
-      consumer_cards: 1,
-      quantity: 0,
-      file_id: 1,
-      associate_id: 5,
-      File: {
-        url: 'localhost:3334/files/7802614de6664e050f59f6e7b1f1c908.jpg',
-        id: 1,
-        path: '7802614de6664e050f59f6e7b1f1c908.jpg'
-      },
-      Associated: {
-        id: 5,
-        description: 'Essa é uma loja teste',
-        fantasy_name: 'Gool',
-        company_name: 'KEVIN LTDA',
-        file_id: 1,
-        category_id: 1,
-        address_id: 31,
-        Address: {
-          id: 31,
-          city: 'Montes Claros',
-          state: 'MG'
-        }
-      }
-    }
-  ])
+  const [offers, setOffers] = useState<GetOfferProps[]>([])
   const [citys, setCitys] = useState<Option[]>([
     { key: 0, value: 'Nenhuma cidade encontrada' }
   ])
@@ -106,6 +76,7 @@ export default function OfertasDirecionadas() {
       }}
       Products={offers}
       Filters={{ associates, citys }}
+      isDirect
     />
   )
 }

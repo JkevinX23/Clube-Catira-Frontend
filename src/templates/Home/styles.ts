@@ -26,6 +26,7 @@ export const WrapperMenu = styled.div`
 `
 export const WrapperContent = styled.div`
   padding: 8rem 0;
+  background-color: #f9fafa;
 `
 export const WrapperCards = styled.div`
   display: grid;
@@ -45,4 +46,18 @@ export const Text = styled.h2`
   width: 100%;
   font-size: 3rem;
   text-align: center;
+`
+export const Breadcrumbs = styled.div`
+  a,
+  p {
+    font-size: 2rem;
+    color: #444;
+  }
+  padding-left: 3rem;
+`
+export const WrapperBreadcrumbs = styled.div`
+  width: 100%;
+  background: #f2f2f2;
+  width: 100%;
+  padding: 20px 0;
 `

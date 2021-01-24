@@ -5,6 +5,7 @@ import { useEffect, useState } from 'react'
 import { GetMyCatiras } from 'Context/Action/Catira'
 import { PurchaseSalesProps } from 'Types'
 import { FormatDateByFNS } from 'utils/Masks'
+import Button from 'components/Button'
 
 type MyCatirasTableProps = {
   setTrasnsactionId: (id: number) => void
@@ -95,9 +96,17 @@ export default function MyCatirasTable({
 
   return (
     <S.Wrapper>
-      <button onClick={() => setSelector(!selector)}>
-        {selector ? 'Minhas Vendas' : 'Minhas Compras'}
-      </button>
+      <S.Button>
+        <Button
+          size="xsmall"
+          radius="radius100"
+          background="green"
+          onClick={() => setSelector(!selector)}
+        >
+          {selector ? 'Minhas Vendas' : 'Minhas Compras'}
+        </Button>
+      </S.Button>
+
       <MaterialTable
         title={selector ? 'Minhas Compras' : 'Minhas Vendas'}
         columns={columns}

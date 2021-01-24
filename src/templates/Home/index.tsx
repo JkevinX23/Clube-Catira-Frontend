@@ -2,12 +2,16 @@ import AssociateHeader from 'components/AssociateHeader'
 import AssociateMenu from 'components/AssociateMenu'
 import CardOffers from 'components/CardOffers'
 import FiltersOffers from 'components/FiltersOffers'
+import Breadcrumbs from '@material-ui/core/Breadcrumbs'
+import NavigateNextIcon from '@material-ui/icons/NavigateNext'
+import Typography from '@material-ui/core/Typography'
+import Link from 'next/link'
 import Footer from 'components/Footer'
 import { useEffect, useState } from 'react'
 import { HomeProps, GetOfferProps } from 'Types'
 import * as S from './styles'
 
-const Home = ({ HeaderProps, Products, Filters }: HomeProps) => {
+const Home = ({ HeaderProps, Products, Filters, isDirect }: HomeProps) => {
   const [produtos, setProdutos] = useState<GetOfferProps[]>()
   const [city, setCity] = useState('')
   const [associate, setAssociate] = useState('-1')
@@ -15,7 +19,6 @@ const Home = ({ HeaderProps, Products, Filters }: HomeProps) => {
   useEffect(() => {
     function init() {
       setProdutos(Products)
-      console.log(Products)
     }
     init()
   }, [Products])
@@ -53,6 +56,22 @@ const Home = ({ HeaderProps, Products, Filters }: HomeProps) => {
       <S.WrapperMenu>
         <AssociateMenu />
       </S.WrapperMenu>
+      <S.WrapperBreadcrumbs>
+        <S.Breadcrumbs>
+          <Breadcrumbs
+            separator={<NavigateNextIcon fontSize="large" />}
+            aria-label="breadcrumb"
+          >
+            <Link href="/home-associado">Home</Link>
+            {!isDirect ? (
+              <Typography color="textPrimary">Ofertas</Typography>
+            ) : (
+              <Typography color="textPrimary">Ofertas Diretas</Typography>
+            )}
+          </Breadcrumbs>
+        </S.Breadcrumbs>
+      </S.WrapperBreadcrumbs>
+
       <S.WrapperContent>
         <FiltersOffers
           citys={Filters.citys}

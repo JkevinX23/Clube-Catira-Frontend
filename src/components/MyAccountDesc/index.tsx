@@ -1,27 +1,39 @@
 import Button from 'components/Button'
 import * as S from './styles'
 
-const MyAccountDesc = () => (
+type descProps = {
+  site?: string
+  facebook?: string
+  instagram?: string
+  description: string
+}
+
+const MyAccountDesc = ({
+  site,
+  facebook,
+  instagram,
+  description
+}: descProps) => (
   <S.Wrapper>
     <S.WrapperField>
       <div>
         <S.Label>Site</S.Label>
-        <S.Input />
+        <S.Input value={site} />
       </div>
       <div>
         <S.Label>Facebook</S.Label>
-        <S.Input />
+        <S.Input value={facebook} />
       </div>
       <div>
         <S.Label>Instagram</S.Label>
-        <S.Input />
+        <S.Input value={instagram} />
       </div>
     </S.WrapperField>
 
     <S.WrapperField>
       <div>
         <S.Label>Sobre a empresa</S.Label>
-        <S.TextArea />
+        <S.TextArea value={description} />
       </div>
     </S.WrapperField>
 

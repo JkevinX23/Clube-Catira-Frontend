@@ -3,13 +3,17 @@ import AssociateHeader, {
 } from 'components/AssociateHeader'
 import AssociateMenu from 'components/AssociateMenu'
 import Footer from 'components/Footer'
-import { MyAccountInfoProps } from 'components/MyAccountInfo'
-import TabProfile from 'components/TabProfile'
+import TabProfile, { TabProfileProps } from 'components/TabProfile'
 import * as S from './styles'
+
+import Breadcrumbs from '@material-ui/core/Breadcrumbs'
+import NavigateNextIcon from '@material-ui/icons/NavigateNext'
+import Typography from '@material-ui/core/Typography'
+import Link from 'next/link'
 
 export type MyProfileProps = {
   HeaderProps: AssociateHeaderProps
-  Profile: MyAccountInfoProps
+  Profile: TabProfileProps
 }
 
 const MyProfile = ({ HeaderProps, Profile }: MyProfileProps) => {
@@ -25,6 +29,17 @@ const MyProfile = ({ HeaderProps, Profile }: MyProfileProps) => {
       <S.WrapperMenu>
         <AssociateMenu />
       </S.WrapperMenu>
+      <S.WrapperBreadcrumbs>
+        <S.Breadcrumbs>
+          <Breadcrumbs
+            separator={<NavigateNextIcon fontSize="large" />}
+            aria-label="breadcrumb"
+          >
+            <Link href="/home-associado">Home</Link>
+            <Typography color="textPrimary">Perfil</Typography>
+          </Breadcrumbs>
+        </S.Breadcrumbs>
+      </S.WrapperBreadcrumbs>
       <S.WrapperCenter>
         <S.WrapperContent>
           {Profile && (
@@ -40,6 +55,10 @@ const MyProfile = ({ HeaderProps, Profile }: MyProfileProps) => {
               neighborhood={Profile.neighborhood}
               representative_name={Profile.representative_name}
               email={Profile.email}
+              site={Profile.site}
+              instagram={Profile.instagram}
+              facebook={Profile.facebook}
+              description={Profile.description}
             />
           )}
         </S.WrapperContent>

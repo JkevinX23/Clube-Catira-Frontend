@@ -15,6 +15,7 @@
   },
   "dependencies": {
     "@material-ui/core": "^4.11.2",
+    "@material-ui/icons": "^4.11.2",
     "@rocketseat/unform": "^1.6.2",
     "@types/react-router-dom": "^5.1.6",
     "@types/styled-components": "^5.1.2",

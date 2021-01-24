@@ -11,8 +11,7 @@ export const Container = styled.div`
     }
 
     img {
-      height: 14.4rem;
-      width: 25.6rem;
+      width: 25rem;
       border: 3px solid rgba(255, 255, 255, 0.3);
       background: #eee;
     }

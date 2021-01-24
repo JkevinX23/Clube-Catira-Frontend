@@ -18,7 +18,9 @@ export const Wrapper = styled.div`
   gap: 4rem;
 
   h4 {
-    text-align: left;
+    text-align: center;
+
+    padding-bottom: 1rem;
   }
 
   button {

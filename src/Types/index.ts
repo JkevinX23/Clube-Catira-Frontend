@@ -149,6 +149,7 @@ export interface HomeProps {
   HeaderProps: AssociateHeaderProps
   Products: GetOfferProps[]
   Filters: FilterProps
+  isDirect?: boolean
 }
 
 export interface HomeAdminProps {
