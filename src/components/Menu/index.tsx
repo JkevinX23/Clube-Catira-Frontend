@@ -8,11 +8,20 @@ import * as S from './styles'
 import Button from 'components/Button'
 import MediaMatch from 'components/MediaMatch'
 import { MenuProps } from 'utils/types'
+import Image from 'next/image'
+import Tooltip from '@material-ui/core/Tooltip'
+import { withStyles } from '@material-ui/core/styles'
+
+const styles = {
+  tooltip: {
+    fontSize: '1.2rem'
+  }
+}
 
 const Menu = ({ handleChange, username, background }: MenuProps) => {
   const [isOpen, setIsOpen] = useState(false)
   const router = useRouter()
-
+  const CustomTooltip = withStyles(styles)(Tooltip)
   function setRef(value: number) {
     switch (value) {
       case 1:
@@ -63,6 +72,18 @@ const Menu = ({ handleChange, username, background }: MenuProps) => {
             </Button>
           </Link>
         </S.MenuNav>
+        <CustomTooltip title="Ponto de venda">
+          <S.MenuPDV>
+            <Link href="/pdv">
+              <Image
+                src="/img/catira-icon-72x72.png"
+                alt="PDV"
+                width={36}
+                height={36}
+              />
+            </Link>
+          </S.MenuPDV>
+        </CustomTooltip>
       </MediaMatch>
 
       <S.MenuFull aria-hidden={!isOpen} isOpen={isOpen}>

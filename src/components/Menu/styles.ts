@@ -36,7 +36,9 @@ type MenufullProps = {
   isOpen: boolean
 }
 
-export const MenuNav = styled.div``
+export const MenuNav = styled.div`
+  margin-right: 4rem;
+`
 export const MenuLink = styled.a`
   ${({ theme }) => css`
     position: relative;
@@ -149,4 +151,10 @@ export const CreateAccount = styled.a`
     color: ${theme.colors.orange};
     border-bottom: 0.2rem solid ${theme.colors.orange};
   `}
+`
+export const MenuPDV = styled.span`
+  position: absolute;
+  width: 32px;
+  top: 3.3rem;
+  right: 1.2rem;
 `
