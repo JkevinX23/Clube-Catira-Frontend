@@ -29,9 +29,15 @@ export default function MyCatirasTable({
       field: 'id',
       type: string
     },
+
     {
       title: 'Tipo',
       field: 'type',
+      type: string
+    },
+    {
+      title: 'Oferta',
+      field: 'title',
       type: string
     },
     {

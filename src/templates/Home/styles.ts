@@ -50,7 +50,7 @@ export const Text = styled.h2`
 export const Breadcrumbs = styled.div`
   a,
   p {
-    font-size: 2rem;
+    font-size: 1.5rem;
     color: #444;
   }
   padding-left: 3rem;

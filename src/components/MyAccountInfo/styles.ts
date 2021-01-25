@@ -18,6 +18,26 @@ export const WrapperImage = styled.div`
     width: 93%;
     margin: 1rem auto;
   }
+
+  .inputfile {
+    width: 0.1px;
+    height: 0.1px;
+    opacity: 0;
+    overflow: hidden;
+    position: absolute;
+    z-index: -1;
+  }
+  .inputfile + label {
+    color: #eee;
+    background-color: #074355;
+    border-radius: 4px;
+    padding: 8px 4px;
+    &:hover {
+      color: #074355;
+      background-color: #eee;
+      border: 1px solid #074355;
+    }
+  }
 `
 export const WrapperInfo = styled.div`
   ${({ theme }) => css`
@@ -62,5 +82,6 @@ export const Image = styled.div<ImageProps>`
     border: 4px solid ${theme.colors.white};
     border-radius: 4px;
     transition: all 0.2s ease-in-out;
+    margin-bottom: 1rem;
   `}
 `

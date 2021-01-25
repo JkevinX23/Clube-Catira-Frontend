@@ -3,6 +3,7 @@ import MaterialTable from 'material-table'
 import { useEffect, useState } from 'react'
 import { getVoucherByTransaction } from 'Context/Action/Voucher'
 import { FormatDateByFNS } from 'utils/Masks'
+import Button from 'components/Button'
 
 type Props = {
   id: number
@@ -68,9 +69,19 @@ export default function TableListVouchers({ id, setTrasnsactionId }: Props) {
 
   return (
     <S.Wrapper>
-      <button onClick={() => setTrasnsactionId(0)}>Voltar</button>
+      <S.Button>
+        <Button
+          size="xsmall"
+          radius="radius100"
+          background="green"
+          onClick={() => setTrasnsactionId(0)}
+        >
+          Voltar
+        </Button>
+      </S.Button>
+
       <MaterialTable
-        title="Vouchers Gerados"
+        title={`Vouchers gerados pela transação Nº${id}`}
         columns={columns}
         data={data}
         options={{ exportButton: true }}
@@ -78,7 +89,7 @@ export default function TableListVouchers({ id, setTrasnsactionId }: Props) {
           header: { actions: 'Ações' },
           body: {
             emptyDataSourceMessage:
-              'Seus vouchers serão gerados quando o pagamento for confirmado'
+              'Os vouchers referentes a essa transação ainda não foram gerados.'
           },
           toolbar: {
             exportCSVName: 'Exportar como CSV',

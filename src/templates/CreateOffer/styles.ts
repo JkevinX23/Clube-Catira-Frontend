@@ -38,7 +38,7 @@ export const WrapperFooter = styled.div`
 export const Breadcrumbs = styled.div`
   a,
   p {
-    font-size: 2rem;
+    font-size: 1.5rem;
     color: #444;
   }
   padding-left: 3rem;
