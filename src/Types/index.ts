@@ -697,3 +697,20 @@ export interface GetVoucherProps {
     directed_associate_id: null
   }
 }
+
+export interface IncreaseProps {
+  status?: number
+  value: number
+  reason: string
+  option?: number
+  option_id?: number
+  Associate?: {
+    id: number
+    fantasy_name: string
+    document: string
+    representative: string
+    contact1: string
+    email: string
+    status: number
+  }
+}

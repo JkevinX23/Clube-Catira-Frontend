@@ -66,6 +66,7 @@ export const Input = styled.input`
   box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
   transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
   outline: none;
+  padding: 4px 1rem;
 `
 
 export const WrapperField = styled.div`
