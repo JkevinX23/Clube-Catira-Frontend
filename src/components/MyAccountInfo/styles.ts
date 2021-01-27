@@ -85,3 +85,9 @@ export const Image = styled.div<ImageProps>`
     margin-bottom: 1rem;
   `}
 `
+export const Buttons = styled.div`
+  width: 100%;
+  display: flex;
+  gap: 30px;
+  padding-top: 1rem;
+`

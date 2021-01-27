@@ -18,7 +18,7 @@ export const WrapperHeader = styled.div`
     width: 100%;
     background-color: ${theme.colors.white};
     box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.47);
-    z-index: ${theme.layers.base};
+    z-index: ${theme.layers.menu};
   `}
 `
 export const WrapperMenu = styled.div`
@@ -41,10 +41,21 @@ export const WrapperContent = styled.div`
   display: flex;
   justify-content: center;
   gap: 4rem;
-  height: 100vh;
 `
 export const MyCredits = styled.div`
   min-width: 30rem;
   height: 100%;
 `
 export const RequestIncrease = styled.div``
+export const Table = styled.div`
+  display: flex;
+  width: 100%;
+  padding: 0 10%;
+  padding-bottom: 4rem;
+  align-items: center;
+  justify-content: center;
+  table {
+    max-width: 90rem;
+    min-width: 65rem;
+  }
+`

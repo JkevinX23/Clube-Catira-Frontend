@@ -64,3 +64,9 @@ export const WrapperField = styled.div`
   flex-direction: row;
   gap: 2rem;
 `
+export const Buttons = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  padding-right: 6%;
+`

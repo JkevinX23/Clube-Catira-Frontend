@@ -1,6 +1,10 @@
 import { SyntheticEvent } from 'Types'
 import * as S from './styles'
 import { useState } from 'react'
+import Button from 'components/Button'
+import { postFile } from 'Context/Action/File'
+import { updateAssociate } from 'Context/Action/Associates'
+import { toast } from 'react-toastify'
 
 export type MyAccountInfoProps = {
   img: string
@@ -29,10 +33,10 @@ const MyAccountInfo = ({
   representative_name,
   email
 }: MyAccountInfoProps) => {
-  const [file, setFile] = useState<any>()
+  const [file, setFile] = useState<any>(null)
   const [imagePreviewUrl, setImagePreviewUrl] = useState<
     string | ArrayBuffer | null
-  >('/img/preview-clube.png')
+  >()
 
   function handleImageChange(e: SyntheticEvent) {
     e.preventDefault()
@@ -50,10 +54,33 @@ const MyAccountInfo = ({
       }
     }
   }
+
+  async function handleSubmit() {
+    try {
+      const { data } = await postFile(file)
+      await updateAssociate({ file_id: data.id })
+      toast.success('Logo atualizada com sucesso!')
+    } catch (err) {
+      console.log(err)
+      toast.warn(
+        'Algo de errado ocorreu, caso persista, contate o administrador do sistema.'
+      )
+    }
+  }
+  function handleCancel() {
+    setFile(null)
+    setImagePreviewUrl(null)
+  }
   return (
     <S.Wrapper>
       <S.WrapperImage>
-        <S.Image src={img} role="img" aria-label={fantasy_name} />
+        <S.Image
+          // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+          // @ts-ignore: Unreachable code error
+          src={imagePreviewUrl || img}
+          role="img"
+          aria-label={fantasy_name}
+        />
         <input
           type="file"
           accept="image/*"
@@ -67,7 +94,6 @@ const MyAccountInfo = ({
           }
         />
         <label htmlFor="file">Trocar Logo</label>
-        {/* <Button size="xxsmall" background="green" radius="radius100"></Button> */}
       </S.WrapperImage>
 
       <S.WrapperInfo>
@@ -90,6 +116,30 @@ const MyAccountInfo = ({
           <p>{representative_name}</p>
           <p>{email}</p>
         </S.WrapperText>
+        {file !== null && (
+          <S.Buttons>
+            <div>
+              <Button
+                size="xxsmall"
+                background="orange"
+                radius="radius100"
+                onClick={() => handleSubmit()}
+              >
+                Salvar
+              </Button>
+            </div>
+            <div>
+              <Button
+                size="xxsmall"
+                background="black"
+                radius="radius100"
+                onClick={() => handleCancel()}
+              >
+                Cancelar
+              </Button>
+            </div>
+          </S.Buttons>
+        )}
       </S.WrapperInfo>
     </S.Wrapper>
   )

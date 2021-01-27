@@ -8,6 +8,7 @@ import MyCredits from 'components/MyCredits'
 import * as S from './styles'
 import { useEffect, useState } from 'react'
 import { getCredits } from 'Context/Action/Associates'
+import HistoryAssociateTable from 'templates/TablesAssociate/History'
 
 export type MyCreditsProps = {
   HeaderProps: AssociateHeaderProps
@@ -56,6 +57,10 @@ const MyCreditsTemplate = ({ HeaderProps }: MyCreditsProps) => {
           <RequestCreditIncrease />
         </S.RequestIncrease>
       </S.WrapperContent>
+
+      <S.Table>
+        <HistoryAssociateTable />
+      </S.Table>
       <S.WrapperFooter>
         <Footer />
       </S.WrapperFooter>

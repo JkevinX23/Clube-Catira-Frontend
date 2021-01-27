@@ -9,7 +9,7 @@ export const Wrapper = styled.div`
   background-color: #eee;
   border-radius: 4px;
   max-width: 80rem;
-  height: 20rem;
+  height: 35rem;
   border-top: none;
 
   button {
@@ -49,7 +49,11 @@ export const Input = styled.input`
 export const WrapperField = styled.div`
   width: 100%;
   display: flex;
-  flex-direction: row;
-  justify-content: center;
-  gap: 2rem;
+  flex-direction: column;
+`
+export const WrapperRow = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 80%;
+  padding-left: 6%;
 `

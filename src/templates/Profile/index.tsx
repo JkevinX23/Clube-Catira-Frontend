@@ -17,7 +17,6 @@ export type MyProfileProps = {
 }
 
 const MyProfile = ({ HeaderProps, Profile }: MyProfileProps) => {
-  console.log(Profile)
   return (
     <S.Wrapper>
       <S.WrapperHeader>

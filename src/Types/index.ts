@@ -714,3 +714,22 @@ export interface IncreaseProps {
     status: number
   }
 }
+
+export interface AssociateHistoryProps {
+  typeDesc: string
+  type: number
+  description: string
+  value: number
+  status: number
+  date: string
+}
+
+export interface PutAssociatePropsAssociate {
+  description?: string
+  site?: string
+  facebook?: string
+  instagram?: string
+  file_id?: number
+  password?: string
+  oldPassword?: string
+}
