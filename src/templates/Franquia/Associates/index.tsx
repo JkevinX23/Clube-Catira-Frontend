@@ -1,16 +1,16 @@
 import HeaderDash from 'components/HeaderDash'
+import AssociatesTable from '../../TablesFranchise/Associates'
 import Footer from 'components/Footer'
 import { HomeAdminProps } from 'Types'
 import * as S from './styles'
 
-import SidebarAdmin from 'components/Sidebar'
+import Sidebar from 'components/Franquia/Sidebar'
+import CreateAssociate from 'templates/CreateAssociate'
 import { useEffect, useState } from 'react'
 import Button from 'components/Button'
-import CreateOfferAdmin from 'components/CreateOfferAdministrador'
-import OfferTable from 'templates/TablesAdmin/Offers'
-import ShowOffer from 'templates/Show/Administrador/Offer'
+import ShowAssociate from 'templates/Show/Franchise/Associate'
 
-const OfferAdmin = ({ name, role }: HomeAdminProps) => {
+const AssociatesAdmin = ({ name, role }: HomeAdminProps) => {
   const [selector, setSelector] = useState(1)
   const [id, setId] = useState<number>(0)
 
@@ -24,6 +24,7 @@ const OfferAdmin = ({ name, role }: HomeAdminProps) => {
     setSelector(1)
     setId(0)
   }
+
   return (
     <S.Wrapper>
       <S.WrapperContent>
@@ -37,7 +38,7 @@ const OfferAdmin = ({ name, role }: HomeAdminProps) => {
               background="green"
               onClick={() => setSelector(2)}
             >
-              Cadastrar nova oferta
+              Cadastrar novo associado
             </Button>
           ) : selector === 2 ? (
             <Button
@@ -45,7 +46,7 @@ const OfferAdmin = ({ name, role }: HomeAdminProps) => {
               background="green"
               onClick={() => setSelector(1)}
             >
-              Gerenciar Ofertas
+              Gerenciar Associados
             </Button>
           ) : (
             <Button
@@ -59,19 +60,19 @@ const OfferAdmin = ({ name, role }: HomeAdminProps) => {
         </S.ButtonChange>
         {selector === 2 ? (
           <S.CreateFranchise>
-            <CreateOfferAdmin />
+            <CreateAssociate />
           </S.CreateFranchise>
         ) : selector === 1 ? (
           <S.Table>
-            <OfferTable setId={setId} />
+            <AssociatesTable setId={setId} />
           </S.Table>
         ) : (
           <S.CreateFranchise>
-            <ShowOffer id={id} />
+            <ShowAssociate id={id} />
           </S.CreateFranchise>
         )}
       </S.WrapperContent>
-      <SidebarAdmin />
+      <Sidebar />
       <S.WrapperFooter>
         <Footer />
       </S.WrapperFooter>
@@ -79,4 +80,4 @@ const OfferAdmin = ({ name, role }: HomeAdminProps) => {
   )
 }
 
-export default OfferAdmin
+export default AssociatesAdmin

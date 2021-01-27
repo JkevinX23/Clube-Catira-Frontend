@@ -3,14 +3,14 @@ import Footer from 'components/Footer'
 import { HomeAdminProps } from 'Types'
 import * as S from './styles'
 
-import SidebarAdmin from 'components/Sidebar'
+import Sidebar from 'components/Franquia/Sidebar'
 import { useEffect, useState } from 'react'
 import Button from 'components/Button'
-import CreateOfferAdmin from 'components/CreateOfferAdministrador'
-import OfferTable from 'templates/TablesAdmin/Offers'
-import ShowOffer from 'templates/Show/Administrador/Offer'
+import CreateOffer from 'components/Franquia/Offer'
+import OfferTable from 'templates/TablesFranchise/Offers'
+import ShowOffer from 'templates/Show/Franchise/Offer'
 
-const OfferAdmin = ({ name, role }: HomeAdminProps) => {
+const OfferFranchise = ({ name, role }: HomeAdminProps) => {
   const [selector, setSelector] = useState(1)
   const [id, setId] = useState<number>(0)
 
@@ -59,7 +59,7 @@ const OfferAdmin = ({ name, role }: HomeAdminProps) => {
         </S.ButtonChange>
         {selector === 2 ? (
           <S.CreateFranchise>
-            <CreateOfferAdmin />
+            <CreateOffer />
           </S.CreateFranchise>
         ) : selector === 1 ? (
           <S.Table>
@@ -71,7 +71,7 @@ const OfferAdmin = ({ name, role }: HomeAdminProps) => {
           </S.CreateFranchise>
         )}
       </S.WrapperContent>
-      <SidebarAdmin />
+      <Sidebar />
       <S.WrapperFooter>
         <Footer />
       </S.WrapperFooter>
@@ -79,4 +79,4 @@ const OfferAdmin = ({ name, role }: HomeAdminProps) => {
   )
 }
 
-export default OfferAdmin
+export default OfferFranchise

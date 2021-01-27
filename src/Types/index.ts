@@ -1,5 +1,4 @@
 import { CardPendingOffDashProps } from 'components/CardPendingOffDash'
-import { StringifyOptions } from 'querystring'
 
 export interface Login {
   email: string
@@ -267,7 +266,7 @@ export interface GetConsultant {
   identification: string
   contact1: string
   status: number
-  Franchise: {
+  Franchise?: {
     id: number
     name: string
   }
