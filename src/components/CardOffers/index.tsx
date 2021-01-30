@@ -32,7 +32,11 @@ const CardOffers = ({
       </S.subTitle>
 
       <S.BuyWrapper>
-        <S.Value>CT${value}</S.Value>
+        {Number(value) > 0 ? (
+          <S.Value>CT${value}</S.Value>
+        ) : (
+          <S.subTitle>A Negociar</S.subTitle>
+        )}
         <Button
           size="xxsmall"
           background="white"

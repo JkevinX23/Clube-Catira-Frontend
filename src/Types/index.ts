@@ -611,6 +611,7 @@ export interface PostCatira {
   associate_id?: number
   offer_id: number
   quantity?: number
+  value?: number
 }
 
 export interface ResponsePostCatira {

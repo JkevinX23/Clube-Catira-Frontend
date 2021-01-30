@@ -82,7 +82,6 @@ const Home = ({ HeaderProps, Products, Filters, isDirect }: HomeProps) => {
         <S.WrapperCards>
           {produtos && produtos?.length > 0 ? (
             produtos.map((prod) => {
-              console.log(prod)
               return (
                 <CardOffers
                   key={prod.id}

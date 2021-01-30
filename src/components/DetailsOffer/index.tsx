@@ -5,6 +5,8 @@ import { PurschaseOffer } from 'Context/Action/Catira'
 import { toast } from 'react-toastify'
 import { useState } from 'react'
 import Link from 'next/link'
+import TextField from 'components/TextField'
+import { PostCatira } from 'Types'
 
 export type DetailsOfferProps = {
   id: number
@@ -31,21 +33,33 @@ const DetailsOffer = ({
   const [qtd, setQtd] = useState(1)
   const [code, setCode] = useState('')
   const [status, setStatus] = useState(0)
+  const [estimateValue, setEstimateValue] = useState(0)
 
   function handleChage(e: any) {
     setQtd(Number(e))
     setStatus(0)
   }
   async function purchase() {
-    const payload = {
+    const payload: PostCatira = {
       offer_id: id,
       quantity: qtd
     }
+
+    if (Number(value) === 0) {
+      if (estimateValue === 0) {
+        toast.warn(
+          'Essa é uma oferta do tipo ORÇAMENTO. Insira o valor desejado para gerar um voucher no valor personalizado.'
+        )
+        return
+      } else {
+        payload.value = estimateValue
+      }
+    }
+
     try {
       setStatus(1)
       toast.success('Aguarde, estamos processando sua solicitação')
       const { data } = await PurschaseOffer(payload)
-      console.log(data)
       const { checkout } = data
       setCode(checkout.code)
       toast.success(
@@ -64,7 +78,17 @@ const DetailsOffer = ({
         <S.Image src={img} role="img" />
         <S.WrapperDetails>
           <S.Title>{offer}</S.Title>
-          <S.Value>Ctz {Number(value).toFixed(2)}</S.Value>
+          {Number(value) > 0 ? (
+            <S.Value>Ctz {Number(value).toFixed(2)}</S.Value>
+          ) : (
+            <TextField
+              label="Insira um valor"
+              type="numeric"
+              onChange={(e) => setEstimateValue(Number(e.target.value))}
+              step={10}
+            />
+          )}
+
           <p>
             Empresa: <span>{associate}</span>
           </p>
