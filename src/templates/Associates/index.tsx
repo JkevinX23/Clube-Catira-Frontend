@@ -64,6 +64,7 @@ const Associates = ({ MenuProps }: AssociateProps) => {
             {associates.map((associate: GetAssociatesNoAuth) => (
               <CardAssociates
                 key={associate.id}
+                id={associate.id}
                 city={associate.city}
                 name={associate.fantasy_name}
                 img={associate.img}

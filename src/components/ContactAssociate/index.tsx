@@ -1,20 +1,6 @@
-import Button from 'components/Button'
+// import Button from 'components/Button'
+import { ContactAssociateProps } from 'Types'
 import * as S from './styles'
-
-export type ContactAssociateProps = {
-  img: string
-
-  associate: string
-  description: string
-
-  contact: string
-
-  street: string
-  number: string
-  neighborhood: string
-  city: string
-  state: string
-}
 
 const ContactAssociate = ({
   img,
@@ -25,11 +11,14 @@ const ContactAssociate = ({
   number,
   neighborhood,
   city,
-  state
+  state,
+  instagram,
+  site,
+  facebook
 }: ContactAssociateProps) => (
   <S.Wrapper>
     <S.Content>
-      <S.Image src={img} role="img" aria-label={name} />
+      <S.Image src={img} role="img" />
       <S.WrapperDetails>
         <S.Title>{associate}</S.Title>
         <S.Sub>{description}</S.Sub>
@@ -39,7 +28,7 @@ const ContactAssociate = ({
         </S.Sub>
       </S.WrapperDetails>
     </S.Content>
-
+    {/*
     <S.WrapperContact>
       <S.Title>Contato com o associado</S.Title>
       <S.WrapperField>
@@ -67,7 +56,7 @@ const ContactAssociate = ({
       <Button background="black" size="xxsmall" radius="radius100">
         Enviar
       </Button>
-    </S.WrapperContact>
+    </S.WrapperContact> */}
   </S.Wrapper>
 )
 

@@ -8,7 +8,8 @@ import {
   GetAssociatesNoAuth,
   GetAssociatesAuth,
   GetCreditsProps,
-  PutAssociatePropsAssociate
+  PutAssociatePropsAssociate,
+  ContactAssociateProps
 } from 'Types'
 
 export const getAssociatesAdmin = async () =>
@@ -28,6 +29,10 @@ export const updateAssociateAdmin = async (data: PutAssociateProps) =>
 
 export const showAssociate = async (id: number) =>
   api.get<ShowAssociateProps>(`/associate/show?id=${id}`)
+
+export const showAssociateAssociate = async (id: number) =>
+  api.get<ContactAssociateProps>(`/associate/show?id=${id}`)
+
 export const getAssociates = async () =>
   api.get<GetAssociatesAdmin[]>('/associate')
 

@@ -69,6 +69,7 @@ const ListAssociatesDetails = ({ HeaderProps }: PageProps) => {
               (associate: GetAssociatesAuth) =>
                 associate && (
                   <CardAssociates
+                    id={associate.id}
                     key={associate.id}
                     city={associate.Address.city}
                     name={associate.fantasy_name}

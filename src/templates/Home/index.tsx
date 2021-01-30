@@ -86,6 +86,7 @@ const Home = ({ HeaderProps, Products, Filters, isDirect }: HomeProps) => {
                 <CardOffers
                   key={prod.id}
                   id={prod.id}
+                  associateId={prod.Associated.id}
                   associate={prod.Associated.fantasy_name}
                   city={prod.Associated.Address.city}
                   value={prod.value_offer}

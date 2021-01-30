@@ -1,6 +1,7 @@
 import Button from 'components/Button'
 import * as S from './styles'
 import { useRouter } from 'next/router'
+import Link from 'next/link'
 export type CardOffersProps = {
   id: number
   img: string
@@ -10,6 +11,7 @@ export type CardOffersProps = {
   city: string
   state: string
   value: number
+  associateId: number
 }
 
 const CardOffers = ({
@@ -19,14 +21,18 @@ const CardOffers = ({
   city,
   state,
   value,
-  id
+  id,
+  associateId
 }: CardOffersProps) => {
   const router = useRouter()
   return (
     <S.Wrapper>
       <S.Image src={img} role="img" aria-label={name} />
       <S.Title>{name}</S.Title>
-      <S.subTitle>{associate}</S.subTitle>
+      <Link href={`/associado/associado?id=${associateId}`}>
+        <S.subTitle isLink>{associate}</S.subTitle>
+      </Link>
+
       <S.subTitle>
         {city}/{state}
       </S.subTitle>

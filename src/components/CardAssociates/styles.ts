@@ -4,6 +4,7 @@ export const Wrapper = styled.main`
   width: 25rem;
   text-align: center;
   border: 1px solid black;
+  cursor: pointer;
 `
 
 type ImageProps = {

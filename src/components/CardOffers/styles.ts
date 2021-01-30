@@ -27,13 +27,16 @@ export const Title = styled.p`
   margin-top: 1rem;
   margin-bottom: 1rem;
 `
-
-export const subTitle = styled.p`
-  ${({ theme }) => css`
+type subTitleProps = {
+  isLink?: boolean
+}
+export const subTitle = styled.p<subTitleProps>`
+  ${({ theme, isLink }) => css`
     color: ${theme.colors.lightBlack};
     font-size: 1.5rem;
     margin-top: 1rem;
     margin-bottom: 3rem;
+    cursor: ${isLink ? 'pointer' : 'default'};
   `}
 `
 

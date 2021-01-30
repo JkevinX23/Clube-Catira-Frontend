@@ -1,5 +1,6 @@
 import { Meta, Story } from '@storybook/react/types-6-0'
-import ContactAssociate, { ContactAssociateProps } from '.'
+import ContactAssociate from '.'
+import { ContactAssociateProps } from 'Types'
 
 export default {
   title: 'ContactAssociate',

@@ -607,6 +607,21 @@ export interface ShowAssociateProps {
   }
 }
 
+export interface ContactAssociateProps {
+  img: string
+  associate: string
+  description: string
+  contact: string
+  street: string
+  number: string
+  neighborhood: string
+  city: string
+  state: string
+  instagram?: string
+  site?: string
+  facebook?: string
+}
+
 export interface PostCatira {
   associate_id?: number
   offer_id: number
