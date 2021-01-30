@@ -730,6 +730,12 @@ export interface IncreaseProps {
   }
 }
 
+export interface IncreaseUpdateProps {
+  id: number
+  value?: number
+  status?: number
+}
+
 export interface AssociateHistoryProps {
   typeDesc: string
   type: number
@@ -747,4 +753,14 @@ export interface PutAssociatePropsAssociate {
   file_id?: number
   password?: string
   oldPassword?: string
+}
+export interface GetIncreaseProps {
+  id: number
+  credits: number
+  associate: string
+  status: number
+  value: number
+  reason: string
+  createdAt: string
+  updatedby?: string
 }
