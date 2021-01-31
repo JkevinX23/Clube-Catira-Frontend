@@ -48,8 +48,6 @@ export const AuthProvider: React.FC = ({ children }: any) => {
         password: payload.password
       })
 
-      console.log(data)
-
       setClient(data.client)
       setToken(data.token)
       setOption(data.option)
