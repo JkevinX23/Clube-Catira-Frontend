@@ -14,9 +14,9 @@ const Home = ({ name, role }: HomeAdminProps) => {
         <S.WrapperHeader>
           <HeaderDash name={name} role={role} />
         </S.WrapperHeader>
-        <S.CreateFranchise>
+        <S.Table>
           <TransactionTableAdmin />
-        </S.CreateFranchise>
+        </S.Table>
       </S.WrapperContent>
       <SidebarAdmin />
       <S.WrapperFooter>

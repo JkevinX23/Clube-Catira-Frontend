@@ -1,6 +1,5 @@
 import { Meta, Story } from '@storybook/react/types-6-0'
-import { MyAccountInfoProps } from 'components/MyAccountInfo'
-import TabProfile from '.'
+import TabProfile, { TabProfileProps } from '.'
 
 export default {
   title: 'TabProfile',
@@ -16,10 +15,9 @@ export default {
     street: 'Rua trinta e dois',
     neighborhood: 'Jardim Primavera',
     representative_name: 'João Kevin Gomes Rodrigues',
-    email: 'kevingomesr@gmail.com'
+    email: 'kevingomesr@gmail.com',
+    description: 'teste'
   }
 } as Meta
 
-export const Basic: Story<MyAccountInfoProps> = (args) => (
-  <TabProfile {...args} />
-)
+export const Basic: Story<TabProfileProps> = (args) => <TabProfile {...args} />

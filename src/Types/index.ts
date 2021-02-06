@@ -764,3 +764,25 @@ export interface GetIncreaseProps {
   createdAt: string
   updatedby?: string
 }
+
+export interface GetAdminReport {
+  franchise: string
+  qtdTransactions: number
+  totalCollected: number
+  invoice: number
+  Details: {
+    Franchise: string
+    data: [
+      {
+        consultant: string
+        totalGenerate: number
+        percentage: number
+      }
+    ]
+  }
+}
+
+export interface Dates {
+  dateInit: Date
+  dateEnd: Date
+}
