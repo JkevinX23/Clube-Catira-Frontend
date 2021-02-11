@@ -79,8 +79,4 @@ export const WrapperFooter = styled.div`
   position: relative;
   padding-top: 2rem;
   width: 100%;
-
-  p:nth-child(1) {
-    display: none;
-  }
 `

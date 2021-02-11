@@ -1,24 +1,5 @@
 import styled from 'styled-components'
 
-export const Wrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.47);
-  border: 1px solid #ccc;
-  background-color: #eee;
-  border-radius: 4px;
-  max-width: 80rem;
-  height: 35rem;
-  border-top: none;
-
-  button {
-    margin-bottom: 2rem;
-    margin-top: 2rem;
-    align-self: flex-end;
-    margin-right: 10%;
-  }
-`
 export const Label = styled.p`
   padding-top: 2rem;
   margin-bottom: 0.5rem;
@@ -56,4 +37,39 @@ export const WrapperRow = styled.div`
   flex-direction: column;
   width: 80%;
   padding-left: 6%;
+`
+
+export const Wrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.47);
+  border: 1px solid #ccc;
+  background-color: #eee;
+  border-radius: 4px;
+  max-width: 80rem;
+  height: 35rem;
+  border-top: none;
+  min-width: 60rem;
+
+  button {
+    margin-bottom: 2rem;
+    margin-top: 2rem;
+    align-self: flex-end;
+    margin-right: 10%;
+  }
+
+  @media (max-width: 768px) {
+    min-width: 25rem;
+    height: 35rem;
+    ${WrapperField} {
+      width: 100%;
+    }
+    button {
+      margin-bottom: 2rem;
+      margin-top: 2rem;
+      align-self: center;
+      margin-right: 0%;
+    }
+  }
 `

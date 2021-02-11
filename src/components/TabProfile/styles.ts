@@ -1,7 +1,5 @@
 import styled, { css } from 'styled-components'
 
-export const Wrapper = styled.div``
-
 export const NavButton = styled.button`
   ${({ theme }) => css`
     border: 0;
@@ -28,7 +26,30 @@ export const NavButton = styled.button`
   `}
 `
 
-export const WrapperContent = styled.div``
+export const WrapperContent = styled.div`
+  @media (max-width: 768px) {
+    width: 90%;
+  }
+`
 export const WrapperNav = styled.div`
   display: flex;
+`
+export const Wrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+
+  @media (max-width: 768px) {
+    ${WrapperNav} {
+      flex-direction: column;
+      width: 100%;
+      justify-content: center;
+      align-items: center;
+      ${NavButton} {
+        width: 80%;
+      }
+    }
+  }
 `

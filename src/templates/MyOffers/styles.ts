@@ -43,10 +43,6 @@ export const WrapperFooter = styled.div`
   left: 0;
   bottom: 0;
   width: 100%;
-
-  p:nth-child(1) {
-    display: none;
-  }
 `
 export const Breadcrumbs = styled.div`
   a,

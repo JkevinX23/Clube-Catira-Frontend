@@ -37,9 +37,7 @@ export const WrapperCards = styled.div`
 `
 
 export const WrapperFooter = styled.div`
-  p:nth-child(1) {
-    display: none;
-  }
+
 `
 export const WrapperReports = styled.div`
   display: flex;

@@ -44,7 +44,5 @@ export const WrapperFooter = styled.div`
   bottom: 0;
   width: 100%;
 
-  p:nth-child(1) {
-    display: none;
-  }
+
 `

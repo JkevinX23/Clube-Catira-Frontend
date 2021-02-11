@@ -53,13 +53,13 @@ const MyAccountDesc = (social: descProps) => {
       </S.WrapperField>
 
       <S.WrapperField>
-        <div>
+        <S.WArea>
           <S.Label>Sobre a empresa</S.Label>
           <S.TextArea
             value={description}
             onChange={(e) => setDescription(e.target.value)}
           />
-        </div>
+        </S.WArea>
       </S.WrapperField>
 
       <S.Buttons>

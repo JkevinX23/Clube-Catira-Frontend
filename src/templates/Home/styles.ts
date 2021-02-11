@@ -27,6 +27,9 @@ export const WrapperMenu = styled.div`
 export const WrapperContent = styled.div`
   padding: 8rem 0;
   background-color: #f9fafa;
+  @media (max-width: 768px) {
+    padding: 2rem 0;
+  }
 `
 export const WrapperCards = styled.div`
   display: grid;
@@ -37,9 +40,6 @@ export const WrapperCards = styled.div`
 
 export const WrapperFooter = styled.div`
   margin-top: 8rem;
-  p:nth-child(1) {
-    display: none;
-  }
 `
 export const Text = styled.h2`
   color: #444;

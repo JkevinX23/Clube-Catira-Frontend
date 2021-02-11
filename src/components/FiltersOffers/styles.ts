@@ -13,10 +13,28 @@ export const SelectWrapper = styled.select`
     width: 35%;
   `}
 `
+
+export const Button = styled.div``
 export const Wrapper = styled.main`
   display: flex;
   flex-direction: row;
   justify-content: center;
   max-width: 62rem;
   margin: 0 auto;
+  @media (max-width: 768px) {
+    width: 100%;
+    flex-direction: column;
+    select {
+      width: 80%;
+      padding-bottom: 1rem;
+      margin-bottom: 1rem;
+    }
+    ${Button} {
+      width: 100%;
+      padding-left: 10%;
+      button {
+        width: 90%;
+      }
+    }
+  }
 `

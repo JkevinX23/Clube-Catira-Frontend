@@ -37,9 +37,7 @@ export const WrapperCards = styled.div`
 
 export const WrapperFooter = styled.div`
   margin-top: 8rem;
-  p:nth-child(1) {
-    display: none;
-  }
+
 `
 export const Text = styled.h2`
   color: #444;

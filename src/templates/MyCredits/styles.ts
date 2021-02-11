@@ -30,9 +30,7 @@ export const WrapperFooter = styled.div`
   position: relative;
   width: 100%;
 
-  p:nth-child(1) {
-    display: none;
-  }
+
 `
 export const WrapperContent = styled.div`
   padding: 5rem 0;

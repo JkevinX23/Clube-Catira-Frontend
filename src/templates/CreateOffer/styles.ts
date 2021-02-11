@@ -31,9 +31,6 @@ export const WrapperCards = styled.div`
 
 export const WrapperFooter = styled.div`
   padding-top: 2rem;
-  p:nth-child(1) {
-    display: none;
-  }
 `
 export const Breadcrumbs = styled.div`
   a,

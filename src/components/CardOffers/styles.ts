@@ -1,11 +1,5 @@
 import styled, { css } from 'styled-components'
 
-export const Wrapper = styled.main`
-  width: 26rem;
-  text-align: center;
-  border: 1px solid black;
-`
-
 type ImageProps = {
   src: string
 }
@@ -48,3 +42,29 @@ export const BuyWrapper = styled.div`
   margin-bottom: 1rem;
 `
 export const Value = styled.p``
+
+export const Wrapper = styled.main`
+  width: 26rem;
+  text-align: center;
+  border: 1px solid black;
+  @media (max-width: 768px) {
+    width: 26rem;
+    ${Image} {
+      height: 14rem;
+    }
+    ${Title} {
+      font-size: 1.8rem;
+      margin-top: 0.5rem;
+      margin-bottom: 0.5rem;
+    }
+    ${subTitle} {
+      font-size: 1.5rem;
+      margin-top: 0.8rem;
+      margin-bottom: 1rem;
+    }
+    ${BuyWrapper} {
+      padding: 0 0.5rem;
+      margin-bottom: 1.5rem;
+    }
+  }
+`

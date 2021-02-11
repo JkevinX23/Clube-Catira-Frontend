@@ -7,7 +7,9 @@ import { useEffect, useState } from 'react'
 import { MenuProps } from 'utils/types'
 import SociaisSection from 'components/SociaisSection'
 import Footer from 'components/Footer'
-import CardAssociates, { CardAssociatesProps } from 'components/CardAssociates'
+import CardAssociates, {
+  CardAssociatesProps
+} from 'components/CardAssociatesNA'
 import { GetAssociatesNA } from 'Context/Action/Associates'
 import { GetAssociatesNoAuth } from 'Types'
 
@@ -64,7 +66,6 @@ const Associates = ({ MenuProps }: AssociateProps) => {
             {associates.map((associate: GetAssociatesNoAuth) => (
               <CardAssociates
                 key={associate.id}
-                id={associate.id}
                 city={associate.city}
                 name={associate.fantasy_name}
                 img={associate.img}

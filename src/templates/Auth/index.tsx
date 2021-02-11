@@ -91,15 +91,16 @@ const Auth = () => {
             value={password}
           />
           <S.ForgotPassword> Esqueceu a senha? </S.ForgotPassword>
-          <Button
-            fullWidth
-            size="xlarge"
-            background="orange"
-            radius="radius300"
-            onClick={handleAuth}
-          >
-            Entrar
-          </Button>
+          <S.Button>
+            <Button
+              fullWidth
+              background="orange"
+              radius="radius300"
+              onClick={handleAuth}
+            >
+              Entrar
+            </Button>
+          </S.Button>
         </S.TextFieldWrapper>
       </S.FormWrapper>
 

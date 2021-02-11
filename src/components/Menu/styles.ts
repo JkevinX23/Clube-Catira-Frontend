@@ -88,7 +88,7 @@ export const MenuFull = styled.nav<MenufullProps>`
     transition: opacity 0.3s ease-in-out;
     opacity: ${isOpen ? 1 : 0};
     pointer-events: ${isOpen ? 'all' : 'none'};
-    z-index: 4;
+    z-index: 5;
 
     > svg {
       position: absolute;

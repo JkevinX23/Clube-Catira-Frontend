@@ -10,14 +10,28 @@ export const Wrapper = styled.div`
   align-items: center;
   padding: 1rem 5rem;
   background-color: #fff;
+  @media (max-width: 768px) {
+    max-height: 40rem;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    padding-right: 0.2rem;
+    padding-left: 0.2rem;
+  }
 `
 export const Name = styled.p`
   font-size: 2rem;
+  @media (max-width: 768px) {
+    font-size: 1.5rem;
+  }
 `
 export const Box = styled.div`
   display: flex;
   flex-direction: column;
   padding-right: 1rem;
+  @media (max-width: 768px) {
+    padding-right: 4rem;
+    font-size: 1.5rem;
+  }
 `
 export const Row = styled.div`
   display: flex;
@@ -39,5 +53,11 @@ export const Icon = styled.div`
     width: 4.4rem;
     height: 4.4rem;
     padding-top: 0.8rem;
+  }
+  @media (max-width: 768px) {
+    padding-top: 0.2rem;
+    &:last-child {
+      padding-top: 0.2rem;
+    }
   }
 `

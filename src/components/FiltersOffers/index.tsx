@@ -68,9 +68,11 @@ const FiltersOffers = ({
           ))}
       </S.SelectWrapper>
 
-      <Button background="black" size="xxsmall" onClick={handleClear}>
-        Limpar filtro
-      </Button>
+      <S.Button>
+        <Button background="black" size="xxsmall" onClick={handleClear}>
+          Limpar filtro
+        </Button>
+      </S.Button>
     </S.Wrapper>
   )
 }

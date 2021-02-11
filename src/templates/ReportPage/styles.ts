@@ -36,11 +36,7 @@ export const WrapperCards = styled.div`
   justify-content: space-between;
 `
 
-export const WrapperFooter = styled.div`
-  p:nth-child(1) {
-    display: none;
-  }
-`
+export const WrapperFooter = styled.div``
 export const WrapperReports = styled.div`
   display: flex;
   justify-content: space-between;

@@ -20,8 +20,11 @@ export const WrapperMenu = styled.div`
 `
 
 export const WrapperCenter = styled.div`
-  margin-left: 28%;
   height: 100vh;
+  @media (max-width: 768px) {
+    height: 100%;
+    margin-left: 0;
+  }
 `
 export const WrapperContent = styled.div`
   padding: 1rem 0;
@@ -36,13 +39,7 @@ export const WrapperCards = styled.div`
 
 export const WrapperFooter = styled.div`
   position: relative;
-  left: 0;
-  bottom: 0;
   width: 100%;
-
-  p:nth-child(1) {
-    display: none;
-  }
 `
 export const Breadcrumbs = styled.div`
   a,

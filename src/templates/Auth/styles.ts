@@ -36,8 +36,9 @@ export const TitleWrapper = styled.div`
   display: flex;
   align-items: center;
   flex-direction: column;
-  padding: 5rem;
-  gap: 2rem;
+  padding-top: 5rem;
+  padding-bottom: 2rem;
+  row-gap: 2rem;
 `
 export const Title = styled.p`
   ${({ theme }) => css`
@@ -48,12 +49,15 @@ export const Title = styled.p`
 export const TextFieldWrapper = styled.div`
   display: flex;
   flex-direction: column;
+  width: 60%;
   gap: 2rem;
-  margin: 0 auto;
 `
 
 export const FormWrapper = styled.div`
   display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   width: 100%;
   align-items: center;
 `
@@ -62,8 +66,13 @@ export const Footer = styled.footer`
 `
 export const ForgotPassword = styled.a`
   ${({ theme }) => css`
+    width: 100%;
     color: ${theme.colors.blue};
     text-align: right;
     cursor: pointer;
+    align-self: right;
   `}
+`
+export const Button = styled.div`
+  width: 100%;
 `

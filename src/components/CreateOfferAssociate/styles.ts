@@ -6,34 +6,6 @@ export const WrapperField = styled.div`
   padding: 2%;
 `
 
-export const Wrapper = styled.div`
-  line-height: 1.75;
-  display: flex;
-  margin: 0 0 10px;
-  background-color: #fff;
-  box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.47);
-  -webkit-box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.47);
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  gap: 4rem;
-
-  h4 {
-    text-align: center;
-
-    padding-bottom: 1rem;
-  }
-
-  button {
-    margin-top: 2rem;
-    padding: 0.5rem 4rem;
-  }
-
-  ${WrapperField}:nth-child(2) {
-    p:nth-child(1) {
-      margin-top: 8%;
-    }
-  }
-`
 export const Label = styled.p`
   display: inline-block;
   margin-bottom: 0.5rem;
@@ -99,17 +71,7 @@ export const WrapperButton = styled.div`
     margin-left: auto;
   }
 `
-export const Image = styled.img`
-  margin-top: 1rem;
-  margin-right: 3em;
-  background-color: #fff;
-  border: 1px solid #ddd;
-  border-radius: 4px;
-  transition: all 0.2s ease-in-out;
-  width: 25.6rem;
-  height: 14.4rem;
-  object-fit: cover;
-`
+
 export const Select = styled.select`
   display: flex;
   position: relative;
@@ -145,4 +107,53 @@ export const AlignCenter = styled.div`
   justify-content: center;
   padding-top: 1rem;
   padding-bottom: 1rem;
+`
+export const Wrapper = styled.div`
+  line-height: 1.75;
+  display: flex;
+  margin: 0 0 10px;
+  background-color: #fff;
+  box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.47);
+  -webkit-box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.47);
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  gap: 4rem;
+
+  h4 {
+    text-align: center;
+
+    padding-bottom: 1rem;
+  }
+
+  button {
+    margin-top: 2rem;
+    padding: 0.5rem 4rem;
+  }
+
+  ${WrapperField}:nth-child(2) {
+    p:nth-child(1) {
+      margin-top: 8%;
+    }
+  }
+
+  @media (max-width: 768px) {
+    line-height: 1.2;
+
+    flex-direction: column;
+    width: 100%;
+    gap: 0rem;
+    margin: 0 auto;
+    img {
+      height: 20rem;
+    }
+    ${WrapperField} {
+      width: 100%;
+    }
+    ${Label} {
+      margin-top: 2rem;
+    }
+    button {
+      width: 100%;
+    }
+  }
 `
