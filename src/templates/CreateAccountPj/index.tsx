@@ -186,7 +186,7 @@ const CreatePJ = ({ categories, consultants }: pageProps) => {
           <S.DecorationLineWrapper />
         </div>
         <Link href="/associar-se-pf">
-          <Button size="large" background="green" radius="radius100">
+          <Button background="green" radius="radius100">
             Trocar para Pessoa Física
           </Button>
         </Link>
@@ -482,7 +482,6 @@ const CreatePJ = ({ categories, consultants }: pageProps) => {
           </S.InlineWrapper>
           <Button
             fullWidth
-            size="xlarge"
             background="orange"
             radius="radius300"
             onClick={() => handlesubmit()}

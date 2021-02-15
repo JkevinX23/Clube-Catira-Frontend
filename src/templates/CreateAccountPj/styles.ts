@@ -1,16 +1,5 @@
 import styled, { css } from 'styled-components'
 
-export const Wrapper = styled.div`
-  ${({ theme }) => css`
-    background: rgb(2, 0, 36);
-    background: linear-gradient(
-      180deg,
-      ${theme.colors.gray} 0%,
-      rgba(250, 250, 250, 1) 100%
-    );
-  `}
-`
-
 type DecorationProps = {
   isPrimary?: boolean
 }
@@ -65,13 +54,7 @@ export const FormWrapper = styled.div`
 export const Footer = styled.footer`
   margin-top: 6vw;
 `
-export const ForgotPassword = styled.a`
-  ${({ theme }) => css`
-    color: ${theme.colors.blue};
-    text-align: right;
-    cursor: pointer;
-  `}
-`
+
 export const InlineWrapper = styled.div`
   display: flex;
   flex-direction: row;
@@ -88,25 +71,12 @@ export const Select = styled.select`
   cursor: pointer;
   height: 62.5%;
   width: 100%;
-  border: 1px solid #aaa;
-  border-radius: 4px;
-  font-size: 15px;
-  overflow: hidden;
-  padding-top: 2px;
-  padding-bottom: 2px;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  outline: none;
-  option {
-    font-size: 15px;
-    color: #60666d;
-    padding-top: 4px;
-    padding-bottom: 4px;
-  }
+  border: none;
 `
 export const Label = styled.p``
 export const SelectWrapper = styled.div`
-  width: 40%;
+  width: 50%;
+  gap: 2rem;
 `
 
 type TextWrapperProps = {
@@ -121,6 +91,7 @@ export const TextWrapper = styled.div<TextWrapperProps>`
     padding-right: 1rem;
   `}
 `
+
 type AreaProps = {
   isDescription?: boolean
 }
@@ -149,4 +120,60 @@ export const Image = styled.img`
   width: 25.6rem;
   height: 14.4rem;
   object-fit: cover;
+`
+export const Button = styled.div``
+export const Wrapper = styled.div`
+  ${({ theme }) => css`
+    background: rgb(2, 0, 36);
+    background: linear-gradient(
+      180deg,
+      ${theme.colors.gray} 0%,
+      rgba(250, 250, 250, 1) 100%
+    );
+  `}
+  @media (max-width: 768px) {
+    ${InlineWrapper} {
+      flex-direction: column;
+      align-items: center;
+    }
+    ${TitleWrapper} {
+      padding: 2rem;
+      gap: 1rem;
+    }
+    ${TextFieldWrapper} {
+      display: flex;
+      width: 100%;
+      align-items: center;
+    }
+    ${FormWrapper} {
+      justify-content: center;
+    }
+    ${Select} {
+      height: 3rem;
+    }
+    ${TextWrapper} {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+      align-items: center;
+      img {
+        margin: 0;
+        margin-top: 1rem;
+        margin-bottom: 1.5rem;
+      }
+      ${Label} {
+        width: 100%;
+        text-align: left;
+      }
+    }
+    ${SelectWrapper} {
+      width: 100%;
+    }
+    ${TextArea} {
+      width: 100%;
+    }
+    button {
+      width: 90%;
+    }
+  }
 `

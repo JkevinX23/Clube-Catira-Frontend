@@ -23,13 +23,13 @@ const CreateAccountSwitch = () => {
 
         <S.ButtonWrapper>
           <Link href="/associar-se-pj">
-            <Button size="large" background="green" radius="radius100">
+            <Button background="green" radius="radius100">
               Pessoa Jurídica
             </Button>
           </Link>
 
           <Link href="/associar-se-pf">
-            <Button size="large" background="green" radius="radius100">
+            <Button background="green" radius="radius100">
               Pessoa Física
             </Button>
           </Link>

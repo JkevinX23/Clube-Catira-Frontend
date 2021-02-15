@@ -66,4 +66,6 @@ export const ButtonWrapper = styled.div`
   display: flex;
   margin-top: 5rem;
   gap: 4rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
 `
