@@ -324,6 +324,18 @@ export interface GetOfferAdmin {
       }
     }
   }
+  Directed?: {
+    id: number
+    fantasy_name: string
+    Consultant: {
+      id: number
+      name: string
+      Franchise: {
+        id: number
+        name: string
+      }
+    }
+  }
 }
 
 export interface ShowOfferAdminProps {
@@ -341,6 +353,18 @@ export interface ShowOfferAdminProps {
     path: string
   }
   Associated: {
+    id: number
+    fantasy_name: string
+    Consultant: {
+      id: number
+      name: string
+      Franchise: {
+        id: number
+        name: string
+      }
+    }
+  }
+  Directed?: {
     id: number
     fantasy_name: string
     Consultant: {
