@@ -43,15 +43,18 @@ const CardOffers = ({
         ) : (
           <S.subTitle>A Negociar</S.subTitle>
         )}
-        <Button
-          size="xxsmall"
-          background="white"
-          onClick={() => {
-            router.push({ pathname: '/associado/oferta', query: { id } })
-          }}
-        >
-          Comprar
-        </Button>
+        <S.Button>
+          <Button
+            fullWidth
+            size="xxsmall"
+            background="white"
+            onClick={() => {
+              router.push({ pathname: '/associado/oferta', query: { id } })
+            }}
+          >
+            Comprar
+          </Button>
+        </S.Button>
       </S.BuyWrapper>
     </S.Wrapper>
   )

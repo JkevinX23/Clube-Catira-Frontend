@@ -36,7 +36,7 @@ const CreateOfferAssociate = () => {
     const data = {
       title,
       description,
-      value_offer,
+      value_offer: value_offer | 0,
       consumer_cards,
       quantity,
       file_id: file,

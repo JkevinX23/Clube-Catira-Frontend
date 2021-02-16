@@ -389,6 +389,7 @@ export interface ShowOfferAssociateProps {
     description?: string
     consumer_cards: number
     quantity: number
+    directed_associate_id?: number
     File: {
       url: string
       id: number

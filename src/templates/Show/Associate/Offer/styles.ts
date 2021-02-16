@@ -27,12 +27,8 @@ export const WrapperCards = styled.div`
   padding: 5rem;
   row-gap: 3rem;
 `
-
 export const WrapperFooter = styled.div`
-  position: fixed;
-  left: 0;
-  bottom: 0;
-  width: 100%;
+  margin-top: 32vh;
 `
 export const Breadcrumbs = styled.div`
   a,

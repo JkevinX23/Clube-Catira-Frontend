@@ -86,6 +86,7 @@ const DetailsOffer = ({
               type="numeric"
               onChange={(e) => setEstimateValue(Number(e.target.value))}
               step={10}
+              value={estimateValue}
             />
           )}
 

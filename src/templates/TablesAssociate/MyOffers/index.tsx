@@ -55,7 +55,13 @@ export default function TableListMyOffers() {
   useEffect(() => {
     async function loadData() {
       const { data } = await getMyOffers()
-      setData(data.sort((a, b) => b.id - a.id))
+      setData(
+        data
+          .map((c) =>
+            c.quantity === 0 ? { ...c, quantity: 'Ilimitado' } : { ...c }
+          )
+          .reverse()
+      )
     }
     loadData()
   }, [])

@@ -29,8 +29,9 @@ export const subTitle = styled.p<subTitleProps>`
     color: ${theme.colors.lightBlack};
     font-size: 1.5rem;
     margin-top: 1rem;
-    margin-bottom: 3rem;
+    margin-bottom: 2.5rem;
     cursor: ${isLink ? 'pointer' : 'default'};
+    margin-left: 0.5rem;
   `}
 `
 
@@ -67,4 +68,7 @@ export const Wrapper = styled.main`
       margin-bottom: 1.5rem;
     }
   }
+`
+export const Button = styled.div`
+  width: 60%;
 `

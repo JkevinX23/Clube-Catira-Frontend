@@ -120,9 +120,9 @@ export function cleanObject(object: any) {
   const obj = object
   for (const propName in obj) {
     if (
-      obj[propName] == null ||
-      obj[propName] == undefined ||
-      obj[propName] == ''
+      obj[propName] === null ||
+      obj[propName] === undefined ||
+      obj[propName] === ''
     ) {
       delete obj[propName]
     }

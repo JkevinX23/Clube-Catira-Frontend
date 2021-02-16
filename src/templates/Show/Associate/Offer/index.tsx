@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-non-null-assertion */
 import * as S from './styles'
 import { useEffect, useState } from 'react'
 import { postOffers, showOffer } from 'Context/Action/Offer'
@@ -31,6 +32,7 @@ const ShowOffer = ({ id, HeaderProps }: props) => {
   const [associate, setAssociate] = useState('')
   const [date, setDate] = useState('')
   const [sell, setSell] = useState(0)
+  const [isDirect, setIsDirect] = useState(false)
 
   useEffect(() => {
     async function loadOffer() {
@@ -42,6 +44,10 @@ const ShowOffer = ({ id, HeaderProps }: props) => {
       setQuantity((data as ShowOfferAssociateProps).offer.quantity)
       setAssociate(
         (data as ShowOfferAssociateProps).offer.Associated.fantasy_name
+      )
+      setIsDirect(
+        (data as ShowOfferAssociateProps).offer.directed_associate_id! > 0 ||
+          false
       )
       setFile((data as ShowOfferAssociateProps).offer.File.url)
       setDate(
@@ -70,9 +76,11 @@ const ShowOffer = ({ id, HeaderProps }: props) => {
             aria-label="breadcrumb"
           >
             <Link href="/home-associado">Home</Link>
-            <Link href="/associado/ofertas-direcionadas">
-              Ofertas direcionadas
-            </Link>
+            {isDirect && (
+              <Link href="/associado/ofertas-direcionadas">
+                Ofertas direcionadas
+              </Link>
+            )}
             {title && <Typography color="textPrimary">{title}</Typography>}
           </Breadcrumbs>
         </S.Breadcrumbs>
