@@ -1,9 +1,5 @@
 import styled, { css } from 'styled-components'
 
-export const Wrapper = styled.main`
-  padding: 2rem;
-`
-
 type ImageProps = {
   src: string
 }
@@ -83,4 +79,26 @@ export const WrapperField = styled.div`
   display: flex;
   flex-direction: row;
   gap: 2rem;
+`
+export const Wrapper = styled.main`
+  padding: 2rem;
+  @media (max-width: 768px) {
+    ${Content} {
+      flex-direction: column;
+    }
+    ${Image} {
+      height: 20rem;
+      max-width: 100%;
+      min-width: none;
+    }
+    ${Title} {
+      font-size: 3rem;
+      font-weight: bold;
+    }
+    ${WrapperDetails} {
+      margin-top: 1rem;
+      margin-left: 0rem;
+      gap: 1rem;
+    }
+  }
 `

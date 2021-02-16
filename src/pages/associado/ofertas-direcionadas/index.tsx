@@ -29,7 +29,7 @@ export default function OfertasDirecionadas() {
     async function loadOffers() {
       try {
         const response = await getDirectOffers()
-        const offs: GetOfferProps[] = response.data
+        const offs: GetOfferProps[] = response.data.reverse()
         setOffers(offs)
         const cits: Option[] = []
         const ass: Option[] = []

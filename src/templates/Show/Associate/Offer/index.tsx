@@ -11,6 +11,11 @@ import DetailsOffer from 'components/DetailsOffer'
 import { FormatDateByFNS } from 'utils/Masks'
 import { ShowOfferAssociateProps } from 'Types'
 
+import Breadcrumbs from '@material-ui/core/Breadcrumbs'
+import NavigateNextIcon from '@material-ui/icons/NavigateNext'
+import Typography from '@material-ui/core/Typography'
+import Link from 'next/link'
+
 type props = {
   id: number
   HeaderProps: AssociateHeaderProps
@@ -58,6 +63,20 @@ const ShowOffer = ({ id, HeaderProps }: props) => {
       <S.WrapperMenu>
         <AssociateMenu />
       </S.WrapperMenu>
+      <S.WrapperBreadcrumbs>
+        <S.Breadcrumbs>
+          <Breadcrumbs
+            separator={<NavigateNextIcon fontSize="large" />}
+            aria-label="breadcrumb"
+          >
+            <Link href="/home-associado">Home</Link>
+            <Link href="/associado/ofertas-direcionadas">
+              Ofertas direcionadas
+            </Link>
+            {title && <Typography color="textPrimary">{title}</Typography>}
+          </Breadcrumbs>
+        </S.Breadcrumbs>
+      </S.WrapperBreadcrumbs>
       <S.WrapperContent>
         <DetailsOffer
           key={id}

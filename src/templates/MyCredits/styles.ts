@@ -1,15 +1,5 @@
 import styled, { css } from 'styled-components'
 
-export const Wrapper = styled.div`
-  ${({ theme }) => css`
-    background: rgb(2, 0, 36);
-    background: linear-gradient(
-      180deg,
-      ${theme.colors.gray} 0%,
-      rgba(250, 250, 250, 1) 100%
-    );
-  `}
-`
 export const WrapperHeader = styled.div`
   ${({ theme }) => css`
     overflow: hidden;
@@ -29,8 +19,6 @@ export const WrapperMenu = styled.div`
 export const WrapperFooter = styled.div`
   position: relative;
   width: 100%;
-
-
 `
 export const WrapperContent = styled.div`
   padding: 5rem 0;
@@ -55,5 +43,43 @@ export const Table = styled.div`
   table {
     max-width: 90rem;
     min-width: 65rem;
+  }
+`
+
+export const Wrapper = styled.div`
+  ${({ theme }) => css`
+    background: rgb(2, 0, 36);
+    background: linear-gradient(
+      180deg,
+      ${theme.colors.gray} 0%,
+      rgba(250, 250, 250, 1) 100%
+    );
+  `}
+  overflow: hidden;
+
+  @media (max-width: 768px) {
+    ${WrapperContent} {
+      padding: 2rem 0;
+      flex-direction: column;
+    }
+    ${MyCredits} {
+      min-width: 15rem;
+    }
+    ${RequestIncrease} {
+      width: 90%;
+      margin-left: 5%;
+    }
+    ${Table} {
+      display: flex;
+      width: 96%;
+      padding: 0;
+      padding-left: 2%;
+      padding-bottom: 4rem;
+      table {
+        width: 100%;
+        max-width: 90rem;
+        min-width: 10rem;
+      }
+    }
   }
 `

@@ -95,11 +95,17 @@ const DetailsOffer = ({
           <p>
             Data Oferta: <span>{date}</span>
           </p>
+          {quantity > 0 ? (
+            <p>
+              Quantidade: <span>{quantity} unidade(s)</span>
+            </p>
+          ) : (
+            <p>
+              Quantidade: <span>Ilimitado</span>
+            </p>
+          )}
           <p>
-            Quantidade: <span>{quantity} unidade(s)</span>
-          </p>
-          <p>
-            Vendidas: <span>{sell} unidade(s)</span>
+            Vendidas: <span>{sell | 0} unidade(s)</span>
           </p>
           <S.Description>{description}</S.Description>
         </S.WrapperDetails>
@@ -107,13 +113,22 @@ const DetailsOffer = ({
 
       <div>
         Quantidade:
-        <S.InputNumber
-          type="number"
-          min="1"
-          max={quantity - sell}
-          defaultValue="1"
-          onChange={(e) => handleChage(Number(e.target.value))}
-        />
+        {quantity > 0 ? (
+          <S.InputNumber
+            type="number"
+            min="1"
+            max={quantity - sell}
+            defaultValue="1"
+            onChange={(e) => handleChage(Number(e.target.value))}
+          />
+        ) : (
+          <S.InputNumber
+            type="number"
+            min="1"
+            defaultValue="1"
+            onChange={(e) => handleChage(Number(e.target.value))}
+          />
+        )}
         {status === 0 ? (
           <Button background="green" radius="radius100" size="xxsmall">
             <p onClick={() => purchase()}>

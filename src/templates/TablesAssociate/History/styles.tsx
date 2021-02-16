@@ -1,6 +1,7 @@
 import styled from 'styled-components'
 
 export const Wrapper = styled.div`
+  width: 100%;
   z-index: 10;
   font-size: 1.2rem;
 
@@ -14,6 +15,11 @@ export const Wrapper = styled.div`
 
   h6 {
     font-size: 2rem;
+  }
+
+  .MuiTablePagination-root {
+    width: 100%;
+    overflow: hidden;
   }
 `
 

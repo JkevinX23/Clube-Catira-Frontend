@@ -1,15 +1,5 @@
 import styled, { css } from 'styled-components'
 
-export const Wrapper = styled.div`
-  ${({ theme }) => css`
-    background: rgb(2, 0, 36);
-    background: linear-gradient(
-      180deg,
-      ${theme.colors.gray} 0%,
-      rgba(250, 250, 250, 1) 100%
-    );
-  `}
-`
 export const WrapperHeader = styled.div`
   ${({ theme }) => css`
     overflow: hidden;
@@ -43,6 +33,37 @@ export const WrapperFooter = styled.div`
   left: 0;
   bottom: 0;
   width: 100%;
+`
+export const Breadcrumbs = styled.div`
+  a,
+  p {
+    font-size: 1.5rem;
+    color: #444;
+  }
+  padding-left: 3rem;
+`
+export const WrapperBreadcrumbs = styled.div`
+  width: 100%;
+  background: #f2f2f2;
+  width: 100%;
+  padding: 20px 0;
+`
 
-
+export const Wrapper = styled.div`
+  ${({ theme }) => css`
+    background: rgb(2, 0, 36);
+    background: linear-gradient(
+      180deg,
+      ${theme.colors.gray} 0%,
+      rgba(250, 250, 250, 1) 100%
+    );
+  `}
+  @media (max-width: 768px) {
+    ${WrapperContent} {
+      padding: 2rem 0;
+    }
+    ${WrapperFooter} {
+      margin-top: 4rem;
+    }
+  }
 `
