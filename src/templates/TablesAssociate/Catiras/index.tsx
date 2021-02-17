@@ -29,7 +29,6 @@ export default function MyCatirasTable({
       field: 'id',
       type: string
     },
-
     {
       title: 'Tipo',
       field: 'type',
@@ -55,7 +54,6 @@ export default function MyCatirasTable({
       field: 'date',
       type: string
     },
-
     {
       title: 'Status',
       field: 'status',

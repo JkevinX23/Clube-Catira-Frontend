@@ -51,7 +51,7 @@ export default function OfferTable({ setId }: props) {
     },
     {
       title: 'Valor',
-      field: 'value_offer',
+      field: 'value',
       type: string
     }
   ]
@@ -67,10 +67,18 @@ export default function OfferTable({ setId }: props) {
             e.Directed
               ? {
                   ...e,
-                  status: 4
+                  status: 4,
+                  value:
+                    e.value_offer === 0
+                      ? 'A combinar'
+                      : e.value_offer.toString()
                 }
               : {
-                  ...e
+                  ...e,
+                  value:
+                    e.value_offer === 0
+                      ? 'A combinar'
+                      : e.value_offer.toString()
                 }
           )
           .reverse()

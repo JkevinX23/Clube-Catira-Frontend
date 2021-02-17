@@ -1,8 +1,12 @@
 import * as S from './styles'
 import MaterialTable from 'material-table'
-// import { useState } from 'react'
+import { useEffect, useState } from 'react'
+import { getCatirasFranchise } from 'Context/Action/Catira'
+import { toast } from 'react-toastify'
+import { FormatDateByFNS } from 'utils/Masks'
 
 export default function TransactionTableAdmin() {
+  const [payload, setPayload] = useState<any>()
   type IType =
     | 'string'
     | 'boolean'
@@ -20,17 +24,17 @@ export default function TransactionTableAdmin() {
     },
     {
       title: 'Data',
-      field: 'created_at',
+      field: 'date',
       type: string
     },
     {
       title: 'Vendedor',
-      field: 'franchise',
+      field: 'seller',
       type: string
     },
     {
       title: 'Comprador',
-      field: 'purchase',
+      field: 'buyer',
       type: string
     },
     {
@@ -39,23 +43,54 @@ export default function TransactionTableAdmin() {
       type: string
     },
     {
-      title: 'QTD',
-      field: 'quantity',
+      title: 'Valor (R$)',
+      field: 'value',
       type: string
     },
     {
-      title: 'Valor',
-      field: 'value',
-      type: string
+      title: 'Status',
+      field: 'status',
+      lookup: {
+        0: 'Pendente',
+        1: 'Aguardando pagamento',
+        2: 'Em análise',
+        3: 'Paga',
+        4: 'Paga',
+        5: 'Em disputa',
+        6: 'Cancelada',
+        7: 'Cancelada',
+        8: 'Cancelada',
+        9: 'Em cancelamento'
+      }
     }
   ]
+
+  useEffect(() => {
+    async function loadData() {
+      try {
+        const { data } = await getCatirasFranchise()
+        setPayload(
+          data
+            .map((t) => ({ ...t, date: FormatDateByFNS(t.date) }))
+            .sort((a, b) => b.id - a.id)
+        )
+      } catch (err) {
+        console.log(err)
+        toast.warn(
+          'Algo de errado aconteceu ao carregar as transações. Tente novamente.'
+        )
+        toast.warn('Caso persista, contate o administrador do sistema.')
+      }
+    }
+    loadData()
+  }, [])
 
   return (
     <S.Wrapper>
       <MaterialTable
         title="Transações"
         columns={columns}
-        data={[]}
+        data={payload}
         options={{ exportButton: true }}
         localization={{
           header: { actions: 'Ações' },

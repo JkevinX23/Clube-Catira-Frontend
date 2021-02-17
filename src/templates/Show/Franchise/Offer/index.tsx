@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react'
 import { putOptionOffer, showOffer } from 'Context/Action/Offer'
 import { toast } from 'react-toastify'
 import { ShowOfferAdminProps } from 'Types'
+// import { SyntheticEvent } from 'Types'
 
 type props = {
   id: number
@@ -22,6 +23,7 @@ const ShowOffer = ({ id }: props) => {
   const [quantity, setQuantity] = useState(0)
   const [status, setStatus] = useState('')
   const [associate, setAssociate] = useState('')
+  const [direct, setDirect] = useState<any>(null)
 
   async function handleOffer(status: number) {
     try {
@@ -54,7 +56,6 @@ const ShowOffer = ({ id }: props) => {
   useEffect(() => {
     async function loadOffer() {
       const { data } = await showOffer(id)
-      console.log(data)
       setTitle((data as ShowOfferAdminProps).title)
       setValueOffer((data as ShowOfferAdminProps).value_offer)
       setDescription((data as ShowOfferAdminProps).description || '')
@@ -70,6 +71,7 @@ const ShowOffer = ({ id }: props) => {
           ? 'ATIVA'
           : 'SUSPENSA'
       )
+      setDirect((data as ShowOfferAdminProps).Directed)
     }
     loadOffer()
   }, [id])
@@ -77,8 +79,14 @@ const ShowOffer = ({ id }: props) => {
   return (
     <S.Wrapper>
       <S.WrapperField>
-        <h5>STATUS: {status} </h5>
-
+        {!!direct && direct ? (
+          <div>
+            <h5>OFERTA DIRECIONADA</h5>
+            <h5>PARA: {direct.fantasy_name}</h5>
+          </div>
+        ) : (
+          <h5>STATUS: {status} </h5>
+        )}
         {/* <input
           type="file"
           accept="image/*"

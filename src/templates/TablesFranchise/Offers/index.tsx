@@ -30,7 +30,8 @@ export default function OfferTable({ setId }: props) {
       lookup: {
         0: 'Pendente',
         1: 'Ativa',
-        2: 'Suspensa'
+        2: 'Suspensa',
+        4: 'Oferta Direta'
       }
     },
     {
@@ -45,7 +46,7 @@ export default function OfferTable({ setId }: props) {
     },
     {
       title: 'Valor',
-      field: 'value_offer',
+      field: 'value',
       type: string
     }
   ]
@@ -55,7 +56,28 @@ export default function OfferTable({ setId }: props) {
   useEffect(() => {
     async function loadData() {
       const { data } = await getOffersAdmin()
-      setData(data.reverse())
+      setData(
+        data
+          .map((e) =>
+            e.Directed
+              ? {
+                  ...e,
+                  status: 4,
+                  value:
+                    e.value_offer === 0
+                      ? 'A combinar'
+                      : e.value_offer.toString()
+                }
+              : {
+                  ...e,
+                  value:
+                    e.value_offer === 0
+                      ? 'A combinar'
+                      : e.value_offer.toString()
+                }
+          )
+          .reverse()
+      )
     }
     loadData()
   }, [])

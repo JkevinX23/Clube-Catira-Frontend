@@ -811,3 +811,13 @@ export interface Dates {
   dateInit: Date
   dateEnd: Date
 }
+
+export interface CatirasFranchiseProps {
+  id: number
+  date: string
+  seller: string
+  buyer: string
+  offer: string
+  value: number
+  status: number
+}

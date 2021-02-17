@@ -56,7 +56,6 @@ const ShowOffer = ({ id }: props) => {
   useEffect(() => {
     async function loadOffer() {
       const { data } = await showOffer(id)
-      console.log(data)
       setTitle((data as ShowOfferAdminProps).title)
       setValueOffer((data as ShowOfferAdminProps).value_offer)
       setDescription((data as ShowOfferAdminProps).description || '')
