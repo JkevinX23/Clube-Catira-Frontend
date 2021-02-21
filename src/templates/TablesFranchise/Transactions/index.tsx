@@ -5,8 +5,13 @@ import { getCatirasFranchise } from 'Context/Action/Catira'
 import { toast } from 'react-toastify'
 import { FormatDateByFNS } from 'utils/Masks'
 
-export default function TransactionTableAdmin() {
-  const [payload, setPayload] = useState<any>()
+type TransactionProps = {
+  setTrasnsactionId: (id: number) => void
+}
+
+export default function TransactionTableAdmin({
+  setTrasnsactionId
+}: TransactionProps) {
   type IType =
     | 'string'
     | 'boolean'
@@ -65,6 +70,7 @@ export default function TransactionTableAdmin() {
     }
   ]
 
+  const [payload, setPayload] = useState<any>()
   useEffect(() => {
     async function loadData() {
       try {
@@ -113,6 +119,16 @@ export default function TransactionTableAdmin() {
             lastTooltip: 'Última página'
           }
         }}
+        actions={[
+          {
+            icon: 'open_in_new',
+            tooltip: 'Detalhes',
+            onClick: (event, rowData) => {
+              const row = rowData as any
+              setTrasnsactionId(row.id)
+            }
+          }
+        ]}
       />
     </S.Wrapper>
   )

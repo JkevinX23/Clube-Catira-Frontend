@@ -732,9 +732,6 @@ export interface GetVoucherProps {
     status: number
     createdAt: string
     updatedAt: string
-    file_id: number
-    associate_id: number
-    directed_associate_id: null
   }
 }
 
@@ -820,4 +817,66 @@ export interface CatirasFranchiseProps {
   offer: string
   value: number
   status: number
+}
+
+export interface AdminProfileProps {
+  id: number
+  name: string
+  email: string
+  company_name: string
+  contact: string
+  document: string
+  getway_email: string
+  getway_token: string
+  address_id: number
+  Address: Address
+}
+
+export interface FranchiseProfileProps {
+  id: number
+  name: string
+  company_name: string
+  email: string
+  contact1: string
+  contact2?: string
+  document: string
+  status: number
+  percentage: number
+  ie?: number
+  im?: number
+  getway_email: string
+  getway_token: string
+  Address: Address
+}
+
+export interface ShowVoucherProps {
+  id: number
+  code: string
+  ctz_value: number
+  status: number
+  createdAt: string
+  Offer: {
+    title: string
+    description: string
+    value_offer: number
+    consumer_cards: number
+    createdAt: string
+    Associated: {
+      email: string
+      fantasy_name: string
+      document: string
+      contact1: string
+      Address: Address
+    }
+    File: {
+      url: string
+    }
+  }
+  Associated: {
+    email: string
+    fantasy_name: string
+    document: string
+    contact1: string
+    Address: Address
+  }
 }

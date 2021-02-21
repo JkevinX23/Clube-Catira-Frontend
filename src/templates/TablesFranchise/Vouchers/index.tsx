@@ -4,7 +4,6 @@ import { useEffect, useState } from 'react'
 import { getVoucherByTransaction } from 'Context/Action/Voucher'
 import { FormatDateByFNS } from 'utils/Masks'
 import Button from 'components/Button'
-import { useRouter } from 'next/router'
 
 type Props = {
   id: number
@@ -28,7 +27,7 @@ export default function TableListVouchers({ id, setTrasnsactionId }: Props) {
     },
     {
       title: 'Oferta',
-      field: 'Offer.title',
+      field: 'title',
       type: string
     },
     {
@@ -55,25 +54,19 @@ export default function TableListVouchers({ id, setTrasnsactionId }: Props) {
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const [data, setData] = useState<any>([])
-  const router = useRouter()
-
   useEffect(() => {
     async function loadData() {
       const { data } = await getVoucherByTransaction(id)
       const payload = data.map((v) => ({
         ...v,
         value: `Ctz ${v.ctz_value.toFixed(2)}`,
-        date: FormatDateByFNS(v.createdAt)
+        date: FormatDateByFNS(v.createdAt),
+        title: `${v.Offer.id} - ${v.Offer.title}`
       }))
       setData(payload.sort((a, b) => b.id - a.id))
     }
     loadData()
   }, [id])
-
-  function showVoucher(id: number) {
-    window.open(window.location.origin + '/associado/voucher' + '?id=' + id)
-    //router.push({ pathname: 'voucher', query: { id } })
-  }
 
   return (
     <S.Wrapper>
@@ -115,16 +108,6 @@ export default function TableListVouchers({ id, setTrasnsactionId }: Props) {
             lastTooltip: 'Última página'
           }
         }}
-        actions={[
-          {
-            icon: 'open_in_new',
-            tooltip: 'Detalhes',
-            onClick: (_event, rowData) => {
-              const row = rowData as any
-              showVoucher(row.id)
-            }
-          }
-        ]}
       />
     </S.Wrapper>
   )

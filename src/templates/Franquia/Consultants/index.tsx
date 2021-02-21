@@ -1,4 +1,4 @@
-import HeaderDash from 'components/HeaderDash'
+import HeaderDash from 'components/HeaderFranchise'
 import TableConsultant from '../../TablesFranchise/Consultant'
 import Footer from 'components/Footer'
 import { HomeAdminProps } from 'Types'

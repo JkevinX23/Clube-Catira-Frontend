@@ -44,7 +44,7 @@ const HeaderDash = ({ name, role }: HeaderDashProps) => {
       </S.Content>
       {isOpen && (
         <S.Options>
-          <Link href="/administrador/perfil">
+          <Link href="/franquia/perfil">
             <li>
               <S.Icon>
                 <ProfileIcon />

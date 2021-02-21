@@ -1,4 +1,4 @@
-import HeaderDash from 'components/HeaderDash'
+import HeaderDash from 'components/HeaderFranchise'
 import Footer from 'components/Footer'
 import { HomeDashAdminProps } from 'Types'
 import * as S from './styles'

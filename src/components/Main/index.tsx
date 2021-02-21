@@ -20,8 +20,6 @@ const Main = ({ preSection }: props) => {
   const sectionOClubeRef = useRef<null | HTMLDivElement>(null)
   const sectionComoFuncionaRef = useRef<null | HTMLDivElement>(null)
 
-  useEffect
-
   function logit() {
     setScrollY(window.pageYOffset)
   }

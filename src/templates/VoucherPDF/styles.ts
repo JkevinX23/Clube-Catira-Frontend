@@ -6,7 +6,7 @@ export const Wrapper = styled.div`
   flex-direction: column;
 `
 export const Header = styled.header`
-  padding-top: 10%;
+  padding-top: 2%;
   display: flex;
   width: 80%;
   flex-direction: row;
@@ -33,7 +33,14 @@ export const Description = styled.div`
   padding: 2rem;
   font-size: 14px;
 `
-export const Image = styled.div``
+export const Image = styled.div`
+  img {
+    max-width: 300px;
+    max-height: 290px;
+    background-color: #fff;
+    padding: 4px;
+  }
+`
 export const Session = styled.div`
   p {
     font-size: 14px;
@@ -57,6 +64,7 @@ export const Footer = styled.footer`
   justify-content: space-between;
   padding: 2rem;
   font-size: 14px;
+  margin-bottom: 2rem;
 `
 export const Data = styled.div`
   padding-top: 2rem;
@@ -69,4 +77,27 @@ export const Signature = styled.div`
   align-items: center;
   justify-content: center;
   flex-direction: column;
+`
+export const Button = styled.div`
+  padding-top: 4rem;
+  padding-bottom: 4rem;
+  button {
+    padding: 1rem 4rem;
+    font-size: 2rem;
+    color: white;
+    background: #4287f5;
+    border: 1px solid #4287f5;
+    border-radius: 4px;
+    outline: none;
+    &:hover {
+      background: white;
+      color: #4287f5;
+      border: 1px solid #4287f5;
+    }
+  }
+  @media print {
+    button {
+      display: none;
+    }
+  }
 `

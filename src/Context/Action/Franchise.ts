@@ -3,7 +3,8 @@ import {
   GetFranchises,
   Franquia,
   PostFranchiseProps,
-  PutFranchiseProps
+  PutFranchiseProps,
+  FranchiseProfileProps
 } from 'Types'
 
 export const getFranchise = async () => api.get<GetFranchises[]>('/franchise')
@@ -13,3 +14,5 @@ export const PostFranchise = async (data: PostFranchiseProps) =>
   api.post('/franchise', data)
 export const PutFranchise = async (data: PutFranchiseProps) =>
   api.put('/franchise', data)
+export const GetFranchiseProfile = async () =>
+  api.get<FranchiseProfileProps>('/franchise-profile')
