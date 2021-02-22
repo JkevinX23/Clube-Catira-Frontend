@@ -1,13 +1,13 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { createContext, useState } from 'react'
 import { postLogin } from 'Context/Action/Login'
-import { Administrador, Login, Franquia, Associate } from 'Types'
+import { Administrador, Login, Franquia, Associate, Consultant } from 'Types'
 import Router from 'next/router'
 import { toast } from 'react-toastify'
 interface IAuthContext {
   signed: boolean
   option: number
-  client: Administrador | Franquia | Associate | null
+  client: Administrador | Franquia | Associate | Consultant | null
   signIn: (data: Login) => Promise<void>
   signOut: () => void
 }
@@ -27,7 +27,7 @@ export const AuthProvider: React.FC = ({ children }: any) => {
   }
 
   const [client, setClient] = useState<
-    Administrador | Franquia | Associate | null
+    Administrador | Franquia | Associate | Consultant | null
   >(process.browser ? clientJSON !== null && JSON.parse(clientJSON) : null)
 
   const [token, setToken] = useState<string | null>(
@@ -67,6 +67,9 @@ export const AuthProvider: React.FC = ({ children }: any) => {
           break
         case 2:
           Router.push('/franquia')
+          break
+        case 3:
+          Router.push('/consultor')
           break
         case 4:
           Router.push('/home-associado')

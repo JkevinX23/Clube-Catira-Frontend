@@ -20,3 +20,6 @@ export const postConsultant = async (data: PostConsultantProps) =>
 
 export const putConsultant = async (data: PutConsultantProps) =>
   api.put('/consultant', data)
+
+export const getConsultantProfile = async () =>
+  api.get<Consultant>('/consultant-profile')

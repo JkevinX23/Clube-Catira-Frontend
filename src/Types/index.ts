@@ -295,6 +295,7 @@ export interface Consultant {
   Franchise: {
     id: number
     name: string
+    company_name?: string
   }
 }
 

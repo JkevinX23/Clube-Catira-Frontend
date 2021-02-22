@@ -17,6 +17,6 @@ module.exports = {
 }
 module.exports = {
   images: {
-    domains: ['192.168.1.104']
+    domains: ['192.168.1.104', 'svr.rededetrocas.com']
   }
 }
