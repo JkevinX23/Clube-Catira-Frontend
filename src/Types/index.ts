@@ -881,3 +881,29 @@ export interface ShowVoucherProps {
     Address: Address
   }
 }
+export interface PDVProps {
+  id: number
+  code: string
+  status: number
+  ctz_value: number
+  createdAt: string
+  updatedAt: string
+  Offer: {
+    id: number
+    title: string
+    description: string
+    value_offer: number
+    consumer_cards: number
+    status: number
+  }
+  Transaction: {
+    id: number
+    status: number
+    updatedAt: string
+  }
+  Associate: {
+    id: number
+    fantasy_name: string
+    status: number
+  }
+}

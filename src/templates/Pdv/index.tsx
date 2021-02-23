@@ -4,15 +4,26 @@ import Button from 'components/Button'
 import TextField from 'components/TextField'
 import { useEffect, useState } from 'react'
 import { toast } from 'react-toastify'
+import { validateVoucher } from 'Context/Action/Voucher'
 
 export default function PDV() {
   const [token, setToken] = useState('')
 
   useEffect(() => {
-    if (token.length < 6) {
-      return
+    async function postToken() {
+      if (token.length < 6) {
+        return
+      }
+      try {
+        const { data } = await validateVoucher(token)
+        console.log(data)
+        toast.success('Voucher Validado com Sucesso!')
+      } catch (err) {
+        console.log(err)
+        toast.warn('Nao foi possível validar o voucher.')
+      }
     }
-    toast.success('Token tem 6 dígitos')
+    postToken()
   }, [token])
 
   return (
