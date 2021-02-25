@@ -5,7 +5,7 @@ import { HomeAdminProps } from 'Types'
 import * as S from './styles'
 
 import SidebarFranchise from 'components/Franquia/Sidebar'
-import CreateConsultant from 'templates/CreateConsultant'
+import CreateConsultant from 'templates/Franquia/CreateConsultant'
 import { useEffect, useState } from 'react'
 import Button from 'components/Button'
 import ShowConsultant from 'templates/Show/Franchise/Consultant'
