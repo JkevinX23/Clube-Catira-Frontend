@@ -47,6 +47,9 @@ const CreatePJ = ({ categories, consultants }: pageProps) => {
   const [credit, setCredit] = useState('')
   const [status, setStatus] = useState(1)
   const [consultant_id, setconsultant_id] = useState(0)
+  const {
+    query: { id }
+  } = router
 
   const [imagePreviewUrl, setImagePreviewUrl] = useState<
     string | ArrayBuffer | null
@@ -185,7 +188,7 @@ const CreatePJ = ({ categories, consultants }: pageProps) => {
           <S.DecorationLineWrapper isPrimary />
           <S.DecorationLineWrapper />
         </div>
-        <Link href="/associar-se-pf">
+        <Link href={id ? `/associar-se-pf?id=${id}` : '/associar-se-pf'}>
           <Button background="green" radius="radius100">
             Trocar para Pessoa Física
           </Button>
@@ -196,23 +199,33 @@ const CreatePJ = ({ categories, consultants }: pageProps) => {
           <S.InlineWrapper>
             <S.SelectWrapper>
               <S.Label>Consultor</S.Label>
-              <S.Select
-                onChange={(e) =>
-                  setconsultant_id(
-                    Number((e.target as HTMLSelectElement).value)
-                  )
-                }
-              >
-                <option value="none" selected disabled hidden>
-                  Selecione
-                </option>
-                {consultants &&
-                  consultants.map((cons) => (
-                    <option key={cons.id} value={cons.id}>
+              {consultants?.length > 1 ? (
+                <S.Select
+                  onChange={(e) =>
+                    setconsultant_id(
+                      Number((e.target as HTMLSelectElement).value)
+                    )
+                  }
+                >
+                  <option value="none" selected disabled hidden>
+                    Selecione
+                  </option>
+                  {consultants &&
+                    consultants.map((cons) => (
+                      <option key={cons.id} value={cons.id}>
+                        {cons.identification}
+                      </option>
+                    ))}
+                </S.Select>
+              ) : (
+                <S.Select disabled>
+                  {consultants?.map((cons) => (
+                    <option key={cons.id} value={cons.id} selected>
                       {cons.identification}
                     </option>
                   ))}
-              </S.Select>
+                </S.Select>
+              )}
             </S.SelectWrapper>
             <S.TextWrapper items={2}>
               <TextField

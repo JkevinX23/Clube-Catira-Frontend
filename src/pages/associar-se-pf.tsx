@@ -9,6 +9,14 @@ export default function CreateAccPF() {
   useEffect(() => {
     async function loadConsultants() {
       const { data } = await getConsultantsNA()
+      const search = window.location.search
+      const params = new URLSearchParams(search)
+      const cons = params.get('id')
+      if (Number(cons) > 0) {
+        const payload = data.filter((c) => c.id === Number(cons))
+        payload.length > 0 ? setConsultants(payload) : setConsultants(data)
+        return
+      }
       setConsultants(data)
     }
     async function loadCategories() {

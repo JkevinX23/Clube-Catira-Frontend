@@ -5,7 +5,11 @@ import SociaisSection from 'components/SociaisSection'
 import Link from 'next/link'
 import * as S from './styles'
 
-const CreateAccountSwitch = () => {
+export type CreateAccountProps = {
+  id?: string | string[]
+}
+
+const CreateAccountSwitch = ({ id }: CreateAccountProps) => {
   return (
     <S.Wrapper>
       <S.MenuWrapper>
@@ -22,13 +26,13 @@ const CreateAccountSwitch = () => {
         <S.SubTitle>Tipo de pessoa</S.SubTitle>
 
         <S.ButtonWrapper>
-          <Link href="/associar-se-pj">
+          <Link href={id ? `/associar-se-pj?id=${id}` : '/associar-se-pj'}>
             <Button background="green" radius="radius100">
               Pessoa Jurídica
             </Button>
           </Link>
 
-          <Link href="/associar-se-pf">
+          <Link href={id ? `/associar-se-pf?id=${id}` : '/associar-se-pf'}>
             <Button background="green" radius="radius100">
               Pessoa Física
             </Button>

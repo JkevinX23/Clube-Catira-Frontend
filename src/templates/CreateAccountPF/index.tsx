@@ -29,7 +29,6 @@ const CreatePF = ({ categories, consultants }: pageProps) => {
   const [facebook, setFacebook] = useState('')
   const [instagram, setInstagram] = useState('')
   const [category_id, setCategory_id] = useState(0)
-  const [company_name, setCompanyName] = useState('')
   const [fantasy_name, setFantasy_name] = useState('')
   const [document, setDocument] = useState('')
   const [response_name, setResponseName] = useState('')
@@ -49,6 +48,9 @@ const CreatePF = ({ categories, consultants }: pageProps) => {
   const [status, setStatus] = useState(1)
   const [consultant_id, setconsultant_id] = useState(0)
   const [file_id, setFile_id] = useState(0)
+  const {
+    query: { id }
+  } = router
 
   const [imagePreviewUrl, setImagePreviewUrl] = useState<
     string | ArrayBuffer | null
@@ -71,36 +73,11 @@ const CreatePF = ({ categories, consultants }: pageProps) => {
     }
   }
 
-  // function print() {
-  //   const payload = {
-  //     description,
-  //     fantasy_name,
-  //     document,
-  //     company_name,
-  //     representative: response_name,
-  //     contact1,
-  //     email,
-  //     password,
-
-  //     cep,
-  //     city,
-  //     neighborhood,
-  //     number,
-  //     state,
-  //     complement,
-  //     credit,
-  //     category_id,
-
-  //     status,
-  //     street,
-  //     contact2,
-  //     consultant_id,
-  //     facebook,
-  //     instagram,
-  //     site
-  //   }
-  //   console.log(payload)
-  // }
+  useEffect(() => {
+    if (consultants?.length === 1) {
+      setconsultant_id(consultants[0].id)
+    }
+  }, [consultants])
   useEffect(() => {
     if (document) {
       setDocument(cpfCnpjMask(document))
@@ -223,7 +200,7 @@ const CreatePF = ({ categories, consultants }: pageProps) => {
           <S.DecorationLineWrapper isPrimary />
           <S.DecorationLineWrapper />
         </div>
-        <Link href="/associar-se-pj">
+        <Link href={id ? `/associar-se-pj?id=${id}` : '/associar-se-pj'}>
           <Button background="green" radius="radius100">
             Trocar para Pessoa Jurídica
           </Button>
@@ -234,23 +211,33 @@ const CreatePF = ({ categories, consultants }: pageProps) => {
           <S.InlineWrapper>
             <S.SelectWrapper>
               <S.Label>Consultor</S.Label>
-              <S.Select
-                onChange={(e) =>
-                  setconsultant_id(
-                    Number((e.target as HTMLSelectElement).value)
-                  )
-                }
-              >
-                <option value="none" selected disabled hidden>
-                  Selecione
-                </option>
-                {consultants &&
-                  consultants.map((cons) => (
-                    <option key={cons.id} value={cons.id}>
+              {consultants?.length > 1 ? (
+                <S.Select
+                  onChange={(e) =>
+                    setconsultant_id(
+                      Number((e.target as HTMLSelectElement).value)
+                    )
+                  }
+                >
+                  <option value="none" selected disabled hidden>
+                    Selecione
+                  </option>
+                  {consultants &&
+                    consultants.map((cons) => (
+                      <option key={cons.id} value={cons.id}>
+                        {cons.identification}
+                      </option>
+                    ))}
+                </S.Select>
+              ) : (
+                <S.Select disabled>
+                  {consultants?.map((cons) => (
+                    <option key={cons.id} value={cons.id} selected>
                       {cons.identification}
                     </option>
                   ))}
-              </S.Select>
+                </S.Select>
+              )}
             </S.SelectWrapper>
             <S.TextWrapper items={2}>
               <TextField
