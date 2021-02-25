@@ -101,7 +101,7 @@ export function validarCNPJ(cnpj: any) {
     if (pos < 2) pos = 9
   }
   let resultado = soma % 11 < 2 ? 0 : 11 - (soma % 11)
-  if (resultado !== digitos.charAt(0)) return false
+  if (resultado != digitos.charAt(0)) return false
 
   tamanho = tamanho + 1
   numeros = cnpj.substring(0, tamanho)
@@ -112,7 +112,7 @@ export function validarCNPJ(cnpj: any) {
     if (pos < 2) pos = 9
   }
   resultado = soma % 11 < 2 ? 0 : 11 - (soma % 11)
-  if (resultado !== digitos.charAt(1)) return false
+  if (resultado != digitos.charAt(1)) return false
 
   return true
 }

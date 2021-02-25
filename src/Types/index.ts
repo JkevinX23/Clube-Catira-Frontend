@@ -907,3 +907,8 @@ export interface PDVProps {
     status: number
   }
 }
+
+export interface RecoveryProps {
+  password: string
+  token: string
+}
