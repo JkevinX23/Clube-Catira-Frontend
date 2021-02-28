@@ -21,7 +21,7 @@ const CreateAssociate = () => {
   const [site, setSite] = useState('')
   const [facebook, setFacebook] = useState('')
   const [instagram, setInstagram] = useState('')
-  const [category_id, setCategory_id] = useState('')
+  const [category_id, setCategory_id] = useState(0)
   const [company_name, setCompanyName] = useState('')
   const [fantasy_name, setFantasy_name] = useState('')
   const [document, setDocument] = useState('')
@@ -111,6 +111,9 @@ const CreateAssociate = () => {
   useEffect(() => {
     async function loadCategories() {
       const { data } = await getCategoriesAdmin()
+      if (!data) {
+        toast.warn('Nenhuma categoria ativa. ')
+      }
       setCategories(data)
     }
 
@@ -150,6 +153,14 @@ const CreateAssociate = () => {
       toast.info('Sua senha deve ter pelo menos 6 caracteres.')
       return
     }
+    if (consultant_id === 0) {
+      toast.warn('Selecione um consultor. ')
+      return
+    }
+    if (category_id === 0) {
+      toast.warn('Selecione uma categoria. ')
+      return
+    }
 
     try {
       const { data } = await postFile(file)
@@ -162,7 +173,6 @@ const CreateAssociate = () => {
         contact1,
         email,
         password,
-
         cep,
         city,
         neighborhood,
@@ -172,7 +182,6 @@ const CreateAssociate = () => {
         credit,
         file_id: data.id,
         category_id,
-
         percentage,
         status,
         street,
@@ -185,11 +194,43 @@ const CreateAssociate = () => {
       }
       await createAssociateAdmin(cleanObject(payload))
       toast.success('Associado criado com sucesso')
+
+      resetValues()
     } catch (err) {
       toast.error(
         'Algo de errado aconteceu, verifique os dados. Se persistir, contate o administrador do sistema'
       )
     }
+  }
+
+  function resetValues() {
+    setDescription('')
+    setFantasy_name('')
+    setDocument('')
+    setCompanyName('')
+    setResponseName('')
+    setContact1('')
+    setEmail('')
+    setPassword('')
+    setCep('')
+    setCity('')
+    setNeighborhood('')
+    setNumber('')
+    setState('none')
+    setComplement('')
+    setCredit('')
+    setCategory_id(0)
+    setPercentage(10)
+    setStatus(1)
+    setStreet('')
+    setContact2('')
+    setconsultant_id(0)
+    setType(1)
+    setFacebook('')
+    setInstagram('')
+    setSite('')
+    setPasswordConfirm('')
+    setImagePreviewUrl('/img/preview-clube.png')
   }
 
   return (
@@ -250,10 +291,10 @@ const CreateAssociate = () => {
             <S.SelectWrapper>
               <S.Label>Categoria</S.Label>
               <S.Select
-                onChange={(e) => setCategory_id(e.target.value)}
+                onChange={(e) => setCategory_id(Number(e.target.value))}
                 value={category_id}
               >
-                <option value="none" selected disabled hidden>
+                <option value={0} selected disabled hidden>
                   Selecione
                 </option>
                 {categories &&
@@ -434,7 +475,7 @@ const CreateAssociate = () => {
                 onChange={(e) => setconsultant_id(Number(e.target.value))}
                 value={consultant_id}
               >
-                <option value="none" selected disabled hidden>
+                <option value={0} selected disabled hidden>
                   Selecione
                 </option>
                 {consultants &&
