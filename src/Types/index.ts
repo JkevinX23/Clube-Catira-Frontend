@@ -203,7 +203,7 @@ export interface PostOfferProps {
   file_id: number
   associate_id?: number
   createdAt?: Date
-  directed_associate_id?: number
+  directed_id?: number
 }
 
 interface EventTarget {

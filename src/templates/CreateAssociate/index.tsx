@@ -162,6 +162,11 @@ const CreateAssociate = () => {
       return
     }
 
+    if (!contact1) {
+      toast.warn('Preencha ao menos um número para contato. ')
+      return
+    }
+
     try {
       const { data } = await postFile(file)
       const payload = {

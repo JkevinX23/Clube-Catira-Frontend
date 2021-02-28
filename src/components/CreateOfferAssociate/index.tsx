@@ -38,7 +38,7 @@ const CreateOfferAssociate = () => {
       description,
       value_offer: value_offer | 0,
       consumer_cards,
-      quantity,
+      quantity: !isIlimmited ? quantity : 0,
       file_id: file,
       directed_id: direct
     }

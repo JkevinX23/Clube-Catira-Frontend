@@ -25,12 +25,6 @@ export const Wrapper = styled.div`
     margin-top: 2rem;
     padding: 0.5rem 4rem;
   }
-
-  ${WrapperField}:nth-child(2) {
-    p:nth-child(1) {
-      margin-top: 8%;
-    }
-  }
 `
 export const Label = styled.p`
   display: inline-block;
@@ -61,7 +55,13 @@ export const TextArea = styled.textarea`
   transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
   padding: 1rem;
 `
-
+export const AlignCenter = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+`
 export const Input = styled.input`
   width: 100%;
 
