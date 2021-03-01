@@ -108,7 +108,7 @@ const DetailsOffer = ({
           <p>
             Vendidas: <span>{sell | 0} unidade(s)</span>
           </p>
-          <S.Description>{description}</S.Description>
+          <S.Description readOnly>{description}</S.Description>
         </S.WrapperDetails>
       </S.Content>
 

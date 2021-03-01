@@ -51,13 +51,15 @@ export const WrapperDetails = styled.div`
     color: #007da5;
   }
 `
-export const Description = styled.p`
+export const Description = styled.textarea`
   width: 100%;
-  font-size: 1.5rem;
-
-  overflow: hidden;
-  text-overflow: ellipsis;
-  max-height: 10ch;
+  font-size: 1.8rem;
+  height: 10ch;
+  border: none;
+  background: #f3f3f3;
+  outline: none;
+  resize: vertical;
+  max-height: 15rem;
 `
 export const InputNumber = styled.input`
   font-size: 2rem;
