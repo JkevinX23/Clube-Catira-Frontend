@@ -13,16 +13,8 @@ const FiltersOffers = ({
   const [cit, setCit] = useState('')
 
   useEffect(() => {
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    // @ts-ignore: Unreachable code error
     setCity(cit)
   }, [cit, setCity])
-
-  useEffect(() => {
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    // @ts-ignore: Unreachable code error
-    setAssociate(ass)
-  }, [ass, setAssociate])
 
   function handleClear() {
     const selectcity = document.getElementById('select-city')
@@ -34,6 +26,15 @@ const FiltersOffers = ({
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore: Unreachable code error
     selectAssociate.options[0].selected = true
+    setCit('')
+    setAssociate(0)
+    setAss('none')
+  }
+
+  function handleSetAss(value: any) {
+    const v = associates.filter((a) => a.value === value)
+    setAssociate(Number(v[0]?.key) || 0)
+    setAss(value)
   }
 
   return (
@@ -41,35 +42,29 @@ const FiltersOffers = ({
       <S.SelectWrapper
         id="select-city"
         onChange={(e) => setCit(e.target.value)}
+        value={cit}
       >
-        <option value="none" selected disabled hidden>
+        <option value="none" selected>
           Todas as cidades
         </option>
         {citys.length > 0 &&
-          citys.map((c) => (
-            <option value={cit} key={c.value}>
-              {c.value}
-            </option>
-          ))}
+          citys.map((c) => <option key={c.value}>{c.value}</option>)}
       </S.SelectWrapper>
 
       <S.SelectWrapper
         id="select-associate"
-        onChange={(e) => setAss(e.target.value)}
+        onChange={(e) => handleSetAss(e.target.value)}
+        value={ass}
       >
-        <option value="none" selected disabled hidden>
+        <option value="none" selected>
           Todos os associados
         </option>
         {associates.length > 0 &&
-          associates.map((a) => (
-            <option value={ass} key={a.key}>
-              {a.value}
-            </option>
-          ))}
+          associates.map((a) => <option key={a.value}>{a.value}</option>)}
       </S.SelectWrapper>
 
       <S.Button>
-        <Button background="black" size="xxsmall" onClick={handleClear}>
+        <Button background="black" size="xxsmall" onClick={() => handleClear()}>
           Limpar filtro
         </Button>
       </S.Button>

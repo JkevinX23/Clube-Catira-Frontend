@@ -53,9 +53,11 @@ const CardPendingOffDash = ({ pending_offers }: CardPendingOffDashProps) => {
             />
           ))}
       </S.Content>
-      <Link href="/administrador/ofertas">
-        <S.Sub>Ver Mais</S.Sub>
-      </Link>
+      {typeof window !== 'undefined' && (
+        <Link href={window.location.href + '/ofertas'}>
+          <S.Sub>Ver Mais</S.Sub>
+        </Link>
+      )}
     </S.Wrapper>
   )
 }

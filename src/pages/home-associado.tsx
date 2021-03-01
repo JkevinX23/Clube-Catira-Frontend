@@ -69,10 +69,10 @@ export default function HomeAssociado() {
             .map(function (e) {
               return e.key
             })
-            .indexOf(off.Associated.Address.id) === -1 &&
+            .indexOf(off.Associated.Address.city) === -1 &&
             cits.push({
               value: off.Associated.Address.city,
-              key: off.Associated.Address.id
+              key: off.Associated.Address.city
             })
 
           ass
@@ -104,7 +104,7 @@ export default function HomeAssociado() {
         associate: client && client.fantasy_name,
         credits: client && client.credit
       }}
-      Products={offers}
+      Products={offers.reverse()}
       Filters={{ associates, citys }}
     />
   )

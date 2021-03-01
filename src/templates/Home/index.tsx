@@ -14,7 +14,7 @@ import * as S from './styles'
 const Home = ({ HeaderProps, Products, Filters, isDirect }: HomeProps) => {
   const [produtos, setProdutos] = useState<GetOfferProps[]>()
   const [city, setCity] = useState('')
-  const [associate, setAssociate] = useState('-1')
+  const [associate, setAssociate] = useState(-1)
 
   useEffect(() => {
     function init() {
@@ -28,6 +28,11 @@ const Home = ({ HeaderProps, Products, Filters, isDirect }: HomeProps) => {
       setProdutos(Products)
       return
     }
+
+    if (city === 'none') {
+      setProdutos(Products)
+      return
+    }
     const prods = Products.filter(
       (value) => value.Associated.Address.city === city
     )
@@ -35,13 +40,12 @@ const Home = ({ HeaderProps, Products, Filters, isDirect }: HomeProps) => {
   }, [city, Products])
 
   useEffect(() => {
-    if (!associate || Number(associate) < 1) {
+    console.log(associate)
+    if (!associate || associate < 1) {
       setProdutos(Products)
       return
     }
-    const prods = Products.filter(
-      (value) => value.Associated.id === Number(associate)
-    )
+    const prods = Products.filter((value) => value.Associated.id === associate)
     setProdutos(prods)
   }, [associate, Products])
 

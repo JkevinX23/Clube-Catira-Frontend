@@ -117,15 +117,15 @@ export interface Associate {
 }
 
 export interface Option {
-  key: number
+  key: string | number
   value: string
 }
 
 export interface FilterProps {
   citys: Option[]
   associates: Option[]
-  setCity?: (value: string) => void
-  setAssociate?: (value: string) => void
+  setCity: (value: string) => void
+  setAssociate: (value: number) => void
 }
 
 export type AssociateHeaderProps = {
@@ -147,7 +147,10 @@ export type ProdTypes = {
 export interface HomeProps {
   HeaderProps: AssociateHeaderProps
   Products: GetOfferProps[]
-  Filters: FilterProps
+  Filters: {
+    citys: Option[]
+    associates: Option[]
+  }
   isDirect?: boolean
 }
 
