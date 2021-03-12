@@ -792,25 +792,42 @@ export interface GetIncreaseProps {
 }
 
 export interface GetAdminReport {
-  franchise: string
-  qtdTransactions: number
-  totalCollected: number
-  invoice: number
-  Details: {
-    Franchise: string
-    data: [
-      {
-        consultant: string
-        totalGenerate: number
-        percentage: number
-      }
-    ]
-  }
+  dateInit: Date
+  dateEnd: Date
+  totalLiquido: number
+  qtdTransacoes: number
+  franquias: [
+    {
+      Franchise: string
+      QtdTransactions: number
+      GanhosLiquido: number
+      porcentagem: number
+      fatura: number
+      detalhesConsultor: [
+        {
+          Consultor: string
+          totalLiquidoTransacoes: number
+          porcentagem: number
+          comissao: number
+          transacoes: [
+            {
+              id: number
+              comprador: string
+              vendedor: string
+              valor: number
+              data: Date
+              oferta: string
+            }
+          ]
+        }
+      ]
+    }
+  ]
 }
 
 export interface Dates {
-  dateInit: Date
-  dateEnd: Date
+  dateInit: Date | string
+  dateEnd: Date | string
 }
 
 export interface CatirasFranchiseProps {

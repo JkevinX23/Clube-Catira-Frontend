@@ -10,7 +10,7 @@ import { getConsultants } from 'Context/Action/Consultant'
 import { postFile } from 'Context/Action/File'
 import { showAssociate, updateAssociateAdmin } from 'Context/Action/Associates'
 import { getAdminProfile } from 'Context/Action/Admin'
-import { GetFranchiseProfile } from 'Context/Action/Franchise'
+import { GetFranchiseProfile, PutFranchise } from 'Context/Action/Franchise'
 
 const ShowProfile = () => {
   const [profile, setProfile] = useState<any>()
@@ -91,6 +91,84 @@ const ShowProfile = () => {
       setCep(cepMask(cep))
     }
   }, [cep])
+
+  async function handlesubmit() {
+    try {
+      if (!isEmail(email)) {
+        toast.error('Email Invalido')
+        return
+      }
+      if (password && password !== passwordConfirm) {
+        toast.warn('As senhas não coorespondem.')
+        return
+      }
+      if (document.length === 14) {
+        if (!validarCPF(document)) {
+          toast.warn('CPF inválido')
+          return
+        }
+      } else {
+        if (!validarCNPJ(document)) {
+          toast.warn('CNPJ inválido')
+          return
+        }
+      }
+
+      if (password && password.length < 6) {
+        toast.info('Sua senha deve ter pelo menos 6 caracteres.')
+        return
+      }
+      const payload = {
+        email,
+        name,
+        document,
+        company_name,
+        ie,
+        im,
+        cep,
+        state,
+        city,
+        street,
+        neighborhood,
+        number,
+        complement,
+        contact1,
+        contact2,
+        getway_email,
+        getway_token,
+        password
+      }
+
+      await PutFranchise(cleanObject(payload))
+      toast.success('Perfil atualizado com sucesso')
+      const { data } = await GetFranchiseProfile()
+      setProfile(data)
+      setName(data.name)
+      setContact1(data.contact1)
+      setContact2(data.contact2 || '')
+      setEmail(data.email)
+      setCompanyName(data.company_name)
+      setDocument(data.document)
+      setGetwayEmail(data.getway_email)
+      setGetwayToken(data.getway_token)
+
+      setStatus(data.status === 1 ? 'Ativo' : 'Inativo')
+      setPercentage(data.percentage)
+      setIe(data.ie)
+      setIm(data.im)
+
+      setCep(data.Address.cep)
+      setState(data.Address.state)
+      setCity(data.Address.city)
+      setNeighborhood(data.Address.neighborhood)
+      setStreet(data.Address.street)
+      setNumber(data.Address.number)
+      setComplement(data.Address.complement || '')
+    } catch (err) {
+      console.log(err)
+      toast.success('Erro ao atualizar perfil')
+    }
+  }
 
   return (
     <S.Wrapper>
@@ -338,7 +416,7 @@ const ShowProfile = () => {
               size="large"
               background="green"
               radius="radius100"
-              // onClick={handlesubmit}
+              onClick={handlesubmit}
             >
               ATUALIZAR
             </Button>

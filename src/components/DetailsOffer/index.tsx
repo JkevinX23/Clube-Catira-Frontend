@@ -108,7 +108,7 @@ const DetailsOffer = ({
           <p>
             Vendidas: <span>{sell | 0} unidade(s)</span>
           </p>
-          <S.Description readOnly>{description}</S.Description>
+          <S.Description value={description} readOnly />
         </S.WrapperDetails>
       </S.Content>
 
@@ -143,7 +143,7 @@ const DetailsOffer = ({
           </Button>
         ) : (
           <Link
-            href={`https://ws.sandbox.pagseguro.uol.com.br/v2/checkout/payment.html?code=${code}`}
+            href={`https://sandbox.pagseguro.uol.com.br/v2/checkout/payment.html?code=${code}`}
             passHref
           >
             <a target="_blank" rel="noreferrer">

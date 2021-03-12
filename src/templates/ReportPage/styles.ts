@@ -1,82 +1,98 @@
-import styled, { css } from 'styled-components'
+import styled from 'styled-components'
 
-export const Wrapper = styled.div`
-  ${({ theme }) => css`
-    background: rgb(2, 0, 36);
-    background: linear-gradient(
-      180deg,
-      ${theme.colors.gray} 0%,
-      rgba(250, 250, 250, 1) 100%
-    );
-  `}
-`
-export const WrapperHeader = styled.div`
-  ${({ theme }) => css`
-    overflow: hidden;
-    top: 0;
-    width: 100%;
-    background-color: ${theme.colors.white};
-    box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.47);
-    z-index: ${theme.layers.base};
-  `}
-`
-export const WrapperMenu = styled.div`
-  margin-top: 7.5rem;
-`
-export const WrapperContent = styled.div`
-  padding-left: 7%;
-  transition: opacity 1s ease-out;
-`
-export const WrapperCards = styled.div`
+export const Container = styled.div`
   display: flex;
-  gap: 2rem;
+  flex-direction: column;
+  align-items: center;
+  max-width: 1200px;
+  margin-left: 50px;
+  margin-right: 50px;
+  margin-top: 10px;
+  gap: 10px;
+`
+export const Title = styled.h1``
+export const Topic = styled.h2`
+  margin-top: 30px;
+`
+export const SubTitle = styled.h3``
+export const Paragraph = styled.p`
+  text-align: left;
+  width: 100%;
+`
+export const Table = styled.table`
+  width: 100%;
+  border: 1px solid black;
+  border-collapse: collapse;
+  margin-bottom: 20px;
+  th,
+  td {
+    border: 1px solid black;
+    padding: 8px 15px;
+  }
+  tr:nth-child(even) {
+    background-color: #f2f2f2;
+    tr:hover {
+      background-color: #ddd;
+    }
+  }
+  th {
+    background-color: #dfdfdf;
+  }
+`
+export const MapWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  align-items: center;
+  gap: 10px;
+`
+export const Button = styled.div`
   padding-top: 4rem;
   padding-bottom: 4rem;
-  padding-right: 1rem;
-  justify-content: space-between;
+  button {
+    padding: 1rem 4rem;
+    font-size: 2rem;
+    color: white;
+    background: #4287f5;
+    border: 1px solid #4287f5;
+    border-radius: 4px;
+    outline: none;
+    &:hover {
+      background: white;
+      color: #4287f5;
+      border: 1px solid #4287f5;
+    }
+  }
+  @media print {
+    button {
+      display: none;
+    }
+  }
 `
-
-export const WrapperFooter = styled.div``
-export const WrapperReports = styled.div`
+export const Wrapper = styled.div`
+  background: white;
+  color: black;
   display: flex;
-  justify-content: space-between;
-  width: 100%;
-  padding-bottom: 5rem;
-`
-export const DashNewAssociate = styled.div`
-  display: flex;
-  width: 100%;
-  justify-content: center;
-`
-export const CreateFranchise = styled.div`
-  width: 100%;
-  padding-right: 1rem;
-  padding-top: 2rem;
-  padding-bottom: 5rem;
-  transition: opacity 1s ease-out;
-`
-export const ButtonChange = styled.div`
-  display: flex;
-  width: 100%;
-  justify-content: flex-end;
-  padding-left: 5%;
-  padding-right: 5%;
-  padding-top: 2rem;
-  transition: opacity 1s ease-out;
-`
-export const Table = styled.div`
-  padding-bottom: 2rem;
-  padding-right: 2rem;
-  padding-top: 2rem;
-  transition: opacity 1s ease-out;
-`
-
-export const DatePicker = styled.div`
-  display: flex;
-  width: 100%;
   flex-direction: column;
-  height: 80vh;
-  align-items: flex-start;
-  justify-content: center;
-  gap: 2rem;
+  width: 100%;
+  align-items: center;
+  @media print {
+    table {
+      break-inside: break-inside;
+    }
+    ${Title} {
+      font-size: 24px;
+    }
+    ${Topic},
+    ${SubTitle} {
+      font-size: 20px;
+    }
+    ${Table} {
+      margin-bottom: 10px;
+      th,
+      td {
+        padding: 6px 10px;
+      }
+    }
+  }
 `

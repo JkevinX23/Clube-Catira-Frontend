@@ -64,6 +64,18 @@ export const cpfCnpjMask = (v: string) => {
 
 import { format } from 'date-fns'
 
-export const FormatDateByFNS = (v: string) => {
+export const FormatDateByFNS = (v: string | Date) => {
   return format(new Date(v), 'dd/MM/yyyy')
+}
+
+export const FormatDateByIntl = (v: Date | string) => {
+  return new Intl.DateTimeFormat('pt-br').format(new Date(v))
+}
+
+export const FormatCurrency = (v: number) => {
+  const currency = new Intl.NumberFormat('pt-br', {
+    style: 'currency',
+    currency: 'BRL'
+  }).format(v)
+  return currency
 }
