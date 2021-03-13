@@ -48,7 +48,7 @@ export default function TableListVouchers({ id, setTrasnsactionId }: Props) {
         0: 'Pendente',
         1: 'Ativo',
         2: 'Utilizado',
-        3: 'Cancelado'
+        3: 'Utilizado'
       }
     }
   ]

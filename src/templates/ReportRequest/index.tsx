@@ -18,7 +18,7 @@ import { toast } from 'react-toastify'
 import { useRouter } from 'next/router'
 
 export default function ReportAdminPage({ name, role }: HomeAdminProps) {
-  const [startDate, setStartDate] = useState(new Date('2020-12-12'))
+  const [startDate, setStartDate] = useState(new Date('2021-01-02'))
   const [endDate, setEndDate] = useState(new Date())
   const router = useRouter()
 

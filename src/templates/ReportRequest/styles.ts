@@ -75,8 +75,8 @@ export const DatePicker = styled.div`
   display: flex;
   width: 100%;
   flex-direction: column;
-  height: 80vh;
-  align-items: flex-start;
+  height: 77vh;
+  align-items: center;
   justify-content: center;
   gap: 2rem;
 `
