@@ -157,4 +157,5 @@ export const MenuPDV = styled.span`
   width: 32px;
   top: 3.3rem;
   right: 1.2rem;
+  cursor: pointer;
 `

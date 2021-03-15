@@ -31,7 +31,7 @@ export const DecorationLineWrapper = styled.div<DecorationProps>`
 export const TextWrapper = styled.p`
   ${({ theme }) => css`
     font-weight: ${theme.font.bold};
-    font-size: ${theme.font.sizes.xlarge};
+    font-size: ${theme.font.sizes.xxlarge};
     text-align: center;
     color: ${theme.colors.black};
   `}

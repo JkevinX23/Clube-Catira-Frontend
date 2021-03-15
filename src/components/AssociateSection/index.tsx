@@ -8,7 +8,7 @@ const AssociateSection = () => (
     <S.DecorationLineWrapper isPrimary />
     <S.DecorationLineWrapper />
     <Link href="/associar-se">
-      <Button size="xxsmall">Associar-se</Button>
+      <Button size="xsmall">ASSOCIAR-SE</Button>
     </Link>
   </S.Wrapper>
 )

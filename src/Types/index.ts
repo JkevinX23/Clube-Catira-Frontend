@@ -825,6 +825,36 @@ export interface GetAdminReport {
   ]
 }
 
+export interface GetFranchiseReport {
+  dateInit: Date
+  dateEnd: Date
+  report: {
+    Franchise: string
+    QtdTransactions: number
+    GanhosLiquido: number
+    porcentagem: number
+    fatura: number
+    detalhesConsultor: [
+      {
+        Consultor: string
+        totalLiquidoTransacoes: number
+        porcentagem: number
+        comissao: number
+        transacoes: [
+          {
+            id: number
+            comprador: string
+            vendedor: string
+            valor: number
+            data: Date
+            oferta: string
+          }
+        ]
+      }
+    ]
+  }
+}
+
 export interface Dates {
   dateInit: Date | string
   dateEnd: Date | string
