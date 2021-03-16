@@ -3,7 +3,6 @@ import { Associate } from 'Types'
 import { useRouter } from 'next/router'
 import AuthContext from 'Context/Reduces/Auth'
 import { useContext, useEffect, useState } from 'react'
-import { toast } from 'react-toastify'
 
 export default function ShowAssociadoPage() {
   const [key, setKey] = useState(0)
@@ -40,7 +39,7 @@ export default function ShowAssociadoPage() {
 
   return (
     <div>
-      {key > 0 && process.browser && props.option === 4 && (
+      {key > 0 && props.signed && process.browser && props.option === 4 && (
         <Create
           HeaderProps={{
             associate: client && client.fantasy_name,

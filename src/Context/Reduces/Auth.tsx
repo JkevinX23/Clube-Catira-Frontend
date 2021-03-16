@@ -1,9 +1,10 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { createContext, useState } from 'react'
+import { createContext, useEffect, useState } from 'react'
 import { postLogin } from 'Context/Action/Login'
 import { Administrador, Login, Franquia, Associate, Consultant } from 'Types'
 import Router from 'next/router'
 import { toast } from 'react-toastify'
+import { getCredits } from 'Context/Action/Associates'
 interface IAuthContext {
   signed: boolean
   option: number
@@ -41,6 +42,19 @@ export const AuthProvider: React.FC = ({ children }: any) => {
     process.browser ? signedJSON !== null && JSON.parse(signedJSON) : false
   )
 
+  useEffect(() => {
+    async function lazzy() {
+      setInterval(async () => {
+        const promisse = await getCredits()
+        const associate = client as Associate
+        associate.credit = promisse.data.credits
+        setClient(associate)
+        localStorage.setItem('client', JSON.stringify(associate))
+      }, 60000)
+    }
+    option === 4 && lazzy()
+  }, [client, option])
+
   const signIn = async (payload: Login) => {
     try {
       const { data } = await postLogin({
@@ -54,7 +68,6 @@ export const AuthProvider: React.FC = ({ children }: any) => {
       setSigned(true)
 
       if (process.browser !== null) {
-        console.log(JSON.stringify(client))
         localStorage.setItem('client', JSON.stringify(data.client))
         localStorage.setItem('token', data.token)
         localStorage.setItem('option', JSON.stringify(data.option))

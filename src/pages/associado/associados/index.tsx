@@ -1,7 +1,6 @@
 import Create from 'templates/AssociatesDetails'
 import AuthContext from 'Context/Reduces/Auth'
 import { useRouter } from 'next/router'
-import { toast } from 'react-toastify'
 import { useContext, useEffect } from 'react'
 import { Associate } from 'Types'
 
