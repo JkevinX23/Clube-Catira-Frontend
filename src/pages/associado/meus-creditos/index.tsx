@@ -2,7 +2,7 @@ import Create from 'templates/MyCredits'
 import AuthContext from 'Context/Reduces/Auth'
 import { useRouter } from 'next/router'
 import { toast } from 'react-toastify'
-import { useContext } from 'react'
+import { useContext, useEffect } from 'react'
 import { Associate } from 'Types'
 
 export default function MyOffers() {
@@ -13,17 +13,38 @@ export default function MyOffers() {
     if (process.browser) {
       router.push('/sign-in')
     }
-    toast.info('Olá, realize seu login para continuar')
   }
 
   const client = props.client as Associate
 
+  useEffect(() => {
+    if (process.browser) {
+      switch (props.option) {
+        case 1:
+          router.push('/administrador')
+          break
+        case 2:
+          router.push('/franquia')
+          break
+        case 3:
+          router.push('/consultor')
+          break
+        case 4:
+          break
+      }
+    }
+  }, [props.option, router])
+
   return (
-    <Create
-      HeaderProps={{
-        associate: client && client.fantasy_name,
-        credits: client && client.credit
-      }}
-    />
+    <div>
+      {props.signed && process.browser && props.option === 4 && (
+        <Create
+          HeaderProps={{
+            associate: client && client.fantasy_name,
+            credits: client && client.credit
+          }}
+        />
+      )}
+    </div>
   )
 }

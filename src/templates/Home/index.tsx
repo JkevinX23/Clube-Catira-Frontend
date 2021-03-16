@@ -40,7 +40,6 @@ const Home = ({ HeaderProps, Products, Filters, isDirect }: HomeProps) => {
   }, [city, Products])
 
   useEffect(() => {
-    console.log(associate)
     if (!associate || associate < 1) {
       setProdutos(Products)
       return

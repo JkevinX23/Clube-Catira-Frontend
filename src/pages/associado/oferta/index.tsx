@@ -10,28 +10,45 @@ export default function ProfilePage() {
   const props = useContext(AuthContext)
   const client = props.client as Associate
   const router = useRouter()
-  useEffect(() => {
-    setKey(Number(router.query.id))
-  }, [router.query.id])
 
   useEffect(() => {
     if (!props.signed) {
       if (process.browser) {
         router.push('/sign-in')
       }
-      toast.info('Olá, realize seu login para continuar')
     }
   }, [props.signed, router])
 
+  useEffect(() => {
+    if (process.browser) {
+      switch (props.option) {
+        case 1:
+          router.push('/administrador')
+          break
+        case 2:
+          router.push('/franquia')
+          break
+        case 3:
+          router.push('/consultor')
+          break
+        case 4:
+          setKey(Number(router.query.id))
+          break
+      }
+    }
+  }, [props.option, router])
+
   return (
-    key > 0 && (
-      <Create
-        HeaderProps={{
-          associate: client && client.fantasy_name,
-          credits: client && client.credit
-        }}
-        id={key}
-      />
-    )
+    <div>
+      {props.signed && process.browser && props.option === 4 && key > 0 && (
+        <Create
+          HeaderProps={{
+            associate: client && client.fantasy_name,
+            credits: client && client.credit
+          }}
+          id={key}
+        />
+      )}
+    </div>
   )
 }

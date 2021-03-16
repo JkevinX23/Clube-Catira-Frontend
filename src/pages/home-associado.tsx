@@ -13,7 +13,6 @@ export default function HomeAssociado() {
     if (process.browser) {
       router.push('/sign-in')
     }
-    toast.info('Olá, realize seu login para continuar')
   }
 
   const client = props.client as Associate
@@ -55,6 +54,7 @@ export default function HomeAssociado() {
   const [associates, setAssociates] = useState<Option[]>([
     { key: 0, value: 'Nenhum associado encontrado' }
   ])
+
   useEffect(() => {
     async function loadOffers() {
       try {
@@ -95,17 +95,36 @@ export default function HomeAssociado() {
         )
       }
     }
-    loadOffers()
-  }, [])
+    if (process.browser) {
+      switch (props.option) {
+        case 1:
+          router.push('/administrador')
+          break
+        case 2:
+          router.push('/franquia')
+          break
+        case 3:
+          router.push('/consultor')
+          break
+        case 4:
+          loadOffers()
+          break
+      }
+    }
+  }, [props.option, router])
 
   return (
-    <Page
-      HeaderProps={{
-        associate: client && client.fantasy_name,
-        credits: client && client.credit
-      }}
-      Products={offers.reverse()}
-      Filters={{ associates, citys }}
-    />
+    <div>
+      {props.signed && process.browser && props.option === 4 && (
+        <Page
+          HeaderProps={{
+            associate: client && client.fantasy_name,
+            credits: client && client.credit
+          }}
+          Products={offers.reverse()}
+          Filters={{ associates, citys }}
+        />
+      )}
+    </div>
   )
 }

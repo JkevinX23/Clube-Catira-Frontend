@@ -10,13 +10,11 @@ export default function Profile() {
   const [profile, setProfile] = useState<any>()
   const props = useContext(AuthContext)
   const router = useRouter()
-
   useEffect(() => {
     if (!props.signed) {
       if (process.browser) {
         router.push('/sign-in')
       }
-      toast.info('Olá, realize seu login para continuar')
     }
   }, [props.signed, router])
 
@@ -27,16 +25,35 @@ export default function Profile() {
       const { data } = await getProfileAssociate()
       setProfile(data)
     }
-    loadProfile()
-  }, [])
+    if (process.browser) {
+      switch (props.option) {
+        case 1:
+          router.push('/administrador')
+          break
+        case 2:
+          router.push('/franquia')
+          break
+        case 3:
+          router.push('/consultor')
+          break
+        case 4:
+          loadProfile()
+          break
+      }
+    }
+  }, [props.option, router])
 
   return (
-    <Create
-      Profile={profile}
-      HeaderProps={{
-        associate: client && client.fantasy_name,
-        credits: client && client.credit
-      }}
-    />
+    <div>
+      {props.signed && process.browser && props.option === 4 && (
+        <Create
+          Profile={profile}
+          HeaderProps={{
+            associate: client && client.fantasy_name,
+            credits: client && client.credit
+          }}
+        />
+      )}
+    </div>
   )
 }
