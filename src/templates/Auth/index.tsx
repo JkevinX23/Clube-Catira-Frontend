@@ -4,6 +4,7 @@ import Menu from 'components/Menu'
 import SociaisSection from 'components/SociaisSection'
 import TextField from 'components/TextField'
 import { useContext, useEffect, useRef, useState } from 'react'
+import { useRouter } from 'next/router'
 
 import * as S from './styles'
 import AuthContext from 'Context/Reduces/Auth'
@@ -11,6 +12,7 @@ import AuthContext from 'Context/Reduces/Auth'
 const Auth = () => {
   const { signIn } = useContext(AuthContext)
 
+  const router = useRouter()
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
 
@@ -90,7 +92,10 @@ const Auth = () => {
             onChange={(e) => setPassword(e.target.value)}
             value={password}
           />
-          <S.ForgotPassword> Esqueceu a senha? </S.ForgotPassword>
+          <S.ForgotPassword onClick={() => router.push('/recuperar-senha')}>
+            {' '}
+            Esqueceu a senha?{' '}
+          </S.ForgotPassword>
           <S.Button>
             <Button
               fullWidth

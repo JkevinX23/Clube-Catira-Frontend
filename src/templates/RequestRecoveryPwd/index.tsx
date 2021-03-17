@@ -6,12 +6,18 @@ import * as S from './styles'
 import Link from 'next/link'
 import { recoveryAccount } from 'Context/Action/RecoveryPassword'
 import { toast } from 'react-toastify'
+import { isEmail } from 'utils/Validation'
 
 const RequestRecovery = () => {
   const [email, setEmail] = useState('')
 
   function handleSubmit() {
     try {
+      if (!isEmail(email)) {
+        toast.warn('Email inválido')
+        setEmail('')
+        return
+      }
       recoveryAccount(email)
     } catch (e) {
       return
@@ -39,6 +45,7 @@ const RequestRecovery = () => {
               type="email"
               placeholder="E-mail"
               onChange={(e) => setEmail(e.target.value)}
+              value={email}
             />
             <button
               className="buttom lb"
