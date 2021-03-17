@@ -15,8 +15,32 @@ export default function Offers() {
       if (process.browser) {
         router.push('/sign-in')
       }
-      toast.info('Olá, realize seu login para continuar')
     }
   }, [props.signed, router])
-  return <Create name={client && client.name} role="Administrador" />
+
+  useEffect(() => {
+    if (process.browser) {
+      switch (props.option) {
+        case 1:
+          break
+        case 2:
+          router.push('/franquia')
+          break
+        case 3:
+          router.push('/consultor')
+          break
+        case 4:
+          router.push('/home-associado')
+          break
+      }
+    }
+  }, [props.option, router])
+
+  return (
+    <div>
+      {props.signed && process.browser && props.option === 1 && (
+        <Create name={client && client.name} role="Administrador" />
+      )}
+    </div>
+  )
 }

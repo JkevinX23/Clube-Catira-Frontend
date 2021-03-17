@@ -15,7 +15,6 @@ export default function HomeAdmin() {
     if (process.browser) {
       router.push('/sign-in')
     }
-    toast.info('Olá, realize seu login para continuar')
   }
 
   const client = props.client as Administrador
@@ -29,16 +28,35 @@ export default function HomeAdmin() {
         console.log(err)
       }
     }
-    loadHomeData()
-  }, [])
+    if (process.browser) {
+      switch (props.option) {
+        case 1:
+          loadHomeData()
+          break
+        case 2:
+          router.push('/franquia')
+          break
+        case 3:
+          router.push('/consultor')
+          break
+        case 4:
+          router.push('/home-associado')
+          break
+      }
+    }
+  }, [props.option, router])
 
   return (
-    <Page
-      name={client && client.name}
-      role="Administrador"
-      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-      // @ts-ignore: Unreachable code error
-      page_data={content}
-    />
+    <div>
+      {props.signed && process.browser && props.option === 1 && (
+        <Page
+          name={client && client.name}
+          role="Administrador"
+          // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+          // @ts-ignore: Unreachable code error
+          page_data={content}
+        />
+      )}
+    </div>
   )
 }
