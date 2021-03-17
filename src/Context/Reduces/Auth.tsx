@@ -90,7 +90,46 @@ export const AuthProvider: React.FC = ({ children }: any) => {
       }
       toast.success('Seja bem vindo')
     } catch (error) {
-      toast.warn('Credenciais incorretas, tente novamente')
+      if (error.response) {
+        switch (error.response.status) {
+          case 400:
+            toast.warn('Credenciais inválidas, tente novamente')
+            break
+          case 404:
+            toast.warn('Credenciais incorretas, tente novamente')
+            break
+          case 401:
+            toast.warn('Credenciais incorretas, tente novamente')
+            break
+          case 403:
+            toast.warn(
+              'Seu acesso foi negado pela sua franquia. Entre em contato para regularizar a situação.'
+            )
+            break
+          case 406:
+            toast.success(
+              'Seus dados estão sendo analizados pela franquia. Esse processo pode demorar até 3 dias uteis. Caso se estenda, entre em contato conosco.',
+              { autoClose: 10000, hideProgressBar: false }
+            )
+            break
+          case 408:
+            toast.error(
+              'Seu acesso foi negado pela franqueadora. Entre em contato para regularizar a situação.',
+              { autoClose: 10000, hideProgressBar: false }
+            )
+            break
+          default:
+            toast.error(
+              'Código: ' +
+                error.response.status +
+                '. Caso persista, entre em contato com o administrador do sistema.'
+            )
+        }
+      } else {
+        toast.warn(
+          'Problema de conexão, verifique sua internet, e caso persista, contate o administrador do sistema.'
+        )
+      }
       console.log(error)
     }
   }
