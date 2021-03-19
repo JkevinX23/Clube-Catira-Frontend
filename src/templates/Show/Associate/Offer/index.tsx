@@ -97,6 +97,7 @@ const ShowOffer = ({ id, HeaderProps }: props) => {
           date={date}
           description={description}
           sell={sell}
+          consumer_cards={consumer_cards}
         />
       </S.WrapperContent>
       <S.WrapperFooter>

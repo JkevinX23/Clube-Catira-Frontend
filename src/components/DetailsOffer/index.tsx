@@ -18,6 +18,7 @@ export type DetailsOfferProps = {
   quantity: number
   sell: number
   description: string
+  consumer_cards: number
 }
 const DetailsOffer = ({
   img,
@@ -28,7 +29,8 @@ const DetailsOffer = ({
   quantity,
   sell,
   description,
-  id
+  id,
+  consumer_cards
 }: DetailsOfferProps) => {
   const [qtd, setQtd] = useState(1)
   const [code, setCode] = useState('')
@@ -96,6 +98,11 @@ const DetailsOffer = ({
           <p>
             Data Oferta: <span>{date}</span>
           </p>
+          {consumer_cards > 1 && (
+            <p>
+              Cartões de consumo: <span>{consumer_cards}</span>
+            </p>
+          )}
           {quantity > 0 ? (
             <p>
               Quantidade: <span>{quantity} unidade(s)</span>
