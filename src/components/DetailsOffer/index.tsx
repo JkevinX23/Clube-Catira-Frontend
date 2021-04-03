@@ -150,7 +150,7 @@ const DetailsOffer = ({
           </Button>
         ) : (
           <Link
-            href={`https://sandbox.pagseguro.uol.com.br/v2/checkout/payment.html?code=${code}`}
+            href={`https://pagseguro.uol.com.br/v2/checkout/payment.html?code=${code}`}
             passHref
           >
             <a target="_blank" rel="noreferrer">

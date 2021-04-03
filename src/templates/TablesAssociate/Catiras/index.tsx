@@ -145,7 +145,7 @@ export default function MyCatirasTable({
             onClick: (_event, rowData) => {
               const row = rowData as PurchaseSalesProps
               window.open(
-                `https://sandbox.pagseguro.uol.com.br/v2/checkout/payment.html?code=${row.fat}`
+                `https://pagseguro.uol.com.br/v2/checkout/payment.html?code=${row.fat}`
               )
             }
           },
