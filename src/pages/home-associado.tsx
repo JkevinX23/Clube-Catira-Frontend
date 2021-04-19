@@ -28,7 +28,7 @@ export default function HomeAssociado() {
       file_id: 1,
       associate_id: 5,
       File: {
-        url: 'localhost:3334/files/7802614de6664e050f59f6e7b1f1c908.jpg',
+        url: '',
         id: 1,
         path: '7802614de6664e050f59f6e7b1f1c908.jpg'
       },
@@ -59,7 +59,7 @@ export default function HomeAssociado() {
     async function loadOffers() {
       try {
         const response = await getOffers()
-        const offs: GetOfferProps[] = response.data
+        const offs: GetOfferProps[] = response.data.reverse()
         setOffers(offs)
         const cits: Option[] = []
         const ass: Option[] = []
@@ -121,7 +121,7 @@ export default function HomeAssociado() {
             associate: client && client.fantasy_name,
             credits: client && client.credit
           }}
-          Products={offers.reverse()}
+          Products={offers}
           Filters={{ associates, citys }}
         />
       )}

@@ -7,6 +7,7 @@ import { useState } from 'react'
 import Link from 'next/link'
 import TextField from 'components/TextField'
 import { PostCatira } from 'Types'
+import { useRouter } from 'next/router'
 
 export type DetailsOfferProps = {
   id: number
@@ -36,6 +37,7 @@ const DetailsOffer = ({
   const [code, setCode] = useState('')
   const [status, setStatus] = useState(0)
   const [estimateValue, setEstimateValue] = useState(0)
+  const route = useRouter()
 
   function handleChage(e: any) {
     setQtd(Number(e))
@@ -119,7 +121,7 @@ const DetailsOffer = ({
         </S.WrapperDetails>
       </S.Content>
 
-      <div>
+      <S.DivWB>
         Quantidade:
         {quantity > 0 ? (
           <S.InputNumber
@@ -149,18 +151,29 @@ const DetailsOffer = ({
             <p>Aguarde...</p>
           </Button>
         ) : (
-          <Link
-            href={`https://pagseguro.uol.com.br/v2/checkout/payment.html?code=${code}`}
-            passHref
-          >
-            <a target="_blank" rel="noreferrer">
-              <Button background="green" radius="radius100" size="xxsmall">
-                <p>Ver fatura</p>
-              </Button>
-            </a>
-          </Link>
+          <S.WrapperButton>
+            <Link
+              href={`https://pagseguro.uol.com.br/v2/checkout/payment.html?code=${code}`}
+              passHref
+            >
+              <a target="_blank" rel="noreferrer">
+                <Button background="green" radius="radius100" size="xxsmall">
+                  <p>Ver fatura</p>
+                </Button>
+              </a>
+            </Link>
+            <Button
+              background="black"
+              radius="radius100"
+              size="xxsmall"
+              onClick={() => route.back()}
+            >
+              {' '}
+              <p>Voltar</p>
+            </Button>
+          </S.WrapperButton>
         )}
-      </div>
+      </S.DivWB>
     </S.Wrapper>
   )
 }

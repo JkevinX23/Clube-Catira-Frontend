@@ -66,10 +66,9 @@ export const RadioLabel = styled.label`
 export const WrapperRadio = styled.div``
 export const WrapperButton = styled.div`
   display: flex;
+  justify-content: space-between;
   width: 100%;
-  button {
-    margin-left: auto;
-  }
+  padding-top: 2rem;
 `
 
 export const Select = styled.select`

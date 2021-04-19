@@ -13,7 +13,7 @@ const CreateOfferAssociate = () => {
   const [description, setDescription] = useState('')
   const [value_offer, setValueOffer] = useState(0)
   const [consumer_cards, setConsumerCards] = useState(1)
-  const [quantity, setQuantity] = useState(0)
+  const [quantity, setQuantity] = useState(1)
   const [isDirect, setIsDirect] = useState(false)
   const [associates, setAssociates] = useState<any>([])
   const [direct, setDirectID] = useState<any>(null)
@@ -21,15 +21,21 @@ const CreateOfferAssociate = () => {
   const [file, setFile] = useState(1)
 
   function handleIlimited() {
-    setIlimited(true)
+    if (!isDirect) {
+      setIlimited(true)
+    }
   }
   function handleLimited() {
     setIlimited(false)
   }
 
-  function handleChange() {
+  function handleNotDirect() {
     setIsDirect(false)
     setDirectID(null)
+  }
+  function handleDirect() {
+    setIsDirect(true)
+    setIlimited(false)
   }
 
   async function handleOffer() {
@@ -46,6 +52,7 @@ const CreateOfferAssociate = () => {
     try {
       await postOffers(cleanObject(data))
       toast.success('oferta criada com sucesso!')
+      cleanForm()
     } catch (e) {
       toast.error('Erro ao criar oferta')
       console.log(e)
@@ -55,10 +62,21 @@ const CreateOfferAssociate = () => {
   useEffect(() => {
     async function loadAssociates() {
       const { data } = await getAssociates()
-      setAssociates(data)
+      setAssociates(data.sort())
     }
     loadAssociates()
   }, [])
+
+  function cleanForm() {
+    setIlimited(true)
+    setTitle('')
+    setDescription('')
+    setValueOffer(0)
+    setConsumerCards(1)
+    setQuantity(1)
+    setDirectID(null)
+    setFile(1)
+  }
 
   return (
     <S.Wrapper>
@@ -69,21 +87,24 @@ const CreateOfferAssociate = () => {
         </S.AlignCenter>
 
         <S.Label>Título da Oferta</S.Label>
-        <S.Input onChange={(e) => setTitle(e.target.value)} />
+        <S.Input value={title} onChange={(e) => setTitle(e.target.value)} />
 
         <S.Label>Descrição</S.Label>
-        <S.TextArea onChange={(e) => setDescription(e.target.value)} />
+        <S.TextArea
+          value={description}
+          onChange={(e) => setDescription(e.target.value)}
+        />
       </S.WrapperField>
 
       <S.WrapperField>
         <S.Label>Vai para uma empresa específica</S.Label>
         <S.WrapperRadio>
-          <S.RadioLabel onClick={() => setIsDirect(true)}>
+          <S.RadioLabel onClick={() => handleDirect()}>
             <S.InputRadio type="radio" id="sim" name="direct" value="sim" />
             Sim
           </S.RadioLabel>
 
-          <S.RadioLabel onClick={() => handleChange()}>
+          <S.RadioLabel onClick={() => handleNotDirect()}>
             <S.InputRadio
               type="radio"
               id="nao"
@@ -127,6 +148,7 @@ const CreateOfferAssociate = () => {
           type="number"
           defaultValue="1"
           onChange={(e) => setConsumerCards(Number(e.target.value))}
+          value={consumer_cards}
         />
 
         <S.Label>Quantidade Disponível</S.Label>
@@ -137,6 +159,7 @@ const CreateOfferAssociate = () => {
               id="limitada"
               name="limit"
               value="limitada"
+              checked={!isIlimmited}
             />
             Limitada
           </S.RadioLabel>
@@ -147,7 +170,7 @@ const CreateOfferAssociate = () => {
               id="ilimitada"
               name="limit"
               value="ilimitada"
-              defaultChecked
+              checked={isIlimmited}
             />
             Ilimitada
           </S.RadioLabel>
@@ -160,12 +183,21 @@ const CreateOfferAssociate = () => {
               min="1"
               type="number"
               defaultValue="1"
+              value={quantity}
               onChange={(e) => setQuantity(Number(e.target.value))}
             />
           </>
         )}
 
         <S.WrapperButton>
+          <Button
+            background="white"
+            size="xxsmall"
+            radius="radius100"
+            onClick={cleanForm}
+          >
+            Limpar
+          </Button>
           <Button
             background="black"
             size="xxsmall"
