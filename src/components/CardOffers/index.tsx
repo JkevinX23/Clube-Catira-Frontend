@@ -2,6 +2,9 @@ import Button from 'components/Button'
 import * as S from './styles'
 import { useRouter } from 'next/router'
 import Link from 'next/link'
+import { useContext } from 'react'
+import AuthContext from 'Context/Reduces/Auth'
+import { Associate } from 'Types'
 export type CardOffersProps = {
   id: number
   img: string
@@ -25,6 +28,9 @@ const CardOffers = ({
   associateId
 }: CardOffersProps) => {
   const router = useRouter()
+  const props = useContext(AuthContext)
+  const client = props.client as Associate
+
   return (
     <S.Wrapper>
       <S.Image src={img} role="img" aria-label={name} />
@@ -44,16 +50,32 @@ const CardOffers = ({
           <S.subTitle>A Negociar</S.subTitle>
         )}
         <S.Button>
-          <Button
-            fullWidth
-            size="xxsmall"
-            background="white"
-            onClick={() => {
-              router.push({ pathname: '/associado/oferta', query: { id } })
-            }}
-          >
-            Comprar
-          </Button>
+          {client.id !== associateId ? (
+            <Button
+              fullWidth
+              size="xxsmall"
+              background="white"
+              onClick={() => {
+                router.push({ pathname: '/associado/oferta', query: { id } })
+              }}
+            >
+              Comprar
+            </Button>
+          ) : (
+            <Button
+              fullWidth
+              size="xxsmall"
+              background="white"
+              onClick={() => {
+                router.push({
+                  pathname: '/associado/minha-oferta',
+                  query: { id }
+                })
+              }}
+            >
+              Ver
+            </Button>
+          )}
         </S.Button>
       </S.BuyWrapper>
     </S.Wrapper>

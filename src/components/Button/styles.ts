@@ -90,8 +90,18 @@ const wrapperModifiersFullWidth = {
       width: 100%;
     `
 }
+
+const wrapperDisabled = {
+  disabled: () =>
+    css`
+      background: #ccc;
+      &:hover {
+        background: #aaa;
+      }
+    `
+}
 export const Wrapper = styled.button<WrappeProps>`
-  ${({ theme, size, background, radius, fullWidth }) => css`
+  ${({ theme, size, background, radius, fullWidth, disabled }) => css`
     color: ${theme.colors.white};
     border: 0;
     transition-duration: 0.5s;
@@ -105,5 +115,7 @@ export const Wrapper = styled.button<WrappeProps>`
     wrapperModifiersRadius[radius](theme)}
     ${!!fullWidth &&
     wrapperModifiersFullWidth.fullWidth()}
+    ${!!disabled &&
+    wrapperDisabled.disabled()}
   `}
 `
