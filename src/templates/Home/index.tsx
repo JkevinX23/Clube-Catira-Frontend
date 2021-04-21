@@ -48,6 +48,23 @@ const Home = ({ HeaderProps, Products, Filters, isDirect }: HomeProps) => {
     setProdutos(prods)
   }, [associate, Products])
 
+  useEffect(() => {
+    if (!city || !associate) {
+      return
+    }
+    //produtos que passam no filtro 1
+    const prodsCidade = Products.filter(
+      (value) => value.Associated.Address.city === city
+    )
+    //produtos que passam no filtro 2
+    const prodsAssociate = Products.filter(
+      (value) => value.Associated.id === associate
+    )
+
+    const prod = prodsCidade.filter((value) => prodsAssociate.includes(value))
+    setProdutos(prod)
+  }, [associate, city, Products])
+
   return (
     <S.Wrapper>
       <S.WrapperHeader>

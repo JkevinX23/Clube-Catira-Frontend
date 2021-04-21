@@ -76,6 +76,7 @@ const ShowAssociate = ({ id, HeaderProps }: props) => {
             instagram={associate.instagram}
             site={associate.site}
             facebook={associate.facebook}
+            offers={associate.offers}
           />
         )}
       </S.WrapperContent>

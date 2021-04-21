@@ -15,8 +15,12 @@ export const WrapperMenu = styled.div`
   margin-top: 7.5rem;
 `
 export const WrapperContent = styled.div`
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
   padding: 8rem 0;
-  background-color: #f9fafa;
+  background-color: rgba(250, 250, 250, 1);
 `
 
 export const WrapperFooter = styled.div`

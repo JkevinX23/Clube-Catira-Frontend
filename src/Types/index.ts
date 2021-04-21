@@ -649,6 +649,7 @@ export interface ContactAssociateProps {
   instagram?: string
   site?: string
   facebook?: string
+  offers: GetOfferProps[]
 }
 
 export interface PostCatira {

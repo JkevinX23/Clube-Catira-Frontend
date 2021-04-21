@@ -102,3 +102,37 @@ export const Wrapper = styled.main`
     }
   }
 `
+export const WrapperImage = styled.div``
+export const IconWrapper = styled.div`
+  ${({ theme }) => css`
+    color: ${theme.colors.black};
+    width: 2.4rem;
+    height: 2.4rem;
+    cursor: pointer;
+    transition: 0.5s;
+
+    &:hover {
+      color: ${theme.colors.blue};
+    }
+  `}
+`
+export const IconsContainer = styled.div`
+  display: flex;
+  align-items: center;
+  padding-top: 3rem;
+  padding-bottom: 3rem;
+  justify-content: center;
+  gap: 20%;
+`
+export const WrapperOffers = styled.div``
+export const WrapperCards = styled.div`
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, auto));
+  padding-top: 2em;
+`
+export const Text = styled.h2`
+  color: #444;
+  width: 100%;
+  font-size: 3rem;
+  text-align: center;
+`

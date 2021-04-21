@@ -6,6 +6,7 @@ import { toast } from 'react-toastify'
 import { getAssociates } from 'Context/Action/Associates'
 import { cleanObject } from 'utils/Validation'
 import ImageInput from 'components/ImageInput'
+import { GetAssociatesAdmin } from 'Types'
 
 const CreateOfferAssociate = () => {
   const [isIlimmited, setIlimited] = useState(true)
@@ -59,10 +60,16 @@ const CreateOfferAssociate = () => {
     }
   }
 
+  function compare(a: GetAssociatesAdmin, b: GetAssociatesAdmin) {
+    if (a.fantasy_name.toLowerCase() < b.fantasy_name.toLowerCase()) return -1
+    if (a.fantasy_name.toLowerCase() > b.fantasy_name.toLowerCase()) return 1
+    return 0
+  }
+
   useEffect(() => {
     async function loadAssociates() {
       const { data } = await getAssociates()
-      setAssociates(data.sort())
+      setAssociates(data.sort(compare))
     }
     loadAssociates()
   }, [])
@@ -126,7 +133,7 @@ const CreateOfferAssociate = () => {
               {associates &&
                 associates.map((ass: any) => (
                   <option key={ass.id} value={ass.id}>
-                    {ass.id} - {ass.fantasy_name}
+                    {ass.fantasy_name} - {ass.id}
                   </option>
                 ))}
             </S.Select>
