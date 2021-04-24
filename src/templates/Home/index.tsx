@@ -8,13 +8,15 @@ import Typography from '@material-ui/core/Typography'
 import Link from 'next/link'
 import Footer from 'components/Footer'
 import { useEffect, useState } from 'react'
-import { HomeProps, GetOfferProps } from 'Types'
+import { HomeProps, GetOfferProps, Option } from 'Types'
 import * as S from './styles'
 
 const Home = ({ HeaderProps, Products, Filters, isDirect }: HomeProps) => {
   const [produtos, setProdutos] = useState<GetOfferProps[]>()
   const [city, setCity] = useState('')
-  const [associate, setAssociate] = useState(-1)
+  const [associate, setAssociate] = useState<number>()
+  const [citys, setCitys] = useState(Filters.citys)
+  const [associates, setAssociates] = useState(Filters.associates)
 
   useEffect(() => {
     function init() {
@@ -24,46 +26,59 @@ const Home = ({ HeaderProps, Products, Filters, isDirect }: HomeProps) => {
   }, [Products])
 
   useEffect(() => {
-    if (!city || Number(city) < 1) {
-      setProdutos(Products)
+    if (!city && !associate) {
+      Products.length > 0 && setProdutos(Products)
       return
     }
-
-    if (city === 'none') {
-      setProdutos(Products)
-      return
-    }
-    const prods = Products.filter(
-      (value) => value.Associated.Address.city === city
-    )
-    setProdutos(prods)
-  }, [city, Products])
-
-  useEffect(() => {
-    if (!associate || associate < 1) {
-      setProdutos(Products)
-      return
-    }
-    const prods = Products.filter((value) => value.Associated.id === associate)
-    setProdutos(prods)
-  }, [associate, Products])
-
-  useEffect(() => {
-    if (!city || !associate) {
-      return
-    }
-    //produtos que passam no filtro 1
-    const prodsCidade = Products.filter(
-      (value) => value.Associated.Address.city === city
-    )
-    //produtos que passam no filtro 2
     const prodsAssociate = Products.filter(
       (value) => value.Associated.id === associate
     )
+    const prodsCidade = Products.filter(
+      (value) => value.Associated.Address.city === city
+    )
 
-    const prod = prodsCidade.filter((value) => prodsAssociate.includes(value))
-    setProdutos(prod)
+    if (!city && associate) {
+      setProdutos(prodsAssociate)
+    }
+
+    if (city && !associate) {
+      setProdutos(prodsCidade)
+    }
+    if (city && associate) {
+      const prod = prodsCidade.filter((value) => prodsAssociate.includes(value))
+      setProdutos(prod)
+    }
   }, [associate, city, Products])
+
+  useEffect(() => {
+    const citisFiltered: Option[] = []
+    const assFiltered: Option[] = []
+
+    produtos?.map((off: GetOfferProps) => {
+      citisFiltered
+        .map(function (e) {
+          return e.key
+        })
+        .indexOf(off.Associated.Address.city) === -1 &&
+        citisFiltered.push({
+          value: off.Associated.Address.city,
+          key: off.Associated.Address.city
+        })
+
+      assFiltered
+        .map(function (e) {
+          return e.key
+        })
+        .indexOf(off.Associated.id) === -1 &&
+        assFiltered.push({
+          value: off.Associated.fantasy_name,
+          key: off.Associated.id
+        })
+    })
+
+    setCitys(citisFiltered)
+    setAssociates(assFiltered)
+  }, [produtos])
 
   return (
     <S.Wrapper>
@@ -94,8 +109,8 @@ const Home = ({ HeaderProps, Products, Filters, isDirect }: HomeProps) => {
 
       <S.WrapperContent>
         <FiltersOffers
-          citys={Filters.citys}
-          associates={Filters.associates}
+          citys={citys}
+          associates={associates}
           setCity={setCity}
           setAssociate={setAssociate}
         />

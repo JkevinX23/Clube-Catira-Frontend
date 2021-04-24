@@ -44,7 +44,7 @@ const FiltersOffers = ({
         onChange={(e) => setCit(e.target.value)}
         value={cit}
       >
-        <option value="none" selected>
+        <option value="" selected>
           Todas as cidades
         </option>
         {citys.length > 0 &&
@@ -56,7 +56,7 @@ const FiltersOffers = ({
         onChange={(e) => handleSetAss(e.target.value)}
         value={ass}
       >
-        <option value="none" selected>
+        <option value="" selected>
           Todos os associados
         </option>
         {associates.length > 0 &&
