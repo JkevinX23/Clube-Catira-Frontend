@@ -8,6 +8,18 @@ import MaterialTable from 'material-table'
 import { useEffect, useState } from 'react'
 import { toast } from 'react-toastify'
 
+import { createMuiTheme, MuiThemeProvider } from '@material-ui/core/styles'
+
+const theme = createMuiTheme({
+  overrides: {
+    MuiTooltip: {
+      tooltip: {
+        fontSize: '0.8em'
+      }
+    }
+  }
+})
+
 export default function TableCategories() {
   const [categories, setCategories] = useState<any>([])
   type IType =
@@ -75,37 +87,39 @@ export default function TableCategories() {
 
   return (
     <S.Wrapper>
-      <MaterialTable
-        title="Categorias"
-        columns={columns}
-        data={categories}
-        options={{ exportButton: true }}
-        localization={{
-          header: { actions: 'Ações' },
-          body: {
-            emptyDataSourceMessage: 'Nenhum registro para exibir'
-          },
-          toolbar: {
-            exportCSVName: 'Exportar como CSV',
-            exportPDFName: 'Exportar como PDF',
-            exportTitle: 'Exportar',
-            searchPlaceholder: 'Buscar',
-            searchTooltip: 'Buscar na tabela'
-          },
-          pagination: {
-            labelRowsSelect: 'Registros por página',
-            labelDisplayedRows: '{count} de {from}-{to}',
-            firstTooltip: 'Primeira página',
-            previousTooltip: 'Página anterior',
-            nextTooltip: 'Próxima página',
-            lastTooltip: 'Última página'
-          }
-        }}
-        editable={{
-          onRowAdd: (newData) => createCategory(newData),
-          onRowUpdate: (newData) => editCategory(newData)
-        }}
-      />
+      <MuiThemeProvider theme={theme}>
+        <MaterialTable
+          title="Categorias"
+          columns={columns}
+          data={categories}
+          options={{ exportButton: true }}
+          localization={{
+            header: { actions: 'Ações' },
+            body: {
+              emptyDataSourceMessage: 'Nenhum registro para exibir'
+            },
+            toolbar: {
+              exportCSVName: 'Exportar como CSV',
+              exportPDFName: 'Exportar como PDF',
+              exportTitle: 'Exportar',
+              searchPlaceholder: 'Buscar',
+              searchTooltip: 'Buscar na tabela'
+            },
+            pagination: {
+              labelRowsSelect: 'Registros por página',
+              labelDisplayedRows: '{count} de {from}-{to}',
+              firstTooltip: 'Primeira página',
+              previousTooltip: 'Página anterior',
+              nextTooltip: 'Próxima página',
+              lastTooltip: 'Última página'
+            }
+          }}
+          editable={{
+            onRowAdd: (newData) => createCategory(newData),
+            onRowUpdate: (newData) => editCategory(newData)
+          }}
+        />
+      </MuiThemeProvider>
     </S.Wrapper>
   )
 }

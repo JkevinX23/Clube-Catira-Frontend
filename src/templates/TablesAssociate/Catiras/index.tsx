@@ -6,7 +6,17 @@ import { GetMyCatiras } from 'Context/Action/Catira'
 import { PurchaseSalesProps } from 'Types'
 import { FormatDateByFNS } from 'utils/Masks'
 import Button from 'components/Button'
+import { createMuiTheme, MuiThemeProvider } from '@material-ui/core/styles'
 
+const theme = createMuiTheme({
+  overrides: {
+    MuiTooltip: {
+      tooltip: {
+        fontSize: '0.8em'
+      }
+    }
+  }
+})
 type MyCatirasTableProps = {
   setTrasnsactionId: (id: number) => void
 }
@@ -110,55 +120,56 @@ export default function MyCatirasTable({
           {selector ? 'Minhas Vendas' : 'Minhas Compras'}
         </Button>
       </S.Button>
-
-      <MaterialTable
-        title={selector ? 'Minhas Compras' : 'Minhas Vendas'}
-        columns={columns}
-        data={selector ? purchases : sales}
-        options={{ exportButton: true }}
-        localization={{
-          header: { actions: selector ? 'Ver fatura' : 'Detalhes' },
-          body: {
-            emptyDataSourceMessage: 'Nenhum registro para exibir'
-          },
-          toolbar: {
-            exportCSVName: 'Exportar como CSV',
-            exportPDFName: 'Exportar como PDF',
-            exportTitle: 'Exportar',
-            searchPlaceholder: 'Buscar',
-            searchTooltip: 'Buscar na tabela'
-          },
-          pagination: {
-            labelRowsSelect: 'Registros por página',
-            labelDisplayedRows: '{count} de {from}-{to}',
-            firstTooltip: 'Primeira página',
-            previousTooltip: 'Página anterior',
-            nextTooltip: 'Próxima página',
-            lastTooltip: 'Última página'
-          }
-        }}
-        actions={[
-          //@ts-ignore
-          selector && {
-            icon: 'payment',
-            tooltip: 'Ver Fatura',
-            onClick: (_event, rowData) => {
-              const row = rowData as PurchaseSalesProps
-              window.open(
-                `https://pagseguro.uol.com.br/v2/checkout/payment.html?code=${row.fat}`
-              )
+      <MuiThemeProvider theme={theme}>
+        <MaterialTable
+          title={selector ? 'Minhas Compras' : 'Minhas Vendas'}
+          columns={columns}
+          data={selector ? purchases : sales}
+          options={{ exportButton: true }}
+          localization={{
+            header: { actions: selector ? 'Ver fatura' : 'Detalhes' },
+            body: {
+              emptyDataSourceMessage: 'Nenhum registro para exibir'
+            },
+            toolbar: {
+              exportCSVName: 'Exportar como CSV',
+              exportPDFName: 'Exportar como PDF',
+              exportTitle: 'Exportar',
+              searchPlaceholder: 'Buscar',
+              searchTooltip: 'Buscar na tabela'
+            },
+            pagination: {
+              labelRowsSelect: 'Registros por página',
+              labelDisplayedRows: '{count} de {from}-{to}',
+              firstTooltip: 'Primeira página',
+              previousTooltip: 'Página anterior',
+              nextTooltip: 'Próxima página',
+              lastTooltip: 'Última página'
             }
-          },
-          {
-            icon: 'open_in_new',
-            tooltip: 'Detalhes',
-            onClick: (_event, rowData) => {
-              const row = rowData as PurchaseSalesProps
-              setTrasnsactionId(row.id)
+          }}
+          actions={[
+            //@ts-ignore
+            selector && {
+              icon: 'payment',
+              tooltip: 'Ver Fatura',
+              onClick: (_event, rowData) => {
+                const row = rowData as PurchaseSalesProps
+                window.open(
+                  `https://pagseguro.uol.com.br/v2/checkout/payment.html?code=${row.fat}`
+                )
+              }
+            },
+            {
+              icon: 'open_in_new',
+              tooltip: 'Detalhes',
+              onClick: (_event, rowData) => {
+                const row = rowData as PurchaseSalesProps
+                setTrasnsactionId(row.id)
+              }
             }
-          }
-        ]}
-      />
+          ]}
+        />
+      </MuiThemeProvider>
     </S.Wrapper>
   )
 }

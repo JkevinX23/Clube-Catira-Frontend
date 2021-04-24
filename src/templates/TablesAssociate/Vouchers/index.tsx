@@ -5,7 +5,17 @@ import { getVoucherByTransaction } from 'Context/Action/Voucher'
 import { FormatDateByFNS } from 'utils/Masks'
 import Button from 'components/Button'
 import { useRouter } from 'next/router'
+import { createMuiTheme, MuiThemeProvider } from '@material-ui/core/styles'
 
+const theme = createMuiTheme({
+  overrides: {
+    MuiTooltip: {
+      tooltip: {
+        fontSize: '0.8em'
+      }
+    }
+  }
+})
 type Props = {
   id: number
   setTrasnsactionId: (id: number) => void
@@ -87,45 +97,46 @@ export default function TableListVouchers({ id, setTrasnsactionId }: Props) {
           Voltar
         </Button>
       </S.Button>
-
-      <MaterialTable
-        title={`Vouchers gerados pela transação Nº${id}`}
-        columns={columns}
-        data={data}
-        options={{ exportButton: true }}
-        localization={{
-          header: { actions: 'Ações' },
-          body: {
-            emptyDataSourceMessage:
-              'Os vouchers referentes a essa transação ainda não foram gerados.'
-          },
-          toolbar: {
-            exportCSVName: 'Exportar como CSV',
-            exportPDFName: 'Exportar como PDF',
-            exportTitle: 'Exportar',
-            searchPlaceholder: 'Buscar',
-            searchTooltip: 'Buscar na tabela'
-          },
-          pagination: {
-            labelRowsSelect: 'Registros por página',
-            labelDisplayedRows: '{count} de {from}-{to}',
-            firstTooltip: 'Primeira página',
-            previousTooltip: 'Página anterior',
-            nextTooltip: 'Próxima página',
-            lastTooltip: 'Última página'
-          }
-        }}
-        actions={[
-          {
-            icon: 'open_in_new',
-            tooltip: 'Detalhes',
-            onClick: (_event, rowData) => {
-              const row = rowData as any
-              showVoucher(row.id)
+      <MuiThemeProvider theme={theme}>
+        <MaterialTable
+          title={`Vouchers gerados pela transação Nº${id}`}
+          columns={columns}
+          data={data}
+          options={{ exportButton: true }}
+          localization={{
+            header: { actions: 'Ações' },
+            body: {
+              emptyDataSourceMessage:
+                'Os vouchers referentes a essa transação ainda não foram gerados.'
+            },
+            toolbar: {
+              exportCSVName: 'Exportar como CSV',
+              exportPDFName: 'Exportar como PDF',
+              exportTitle: 'Exportar',
+              searchPlaceholder: 'Buscar',
+              searchTooltip: 'Buscar na tabela'
+            },
+            pagination: {
+              labelRowsSelect: 'Registros por página',
+              labelDisplayedRows: '{count} de {from}-{to}',
+              firstTooltip: 'Primeira página',
+              previousTooltip: 'Página anterior',
+              nextTooltip: 'Próxima página',
+              lastTooltip: 'Última página'
             }
-          }
-        ]}
-      />
+          }}
+          actions={[
+            {
+              icon: 'open_in_new',
+              tooltip: 'Detalhes',
+              onClick: (_event, rowData) => {
+                const row = rowData as any
+                showVoucher(row.id)
+              }
+            }
+          ]}
+        />
+      </MuiThemeProvider>
     </S.Wrapper>
   )
 }

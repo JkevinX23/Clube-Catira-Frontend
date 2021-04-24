@@ -4,7 +4,17 @@ import { useEffect, useState } from 'react'
 import { getIncrease, updateIncrease } from 'Context/Action/Increases'
 import { FormatDateByFNS } from 'utils/Masks'
 import { toast } from 'react-toastify'
+import { createMuiTheme, MuiThemeProvider } from '@material-ui/core/styles'
 
+const theme = createMuiTheme({
+  overrides: {
+    MuiTooltip: {
+      tooltip: {
+        fontSize: '0.8em'
+      }
+    }
+  }
+})
 export default function IncreasesTable() {
   type IType =
     | 'string'
@@ -106,37 +116,39 @@ export default function IncreasesTable() {
 
   return (
     <S.Wrapper>
-      <MaterialTable
-        title="Aumentos"
-        columns={columns}
-        data={increases}
-        options={{ exportButton: true }}
-        localization={{
-          header: { actions: 'Ações' },
-          body: {
-            emptyDataSourceMessage: 'Nenhum registro para exibir'
-          },
-          toolbar: {
-            exportCSVName: 'Exportar como CSV',
-            exportPDFName: 'Exportar como PDF',
-            exportTitle: 'Exportar',
-            searchPlaceholder: 'Buscar',
-            searchTooltip: 'Buscar na tabela'
-          },
-          pagination: {
-            labelRowsSelect: 'Registros por página',
-            labelDisplayedRows: '{count} de {from}-{to}',
-            firstTooltip: 'Primeira página',
-            previousTooltip: 'Página anterior',
-            nextTooltip: 'Próxima página',
-            lastTooltip: 'Última página'
-          }
-        }}
-        editable={{
-          onRowUpdate: (newData: any, oldData: any) =>
-            handleUpdate(oldData.id, newData.value, newData.status)
-        }}
-      />
+      <MuiThemeProvider theme={theme}>
+        <MaterialTable
+          title="Aumentos"
+          columns={columns}
+          data={increases}
+          options={{ exportButton: true }}
+          localization={{
+            header: { actions: 'Ações' },
+            body: {
+              emptyDataSourceMessage: 'Nenhum registro para exibir'
+            },
+            toolbar: {
+              exportCSVName: 'Exportar como CSV',
+              exportPDFName: 'Exportar como PDF',
+              exportTitle: 'Exportar',
+              searchPlaceholder: 'Buscar',
+              searchTooltip: 'Buscar na tabela'
+            },
+            pagination: {
+              labelRowsSelect: 'Registros por página',
+              labelDisplayedRows: '{count} de {from}-{to}',
+              firstTooltip: 'Primeira página',
+              previousTooltip: 'Página anterior',
+              nextTooltip: 'Próxima página',
+              lastTooltip: 'Última página'
+            }
+          }}
+          editable={{
+            onRowUpdate: (newData: any, oldData: any) =>
+              handleUpdate(oldData.id, newData.value, newData.status)
+          }}
+        />
+      </MuiThemeProvider>
     </S.Wrapper>
   )
 }

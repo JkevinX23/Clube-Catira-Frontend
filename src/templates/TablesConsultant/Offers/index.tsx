@@ -3,7 +3,17 @@ import MaterialTable from 'material-table'
 import { GetOfferAdmin } from 'Types'
 import { useState, useEffect } from 'react'
 import { getOffersAdmin } from 'Context/Action/Offer'
+import { createMuiTheme, MuiThemeProvider } from '@material-ui/core/styles'
 
+const theme = createMuiTheme({
+  overrides: {
+    MuiTooltip: {
+      tooltip: {
+        fontSize: '0.8em'
+      }
+    }
+  }
+})
 type props = {
   setId: (id: number) => void
 }
@@ -84,43 +94,45 @@ export default function OfferTable({ setId }: props) {
 
   return (
     <S.Wrapper>
-      <MaterialTable
-        title="Ofertas"
-        columns={columns}
-        data={data}
-        options={{ exportButton: true }}
-        localization={{
-          header: { actions: 'Ações' },
-          body: {
-            emptyDataSourceMessage: 'Nenhum registro para exibir'
-          },
-          toolbar: {
-            exportCSVName: 'Exportar como CSV',
-            exportPDFName: 'Exportar como PDF',
-            exportTitle: 'Exportar',
-            searchPlaceholder: 'Buscar',
-            searchTooltip: 'Buscar na tabela'
-          },
-          pagination: {
-            labelRowsSelect: 'Registros por página',
-            labelDisplayedRows: '{count} de {from}-{to}',
-            firstTooltip: 'Primeira página',
-            previousTooltip: 'Página anterior',
-            nextTooltip: 'Próxima página',
-            lastTooltip: 'Última página'
-          }
-        }}
-        actions={[
-          {
-            icon: 'visibility',
-            tooltip: 'Ver Detalhes',
-            onClick: (event, rowData) => {
-              const row = rowData as GetOfferAdmin
-              setId(row.id)
+      <MuiThemeProvider theme={theme}>
+        <MaterialTable
+          title="Ofertas"
+          columns={columns}
+          data={data}
+          options={{ exportButton: true }}
+          localization={{
+            header: { actions: 'Ações' },
+            body: {
+              emptyDataSourceMessage: 'Nenhum registro para exibir'
+            },
+            toolbar: {
+              exportCSVName: 'Exportar como CSV',
+              exportPDFName: 'Exportar como PDF',
+              exportTitle: 'Exportar',
+              searchPlaceholder: 'Buscar',
+              searchTooltip: 'Buscar na tabela'
+            },
+            pagination: {
+              labelRowsSelect: 'Registros por página',
+              labelDisplayedRows: '{count} de {from}-{to}',
+              firstTooltip: 'Primeira página',
+              previousTooltip: 'Página anterior',
+              nextTooltip: 'Próxima página',
+              lastTooltip: 'Última página'
             }
-          }
-        ]}
-      />
+          }}
+          actions={[
+            {
+              icon: 'visibility',
+              tooltip: 'Ver Detalhes',
+              onClick: (event, rowData) => {
+                const row = rowData as GetOfferAdmin
+                setId(row.id)
+              }
+            }
+          ]}
+        />
+      </MuiThemeProvider>
     </S.Wrapper>
   )
 }
