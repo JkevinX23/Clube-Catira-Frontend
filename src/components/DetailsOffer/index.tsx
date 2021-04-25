@@ -7,7 +7,7 @@ import { useState } from 'react'
 import Link from 'next/link'
 import TextField from 'components/TextField'
 import { PostCatira } from 'Types'
-import { useRouter } from 'next/router'
+import { Router, useRouter } from 'next/router'
 
 export type DetailsOfferProps = {
   id: number
@@ -66,10 +66,18 @@ const DetailsOffer = ({
       const { data } = await PurschaseOffer(payload)
       const { checkout } = data
       setCode(checkout.code)
+      setStatus(2)
       toast.success(
         'Parabéns, você está apenas um passo de adquirir esta oferta. Acesse o link gerado abaixo e efetue o pagamento.'
       )
-      setStatus(2)
+
+      setTimeout(
+        () =>
+          route.push(
+            `https://pagseguro.uol.com.br/v2/checkout/payment.html?code=${checkout.code}`
+          ),
+        1000
+      )
     } catch (err) {
       setStatus(0)
       toast.warn('Desculpe, algo de errado ocorreu com sua solicitação')
@@ -146,32 +154,12 @@ const DetailsOffer = ({
               Comprar
             </p>
           </Button>
-        ) : status === 1 ? (
-          <Button background="orange" radius="radius100" size="xxsmall">
-            <p>Aguarde...</p>
-          </Button>
         ) : (
-          <S.WrapperButton>
-            <Link
-              href={`https://pagseguro.uol.com.br/v2/checkout/payment.html?code=${code}`}
-              passHref
-            >
-              <a target="_blank" rel="noreferrer">
-                <Button background="green" radius="radius100" size="xxsmall">
-                  <p>Ver fatura</p>
-                </Button>
-              </a>
-            </Link>
-            <Button
-              background="black"
-              radius="radius100"
-              size="xxsmall"
-              onClick={() => route.back()}
-            >
-              {' '}
-              <p>Voltar</p>
+          status === 1 && (
+            <Button background="orange" radius="radius100" size="xxsmall">
+              <p>Aguarde...</p>
             </Button>
-          </S.WrapperButton>
+          )
         )}
       </S.DivWB>
     </S.Wrapper>
