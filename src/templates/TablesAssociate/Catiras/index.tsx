@@ -45,6 +45,11 @@ export default function MyCatirasTable({
       type: string
     },
     {
+      title: 'Associado',
+      field: 'associate',
+      type: string
+    },
+    {
       title: 'Oferta',
       field: 'title',
       type: string
@@ -82,52 +87,47 @@ export default function MyCatirasTable({
     }
   ]
 
-  const [purchases, setPurchases] = useState<PurchaseSalesProps[]>([])
-  const [sales, setSales] = useState<PurchaseSalesProps[]>([])
-  const [selector, setSelector] = useState(false)
+  const [transactions, SetTransactions] = useState<PurchaseSalesProps[]>([])
   useEffect(() => {
     async function loadData() {
       const { data } = await GetMyCatiras()
-      const p = data.purchases.sort((a, b) => b.id - a.id)
-      setPurchases(
-        p.map((a: PurchaseSalesProps) => ({
-          ...a,
-          date: FormatDateByFNS(a.date),
-          value: `Ctz: ${Number(a.value).toFixed(2)}`
-        }))
-      )
-      const s = data.sales.sort((a, b) => b.id - a.id)
-      setSales(
-        s.map((a: PurchaseSalesProps) => ({
-          ...a,
-          date: FormatDateByFNS(a.date),
-          value: `Ctz ${Number(a.value).toFixed(2)}`
-        }))
-      )
+      const p = data.purchases
+      const s = data.sales
+
+      const pf = p.map((a: PurchaseSalesProps) => ({
+        ...a,
+        date: FormatDateByFNS(a.date),
+        value: `Ctz: ${Number(a.value).toFixed(2)}`,
+        type: 'compra'
+      }))
+
+      const sf = s.map((a: PurchaseSalesProps) => ({
+        ...a,
+        date: FormatDateByFNS(a.date),
+        value: `Ctz ${Number(a.value).toFixed(2)}`,
+        type: 'venda'
+      }))
+
+      SetTransactions(pf.concat(sf).sort((a, b) => b.id - a.id))
     }
     loadData()
   }, [])
 
   return (
     <S.Wrapper>
-      <S.Button>
-        <Button
-          size="xsmall"
-          radius="radius100"
-          background="green"
-          onClick={() => setSelector(!selector)}
-        >
-          {selector ? 'Minhas Vendas' : 'Minhas Compras'}
-        </Button>
-      </S.Button>
       <MuiThemeProvider theme={theme}>
         <MaterialTable
-          title={selector ? 'Minhas Compras' : 'Minhas Vendas'}
+          title={'Minhas Transações'}
           columns={columns}
-          data={selector ? purchases : sales}
-          options={{ exportButton: true }}
+          data={transactions}
+          options={{
+            exportButton: true,
+            pageSize: 10,
+            pageSizeOptions: [5, 10, 20, 50],
+            emptyRowsWhenPaging: false
+          }}
           localization={{
-            header: { actions: selector ? 'Ver fatura' : 'Detalhes' },
+            header: { actions: 'Detalhes' },
             body: {
               emptyDataSourceMessage: 'Nenhum registro para exibir'
             },
@@ -148,8 +148,7 @@ export default function MyCatirasTable({
             }
           }}
           actions={[
-            //@ts-ignore
-            selector && {
+            {
               icon: 'payment',
               tooltip: 'Ver Fatura',
               onClick: (_event, rowData) => {

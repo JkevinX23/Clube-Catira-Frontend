@@ -99,6 +99,9 @@ export const Select = styled.select`
 export const SelectWrapper = styled.div`
   width: 100%;
   margin-top: 0px;
+  .react-select-container {
+    font-size: 1.4rem;
+  }
 `
 export const AlignCenter = styled.div`
   display: flex;

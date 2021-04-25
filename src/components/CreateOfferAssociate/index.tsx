@@ -7,6 +7,8 @@ import { getAssociates } from 'Context/Action/Associates'
 import { cleanObject } from 'utils/Validation'
 import ImageInput from 'components/ImageInput'
 import { GetAssociatesAdmin } from 'Types'
+import NumberFormat from 'react-number-format'
+import Select from 'react-select'
 
 const CreateOfferAssociate = () => {
   const [isIlimmited, setIlimited] = useState(true)
@@ -18,6 +20,7 @@ const CreateOfferAssociate = () => {
   const [isDirect, setIsDirect] = useState(false)
   const [associates, setAssociates] = useState<any>([])
   const [direct, setDirectID] = useState<any>(null)
+  const [options, setOptions] = useState<any>(null)
 
   const [file, setFile] = useState(1)
 
@@ -69,20 +72,17 @@ const CreateOfferAssociate = () => {
   useEffect(() => {
     async function loadAssociates() {
       const { data } = await getAssociates()
+      const opt = data
+        .sort(compare)
+        .map((e) => ({ value: e.id, label: `${e.fantasy_name} - ${e.id}` }))
       setAssociates(data.sort(compare))
+      setOptions(opt)
     }
     loadAssociates()
   }, [])
 
   function cleanForm() {
-    setIlimited(true)
-    setTitle('')
-    setDescription('')
-    setValueOffer(0)
-    setConsumerCards(1)
-    setQuantity(1)
-    setDirectID(null)
-    setFile(1)
+    setTimeout(() => window.location.reload(), 1500)
   }
 
   return (
@@ -126,27 +126,24 @@ const CreateOfferAssociate = () => {
         {isDirect && (
           <S.SelectWrapper>
             <S.Label>Associado</S.Label>
-            <S.Select onChange={(e) => setDirectID(e.target.value)}>
-              <option value="none" selected disabled hidden>
-                Selecione
-              </option>
-              {associates &&
-                associates.map((ass: any) => (
-                  <option key={ass.id} value={ass.id}>
-                    {ass.fantasy_name} - {ass.id}
-                  </option>
-                ))}
-            </S.Select>
+            <Select
+              isClearable
+              className="react-select-container"
+              placeholder="Selecione"
+              options={options}
+              onChange={(e) => setDirectID(e?.value)}
+            />
           </S.SelectWrapper>
         )}
 
         <S.Label>Insira o valor</S.Label>
-        <S.Input
-          min="0"
-          type="number"
-          onChange={(e) => setValueOffer(Number(e.target.value))}
-          value={value_offer.toFixed(2)}
-          step="0.1"
+        <NumberFormat
+          thousandSeparator={'.'}
+          customInput={S.Input}
+          decimalScale={2}
+          fixedDecimalScale
+          decimalSeparator={','}
+          onValueChange={(e) => setValueOffer(Number(e.value) | 0)}
         />
 
         <S.Label>Dividir em quantos &#34;Cartões de Consumo&#34;</S.Label>

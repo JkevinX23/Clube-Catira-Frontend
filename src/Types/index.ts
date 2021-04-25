@@ -681,6 +681,7 @@ export interface PurchaseSalesProps {
   title: string
   value: string
   quantity: number
+  associate: string
   status: number
   date: string
   fat: string

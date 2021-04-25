@@ -20,8 +20,8 @@ export default function HomeAssociado() {
   const [offers, setOffers] = useState<GetOfferProps[]>([
     {
       id: -1,
-      title: 'Massagen',
-      description: '1 sessao de massagem',
+      title: ' ',
+      description: ' ',
       value_offer: 0,
       consumer_cards: 1,
       quantity: 0,
@@ -30,20 +30,20 @@ export default function HomeAssociado() {
       File: {
         url: '',
         id: 1,
-        path: '7802614de6664e050f59f6e7b1f1c908.jpg'
+        path: ' '
       },
       Associated: {
         id: 5,
-        description: 'Essa é uma loja teste',
-        fantasy_name: 'Gool',
-        company_name: 'KEVIN LTDA',
+        description: ' ',
+        fantasy_name: ' ',
+        company_name: ' ',
         file_id: 1,
         category_id: 1,
         address_id: 31,
         Address: {
           id: 31,
-          city: 'Montes Claros',
-          state: 'MG'
+          city: ' ',
+          state: ' '
         }
       }
     }

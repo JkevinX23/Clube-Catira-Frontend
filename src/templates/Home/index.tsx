@@ -17,6 +17,7 @@ const Home = ({ HeaderProps, Products, Filters, isDirect }: HomeProps) => {
   const [associate, setAssociate] = useState<number>()
   const [citys, setCitys] = useState(Filters.citys)
   const [associates, setAssociates] = useState(Filters.associates)
+  const [search, SetSearch] = useState('')
 
   useEffect(() => {
     function init() {
@@ -27,7 +28,25 @@ const Home = ({ HeaderProps, Products, Filters, isDirect }: HomeProps) => {
 
   useEffect(() => {
     if (!city && !associate) {
-      Products.length > 0 && setProdutos(Products)
+      if (Products.length <= 0) return
+      if (search) {
+        const resAss = []
+        for (const prod of Products) {
+          if (
+            prod.Associated.fantasy_name
+              .toLowerCase()
+              .includes(search.toLowerCase()) ||
+            prod.title.toLowerCase().includes(search.toLowerCase()) ||
+            prod.description.toLowerCase().includes(search.toLowerCase())
+          ) {
+            resAss.push(prod)
+            continue
+          }
+        }
+        setProdutos(resAss)
+        return
+      }
+      setProdutos(Products)
       return
     }
     const prodsAssociate = Products.filter(
@@ -38,17 +57,85 @@ const Home = ({ HeaderProps, Products, Filters, isDirect }: HomeProps) => {
     )
 
     if (!city && associate) {
-      setProdutos(prodsAssociate)
+      if (search) {
+        const resAss = []
+        for (const prod of prodsAssociate) {
+          if (
+            prod.Associated.fantasy_name
+              .toLowerCase()
+              .includes(search.toLowerCase()) ||
+            prod.Associated.company_name
+              .toLowerCase()
+              .includes(search.toLowerCase()) ||
+            prod.title.toLowerCase().includes(search.toLowerCase()) ||
+            prod.description.toLowerCase().includes(search.toLowerCase())
+          ) {
+            resAss.push(prod)
+            continue
+          }
+        }
+        setProdutos(resAss)
+        return
+      } else {
+        setProdutos(prodsAssociate)
+        return
+      }
     }
 
     if (city && !associate) {
-      setProdutos(prodsCidade)
+      if (search) {
+        const resAss = []
+        for (const prod of prodsCidade) {
+          if (
+            prod.Associated.fantasy_name
+              .toLowerCase()
+              .includes(search.toLowerCase()) ||
+            prod.Associated.company_name
+              .toLowerCase()
+              .includes(search.toLowerCase()) ||
+            prod.title.toLowerCase().includes(search.toLowerCase()) ||
+            prod.description.toLowerCase().includes(search.toLowerCase())
+          ) {
+            resAss.push(prod)
+            continue
+          }
+        }
+        setProdutos(resAss)
+        return
+      } else {
+        setProdutos(prodsCidade)
+        return
+      }
     }
     if (city && associate) {
-      const prod = prodsCidade.filter((value) => prodsAssociate.includes(value))
-      setProdutos(prod)
+      const prodFiltered = prodsCidade.filter((value) =>
+        prodsAssociate.includes(value)
+      )
+      if (search) {
+        const resAss = []
+        for (const prod of prodFiltered) {
+          if (
+            prod.Associated.fantasy_name
+              .toLowerCase()
+              .includes(search.toLowerCase()) ||
+            prod.Associated.company_name
+              .toLowerCase()
+              .includes(search.toLowerCase()) ||
+            prod.title.toLowerCase().includes(search.toLowerCase()) ||
+            prod.description.toLowerCase().includes(search.toLowerCase())
+          ) {
+            resAss.push(prod)
+            continue
+          }
+        }
+        setProdutos(resAss)
+        return
+      } else {
+        setProdutos(prodFiltered)
+        return
+      }
     }
-  }, [associate, city, Products])
+  }, [associate, city, search, Products])
 
   useEffect(() => {
     const citisFiltered: Option[] = []
@@ -108,6 +195,14 @@ const Home = ({ HeaderProps, Products, Filters, isDirect }: HomeProps) => {
       </S.WrapperBreadcrumbs>
 
       <S.WrapperContent>
+        <S.SearchWrapper>
+          <input
+            type="text"
+            id="searchInput"
+            placeholder="Buscar.."
+            onChange={(e) => SetSearch(e.target.value)}
+          />
+        </S.SearchWrapper>
         <FiltersOffers
           citys={citys}
           associates={associates}

@@ -25,7 +25,7 @@ export const WrapperMenu = styled.div`
   margin-top: 7.5rem;
 `
 export const WrapperContent = styled.div`
-  padding: 8rem 0;
+  padding: 4rem 0;
   background-color: #f9fafa;
   @media (max-width: 768px) {
     padding: 2rem 0;
@@ -60,4 +60,27 @@ export const WrapperBreadcrumbs = styled.div`
   background: #f2f2f2;
   width: 100%;
   padding: 20px 0;
+`
+export const SearchWrapper = styled.div`
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 2rem;
+
+  #searchInput {
+    width: 18%;
+    border: 1px solid #000;
+    border-radius: 30px;
+    font-size: 16px;
+    background-color: white;
+    background-image: url('https://cdn2.iconfinder.com/data/icons/ios-7-icons/50/search-24.png');
+    background-position: 10px 7px;
+    background-repeat: no-repeat;
+    padding: 8px 20px 8px 40px;
+    -webkit-transition: width 0.8s ease-in-out;
+    transition: width 0.8s ease-in-out;
+    outline: none;
+    opacity: 0.9;
+  }
 `
