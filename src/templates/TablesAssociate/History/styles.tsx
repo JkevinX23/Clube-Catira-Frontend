@@ -21,6 +21,12 @@ export const Wrapper = styled.div`
     width: 100%;
     overflow: hidden;
   }
+  .MuiTable-root {
+    width: 100%;
+    table {
+      max-width: none;
+    }
+  }
 `
 
 export const Button = styled.div`

@@ -41,7 +41,6 @@ export const Table = styled.div`
   align-items: center;
   justify-content: center;
   table {
-    max-width: 90rem;
     min-width: 65rem;
   }
 `
