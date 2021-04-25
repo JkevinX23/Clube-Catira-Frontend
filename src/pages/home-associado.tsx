@@ -55,11 +55,17 @@ export default function HomeAssociado() {
     { key: 0, value: 'Nenhum associado encontrado' }
   ])
 
+  function compare(a: GetOfferProps, b: GetOfferProps) {
+    if (a.id > b.id) return -1
+    if (a.id < b.id) return 1
+    return 0
+  }
+
   useEffect(() => {
     async function loadOffers() {
       try {
         const response = await getOffers()
-        const offs: GetOfferProps[] = response.data.reverse()
+        const offs: GetOfferProps[] = response.data.sort(compare)
         setOffers(offs)
         const cits: Option[] = []
         const ass: Option[] = []
