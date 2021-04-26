@@ -61,6 +61,22 @@ export const Description = styled.textarea`
   resize: vertical;
   max-height: 15rem;
 `
+
+export const Input = styled.input`
+  width: 100%;
+  height: 4.5rem;
+  font-size: 2rem;
+  line-height: 1.33;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+  transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
+  outline: none;
+  padding-left: 1rem;
+  border: 2px solid black;
+  margin-bottom: 1rem;
+`
+
 export const InputNumber = styled.input`
   font-size: 2rem;
   width: 7rem;

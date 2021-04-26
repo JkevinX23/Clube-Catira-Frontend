@@ -6,8 +6,8 @@ export const Wrapper = styled.div`
     display: flex;
     align-items: center;
     flex-direction: column;
-    padding-top: 8rem;
-    padding-bottom: 5rem;
+    width: 100%;
+    padding-top: 2rem;
   `}
 `
 type DecorationProps = {
@@ -41,7 +41,6 @@ export const SelectionSearchWrapper = styled.div`
   max-width: 600px;
   display: grid;
   gap: 2rem;
-  padding-bottom: 9.5rem;
 
   select {
     width: 98%;

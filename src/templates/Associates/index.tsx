@@ -22,6 +22,7 @@ const Associates = ({ MenuProps }: AssociateProps) => {
   const [associates, setAssociates] = useState<any>([])
   const [allAssociates, setAllAssociates] = useState<any>([])
   const [filter, setFilter] = useState('')
+  const [search, SetSearch] = useState('')
 
   useEffect(() => {
     async function loadAssociates() {
@@ -40,13 +41,47 @@ const Associates = ({ MenuProps }: AssociateProps) => {
   }, [])
 
   useEffect(() => {
-    const associates_selecteds = allAssociates.map(
-      (ass: GetAssociatesNoAuth) => {
-        if (`${ass.city}/${ass.state}` === filter) return ass
+    if (!filter) {
+      const resAss = []
+      if (search) {
+        for (const ass of allAssociates) {
+          if (ass.fantasy_name.toLowerCase().includes(search.toLowerCase())) {
+            resAss.push(ass)
+            continue
+          }
+        }
+        setAssociates(resAss)
+      } else {
+        setAssociates(allAssociates)
       }
-    )
+      return
+    }
+
+    const associates_selecteds: GetAssociatesNoAuth[] = []
+    allAssociates.forEach((ass: any) => {
+      if (`${ass.city}/${ass.state}` === filter) {
+        associates_selecteds.push(ass)
+      }
+    })
+
+    if (associates_selecteds.length < 1) {
+      setAssociates([])
+      return
+    }
+    const resAss = []
+    if (search) {
+      for (const ass of associates_selecteds) {
+        console.log({ ass })
+        if (ass.fantasy_name.toLowerCase().includes(search.toLowerCase())) {
+          resAss.push(ass)
+        }
+      }
+      setAssociates(resAss)
+      return
+    }
+
     setAssociates(associates_selecteds)
-  }, [filter])
+  }, [allAssociates, filter, search])
 
   return (
     <S.Wrapper>
@@ -54,25 +89,45 @@ const Associates = ({ MenuProps }: AssociateProps) => {
         <Menu />
       </S.MenuWrapper>
 
-      <AssociateComponent citys={citys} setFilter={setFilter} />
+      <S.TextWrapper>Associados</S.TextWrapper>
+      <S.DecorationLineWrapper isPrimary />
+      <S.DecorationLineWrapper />
 
-      {associates.length > 0 && (
+      <S.FiltersWrapper>
+        <S.SearchWrapper>
+          <input
+            type="text"
+            id="searchInput"
+            placeholder="Buscar.."
+            onChange={(e) => SetSearch(e.target.value)}
+          />
+        </S.SearchWrapper>
+        <div className="selectCity">
+          <AssociateComponent citys={citys} setFilter={setFilter} />
+        </div>
+      </S.FiltersWrapper>
+      {!!associates && associates.length > 0 && (
         <S.ContentWrapper>
-          <S.TextWrapper>Associados</S.TextWrapper>
-          <S.DecorationLineWrapper isPrimary />
-          <S.DecorationLineWrapper />
-
           <S.Grid>
-            {associates.map((associate: GetAssociatesNoAuth) => (
-              <CardAssociates
-                key={associate.id}
-                city={associate.city}
-                name={associate.fantasy_name}
-                img={associate.img}
-                state={associate.state}
-              />
-            ))}
+            {associates.map(
+              (associate: GetAssociatesNoAuth) =>
+                associate && (
+                  <CardAssociates
+                    key={associate.id}
+                    city={associate.city}
+                    name={associate.fantasy_name}
+                    img={associate.img}
+                    state={associate.state}
+                  />
+                )
+            )}
           </S.Grid>
+        </S.ContentWrapper>
+      )}
+
+      {associates.length < 1 && (
+        <S.ContentWrapper>
+          <S.TextWrapper>Nenhum associado encontrado</S.TextWrapper>
         </S.ContentWrapper>
       )}
       <SociaisSection />

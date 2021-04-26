@@ -7,16 +7,13 @@ type pageProps = {
 
 const AssociateSection = ({ citys, setFilter }: pageProps) => (
   <S.Wrapper>
-    <S.TextWrapper>Selecione a Cidade</S.TextWrapper>
-    <S.DecorationLineWrapper isPrimary />
-    <S.DecorationLineWrapper />
     <S.SelectionSearchWrapper>
       {citys && (
         <S.SelectWrapper
           onClick={(e) => setFilter((e.target as HTMLTextAreaElement).value)}
         >
-          <option value="none" selected disabled>
-            Selecione
+          <option value="" selected>
+            Todas as cidades
           </option>
           {citys &&
             citys.map((c: string, i: number) => (

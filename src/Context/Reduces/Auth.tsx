@@ -52,8 +52,8 @@ export const AuthProvider: React.FC = ({ children }: any) => {
         localStorage.setItem('client', JSON.stringify(associate))
       }, 60000)
     }
-    option === 4 && lazzy()
-  }, [client, option])
+    signed && option === 4 && lazzy()
+  }, [client, option, signed])
 
   const signIn = async (payload: Login) => {
     try {

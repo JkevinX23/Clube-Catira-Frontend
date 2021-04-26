@@ -8,6 +8,7 @@ import Link from 'next/link'
 import TextField from 'components/TextField'
 import { PostCatira } from 'Types'
 import { Router, useRouter } from 'next/router'
+import NumberFormat from 'react-number-format'
 
 export type DetailsOfferProps = {
   id: number
@@ -93,15 +94,19 @@ const DetailsOffer = ({
           {Number(value) > 0 ? (
             <S.Value>Ctz {Number(value).toFixed(2)}</S.Value>
           ) : (
-            <TextField
-              label="Insira um valor"
-              type="numeric"
-              onChange={(e) => setEstimateValue(Number(e.target.value))}
-              step={10}
-              value={estimateValue}
-            />
+            <div>
+              <p>Oferta a negociar</p>
+              <NumberFormat
+                thousandSeparator={'.'}
+                customInput={S.Input}
+                decimalScale={2}
+                fixedDecimalScale
+                decimalSeparator={','}
+                onValueChange={(e) => setEstimateValue(Number(e.value) | 0)}
+                placeholder="Insira o valor aqui"
+              />
+            </div>
           )}
-
           <p>
             Empresa: <span>{associate}</span>
           </p>
