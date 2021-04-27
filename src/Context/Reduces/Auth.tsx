@@ -45,10 +45,14 @@ export const AuthProvider: React.FC = ({ children }: any) => {
   useEffect(() => {
     async function lazzy() {
       setInterval(async () => {
+        if (!process.browser) {
+          return
+        }
         const promisse = await getCredits()
         const associate = client as Associate
         associate.credit = promisse.data.credits
         setClient(associate)
+
         localStorage.setItem('client', JSON.stringify(associate))
       }, 60000)
     }
