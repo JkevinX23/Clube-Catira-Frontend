@@ -6,6 +6,7 @@ export type MyCreditsProps = {
   pendingSpend: number
   received: number
   receivable: number
+  limit: number
 }
 
 const MyCredits = ({
@@ -13,7 +14,8 @@ const MyCredits = ({
   spent,
   pendingSpend,
   received,
-  receivable
+  receivable,
+  limit
 }: MyCreditsProps) => (
   <S.Wrapper>
     <S.WrapperTitle>
@@ -42,6 +44,11 @@ const MyCredits = ({
     <S.InfoBox>
       <p>Créditos a receber</p>
       <p>Ct${receivable}</p>
+    </S.InfoBox>
+
+    <S.InfoBox>
+      <p>Limite de Crédito</p>
+      <p>Ct${limit}</p>
     </S.InfoBox>
   </S.Wrapper>
 )

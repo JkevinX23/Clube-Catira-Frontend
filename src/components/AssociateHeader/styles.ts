@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 
 export const Wrapper = styled.div`
   display: flex;
@@ -40,7 +40,15 @@ export const Row = styled.div`
     font-size: 1.2rem;
   }
 `
-export const Value = styled.p``
+
+type ValueProps = {
+  isNegative: boolean
+}
+export const Value = styled.p<ValueProps>`
+  ${({ isNegative }) => css`
+    color: ${isNegative ? '#FF4500' : 'black'};
+  `}
+`
 export const Icon = styled.div`
   width: 4rem;
   height: 4rem;

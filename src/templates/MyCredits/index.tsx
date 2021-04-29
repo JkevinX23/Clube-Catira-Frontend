@@ -20,6 +20,7 @@ const MyCreditsTemplate = ({ HeaderProps }: MyCreditsProps) => {
   const [pendingSpend, setPendingSpend] = useState(0)
   const [received, setReceived] = useState(0)
   const [receivable, setReceivable] = useState(0)
+  const [limit, setLimit] = useState(0)
 
   useEffect(() => {
     async function loadMyCredits() {
@@ -29,6 +30,7 @@ const MyCreditsTemplate = ({ HeaderProps }: MyCreditsProps) => {
       setPendingSpend(data.pendingSpend || 0)
       setReceivable(data.receivable || 0)
       setReceived(data.received || 0)
+      setLimit(data.limit || 0)
     }
     loadMyCredits()
   }, [])
@@ -51,6 +53,7 @@ const MyCreditsTemplate = ({ HeaderProps }: MyCreditsProps) => {
             spent={spent}
             received={received}
             receivable={receivable}
+            limit={limit}
           />
         </S.MyCredits>
         <S.RequestIncrease>

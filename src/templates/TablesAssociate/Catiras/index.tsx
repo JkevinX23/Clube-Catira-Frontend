@@ -158,8 +158,10 @@ export default function MyCatirasTable({
               tooltip: 'Ver Fatura',
               onClick: (_event, rowData) => {
                 const row = rowData as PurchaseSalesProps
-                if (row.status > 3) {
-                  toast.success('Não é possível ver abrir essa fatura.')
+                if (row.status > 2) {
+                  toast.warn(
+                    'Não foi possível ver abrir essa fatura pois ela já foi finalizada.'
+                  )
                   return
                 }
                 window.open(

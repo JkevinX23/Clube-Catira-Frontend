@@ -717,6 +717,7 @@ export interface GetCreditsProps {
   pendingSpend: number
   received: number
   receivable: number
+  limit: number
 }
 
 export interface GetVoucherProps {

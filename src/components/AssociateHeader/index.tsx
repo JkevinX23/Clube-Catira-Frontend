@@ -21,7 +21,7 @@ const AssociateHeader = ({ associate, credits }: AssociateHeaderProps) => {
       <S.Row>
         <S.Box>
           <p>Créditos</p>
-          <S.Value>CT${credits}</S.Value>
+          <S.Value isNegative={credits < 0}>CT${credits}</S.Value>
         </S.Box>
         <Link href="/associado/perfil">
           <S.Icon>
