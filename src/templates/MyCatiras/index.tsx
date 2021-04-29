@@ -14,6 +14,7 @@ export type MyCatirasProps = {
 
 const MyCatiras = ({ HeaderProps }: MyCatirasProps) => {
   const [transaction_id, setTrasnsactionId] = useState(0)
+  const [isSale, setIsSale] = useState(false)
   return (
     <S.Wrapper>
       <S.WrapperHeader>
@@ -30,9 +31,13 @@ const MyCatiras = ({ HeaderProps }: MyCatirasProps) => {
           <TableListVouchers
             setTrasnsactionId={setTrasnsactionId}
             id={transaction_id}
+            isSale={isSale}
           />
         ) : (
-          <MyCatirasTable setTrasnsactionId={setTrasnsactionId} />
+          <MyCatirasTable
+            setTrasnsactionId={setTrasnsactionId}
+            setIsSale={setIsSale}
+          />
         )}
       </S.WrapperContent>
       <S.WrapperFooter>

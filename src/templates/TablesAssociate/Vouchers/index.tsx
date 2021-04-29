@@ -18,9 +18,14 @@ const theme = createMuiTheme({
 })
 type Props = {
   id: number
+  isSale: boolean
   setTrasnsactionId: (id: number) => void
 }
-export default function TableListVouchers({ id, setTrasnsactionId }: Props) {
+export default function TableListVouchers({
+  id,
+  setTrasnsactionId,
+  isSale
+}: Props) {
   type IType =
     | 'string'
     | 'boolean'
@@ -30,7 +35,7 @@ export default function TableListVouchers({ id, setTrasnsactionId }: Props) {
     | 'time'
     | 'currency'
   const string: IType = 'string'
-  const columns = [
+  const columnsCompra = [
     {
       title: 'Codigo',
       field: 'code',
@@ -62,6 +67,38 @@ export default function TableListVouchers({ id, setTrasnsactionId }: Props) {
       }
     }
   ]
+  const columnsVenda = [
+    {
+      title: 'Oferta',
+      field: 'Offer.title',
+      type: string
+    },
+    {
+      title: 'Valor',
+      field: 'value',
+      type: string
+    },
+    {
+      title: 'Data Compra',
+      field: 'date',
+      type: string
+    },
+    {
+      title: 'Status',
+      field: 'status',
+      lookup: {
+        0: 'Pendente',
+        1: 'Ativo',
+        2: 'Utilizado',
+        3: 'Utilizado'
+      }
+    },
+    {
+      title: 'Data Utilização',
+      field: 'dateUse',
+      type: string
+    }
+  ]
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const [data, setData] = useState<any>([])
@@ -73,7 +110,8 @@ export default function TableListVouchers({ id, setTrasnsactionId }: Props) {
       const payload = data.map((v) => ({
         ...v,
         value: `Ctz ${v.ctz_value.toFixed(2)}`,
-        date: FormatDateByFNS(v.createdAt)
+        date: FormatDateByFNS(v.createdAt),
+        dateUse: v.status > 1 ? FormatDateByFNS(v.updatedAt) : ''
       }))
       setData(payload.sort((a, b) => b.id - a.id))
     }
@@ -99,8 +137,10 @@ export default function TableListVouchers({ id, setTrasnsactionId }: Props) {
       </S.Button>
       <MuiThemeProvider theme={theme}>
         <MaterialTable
-          title={`Vouchers gerados pela transação Nº${id}`}
-          columns={columns}
+          title={`Vouchers gerados pela transação de ${
+            isSale ? 'venda' : 'compra'
+          } Nº${id}`}
+          columns={isSale ? columnsVenda : columnsCompra}
           data={data}
           options={{ exportButton: true }}
           localization={{
@@ -125,16 +165,20 @@ export default function TableListVouchers({ id, setTrasnsactionId }: Props) {
               lastTooltip: 'Última página'
             }
           }}
-          actions={[
-            {
-              icon: 'open_in_new',
-              tooltip: 'Detalhes',
-              onClick: (_event, rowData) => {
-                const row = rowData as any
-                showVoucher(row.id)
-              }
-            }
-          ]}
+          actions={
+            !isSale
+              ? [
+                  {
+                    icon: 'open_in_new',
+                    tooltip: 'Detalhes',
+                    onClick: (_event, rowData) => {
+                      const row = rowData as any
+                      showVoucher(row.id)
+                    }
+                  }
+                ]
+              : []
+          }
         />
       </MuiThemeProvider>
     </S.Wrapper>

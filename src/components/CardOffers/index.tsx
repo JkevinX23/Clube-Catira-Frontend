@@ -54,7 +54,7 @@ const CardOffers = ({
             <Button
               fullWidth
               size="xxsmall"
-              background="white"
+              background="blue"
               onClick={() => {
                 router.push({ pathname: '/associado/oferta', query: { id } })
               }}
@@ -65,7 +65,7 @@ const CardOffers = ({
             <Button
               fullWidth
               size="xxsmall"
-              background="white"
+              background="blue"
               onClick={() => {
                 router.push({
                   pathname: '/associado/minha-oferta',

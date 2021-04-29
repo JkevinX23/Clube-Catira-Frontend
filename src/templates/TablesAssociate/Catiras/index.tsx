@@ -7,6 +7,7 @@ import { PurchaseSalesProps } from 'Types'
 import { FormatDateByFNS } from 'utils/Masks'
 import Button from 'components/Button'
 import { createMuiTheme, MuiThemeProvider } from '@material-ui/core/styles'
+import { toast } from 'react-toastify'
 
 const theme = createMuiTheme({
   overrides: {
@@ -19,10 +20,12 @@ const theme = createMuiTheme({
 })
 type MyCatirasTableProps = {
   setTrasnsactionId: (id: number) => void
+  setIsSale: (value: boolean) => void
 }
 
 export default function MyCatirasTable({
-  setTrasnsactionId
+  setTrasnsactionId,
+  setIsSale
 }: MyCatirasTableProps) {
   type IType =
     | 'string'
@@ -98,14 +101,16 @@ export default function MyCatirasTable({
         ...a,
         date: FormatDateByFNS(a.date),
         value: `Ctz: ${Number(a.value).toFixed(2)}`,
-        type: 'compra'
+        type: 'compra',
+        flag: 1
       }))
 
       const sf = s.map((a: PurchaseSalesProps) => ({
         ...a,
         date: FormatDateByFNS(a.date),
         value: `Ctz ${Number(a.value).toFixed(2)}`,
-        type: 'venda'
+        type: 'venda',
+        flag: 2
       }))
 
       SetTransactions(pf.concat(sf).sort((a, b) => b.id - a.id))
@@ -153,6 +158,10 @@ export default function MyCatirasTable({
               tooltip: 'Ver Fatura',
               onClick: (_event, rowData) => {
                 const row = rowData as PurchaseSalesProps
+                if (row.status > 3) {
+                  toast.success('Não é possível ver abrir essa fatura.')
+                  return
+                }
                 window.open(
                   `https://pagseguro.uol.com.br/v2/checkout/payment.html?code=${row.fat}`
                 )
@@ -161,9 +170,11 @@ export default function MyCatirasTable({
             {
               icon: 'open_in_new',
               tooltip: 'Detalhes',
-              onClick: (_event, rowData) => {
-                const row = rowData as PurchaseSalesProps
+              onClick: (_event, rowData: any) => {
+                const row = rowData
+                console.log(row.type === 'venda')
                 setTrasnsactionId(row.id)
+                setIsSale(row.type === 'venda')
               }
             }
           ]}

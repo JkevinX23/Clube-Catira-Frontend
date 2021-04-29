@@ -129,6 +129,7 @@ export const WrapperCards = styled.div`
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, auto));
   padding-top: 2em;
+  row-gap: 3rem;
 `
 export const Text = styled.h2`
   color: #444;

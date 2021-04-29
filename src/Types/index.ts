@@ -685,6 +685,7 @@ export interface PurchaseSalesProps {
   status: number
   date: string
   fat: string
+  flag?: number
 }
 export interface MyCatiraProps {
   purchases: PurchaseSalesProps[]

@@ -67,7 +67,6 @@ export const SearchWrapper = styled.div`
   align-items: center;
   justify-content: center;
   margin-bottom: 2rem;
-
   #searchInput {
     width: 18%;
     border: 1px solid #000;
@@ -82,5 +81,6 @@ export const SearchWrapper = styled.div`
     transition: width 0.8s ease-in-out;
     outline: none;
     opacity: 0.9;
+    min-width: 200px;
   }
 `
