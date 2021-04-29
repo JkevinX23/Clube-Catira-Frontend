@@ -1,20 +1,23 @@
 import Button from 'components/Button'
 import * as S from './styles'
-import { useEffect, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import { postOffers } from 'Context/Action/Offer'
 import { toast } from 'react-toastify'
 import { getAssociates } from 'Context/Action/Associates'
 import { cleanObject } from 'utils/Validation'
 import ImageInput from 'components/ImageInput'
 import { GetAssociatesAdmin } from 'Types'
-import NumberFormat from 'react-number-format'
+import CurrencyInput from 'react-currency-masked-input'
 import Select from 'react-select'
+import { Data } from 'templates/VoucherPDF/styles'
+import AuthContext from 'Context/Reduces/Auth'
 
 const CreateOfferAssociate = () => {
+  // const props = useContext(AuthContext)
   const [isIlimmited, setIlimited] = useState(true)
   const [title, setTitle] = useState('')
   const [description, setDescription] = useState('')
-  const [value_offer, setValueOffer] = useState(0)
+  const [value_offer, setValueOffer] = useState(0.0)
   const [consumer_cards, setConsumerCards] = useState(1)
   const [quantity, setQuantity] = useState(1)
   const [isDirect, setIsDirect] = useState(false)
@@ -22,6 +25,7 @@ const CreateOfferAssociate = () => {
   const [direct, setDirectID] = useState<any>(null)
   const [options, setOptions] = useState<any>(null)
 
+  //////CLIENT.IMAGE_ID
   const [file, setFile] = useState(1)
 
   function handleIlimited() {
@@ -46,7 +50,7 @@ const CreateOfferAssociate = () => {
     const data = {
       title,
       description,
-      value_offer: value_offer | 0,
+      value_offer: value_offer || 0.0,
       consumer_cards,
       quantity: !isIlimmited ? quantity : 0,
       file_id: file,
@@ -54,7 +58,8 @@ const CreateOfferAssociate = () => {
     }
 
     try {
-      await postOffers(cleanObject(data))
+      const payload = cleanObject(data)
+      await postOffers(payload)
       toast.success('oferta criada com sucesso!')
       cleanForm()
     } catch (e) {
@@ -137,15 +142,12 @@ const CreateOfferAssociate = () => {
         )}
 
         <S.Label>Insira o valor</S.Label>
-        <NumberFormat
-          thousandSeparator={'.'}
-          customInput={S.Input}
-          decimalScale={2}
-          fixedDecimalScale
-          decimalSeparator={','}
-          onValueChange={(e) => setValueOffer(Number(e.value) | 0)}
-        />
-
+        <S.InputDiv>
+          <CurrencyInput
+            separator={'.'}
+            onChange={(e, f: number) => setValueOffer(f)}
+          />
+        </S.InputDiv>
         <S.Label>Dividir em quantos &#34;Cartões de Consumo&#34;</S.Label>
         <S.Input
           min="1"

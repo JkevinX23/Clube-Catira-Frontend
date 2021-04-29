@@ -2,7 +2,7 @@ import * as S from './styles'
 import Link from 'next/link'
 import { Profile as ProfileIcon } from '@styled-icons/icomoon'
 import { Exit as ExitIcon } from '@styled-icons/boxicons-regular'
-import { useContext } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import AuthContext from 'Context/Reduces/Auth'
 
 export type AssociateHeaderProps = {
@@ -15,13 +15,18 @@ const AssociateHeader = ({ associate, credits }: AssociateHeaderProps) => {
   function handleLogout() {
     signOut()
   }
+
+  const [isNegative, setIsNegative] = useState(false)
+  useEffect(() => {
+    credits < 0 ? setIsNegative(true) : setIsNegative(false)
+  }, [credits])
   return (
     <S.Wrapper>
       <S.Name>Bem Vindo {associate}</S.Name>
       <S.Row>
         <S.Box>
           <p>Créditos</p>
-          <S.Value isNegative={credits < 0}>CT${credits}</S.Value>
+          <S.Value isNegative={isNegative}>CT${credits}</S.Value>
         </S.Box>
         <Link href="/associado/perfil">
           <S.Icon>
