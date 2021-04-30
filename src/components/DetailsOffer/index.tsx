@@ -79,9 +79,24 @@ const DetailsOffer = ({
           ),
         1000
       )
-    } catch (err) {
+    } catch (error) {
       setStatus(0)
-      toast.warn('Desculpe, algo de errado ocorreu com sua solicitação')
+      if (error.response) {
+        switch (error.response.status) {
+          case 404: toast.error("[Code: 404] Dados incorretos")
+          break
+          case 402: toast.error("Créditos insuficientes. Faça sua solicitação de aumento de limite de crédito.")
+          break
+          case 403: toast.error("Oferta não válida para este usuario. Tente sair e realizar um novo login no sistema.")
+          break
+          case 406: toast.warn("A quantidade informada está acima da disponibilidade dessa oferta.")
+          break
+          case 408: toast.error("Ocorreu um erro ao processar sua transação. Tente novamente.")
+          break
+          default:
+          toast.warn('Desculpe, algo de errado ocorreu com sua solicitação')
+        }
+
     }
   }
 

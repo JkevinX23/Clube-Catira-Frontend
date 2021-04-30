@@ -45,7 +45,7 @@ export const AuthProvider: React.FC = ({ children }: any) => {
   useEffect(() => {
     async function lazzy() {
       setInterval(async () => {
-        if (!process.browser) {
+        if (!process.browser || !token) {
           return
         }
         const promisse = await getCredits()
@@ -57,7 +57,7 @@ export const AuthProvider: React.FC = ({ children }: any) => {
       }, 60000)
     }
     signed && option === 4 && lazzy()
-  }, [client, option, signed])
+  }, [client, option, signed, token])
 
   const signIn = async (payload: Login) => {
     try {
