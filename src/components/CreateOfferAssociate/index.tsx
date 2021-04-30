@@ -100,7 +100,12 @@ const CreateOfferAssociate = () => {
         </S.AlignCenter>
 
         <S.Label>Título da Oferta</S.Label>
-        <S.Input value={title} onChange={(e) => setTitle(e.target.value)} />
+        <S.Input
+          value={title}
+          onChange={(e) =>
+            e.target.value.length < 40 && setTitle(e.target.value)
+          }
+        />
 
         <S.Label>Descrição</S.Label>
         <S.TextArea
@@ -146,7 +151,8 @@ const CreateOfferAssociate = () => {
         <S.InputDiv>
           <CurrencyInput
             separator={'.'}
-            onChange={(_e: any, f: number) => setValueOffer(f)}
+            onChange={(_e: any, f: number) => f <= 9999999 && setValueOffer(f)}
+            value={value_offer}
           />
         </S.InputDiv>
         <S.Label>Dividir em quantos &#34;Cartões de Consumo&#34;</S.Label>
