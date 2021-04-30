@@ -69,7 +69,7 @@ const DetailsOffer = ({
       setCode(checkout.code)
       setStatus(2)
       toast.success(
-        'Parabéns, você está apenas um passo de adquirir esta oferta. Acesse o link gerado abaixo e efetue o pagamento.'
+        'Parabéns, você será redirecionado para realizar o pagamento em breve.'
       )
 
       setTimeout(
