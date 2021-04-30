@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import Button from 'components/Button'
 import * as S from './styles'
 import { useContext, useEffect, useState } from 'react'
@@ -26,7 +27,7 @@ const CreateOfferAssociate = () => {
   const [options, setOptions] = useState<any>(null)
 
   //////CLIENT.IMAGE_ID
-  const [file, setFile] = useState(1)
+  const [file, setFile] = useState<number>(0)
 
   function handleIlimited() {
     if (!isDirect) {
@@ -145,7 +146,7 @@ const CreateOfferAssociate = () => {
         <S.InputDiv>
           <CurrencyInput
             separator={'.'}
-            onChange={(e, f: number) => setValueOffer(f)}
+            onChange={(_e: any, f: number) => setValueOffer(f)}
           />
         </S.InputDiv>
         <S.Label>Dividir em quantos &#34;Cartões de Consumo&#34;</S.Label>
