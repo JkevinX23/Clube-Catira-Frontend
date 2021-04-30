@@ -17,9 +17,9 @@ export const Image = styled.div<ImageProps>`
 export const Title = styled.p`
   width: 100%;
   text-transform: uppercase;
-  font-size: 2rem;
+  font-size: 1.85rem;
   margin-top: 1rem;
-  margin-bottom: 1rem;
+  margin-bottom: 0.5rem;
 `
 type subTitleProps = {
   isLink?: boolean
@@ -69,6 +69,4 @@ export const Wrapper = styled.main`
     }
   }
 `
-export const Button = styled.div`
-  width: 60%;
-`
+export const Button = styled.div``

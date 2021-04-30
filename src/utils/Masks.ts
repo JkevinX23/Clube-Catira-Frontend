@@ -74,8 +74,7 @@ export const FormatDateByIntl = (v: Date | string) => {
 
 export const FormatCurrency = (v: number) => {
   const currency = new Intl.NumberFormat('pt-br', {
-    style: 'currency',
-    currency: 'BRL'
+    minimumFractionDigits: 2
   }).format(v)
   return currency
 }

@@ -5,6 +5,7 @@ import Link from 'next/link'
 import { useContext } from 'react'
 import AuthContext from 'Context/Reduces/Auth'
 import { Associate } from 'Types'
+import { FormatCurrency } from 'utils/Masks'
 export type CardOffersProps = {
   id: number
   img: string
@@ -45,14 +46,13 @@ const CardOffers = ({
 
       <S.BuyWrapper>
         {Number(value) > 0 ? (
-          <S.Value>CT${value}</S.Value>
+          <S.Value>CT${FormatCurrency(value)}</S.Value>
         ) : (
           <S.subTitle>A Negociar</S.subTitle>
         )}
         <S.Button>
           {client.id !== associateId ? (
             <Button
-              fullWidth
               size="xxsmall"
               background="blue"
               onClick={() => {
@@ -73,7 +73,7 @@ const CardOffers = ({
                 })
               }}
             >
-              Ver
+              Minha
             </Button>
           )}
         </S.Button>
