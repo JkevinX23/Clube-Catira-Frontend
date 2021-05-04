@@ -41,10 +41,12 @@ export const AuthProvider: React.FC = ({ children }: any) => {
   const [signed, setSigned] = useState(
     process.browser ? signedJSON !== null && JSON.parse(signedJSON) : false
   )
+  let interval: any = null
 
   useEffect(() => {
     async function lazzy() {
-      setInterval(async () => {
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+      interval = setInterval(async () => {
         if (!process.browser || !token) {
           return
         }
@@ -138,13 +140,13 @@ export const AuthProvider: React.FC = ({ children }: any) => {
     }
   }
   function signOut() {
+    clearInterval(interval)
+    Router.push('/')
     setClient(null)
     setToken(null)
     setOption(-1)
     setSigned(false)
-
-    process.browser && localStorage.clear()
-    Router.push('/')
+    localStorage.clear()
   }
 
   return (

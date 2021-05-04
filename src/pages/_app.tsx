@@ -13,17 +13,16 @@ function App({ Component, pageProps }: AppProps) {
     <ThemeProvider theme={theme}>
       <Head>
         <title>Clube da Catira</title>
-        <link rel="shortcut icon" href="/img/icon-512.png" />
-        <link rel="apple-touch-icon" href="/img/icon-512.png" />
+        <link rel="shortcut icon" href="/img/catira-icon-72x72.png" />
+        <link rel="apple-touch-icon" href="/img/catira-icon-72x72.png" />
         <link
           rel="stylesheet"
           href="https://fonts.googleapis.com/icon?family=Material+Icons"
         />
-
         <link rel="manifest" href="/manifest.json" />
         <meta
-          name="description"
-          content="A simple project starter to work with TypeScript, React, NextJS and Styled Components"
+          name="Clube da catira"
+          content="Uma solução criativa e econômica Gerando relacionamentos para você transformá-los em negócios"
         />
       </Head>
       <GlobalStyles />

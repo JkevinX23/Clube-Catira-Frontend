@@ -4,10 +4,8 @@ import { Cart as CartIcon } from '@styled-icons/boxicons-regular'
 import { PurschaseOffer } from 'Context/Action/Catira'
 import { toast } from 'react-toastify'
 import { useState } from 'react'
-import Link from 'next/link'
-import TextField from 'components/TextField'
 import { PostCatira } from 'Types'
-import { Router, useRouter } from 'next/router'
+import { useRouter } from 'next/router'
 import NumberFormat from 'react-number-format'
 
 export type DetailsOfferProps = {
@@ -169,7 +167,11 @@ const DetailsOffer = ({
             min="1"
             max={quantity - sell}
             defaultValue="1"
-            onChange={(e) => handleChage(Number(e.target.value))}
+            value={qtd}
+            onChange={(e) =>
+              Number(e.target.value) <= quantity - sell &&
+              handleChage(Number(e.target.value))
+            }
           />
         ) : (
           <S.InputNumber

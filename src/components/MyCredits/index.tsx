@@ -1,3 +1,4 @@
+import { FormatCurrency } from 'utils/Masks'
 import * as S from './styles'
 
 export type MyCreditsProps = {
@@ -23,32 +24,32 @@ const MyCredits = ({
     </S.WrapperTitle>
     <S.InfoBox>
       <p>Créditos</p>
-      <p>Ct${credits}</p>
+      <p>Ct$ {FormatCurrency(credits)}</p>
     </S.InfoBox>
 
     <S.InfoBox>
       <p>Créditos Gastos</p>
-      <p>Ct${spent}</p>
+      <p>Ct$ {FormatCurrency(spent)}</p>
     </S.InfoBox>
 
     <S.InfoBox>
       <p>Gasto Pendente</p>
-      <p>Ct${pendingSpend}</p>
+      <p>Ct$ {FormatCurrency(pendingSpend)}</p>
     </S.InfoBox>
 
     <S.InfoBox>
       <p>Crédito Recebido</p>
-      <p>Ct${received}</p>
+      <p>Ct$ {FormatCurrency(received)}</p>
     </S.InfoBox>
 
     <S.InfoBox>
       <p>Créditos a receber</p>
-      <p>Ct${receivable}</p>
+      <p>Ct$ {FormatCurrency(receivable)}</p>
     </S.InfoBox>
 
     <S.InfoBox>
       <p>Limite de Crédito</p>
-      <p>Ct${limit}</p>
+      <p>Ct$ {FormatCurrency(limit)}</p>
     </S.InfoBox>
   </S.Wrapper>
 )

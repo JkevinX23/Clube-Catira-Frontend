@@ -4,6 +4,7 @@ import { Profile as ProfileIcon } from '@styled-icons/icomoon'
 import { Exit as ExitIcon } from '@styled-icons/boxicons-regular'
 import { useContext, useEffect, useState } from 'react'
 import AuthContext from 'Context/Reduces/Auth'
+import { FormatCurrency } from 'utils/Masks'
 
 export type AssociateHeaderProps = {
   associate: string
@@ -26,7 +27,9 @@ const AssociateHeader = ({ associate, credits }: AssociateHeaderProps) => {
       <S.Row>
         <S.Box>
           <p>Créditos</p>
-          <S.Value isNegative={isNegative}>CT${credits}</S.Value>
+          <S.Value isNegative={isNegative}>
+            CT$ {FormatCurrency(credits)}
+          </S.Value>
         </S.Box>
         <Link href="/associado/perfil">
           <S.Icon>

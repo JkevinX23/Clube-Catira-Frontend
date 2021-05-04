@@ -3,7 +3,7 @@ import * as S from './styles'
 import MaterialTable from 'material-table'
 import { useEffect, useState } from 'react'
 import { AssociateHistoryProps } from 'Types'
-import { FormatDateByFNS } from 'utils/Masks'
+import { FormatCurrency, FormatDateByFNS } from 'utils/Masks'
 import { getHistoryAssociate } from 'Context/Action/Associates'
 import { createMuiTheme, MuiThemeProvider } from '@material-ui/core/styles'
 
@@ -40,7 +40,7 @@ export default function HistoryAssociateTable() {
     },
     {
       title: 'Valor',
-      field: 'value',
+      field: 'formatvalue',
       type: string
     },
     {
@@ -69,7 +69,7 @@ export default function HistoryAssociateTable() {
     },
     {
       title: 'Saldo',
-      field: 'credits',
+      field: 'formatCredits',
       type: string
     }
   ]
@@ -79,10 +79,19 @@ export default function HistoryAssociateTable() {
   useEffect(() => {
     async function loadData() {
       const { data } = await getHistoryAssociate()
-      const revData = data.sort(
-        (a: AssociateHistoryProps, b: AssociateHistoryProps) =>
+      const revData = data
+        .sort((a: AssociateHistoryProps, b: AssociateHistoryProps) =>
           a.date < b.date ? -1 : 1
-      )
+        )
+        .map((x: AssociateHistoryProps) => ({
+          typeDesc: x.typeDesc,
+          type: x.type,
+          description: x.description,
+          value: x.value,
+          formatvalue: FormatCurrency(x.value),
+          status: x.status,
+          date: x.date
+        }))
 
       const hist = []
       for (let i = 0; i < revData.length; i += 1) {
@@ -90,7 +99,8 @@ export default function HistoryAssociateTable() {
           hist.push({
             ...revData[i],
             date: FormatDateByFNS(revData[i].date),
-            credits: revData[i].value
+            credits: 0,
+            formatCredits: FormatCurrency(revData[i].value)
           })
           continue
         }
@@ -106,7 +116,10 @@ export default function HistoryAssociateTable() {
           hist.push({
             ...revData[i],
             date: FormatDateByFNS(revData[i].date),
-            credits: hist[i - 1].credits - revData[i].value
+            credits: hist[i - 1].credits - revData[i].value,
+            formatCredits: FormatCurrency(
+              hist[i - 1].credits - revData[i].value
+            )
           })
         else if (
           revData[i].typeDesc === 'Venda' &&
@@ -117,13 +130,17 @@ export default function HistoryAssociateTable() {
           hist.push({
             ...revData[i],
             date: FormatDateByFNS(revData[i].date),
-            credits: hist[i - 1].credits + revData[i].value
+            credits: hist[i - 1].credits + revData[i].value,
+            formatCredits: FormatCurrency(
+              hist[i - 1].credits + revData[i].value
+            )
           })
         } else {
           hist.push({
             ...revData[i],
             date: FormatDateByFNS(revData[i].date),
-            credits: hist[i - 1].credits
+            credits: hist[i - 1].credits,
+            formatCredits: FormatCurrency(hist[i - 1].credits)
           })
         }
       }
