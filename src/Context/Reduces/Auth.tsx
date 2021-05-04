@@ -41,25 +41,16 @@ export const AuthProvider: React.FC = ({ children }: any) => {
   const [signed, setSigned] = useState(
     process.browser ? signedJSON !== null && JSON.parse(signedJSON) : false
   )
-  let interval: any = null
 
   useEffect(() => {
     async function lazzy() {
-      // eslint-disable-next-line react-hooks/exhaustive-deps
-      interval = setInterval(async () => {
-        if (!process.browser || !token) {
-          return
-        }
-        const promisse = await getCredits()
-        const associate = client as Associate
-        associate.credit = promisse.data.credits
-        setClient(associate)
-
-        localStorage.setItem('client', JSON.stringify(associate))
-      }, 60000)
+      const { data } = await getCredits()
+      const associado = client as Associate
+      associado.credit = data.credits
+      setClient(associado)
     }
-    signed && option === 4 && lazzy()
-  }, [client, option, signed, token])
+    lazzy()
+  }, [])
 
   const signIn = async (payload: Login) => {
     try {
@@ -140,7 +131,6 @@ export const AuthProvider: React.FC = ({ children }: any) => {
     }
   }
   function signOut() {
-    clearInterval(interval)
     Router.push('/')
     setClient(null)
     setToken(null)
