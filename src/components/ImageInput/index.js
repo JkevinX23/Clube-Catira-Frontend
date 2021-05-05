@@ -52,7 +52,7 @@ export default function ImageInput({ cat }) {
           src={
             preview ||
             (avatar && avatar.url) ||
-            'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTFXraD7oFg2-EpsbfYH9id9v6c5O-zIP27vgGe5N5hp4mGcd29&usqp=CAU'
+            'https://clube-catira.vercel.app/img/default.webp'
           }
           alt="avatar"
         />
