@@ -53,6 +53,11 @@ const wrapperModifiers = {
       color: ${theme.colors.danger};
     }
   `,
+  sucess: (theme: DefaultTheme) => css`
+    ${InputWrapper} {
+      border: 2px solid ${theme.colors.lightGreen};
+    }
+  `,
   disabled: (theme: DefaultTheme) => css`
     ${Label},
     ${Input} {
@@ -67,10 +72,12 @@ const wrapperModifiers = {
 }
 
 export const Wrapper = styled.div<
-  Pick<TextFieldProps, 'disabled'> & { error?: boolean }
+  Pick<TextFieldProps, 'disabled'> & { error?: boolean; sucess?: boolean }
 >`
-  ${({ theme, error, disabled }) => css`
+  ${({ theme, error, disabled, sucess }) => css`
     ${!!error && wrapperModifiers.error(theme)}
     ${disabled && wrapperModifiers.disabled(theme)}
+    ${!!sucess &&
+    wrapperModifiers.sucess(theme)}
   `}
 `

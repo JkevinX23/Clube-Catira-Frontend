@@ -59,3 +59,14 @@ export const InputWrapper = styled.div`
     text-transform: uppercase;
   }
 `
+export const row = styled.div`
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  gap: 2rem;
+  input {
+    text-align: center;
+    padding: 5px;
+    font-size: 1.8rem;
+  }
+`

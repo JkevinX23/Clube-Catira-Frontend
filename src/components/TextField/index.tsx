@@ -8,6 +8,7 @@ export type TextFieldProps = {
   initialValue?: string
   disabled?: boolean
   error?: string
+  sucess?: boolean
 } & InputHTMLAttributes<HTMLInputElement>
 
 const TextField = ({
@@ -16,6 +17,7 @@ const TextField = ({
   initialValue = '',
   disabled = false,
   error,
+  sucess,
   onInput,
   ...props
 }: TextFieldProps) => {
@@ -28,7 +30,7 @@ const TextField = ({
     !!onInput && onInput(newValue)
   }
   return (
-    <S.Wrapper disabled={disabled} error={!!error}>
+    <S.Wrapper disabled={disabled} error={!!error} sucess={!!sucess}>
       {!!label && <S.Label htmlFor={labelFor}>{label}</S.Label>}
       <S.InputWrapper>
         <S.Input
