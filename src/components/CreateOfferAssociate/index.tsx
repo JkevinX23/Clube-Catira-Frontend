@@ -153,6 +153,7 @@ const CreateOfferAssociate = () => {
             separator={'.'}
             onChange={(_e: any, f: number) => f <= 9999999 && setValueOffer(f)}
             value={value_offer}
+            min={0}
           />
         </S.InputDiv>
         <S.Label>Dividir em quantos &#34;Cartões de Consumo&#34;</S.Label>

@@ -99,3 +99,17 @@ export const DivWB = styled.div`
   justify-content: center;
   padding-top: 2rem;
 `
+export const InputDiv = styled.div`
+  input {
+    width: 100%;
+    height: 4.5rem;
+    font-size: 2rem;
+    line-height: 1.33;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+    transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
+    outline: none;
+    padding-left: 1rem;
+  }
+`

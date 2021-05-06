@@ -2,9 +2,11 @@ import Button from 'components/Button'
 import { postIncrease } from 'Context/Action/Increases'
 import { useState } from 'react'
 import { toast } from 'react-toastify'
+import CurrencyInput from 'react-currency-masked-input'
+
 import * as S from './styles'
 const RequestCreditIncrease = () => {
-  const [value, setValue] = useState(0)
+  const [value, setValue] = useState(0.0)
   const [reason, setReason] = useState('')
 
   async function handleSubmit() {
@@ -29,15 +31,20 @@ const RequestCreditIncrease = () => {
 
   return (
     <S.Wrapper>
-      <h4> SOLICITAR AUMENTO DE CRÉDITOS </h4>
+      <h4> SOLICITAR AUMENTO DE LIMITE </h4>
 
       <S.WrapperField>
         <S.Label>Valor do Aumento (Ctz)</S.Label>
 
-        <S.Input
-          value={value}
-          onChange={(e) => setValue(Number(e.target.value.replace(/\D/g, '')))}
-        />
+        <S.InputDiv>
+          <CurrencyInput
+            separator={'.'}
+            onChange={(_e: any, f: number) => f <= 9999999 && setValue(f)}
+            value={value}
+            min={0}
+
+          />
+        </S.InputDiv>
       </S.WrapperField>
 
       <S.WrapperField>

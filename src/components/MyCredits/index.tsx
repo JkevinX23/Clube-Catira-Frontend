@@ -20,30 +20,30 @@ const MyCredits = ({
 }: MyCreditsProps) => (
   <S.Wrapper>
     <S.WrapperTitle>
-      <S.Title>Meus Créditos</S.Title>
+      <S.Title>Meu Saldo</S.Title>
     </S.WrapperTitle>
     <S.InfoBox>
-      <p>Créditos</p>
+      <p>Saldo</p>
       <p>Ct$ {FormatCurrency(credits)}</p>
     </S.InfoBox>
 
     <S.InfoBox>
-      <p>Créditos Gastos</p>
+      <p>Compras</p>
       <p>Ct$ {FormatCurrency(spent)}</p>
     </S.InfoBox>
 
     <S.InfoBox>
-      <p>Gasto Pendente</p>
+      <p>Compras pendente</p>
       <p>Ct$ {FormatCurrency(pendingSpend)}</p>
     </S.InfoBox>
 
     <S.InfoBox>
-      <p>Crédito Recebido</p>
+      <p>Vendas</p>
       <p>Ct$ {FormatCurrency(received)}</p>
     </S.InfoBox>
 
     <S.InfoBox>
-      <p>Créditos a receber</p>
+      <p>Vendas Pendente</p>
       <p>Ct$ {FormatCurrency(receivable)}</p>
     </S.InfoBox>
 
