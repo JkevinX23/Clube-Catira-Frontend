@@ -220,7 +220,7 @@ export default function HistoryAssociateTable() {
           background="black"
           onClick={() => handleToggle()}
         >
-          {!toggle ? 'Filtrar por Data' : 'Limpar filtro'}
+          {!toggle ? 'Filtrar por Data' : 'Fechar Filtro'}
         </Button>
       }
       <S.Wrapper>
