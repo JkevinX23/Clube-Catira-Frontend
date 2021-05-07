@@ -44,7 +44,8 @@ export default function ProfilePage() {
         <Create
           HeaderProps={{
             associate: client && client.fantasy_name,
-            credits: client && client.credit
+            credits: client && client.credit,
+            limit: client && client.limit
           }}
           id={key}
         />

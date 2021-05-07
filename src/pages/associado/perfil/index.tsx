@@ -50,7 +50,8 @@ export default function Profile() {
           Profile={profile}
           HeaderProps={{
             associate: client && client.fantasy_name,
-            credits: client && client.credit
+            credits: client && client.credit,
+            limit: client && client.limit
           }}
         />
       )}

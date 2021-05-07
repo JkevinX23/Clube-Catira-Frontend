@@ -39,6 +39,9 @@ export const Row = styled.div`
   span {
     font-size: 1.2rem;
   }
+  .__react_component_tooltip.show {
+    opacity: 1;
+  }
 `
 
 type ValueProps = {
@@ -68,4 +71,9 @@ export const Icon = styled.div`
       padding-top: 0.2rem;
     }
   }
+`
+
+export const SpanTolltip = styled.p`
+  font-size: 1.4rem;
+  max-width: 20rem;
 `

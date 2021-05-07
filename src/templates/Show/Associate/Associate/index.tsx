@@ -42,6 +42,7 @@ const ShowAssociate = ({ id, HeaderProps }: props) => {
         <AssociateHeader
           associate={HeaderProps.associate}
           credits={HeaderProps.credits}
+          limit={HeaderProps.limit}
         />
       </S.WrapperHeader>
       <S.WrapperMenu>

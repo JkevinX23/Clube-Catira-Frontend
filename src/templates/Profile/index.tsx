@@ -23,6 +23,7 @@ const MyProfile = ({ HeaderProps, Profile }: MyProfileProps) => {
         <AssociateHeader
           associate={HeaderProps.associate}
           credits={HeaderProps.credits}
+          limit={HeaderProps.limit}
         />
       </S.WrapperHeader>
       <S.WrapperMenu>

@@ -55,7 +55,7 @@ const AssociateMenu = () => {
           </Link>
 
           <Link href="/associado/meus-creditos">
-            <S.MenuLink>Créditos</S.MenuLink>
+            <S.MenuLink>Extrato</S.MenuLink>
           </Link>
         </S.MenuNav>
       </MediaMatch>
@@ -96,7 +96,7 @@ const AssociateMenu = () => {
           </Link>
 
           <Link href="/associado/meus-creditos">
-            <S.MenuLink>Créditos</S.MenuLink>
+            <S.MenuLink>Extrato</S.MenuLink>
           </Link>
         </S.MenuNav>
       </S.MenuFull>

@@ -36,7 +36,7 @@ export const RequestIncrease = styled.div``
 export const Table = styled.div`
   display: flex;
   width: 100%;
-  padding: 0 10%;
+  padding: 0 5%;
   padding-bottom: 4rem;
   align-items: center;
   justify-content: center;

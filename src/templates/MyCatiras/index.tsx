@@ -21,6 +21,7 @@ const MyCatiras = ({ HeaderProps }: MyCatirasProps) => {
         <AssociateHeader
           associate={HeaderProps.associate}
           credits={HeaderProps.credits}
+          limit={HeaderProps.limit}
         />
       </S.WrapperHeader>
       <S.WrapperMenu>

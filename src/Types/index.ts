@@ -114,6 +114,7 @@ export interface Associate {
   type: number
   createdAt?: Date
   img?: string
+  limit: number
 }
 
 export interface Option {
@@ -131,6 +132,7 @@ export interface FilterProps {
 export type AssociateHeaderProps = {
   associate: string
   credits: number
+  limit: number
 }
 
 export type ProdTypes = {

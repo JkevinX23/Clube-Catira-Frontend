@@ -88,7 +88,8 @@ export default function OfertasDirecionadas() {
         <Page
           HeaderProps={{
             associate: client && client.fantasy_name,
-            credits: client && client.credit
+            credits: client && client.credit,
+            limit: client && client.limit
           }}
           Products={offers}
           Filters={{ associates, citys }}

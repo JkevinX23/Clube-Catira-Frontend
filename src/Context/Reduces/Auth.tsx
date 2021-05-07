@@ -47,6 +47,7 @@ export const AuthProvider: React.FC = ({ children }: any) => {
       const { data } = await getCredits()
       const associado = client as Associate
       associado.credit = data.credits
+      associado.limit = data.limit
       setClient(associado)
     }
     lazzy()
