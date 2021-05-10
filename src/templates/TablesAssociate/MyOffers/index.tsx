@@ -4,6 +4,8 @@ import { useEffect, useState } from 'react'
 import { getMyOffers, putOptionOffer } from 'Context/Action/Offer'
 import { createMuiTheme, MuiThemeProvider } from '@material-ui/core/styles'
 import { toast } from 'react-toastify'
+import Button from 'components/Button'
+import Link from 'next/link'
 
 const theme = createMuiTheme({
   overrides: {
@@ -57,7 +59,8 @@ export default function TableListMyOffers() {
       lookup: {
         0: 'Pendente',
         1: 'Ativo',
-        2: 'Inativo'
+        2: 'Inativo',
+        3: 'Esgotado'
       }
     }
   ]
@@ -69,7 +72,9 @@ export default function TableListMyOffers() {
       const { data } = await getMyOffers()
       const withQtd = data
         .map((c) =>
-          c.quantity === 0 ? { ...c, quantity: 'Ilimitado' } : { ...c }
+          c.quantity === 0
+            ? { ...c, quantity: 'Ilimitado' }
+            : { ...c, status: c.quantity - c.sell < 1 ? 3 : c.status }
         )
         .reverse()
       const valueFormat = withQtd.map((c) =>
@@ -87,7 +92,9 @@ export default function TableListMyOffers() {
       const { data } = await getMyOffers()
       const withQtd = data
         .map((c) =>
-          c.quantity === 0 ? { ...c, quantity: 'Ilimitado' } : { ...c }
+          c.quantity === 0
+            ? { ...c, quantity: 'Ilimitado' }
+            : { ...c, status: c.quantity - c.sell < 1 ? 3 : c.status }
         )
         .reverse()
       const valueFormat = withQtd.map((c) =>
@@ -102,6 +109,13 @@ export default function TableListMyOffers() {
 
   return (
     <S.Wrapper>
+      <S.Button>
+        <Link href="/create-offer">
+          <Button size="xsmall" radius="radius100" background="green">
+            Criar Oferta
+          </Button>
+        </Link>
+      </S.Button>
       <MuiThemeProvider theme={theme}>
         <MaterialTable
           title="Minhas Ofertas"

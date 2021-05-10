@@ -67,16 +67,8 @@ const DetailsOffer = ({
       const { checkout } = data
       setCode(checkout.code)
       setStatus(2)
-      toast.success(
-        'Parabéns, você será redirecionado para realizar o pagamento em breve.'
-      )
-
-      setTimeout(
-        () =>
-          route.push(
-            `https://pagseguro.uol.com.br/v2/checkout/payment.html?code=${checkout.code}`
-          ),
-        1000
+      route.push(
+        `https://pagseguro.uol.com.br/v2/checkout/payment.html?code=${checkout.code}`
       )
     } catch (error) {
       setStatus(0)

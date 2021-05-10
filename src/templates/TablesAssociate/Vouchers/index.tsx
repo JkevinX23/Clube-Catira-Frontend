@@ -6,6 +6,8 @@ import { FormatDateByFNS } from 'utils/Masks'
 import Button from 'components/Button'
 import { useRouter } from 'next/router'
 import { createMuiTheme, MuiThemeProvider } from '@material-ui/core/styles'
+import { ShowVoucherProps } from 'Types'
+import { toast } from 'react-toastify'
 
 const theme = createMuiTheme({
   overrides: {
@@ -118,8 +120,15 @@ export default function TableListVouchers({
     loadData()
   }, [id])
 
-  function showVoucher(id: number) {
-    window.open(window.location.origin + '/associado/voucher' + '?id=' + id)
+  function showVoucher(voucher: ShowVoucherProps) {
+    if (voucher.status > 1) {
+      toast.warn('Voucher já utilizado')
+      return
+    }
+    window.open(
+      window.location.origin + '/associado/voucher' + '?id=' + voucher.id
+    )
+
     //router.push({ pathname: 'voucher', query: { id } })
   }
 
@@ -144,7 +153,7 @@ export default function TableListVouchers({
           data={data}
           options={{ exportButton: true }}
           localization={{
-            header: { actions: 'Ações' },
+            header: { actions: 'Imprimir' },
             body: {
               emptyDataSourceMessage:
                 'Os vouchers referentes a essa transação ainda não foram gerados.'
@@ -170,10 +179,10 @@ export default function TableListVouchers({
               ? [
                   {
                     icon: 'open_in_new',
-                    tooltip: 'Detalhes',
+                    tooltip: 'Imprimir',
                     onClick: (_event, rowData) => {
                       const row = rowData as any
-                      showVoucher(row.id)
+                      showVoucher(row)
                     }
                   }
                 ]

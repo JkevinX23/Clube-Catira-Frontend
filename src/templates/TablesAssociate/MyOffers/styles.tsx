@@ -16,3 +16,7 @@ export const Wrapper = styled.div`
     font-size: 2rem;
   }
 `
+export const Button = styled.div`
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+`
