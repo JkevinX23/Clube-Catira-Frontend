@@ -84,3 +84,22 @@ export const SearchWrapper = styled.div`
     min-width: 200px;
   }
 `
+
+export const Button = styled.div`
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1rem;
+`
+
+// export const Button = styled.div`
+//   display: block;
+//   position: absolute;
+//   width: 100%;
+//   button {
+//     position: fixed;
+//     right: 0.5vw;
+//     top: 90vh;
+//   }
+// `

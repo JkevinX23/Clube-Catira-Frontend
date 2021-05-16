@@ -49,10 +49,32 @@ export const Row = styled.div`
   display: flex;
   flex-direction: row;
   gap: 2rem;
+  padding-bottom: 2rem;
+  z-index: 20;
+  input {
+    padding: 1rem;
+    font-size: 1.6rem;
+  }
+  .react-datepicker {
+    font-size: 1.2rem;
+    z-index: 999;
+  }
+  .react-datepicker__day-name,
+  .react-datepicker__day,
+  .react-datepicker__time-name {
+    width: 2.8rem;
+    line-height: 2.8rem;
+  }
+  .react-datepicker__current-month,
+  .react-datepicker-time__header,
+  .react-datepicker-year-header {
+    font-size: 1.4rem;
+  }
 `
 export const Table = styled.div`
   display: block;
   width: 100%;
+  z-index: 0;
 `
 export const Macro = styled.div`
   width: 100%;

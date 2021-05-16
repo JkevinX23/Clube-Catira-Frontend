@@ -33,7 +33,7 @@ const MyCredits = ({
     </S.InfoBox>
 
     <S.InfoBox>
-      <p>Compras pendente</p>
+      <p>Compras Pendentes</p>
       <p>Ct$ {FormatCurrency(pendingSpend)}</p>
     </S.InfoBox>
 
@@ -43,7 +43,7 @@ const MyCredits = ({
     </S.InfoBox>
 
     <S.InfoBox>
-      <p>Vendas Pendente</p>
+      <p>Vendas Pendentes</p>
       <p>Ct$ {FormatCurrency(receivable)}</p>
     </S.InfoBox>
 

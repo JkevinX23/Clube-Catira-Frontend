@@ -1,24 +1,22 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import Button from 'components/Button'
 import * as S from './styles'
-import { useContext, useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { postOffers } from 'Context/Action/Offer'
 import { toast } from 'react-toastify'
 import { getAssociates } from 'Context/Action/Associates'
 import { cleanObject } from 'utils/Validation'
 import ImageInput from 'components/ImageInput'
 import { GetAssociatesAdmin } from 'Types'
-import CurrencyInput from 'react-currency-masked-input'
 import Select from 'react-select'
-import { Data } from 'templates/VoucherPDF/styles'
-import AuthContext from 'Context/Reduces/Auth'
+import { FormatCurrency } from 'utils/Masks'
 
 const CreateOfferAssociate = () => {
-  // const props = useContext(AuthContext)
   const [isIlimmited, setIlimited] = useState(true)
   const [title, setTitle] = useState('')
   const [description, setDescription] = useState('')
   const [value_offer, setValueOffer] = useState(0.0)
+  const [valueFormated, setValueFormated] = useState('0,00')
   const [consumer_cards, setConsumerCards] = useState(1)
   const [quantity, setQuantity] = useState(1)
   const [isDirect, setIsDirect] = useState(false)
@@ -48,15 +46,24 @@ const CreateOfferAssociate = () => {
   }
 
   async function handleOffer() {
-    const data = {
-      title,
-      description,
-      value_offer: value_offer || 0.0,
-      consumer_cards,
-      quantity: !isIlimmited ? quantity : 0,
-      file_id: file,
-      directed_id: direct
-    }
+    const data = isDirect
+      ? {
+          title,
+          description,
+          value_offer: value_offer || 0.0,
+          consumer_cards: 1,
+          quantity: 1,
+          file_id: file,
+          directed_id: direct
+        }
+      : {
+          title,
+          description,
+          value_offer: value_offer || 0.0,
+          consumer_cards,
+          quantity: !isIlimmited ? quantity : 0,
+          file_id: file
+        }
 
     try {
       const payload = cleanObject(data)
@@ -89,6 +96,18 @@ const CreateOfferAssociate = () => {
 
   function cleanForm() {
     setTimeout(() => window.location.reload(), 1500)
+  }
+
+  function mascaraMoeda(value: string) {
+    const onlyDigits = value
+      .split('')
+      .filter((s: any) => /\d/.test(s))
+      .join('')
+      .padStart(2, '0')
+    const digitsFloat = onlyDigits.slice(0, -2) + '.' + onlyDigits.slice(-2)
+    if (Number(digitsFloat) >= 9999999) return
+    setValueFormated(FormatCurrency(Number(digitsFloat)))
+    setValueOffer(Number(digitsFloat))
   }
 
   return (
@@ -149,60 +168,64 @@ const CreateOfferAssociate = () => {
 
         <S.Label>Insira o valor</S.Label>
         <S.InputDiv>
-          <CurrencyInput
-            separator={'.'}
-            onChange={(_e: any, f: number) => f <= 9999999 && setValueOffer(f)}
-            value={value_offer}
-            min={0}
+          <S.Input
+            onChange={(e) => mascaraMoeda(e.target.value)}
+            value={valueFormated}
           />
         </S.InputDiv>
-        <S.Label>Dividir em quantos &#34;Cartões de Consumo&#34;</S.Label>
-        <S.Input
-          min="1"
-          type="number"
-          defaultValue="1"
-          onChange={(e) => setConsumerCards(Number(e.target.value))}
-          value={consumer_cards}
-        />
-
-        <S.Label>Quantidade Disponível</S.Label>
-        <S.WrapperRadio>
-          <S.RadioLabel onClick={handleLimited}>
-            <S.InputRadio
-              type="radio"
-              id="limitada"
-              name="limit"
-              value="limitada"
-              checked={!isIlimmited}
-            />
-            Limitada
-          </S.RadioLabel>
-
-          <S.RadioLabel onClick={handleIlimited}>
-            <S.InputRadio
-              type="radio"
-              id="ilimitada"
-              name="limit"
-              value="ilimitada"
-              checked={isIlimmited}
-            />
-            Ilimitada
-          </S.RadioLabel>
-        </S.WrapperRadio>
-
-        {!isIlimmited && (
+        {!isDirect && (
           <>
-            <S.Label>Insira a quantidade</S.Label>
+            <S.Label>Dividir em quantos &#34;Cartões de Consumo&#34;</S.Label>
             <S.Input
               min="1"
               type="number"
-              defaultValue="1"
-              value={quantity}
-              onChange={(e) => setQuantity(Number(e.target.value))}
+              defaultValue={1}
+              onChange={(e) => setConsumerCards(Number(e.target.value))}
+              value={consumer_cards}
             />
           </>
         )}
+        {!isDirect && (
+          <>
+            <S.Label>Quantidade Disponível</S.Label>
+            <S.WrapperRadio>
+              <S.RadioLabel onClick={handleLimited}>
+                <S.InputRadio
+                  type="radio"
+                  id="limitada"
+                  name="limit"
+                  value="limitada"
+                  defaultChecked={!isIlimmited}
+                />
+                Limitada
+              </S.RadioLabel>
 
+              <S.RadioLabel onClick={handleIlimited}>
+                <S.InputRadio
+                  type="radio"
+                  id="ilimitada"
+                  name="limit"
+                  value="ilimitada"
+                  checked={isIlimmited}
+                />
+                Ilimitada
+              </S.RadioLabel>
+            </S.WrapperRadio>
+
+            {!isIlimmited && (
+              <>
+                <S.Label>Insira a quantidade</S.Label>
+                <S.Input
+                  min="1"
+                  type="number"
+                  defaultValue="1"
+                  value={quantity}
+                  onChange={(e) => setQuantity(Number(e.target.value))}
+                />
+              </>
+            )}
+          </>
+        )}
         <S.WrapperButton>
           <Button
             background="white"

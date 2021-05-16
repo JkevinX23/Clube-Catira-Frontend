@@ -7,7 +7,8 @@ import { useState } from 'react'
 import { PostCatira } from 'Types'
 import { useRouter } from 'next/router'
 import NumberFormat from 'react-number-format'
-import CurrencyInput from 'react-currency-masked-input'
+import { FormatCurrency } from 'utils/Masks'
+import { putOptionOffer } from 'Context/Action/Offer'
 
 export type DetailsOfferProps = {
   id: number
@@ -20,6 +21,7 @@ export type DetailsOfferProps = {
   sell: number
   description: string
   consumer_cards: number
+  isDirect?: boolean
 }
 const DetailsOffer = ({
   img,
@@ -31,11 +33,13 @@ const DetailsOffer = ({
   sell,
   description,
   id,
-  consumer_cards
+  consumer_cards,
+  isDirect
 }: DetailsOfferProps) => {
   const [qtd, setQtd] = useState(1)
   const [code, setCode] = useState('')
   const [status, setStatus] = useState(0)
+  const [valueFormated, setValueFormated] = useState('0,00')
   const [estimateValue, setEstimateValue] = useState(0)
   const route = useRouter()
 
@@ -103,6 +107,34 @@ const DetailsOffer = ({
       }
     }
   }
+
+  function mascaraMoeda(value: string) {
+    const onlyDigits = value
+      .split('')
+      .filter((s: any) => /\d/.test(s))
+      .join('')
+      .padStart(2, '0')
+    const digitsFloat = onlyDigits.slice(0, -2) + '.' + onlyDigits.slice(-2)
+    if (Number(digitsFloat) >= 9999999) return
+    setValueFormated(FormatCurrency(Number(digitsFloat)))
+    setEstimateValue(Number(digitsFloat))
+  }
+
+  async function HandleRecusar() {
+    if (window.confirm('Deseja mesmo recusar esta oferta? ')) {
+      try {
+        await putOptionOffer({ offer_id: id, status: 2 })
+        toast.warn('Oferta recusada!')
+        setTimeout(() => {
+          route.back()
+        }, 1000)
+      } catch (err) {
+        console.log(err)
+        toast.error('Erro 504!')
+      }
+    }
+  }
+
   return (
     <S.Wrapper>
       <S.Content>
@@ -115,13 +147,9 @@ const DetailsOffer = ({
             <div>
               <p>Insira o valor negociado abaixo </p>
               <S.InputDiv>
-                <CurrencyInput
-                  separator={'.'}
-                  onChange={(_e: any, f: number) =>
-                    f <= 9999999 && setEstimateValue(f)
-                  }
-                  value={estimateValue}
-                  min={0}
+                <S.Input
+                  onChange={(e) => mascaraMoeda(e.target.value)}
+                  value={valueFormated}
                 />
               </S.InputDiv>
             </div>
@@ -188,6 +216,16 @@ const DetailsOffer = ({
               <p>Aguarde...</p>
             </Button>
           )
+        )}
+        {isDirect && (
+          <Button
+            background="red"
+            radius="radius100"
+            size="xxsmall"
+            onClick={() => HandleRecusar()}
+          >
+            <p>Resusar Oferta</p>
+          </Button>
         )}
       </S.DivWB>
     </S.Wrapper>

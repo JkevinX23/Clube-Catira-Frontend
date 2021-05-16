@@ -1,14 +1,28 @@
 import Logo from 'components/Logo'
 import Link from 'next/link'
 import MediaMatch from 'components/MediaMatch'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { Menu as MenuIcon } from '@styled-icons/feather/Menu'
 import { CloseOutline as CloseIcon } from '@styled-icons/evaicons-outline/CloseOutline'
 
 import * as S from './styles'
+import { hasDirectOffer } from 'Context/Action/Associates'
 
 const AssociateMenu = () => {
   const [isOpen, setIsOpen] = useState(false)
+  const [haveDir, setHAveDir] = useState(false)
+
+  useEffect(() => {
+    async function hasDirect() {
+      try {
+        const { data } = await hasDirectOffer()
+        setHAveDir(data.status)
+      } catch (err) {
+        console.log(err)
+      }
+    }
+    hasDirect()
+  }, [])
 
   return (
     <S.Wrapper>
@@ -38,9 +52,9 @@ const AssociateMenu = () => {
             </S.Options>
           </S.MenuLink>
 
-          <S.MenuLink>
+          <S.MenuLink redPoint={haveDir}>
             Catiras
-            <S.Options>
+            <S.Options redPoint={haveDir}>
               <Link href="/associado/ofertas-direcionadas">
                 <li>Ofertas Diretas</li>
               </Link>

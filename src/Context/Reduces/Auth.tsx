@@ -50,7 +50,7 @@ export const AuthProvider: React.FC = ({ children }: any) => {
       associado.limit = data.limit
       setClient(associado)
     }
-    lazzy()
+    signed && token && lazzy()
   }, [])
 
   const signIn = async (payload: Login) => {

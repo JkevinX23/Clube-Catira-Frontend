@@ -10,7 +10,8 @@ export const Image = styled.div<ImageProps>`
     background-color: ${theme.colors.white};
     background-image: url(${src});
     background-position: center center;
-    background-size: cover;
+    background-repeat: no-repeat;
+    background-size: contain;
   `}
 `
 

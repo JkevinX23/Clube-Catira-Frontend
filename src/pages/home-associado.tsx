@@ -2,10 +2,10 @@ import Page from 'templates/Home'
 import AuthContext from 'Context/Reduces/Auth'
 import { useContext, useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
-import { toast } from 'react-toastify'
 import { Associate, Option, GetOfferProps } from 'Types'
 import { getOffers } from 'Context/Action/Offer'
-
+import { hasDirectOffer } from 'Context/Action/Associates'
+import { toast, Slide } from 'react-toastify'
 export default function HomeAssociado() {
   const router = useRouter()
   const props = useContext(AuthContext)
@@ -16,6 +16,34 @@ export default function HomeAssociado() {
   }
 
   const client = props.client as Associate
+  function handleClick() {
+    router.push('/associado/ofertas-direcionadas')
+  }
+
+  useEffect(() => {
+    async function hasOfferDirect() {
+      try {
+        const { data } = await hasDirectOffer()
+        if (data.status) {
+          toast.success(
+            'Hey, você tem ofertas diretas em aberto. Clique aqui pra ver.',
+            {
+              position: 'bottom-right',
+              autoClose: 5000,
+              closeOnClick: true,
+              pauseOnHover: true,
+              draggable: true,
+              transition: Slide,
+              onClick: handleClick
+            }
+          )
+        }
+      } catch (err) {
+        console.log(err)
+      }
+    }
+    hasOfferDirect()
+  }, [])
 
   const [offers, setOffers] = useState<GetOfferProps[]>([
     {

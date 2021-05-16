@@ -3,7 +3,7 @@ import * as S from './styles'
 export type ButtonProps = {
   children?: React.ReactNode
   size?: 'xxsmall' | 'xsmall' | 'small' | 'medium' | 'large' | 'xlarge'
-  background?: 'white' | 'green' | 'orange' | 'blue' | 'black'
+  background?: 'white' | 'green' | 'orange' | 'blue' | 'black' | 'red'
   radius?: 'radius100' | 'radius200' | 'radius300'
   fullWidth?: boolean
   disabled?: boolean

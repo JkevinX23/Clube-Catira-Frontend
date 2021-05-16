@@ -6,16 +6,10 @@ import { AssociateHistoryProps } from 'Types'
 import { FormatCurrency, FormatDateByFNS } from 'utils/Masks'
 import { getHistoryAssociate } from 'Context/Action/Associates'
 import { createMuiTheme, MuiThemeProvider } from '@material-ui/core/styles'
-import {
-  defaultStaticRanges,
-  defaultInputRanges
-} from 'react-date-range/dist/defaultRanges'
 import { ptBR } from 'date-fns/locale'
 import Button from 'components/Button'
-import 'react-date-range/dist/styles.css' // main style file
-import 'react-date-range/dist/theme/default.css' // theme css file
-import { DateRange } from 'react-date-range'
-import { toast } from 'react-toastify'
+import DatePicker, { registerLocale, setDefaultLocale } from 'react-datepicker'
+import 'react-datepicker/dist/react-datepicker.css'
 
 const theme = createMuiTheme({
   overrides: {
@@ -26,6 +20,9 @@ const theme = createMuiTheme({
     }
   }
 })
+
+registerLocale('pt-BR', ptBR)
+setDefaultLocale('pt-BR')
 export default function HistoryAssociateTable() {
   type IType =
     | 'string'
@@ -62,7 +59,7 @@ export default function HistoryAssociateTable() {
       title: 'Status',
       field: 'status',
       lookup: {
-        '-1': 'Recusado',
+        '-1': 'Negado',
         0: 'Pendente',
         1: 'Pendente/Em análise',
         2: 'Em análise',
@@ -73,7 +70,7 @@ export default function HistoryAssociateTable() {
         7: 'Cancelada',
         8: 'Cancelada',
         9: 'Cancelada',
-        10: 'Liberado',
+        10: 'Aprovado',
         11: 'Bloqueado'
       }
     },
@@ -90,31 +87,6 @@ export default function HistoryAssociateTable() {
   const [endDate, setEndDate] = useState(new Date())
   const [toggle, setToggle] = useState(false)
 
-  const staticRangesLabels = {
-    Today: 'Hoje',
-    Yesterday: 'Ontem',
-    'This Week': 'Essa semana',
-    'Last Week': 'Semana passada',
-    'This Month': 'Esse mês',
-    'Last Month': 'Mês passado'
-  }
-
-  const inputRangesLabels = {
-    'days up to today': 'Dias até hoje',
-    'days starting today': 'Dias começando de hoje'
-  }
-
-  function translateRange(dictionary: any) {
-    return (item: any) =>
-      dictionary[item.label] ? { ...item, label: dictionary[item.label] } : item
-  }
-
-  const brStaticRanges = defaultStaticRanges.map(
-    translateRange(staticRangesLabels)
-  )
-  const brInputRanges = defaultInputRanges.map(
-    translateRange(inputRangesLabels)
-  )
   function handleSelect({ selection }: any) {
     setStartDate(selection.startDate)
     setEndDate(selection.endDate)
@@ -212,50 +184,60 @@ export default function HistoryAssociateTable() {
 
   return (
     <S.Macro>
-      {
+      <S.Row>
         <Button
-          size="xsmall"
+          size="xxsmall"
           fullWidth={false}
           radius="radius100"
-          background="black"
+          background="blue"
           onClick={() => handleToggle()}
         >
-          {!toggle ? 'Filtrar por Data' : 'Fechar Filtro'}
+          {!toggle ? 'Filtro por data' : 'Fechar Filtro'}
         </Button>
-      }
-      <S.Wrapper>
         {toggle && (
-          <S.DatePicker>
-            <DateRange
-              ranges={[{ startDate, endDate, key: 'selection' }]}
-              staticRanges={brStaticRanges}
-              inputRanges={brInputRanges}
-              onChange={handleSelect}
-              locale={ptBR}
+          <>
+            {' '}
+            <DatePicker
+              selected={startDate}
+              onChange={(date: Date) => setStartDate(date)}
+              selectsStart
+              locale="pt-BR"
+              startDate={startDate}
+              endDate={endDate}
+              dateFormat="dd/MM/yyyy"
             />
-
-            <S.Row>
-              <Button
-                size="xsmall"
-                fullWidth={false}
-                radius="radius100"
-                background="blue"
-                onClick={handleSubmit}
-              >
-                Filtrar Histórico
-              </Button>
-              <Button
-                size="xsmall"
-                fullWidth={false}
-                radius="radius100"
-                background="black"
-                onClick={() => setFiltered(history)}
-              >
-                Limpar Filtro
-              </Button>
-            </S.Row>
-          </S.DatePicker>
+            <DatePicker
+              selected={endDate}
+              onChange={(date: Date) => setEndDate(date)}
+              selectsEnd
+              locale="pt-BR"
+              startDate={startDate}
+              endDate={endDate}
+              minDate={startDate}
+              dateFormat="dd/MM/yyyy"
+            />
+            <Button
+              size="xxsmall"
+              fullWidth={false}
+              radius="radius100"
+              background="blue"
+              onClick={handleSubmit}
+            >
+              Filtrar Histórico
+            </Button>
+            <Button
+              size="xxsmall"
+              fullWidth={false}
+              radius="radius100"
+              background="black"
+              onClick={() => setFiltered(history)}
+            >
+              Limpar Filtro
+            </Button>
+          </>
         )}
+      </S.Row>
+      <S.Wrapper>
         <S.Table>
           <MuiThemeProvider theme={theme}>
             <MaterialTable

@@ -39,6 +39,18 @@ type MenufullProps = {
 export const MenuNav = styled.div`
   margin-right: 4rem;
 `
+
+export const ButtonAssociar = styled.a`
+  ${({ theme }) => css`
+    position: relative;
+    color: ${theme.colors.black};
+    font-size: ${theme.font.sizes.small};
+    margin: 0.3rem ${theme.spacings.small} 0;
+    text-decoration: none;
+    text-align: center;
+    cursor: pointer;
+  `}
+`
 export const MenuLink = styled.a`
   ${({ theme }) => css`
     position: relative;

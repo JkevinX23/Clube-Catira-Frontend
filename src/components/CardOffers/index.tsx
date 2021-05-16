@@ -16,6 +16,7 @@ export type CardOffersProps = {
   state: string
   value: number
   associateId: number
+  isDirect?: boolean
 }
 
 const CardOffers = ({
@@ -26,7 +27,8 @@ const CardOffers = ({
   state,
   value,
   id,
-  associateId
+  associateId,
+  isDirect
 }: CardOffersProps) => {
   const router = useRouter()
   const props = useContext(AuthContext)
@@ -56,10 +58,13 @@ const CardOffers = ({
               size="xxsmall"
               background="blue"
               onClick={() => {
-                router.push({ pathname: '/associado/oferta', query: { id } })
+                router.push({
+                  pathname: '/associado/oferta',
+                  query: { id, isDirect }
+                })
               }}
             >
-              Comprar
+              Ver +
             </Button>
           ) : (
             <Button

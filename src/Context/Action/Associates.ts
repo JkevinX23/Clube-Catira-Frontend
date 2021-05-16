@@ -9,7 +9,8 @@ import {
   GetAssociatesAuth,
   GetCreditsProps,
   PutAssociatePropsAssociate,
-  ContactAssociateProps
+  ContactAssociateProps,
+  HasDirectProps
 } from 'Types'
 
 export const getAssociatesAdmin = async () =>
@@ -49,3 +50,5 @@ export const getHistoryAssociate = async () => api.get('/history')
 
 export const updateAssociate = async (data: PutAssociatePropsAssociate) =>
   api.put('/associate', data)
+
+export const hasDirectOffer = async () => api.get<HasDirectProps>('hasdirect')

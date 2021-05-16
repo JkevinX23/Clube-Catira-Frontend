@@ -12,7 +12,7 @@ export const Wrapper = styled.div`
   border: 1px solid #ccc;
   border-radius: 4px;
   max-width: 60rem;
-  min-height: 40.5rem;
+  min-height: 45.2rem;
 
   h4 {
     text-align: center;

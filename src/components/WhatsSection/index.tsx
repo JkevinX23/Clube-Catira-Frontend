@@ -15,8 +15,8 @@ const WhatsSection = () => (
       <S.TextWrapper>
         A Catira surgiu para geração de negócios sem a necessidade de gerar
         grandes pagamentos em dinheiro. É excelente maneira de gerar negócios,
-        baseado em trocas individuais denominada individuais denominada
-        <S.TextBold> MULTILATERAL</S.TextBold>. Criando relacionamentos para
+        baseado em trocas individuais denominada{' '}
+        <S.TextBold> MULTILATERAIS. </S.TextBold> Criando relacionamentos para
         gerar negócios.
       </S.TextWrapper>
       <S.TextWrapper>

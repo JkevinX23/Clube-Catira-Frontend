@@ -797,6 +797,10 @@ export interface GetIncreaseProps {
   updatedby?: string
 }
 
+export interface HasDirectProps {
+  status: boolean
+}
+
 export interface GetAdminReport {
   dateInit: Date
   dateEnd: Date

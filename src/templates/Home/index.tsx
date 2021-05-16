@@ -10,6 +10,8 @@ import Footer from 'components/Footer'
 import { useEffect, useState } from 'react'
 import { HomeProps, GetOfferProps, Option } from 'Types'
 import * as S from './styles'
+import Button from 'components/Button'
+import { useRouter } from 'next/router'
 
 const Home = ({ HeaderProps, Products, Filters, isDirect }: HomeProps) => {
   const [produtos, setProdutos] = useState<GetOfferProps[]>()
@@ -18,6 +20,8 @@ const Home = ({ HeaderProps, Products, Filters, isDirect }: HomeProps) => {
   const [citys, setCitys] = useState(Filters.citys)
   const [associates, setAssociates] = useState(Filters.associates)
   const [search, SetSearch] = useState('')
+
+  const route = useRouter()
 
   useEffect(() => {
     function init() {
@@ -196,6 +200,15 @@ const Home = ({ HeaderProps, Products, Filters, isDirect }: HomeProps) => {
       </S.WrapperBreadcrumbs>
 
       <S.WrapperContent>
+        <S.Button>
+          <Button
+            size="xxsmall"
+            background="blue"
+            onClick={() => route.push('/create-offer')}
+          >
+            Criar Oferta
+          </Button>
+        </S.Button>
         <S.SearchWrapper>
           <input
             type="text"
@@ -225,6 +238,7 @@ const Home = ({ HeaderProps, Products, Filters, isDirect }: HomeProps) => {
                   name={prod.title}
                   img={prod.File.url}
                   title={prod.title}
+                  isDirect={isDirect}
                 />
               )
             })

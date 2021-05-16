@@ -70,7 +70,13 @@ const Menu = ({ handleChange, username, background }: MenuProps) => {
           <Link href="/associados">
             <S.MenuLink>Associados</S.MenuLink>
           </Link>
-
+          <S.ButtonAssociar>
+            <Link href="/associar-se">
+              <Button size="xxsmall" background="blue" radius="radius300">
+                Associar-se
+              </Button>
+            </Link>
+          </S.ButtonAssociar>
           <Link href="/sign-in">
             <Button size="xxsmall" background="blue" radius="radius300">
               {username ? 'Minha Conta' : 'Login'}

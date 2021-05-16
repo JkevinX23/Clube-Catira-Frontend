@@ -10,33 +10,44 @@ export const Wrapper = styled.main`
   `}
 `
 
-export const Options = styled.ul`
-  display: none;
-  position: absolute;
-  background: #00aaff;
-  margin: 1%;
-  margin-top: 0.2rem;
-  padding: 1rem;
-  color: white;
-  list-style: none;
-  border-radius: 0px 0px 0px 9px;
-  z-index: 20;
+export const Options = styled.ul<LinkProps>`
+  ${({ theme, redPoint }) => css`
+    display: none;
+    position: absolute;
+    background: #00aaff;
+    margin: 1%;
+    margin-top: 0.2rem;
+    padding: 1rem;
+    color: white;
+    list-style: none;
+    border-radius: 0px 0px 0px 9px;
+    z-index: 20;
 
-  li {
-    padding: 0.5rem;
-    cursor: pointer;
-    font-size: 1.4rem;
-    white-space: nowrap;
+    li {
+      padding: 0.5rem;
+      cursor: pointer;
+      font-size: 1.4rem;
+      white-space: nowrap;
 
-    &:hover {
-      border-bottom: 2px solid white;
-      font-weight: bold;
+      &:hover {
+        border-bottom: 2px solid white;
+        font-weight: bold;
+      }
     }
-  }
+    li:nth-child(1):before {
+      content: '*';
+      color: red;
+      display: ${!redPoint ? 'none' : 'inline'};
+    }
+  `}
 `
 
-export const MenuLink = styled.a`
-  ${({ theme }) => css`
+type LinkProps = {
+  redPoint?: boolean
+}
+
+export const MenuLink = styled.a<LinkProps>`
+  ${({ theme, redPoint }) => css`
     position: relative;
     color: ${theme.colors.black};
     font-size: ${theme.font.sizes.small};
@@ -50,6 +61,12 @@ export const MenuLink = styled.a`
       color: white;
       background: #00aaff;
       border-radius: 8px 8px 0px 0px;
+    }
+
+    &::after {
+      content: '*';
+      color: red;
+      display: ${!redPoint ? 'none' : 'inline'};
     }
   `}
 `
@@ -68,7 +85,7 @@ export const MenuNav = styled.div`
 
   ${MenuLink}:nth-child(2) {
     ${Options} {
-      right: -150%;
+      right: -151%;
       width: 250%;
     }
   }

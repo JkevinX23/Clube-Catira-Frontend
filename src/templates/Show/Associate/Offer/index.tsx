@@ -99,6 +99,7 @@ const ShowOffer = ({ id, HeaderProps }: props) => {
           description={description}
           sell={sell}
           consumer_cards={consumer_cards}
+          isDirect={isDirect}
         />
       </S.WrapperContent>
       <S.WrapperFooter>
