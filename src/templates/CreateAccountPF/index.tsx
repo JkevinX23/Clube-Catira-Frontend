@@ -148,8 +148,17 @@ const CreatePF = ({ categories, consultants }: pageProps) => {
       return
     }
 
+    let data
     try {
-      const { data } = await postFile(file)
+      const resp = await postFile(file)
+      data = resp.data
+    } catch (err) {
+      console.log(err)
+      toast.error('Erro ao carregar Logo.')
+      return
+    }
+
+    try {
       const payload = {
         description,
         fantasy_name,
