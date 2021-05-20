@@ -185,7 +185,8 @@ const CreatePF = ({ categories, consultants }: pageProps) => {
       )
     } catch (err) {
       toast.error(
-        'Algo de errado aconteceu, verifique os dados. Se persistir, contate o administrador do sistema'
+        'Algo de errado aconteceu, verifique os dados. Se persistir, contate o administrador do sistema. Code: ' +
+          err
       )
     }
   }
