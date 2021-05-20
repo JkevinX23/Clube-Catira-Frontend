@@ -5,7 +5,8 @@ import axios from 'axios'
 const instance = axios.create({
   // baseURL: 'http://localhost:3334/'
   //baseURL: 'http://162.214.144.130'
-  baseURL: 'https://svr.rededetrocas.com'
+  // baseURL: 'https://svr.rededetrocas.com'
+  baseURL: 'https://svr.aliancadescontos.com'
 })
 
 instance.interceptors.request.use((config) => {
