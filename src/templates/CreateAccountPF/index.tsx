@@ -23,7 +23,7 @@ type pageProps = {
 
 const CreatePF = ({ categories, consultants }: pageProps) => {
   const router = useRouter()
-  const [file, setFile] = useState<any>()
+  const [file, setFile] = useState<FormData>()
   const [description, setDescription] = useState('')
   const [site, setSite] = useState('')
   const [facebook, setFacebook] = useState('')
@@ -145,6 +145,11 @@ const CreatePF = ({ categories, consultants }: pageProps) => {
 
     if (password.length < 6) {
       toast.info('Sua senha deve ter pelo menos 6 caracteres.')
+      return
+    }
+
+    if (!file) {
+      toast.warn('File not found')
       return
     }
 
