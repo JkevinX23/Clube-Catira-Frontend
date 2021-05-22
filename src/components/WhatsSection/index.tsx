@@ -4,7 +4,7 @@ const WhatsSection = () => (
   <S.Wrapper>
     <S.ImageWrapper
       aria-label="Homem vestido um terno"
-      src="/img/about-01.png"
+      src="/img/about-01.webp"
       alt="Foto ilustrativa de um homem de terno."
     />
 

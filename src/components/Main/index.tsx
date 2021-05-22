@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react'
 import AssociateSection from 'components/AssociateSection'
-// import BackToTop from 'components/BackToTop'
 import Footer from 'components/Footer'
 import HomeSection from 'components/HomeSection'
 import HowWorks from 'components/HowWorks'
@@ -61,7 +60,6 @@ const Main = ({ preSection }: props) => {
 
   return (
     <S.Wrapper>
-      {/* <S.BackToTopWrapper><BackToTop /></S.BackToTopWrapper> */}
       <S.SobrepositionWrapper>
         <S.MenuWrapper position={scrollY}>
           <Menu handleChange={handleChange} />

@@ -17,7 +17,7 @@ const HowWorks = () => {
       <S.SmoothWrapper onClick={() => setOpen(true)}>
         <S.ImageWrapper
           aria-label="Clube da Catira"
-          src="/img/ic-play.png"
+          src="/img/ic-play.webp"
           alt="Símbolo azul representando uma troca mas o nome Clube da catira"
         />
         <S.TextWrapper>Assista nosso vídeo explicativo</S.TextWrapper>

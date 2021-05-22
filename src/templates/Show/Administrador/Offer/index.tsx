@@ -14,7 +14,7 @@ const ShowOffer = ({ id }: props) => {
   // const [file, setFile] = useState('')
   const [imagePreviewUrl, setImagePreviewUrl] = useState<
     string | ArrayBuffer | null
-  >('/img/preview-clube.png')
+  >('/img/preview-clube.webp')
   const [isIlimmited, setIlimited] = useState(true)
   const [title, setTitle] = useState('')
   const [description, setDescription] = useState('')

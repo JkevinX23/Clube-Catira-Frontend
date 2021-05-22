@@ -47,7 +47,7 @@ const CreateAssociate = () => {
 
   const [imagePreviewUrl, setImagePreviewUrl] = useState<
     string | ArrayBuffer | null
-  >('/img/preview-clube.png')
+  >('/img/preview-clube.webp')
 
   function handleImageChange(e: SyntheticEvent) {
     e.preventDefault()
@@ -235,7 +235,7 @@ const CreateAssociate = () => {
     setInstagram('')
     setSite('')
     setPasswordConfirm('')
-    setImagePreviewUrl('/img/preview-clube.png')
+    setImagePreviewUrl('/img/preview-clube.webp')
   }
 
   return (

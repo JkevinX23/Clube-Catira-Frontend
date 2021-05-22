@@ -9,19 +9,10 @@ import Button from 'components/Button'
 import MediaMatch from 'components/MediaMatch'
 import { MenuProps } from 'utils/types'
 import Image from 'next/image'
-// import Tooltip from '@material-ui/core/Tooltip'
-// import { withStyles } from '@material-ui/core/styles'
-
-// const styles = {
-//   tooltip: {
-//     fontSize: '1.2rem'
-//   }
-// }
 
 const Menu = ({ handleChange, username, background }: MenuProps) => {
   const [isOpen, setIsOpen] = useState(false)
   const router = useRouter()
-  // const CustomTooltip = withStyles(styles)(Tooltip)
   function setRef(value: number) {
     switch (value) {
       case 1:

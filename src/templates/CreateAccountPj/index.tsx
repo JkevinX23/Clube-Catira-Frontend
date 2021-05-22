@@ -53,7 +53,7 @@ const CreatePJ = ({ categories, consultants }: pageProps) => {
 
   const [imagePreviewUrl, setImagePreviewUrl] = useState<
     string | ArrayBuffer | null
-  >('/img/preview-clube.png')
+  >('/img/preview-clube.webp')
 
   function handleImageChange(e: SyntheticEvent) {
     e.preventDefault()

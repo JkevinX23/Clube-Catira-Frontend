@@ -40,8 +40,3 @@ export const HowWorksWrapper = styled.div`
     margin-top: 30rem;
   `}
 `
-
-export const BackToTopWrapper = styled.div`
-  position: absolute;
-  z-index: 10;
-`

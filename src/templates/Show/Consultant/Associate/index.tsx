@@ -49,7 +49,7 @@ const ShowAssociate = ({ id }: props) => {
   const [type, setType] = useState(1)
   const [consultant_id, setconsultant_id] = useState(0)
   const [file_id, setFile_id] = useState(0)
-  const [fileUrl, setFileUrl] = useState('/img/preview-clube.png')
+  const [fileUrl, setFileUrl] = useState('/img/preview-clube.webp')
 
   useEffect(() => {
     async function loadAssociate() {
