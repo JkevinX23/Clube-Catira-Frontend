@@ -63,7 +63,7 @@ const CreatePF = ({ categories, consultants }: pageProps) => {
         const reader = new FileReader()
         const file = e.target.files[0]
         const data = new FormData()
-        data.append('file', e.target.files[0])
+        data.append('file', file)
         setFile(data)
         reader.onloadend = () => {
           setImagePreviewUrl(reader.result)
@@ -159,7 +159,7 @@ const CreatePF = ({ categories, consultants }: pageProps) => {
       data = resp.data
     } catch (err) {
       console.log(err)
-      toast.error('Erro ao carregar Logo.')
+      toast.error('Erro ao carregar Logo.  ' + err)
       return
     }
 
