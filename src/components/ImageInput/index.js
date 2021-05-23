@@ -35,7 +35,11 @@ export default function ImageInput({ cat }) {
   async function handleChange(e) {
     const data = new FormData()
 
-    data.append('file', e.target.files[0])
+    data.append('file', {
+      arrayBuffer: e.target.files[0],
+      stream: e.target.files[0],
+      type: 'image/*'
+    })
 
     const response = await api.post('files', data)
 
