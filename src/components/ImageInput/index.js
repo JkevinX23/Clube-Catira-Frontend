@@ -42,7 +42,7 @@ export default function ImageInput({ cat }) {
     try {
       const response = await api.post('files', data, {
         headers: {
-          'Content-Type': 'application/x-www-form-urlencoded'
+          'Content-Type': 'multipart/form-data'
         }
       })
       const { id, url } = response.data
