@@ -40,7 +40,11 @@ export default function ImageInput({ cat }) {
 
     window.alert(data)
     try {
-      const response = await api.post('files', data)
+      const response = await api.post('files', data, {
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded'
+        }
+      })
       const { id, url } = response.data
       setFile(id)
       setPreview(url)
