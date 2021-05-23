@@ -121,6 +121,7 @@ export const Image = styled.img`
   height: 14.4rem;
   object-fit: cover;
 `
+
 export const Button = styled.div``
 export const Wrapper = styled.div`
   ${({ theme }) => css`
@@ -175,5 +176,25 @@ export const Wrapper = styled.div`
     button {
       width: 90%;
     }
+  }
+`
+
+export const ImageWrapper = styled.div`
+  margin-top: 1rem;
+  margin-right: 3em;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  width: 25.2rem;
+  height: 16.7rem;
+  img {
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 5px;
+    height: 16.5rem;
+    object-fit: cover;
+  }
+  img:hover {
+    box-shadow: 0 0 2px 1px rgba(0, 140, 186, 0.5);
   }
 `

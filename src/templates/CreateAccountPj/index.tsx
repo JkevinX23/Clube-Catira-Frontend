@@ -6,15 +6,15 @@ import { cellphoneeMask, cepMask, cpfCnpjMask } from 'utils/Masks'
 import { isEmail, validarCPF, validarCNPJ, cleanObject } from 'utils/Validation'
 import { toast } from 'react-toastify'
 import { useEffect, useState } from 'react'
-import { SyntheticEvent } from 'Types'
 import { useRouter } from 'next/router'
 import SociaisSection from 'components/SociaisSection'
 import TextField from 'components/TextField'
 import * as S from './styles'
 import Link from 'next/link'
 import { GetCategoriesNA, GetConsultantsNoAuth } from 'Types'
-import { postFile } from 'Context/Action/File'
+// import { postFile } from 'Context/Action/File'
 import { createAssociateNA } from 'Context/Action/Associates'
+import ImageInput from 'components/ImageInput'
 
 type pageProps = {
   categories: GetCategoriesNA[]
@@ -22,7 +22,6 @@ type pageProps = {
 }
 const CreatePJ = ({ categories, consultants }: pageProps) => {
   const router = useRouter()
-  const [file, setFile] = useState<any>()
   const [description, setDescription] = useState('')
   const [site, setSite] = useState('')
   const [facebook, setFacebook] = useState('')
@@ -47,30 +46,31 @@ const CreatePJ = ({ categories, consultants }: pageProps) => {
   const [credit, setCredit] = useState('')
   const [status, setStatus] = useState(1)
   const [consultant_id, setconsultant_id] = useState(0)
+  const [file_id, setFile_id] = useState(0)
   const {
     query: { id }
   } = router
 
-  const [imagePreviewUrl, setImagePreviewUrl] = useState<
-    string | ArrayBuffer | null
-  >('/img/preview-clube.webp')
+  // const [imagePreviewUrl, setImagePreviewUrl] = useState<
+  //   string | ArrayBuffer | null
+  // >('/img/preview-clube.webp')
 
-  function handleImageChange(e: SyntheticEvent) {
-    e.preventDefault()
-    if (window.FileReader) {
-      if (e.target.files[0]) {
-        const reader = new FileReader()
-        const file = e.target.files[0]
-        const data = new FormData()
-        data.append('file', e.target.files[0])
-        setFile(data)
-        reader.onloadend = () => {
-          setImagePreviewUrl(reader.result)
-        }
-        reader.readAsDataURL(file)
-      }
-    }
-  }
+  // function handleImageChange(e: SyntheticEvent) {
+  //   e.preventDefault()
+  //   if (window.FileReader) {
+  //     if (e.target.files[0]) {
+  //       const reader = new FileReader()
+  //       const file = e.target.files[0]
+  //       const data = new FormData()
+  //       data.append('file', e.target.files[0])
+  //       setFile(data)
+  //       reader.onloadend = () => {
+  //         setImagePreviewUrl(reader.result)
+  //       }
+  //       reader.readAsDataURL(file)
+  //     }
+  //   }
+  // }
 
   useEffect(() => {
     if (document) {
@@ -137,7 +137,6 @@ const CreatePJ = ({ categories, consultants }: pageProps) => {
     }
 
     try {
-      const { data } = await postFile(file)
       const payload = {
         description,
         fantasy_name,
@@ -155,7 +154,7 @@ const CreatePJ = ({ categories, consultants }: pageProps) => {
         state,
         complement,
         credit,
-        file_id: data.id,
+        file_id,
         category_id,
 
         status,
@@ -449,18 +448,15 @@ const CreatePJ = ({ categories, consultants }: pageProps) => {
 
           <S.InlineWrapper>
             <S.TextWrapper items={3}>
-              <input
+              {/* <input
                 type="file"
                 accept="image/*"
-                onChange={
-                  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-                  // @ts-ignore: Unreachable code error
-                  (e) => handleImageChange(e)
-                }
+                onChange={(e) => handleImageChange(e)}
               />
-              {/* // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-                // @ts-ignore: Unreachable code error */}
-              <S.Image src={imagePreviewUrl} />
+              <S.Image src={imagePreviewUrl} /> */}
+              <S.ImageWrapper>
+                <ImageInput cat={{ setFile_id }} />
+              </S.ImageWrapper>
             </S.TextWrapper>
             <S.TextWrapper items={1}>
               <S.Label>Descrição</S.Label>
