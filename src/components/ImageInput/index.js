@@ -5,6 +5,8 @@ import AuthContext from 'Context/Reduces/Auth'
 
 import { Container } from './styles'
 import { toast } from 'react-toastify'
+import { postFile } from 'Context/Action/File'
+import { Data } from '@styled-icons/boxicons-regular'
 
 export default function ImageInput({ cat }) {
   const props = useContext(AuthContext)
@@ -38,14 +40,8 @@ export default function ImageInput({ cat }) {
 
     data.append('file', e.target.files[0])
 
-    window.alert('Temos: ' + e.target.files.length)
-    window.alert(e.target.files[0])
     try {
-      const response = await api.post('files', data, {
-        headers: {
-          'Content-Type': 'multipart/form-data'
-        }
-      })
+      const response = await postFile(data)
       const { id, url } = response.data
       setFile(id)
       setPreview(url)
