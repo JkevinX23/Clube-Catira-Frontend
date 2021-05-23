@@ -40,6 +40,7 @@ export default function ImageInput({ cat }) {
 
     data.append('file', e.target.files[0])
 
+    console.log({ data })
     try {
       const response = await postFile(data)
       const { id, url } = response.data
