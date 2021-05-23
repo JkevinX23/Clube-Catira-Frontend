@@ -4,6 +4,7 @@ import api from '../../services/api'
 import AuthContext from 'Context/Reduces/Auth'
 
 import { Container } from './styles'
+import { toast } from 'react-toastify'
 
 export default function ImageInput({ cat }) {
   const props = useContext(AuthContext)
@@ -35,18 +36,19 @@ export default function ImageInput({ cat }) {
   async function handleChange(e) {
     const data = new FormData()
 
-    data.append('file', {
-      arrayBuffer: e.target.files[0],
-      stream: e.target.files[0],
-      type: 'image/*'
-    })
+    data.append('file', e.target.files[0])
 
-    const response = await api.post('files', data)
-
-    const { id, url } = response.data
-    setFile(id)
-    setPreview(url)
-    cat && cat.setFile && cat.setFile_id(id)
+    window.alert(data)
+    try {
+      const response = await api.post('files', data)
+      const { id, url } = response.data
+      setFile(id)
+      setPreview(url)
+      cat && cat.setFile && cat.setFile_id(id)
+    } catch (err) {
+      toast.error('Error -> ' + err)
+      toast.error({ err })
+    }
   }
 
   return (
