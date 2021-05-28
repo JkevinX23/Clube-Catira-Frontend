@@ -22,11 +22,12 @@ const RequestCreditIncrease = () => {
       }
       const { data } = await emitirDocumento({ type: 1, value })
       toast.success(`Leia atentamente o documento de confissão de dívida.`)
-      route.push('/associado/documentos/confissaoDivida', {
+      route.push({
+        pathname: '/associado/documentos/confissaoDivida',
         query: {
           code: data.id,
           devedor: data.associate_name,
-          documento: data.associate_name,
+          documento: data.associate_document,
           valor: data.value,
           proximoPagamento: data.next_payment,
           proximoPagamentoPA: data.next_payment_ny,

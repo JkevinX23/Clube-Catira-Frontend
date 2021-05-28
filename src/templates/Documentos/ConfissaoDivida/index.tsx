@@ -1,27 +1,38 @@
 import { postIncrease } from 'Context/Action/Increases'
 import { toast } from 'react-toastify'
-import { ConfissaoDividaProps } from 'Types'
-import jsPDF from 'jspdf'
+import { useRouter } from 'next/router'
+
 import * as S from './styles'
-export default function Documento(confissaoDivida: ConfissaoDividaProps) {
+
+export default function Documento() {
+  const router = useRouter()
+  console.log(router.query)
+  const devedor = router.query.devedor
+  const documento = router.query.documento
+  const valor = router.query.valor
+  const proximoPagamento = router.query.proximoPagamento
+  const proximoPagamentoPA = router.query.proximoPagamentoPA
+  const cidade = router.query.cidade
+  const data = router.query.data
+  const id = router.query.code
+  const reason = router.query.reason
+  const valueRequest = Number(router.query.valueRequest)
+
   async function handleSubmit() {
-    if (confissaoDivida.reason && confissaoDivida.valueRequest) {
-      // window.print()
+    if (reason && valueRequest) {
+      window.print()
       await postIncrease({
-        reason: confissaoDivida.reason,
-        value: confissaoDivida.valueRequest,
-        document_id: Number(confissaoDivida.id)
+        reason: reason as string,
+        value: valueRequest,
+        document_id: Number(id)
       })
-      const printDoc = new jsPDF()
-      printDoc.autoPrint()
-      printDoc.output('dataurlnewwindow')
       toast.success('Solicitação realizada com sucesso.')
     } else {
       toast.warn('Erro ao processar sua solicitação, tente novamente.')
     }
   }
   return (
-    <div>
+    <div id="Printable">
       <S.Wrapper>
         <h1>INSTRUMENTO PARTICULAR DE CONFISSÃO DE DÍVIDA</h1>
         <S.Subtitle>
@@ -31,7 +42,7 @@ export default function Documento(confissaoDivida: ConfissaoDividaProps) {
           </h6>
           {
             <h6>
-              DEVEDOR: ${confissaoDivida.devedor}, ${confissaoDivida.documento}
+              DEVEDOR: {devedor}, {documento}
             </h6>
           }
         </S.Subtitle>
@@ -42,18 +53,17 @@ export default function Documento(confissaoDivida: ConfissaoDividaProps) {
               <b>CLÁUSULA PRIMEIRA: </b>Ressalvadas quaisquer outras obrigações
               aqui não incluídas, pelo presente instrumento e na melhor forma de
               direito, o DEVEDOR confessa dever ao CREDOR a quantia líquida,
-              certa e exigível no valor de ${confissaoDivida.valor}.
+              certa e exigível no valor de {valor}.
             </p>
           }
           {
             <p>
               <b>CLÁUSULA SEGUNDA: </b> Embora reconhecendo como boa a origem da
               dívida, o DEVEDOR, compromete-se a pagar todo dia 05 (cinco) de
-              cada mês, a partir de ${confissaoDivida.proximoPagamento}, e até
-              que encerre o montante devido, 50% do seu rendimento mensal
-              proveniente da empresa Catira Negócios e Intermediações Ltda,
-              inscrita no CNPJ 33.691.559/0001-64, a qual detêm 25% das cotas de
-              participação.
+              cada mês, a partir de {proximoPagamento}, e até que encerre o
+              montante devido, 50% do seu rendimento mensal proveniente da
+              empresa Catira Negócios e Intermediações Ltda, inscrita no CNPJ
+              33.691.559/0001-64, a qual detêm 25% das cotas de participação.
             </p>
           }
           <p>
@@ -71,10 +81,10 @@ export default function Documento(confissaoDivida: ConfissaoDividaProps) {
               falência ou não aja faturamento suficiente para que o DEVEDOR
               honre com o pagamento da dívida durante o ano de 2021, a forma de
               pagamento será transformada em parcelas mensais, pagas sempre no
-              dia 05 de cada mês, a partir de janeiro de $
-              {confissaoDivida.proximoPagamentoPA}, no valor de, meio salário
-              mínimo vigente nas datas de pagamento, cada parcela, até que seja
-              pago todo montante da dívida.
+              dia 05 de cada mês, a partir de janeiro de
+              {proximoPagamentoPA}, no valor de, meio salário mínimo vigente nas
+              datas de pagamento, cada parcela, até que seja pago todo montante
+              da dívida.
             </p>
           }
           <p>
@@ -108,7 +118,7 @@ export default function Documento(confissaoDivida: ConfissaoDividaProps) {
         <S.PreFooter>
           {
             <p>
-              ${confissaoDivida.cidade}, ${confissaoDivida.data}
+              {cidade}, {data}
             </p>
           }
         </S.PreFooter>
