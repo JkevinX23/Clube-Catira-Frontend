@@ -3,23 +3,21 @@ import AuthContext from 'Context/Reduces/Auth'
 import { useRouter } from 'next/router'
 import { useContext, useEffect } from 'react'
 import { ConfissaoDividaProps } from 'Types'
-import { useLocation } from 'react-router'
 
 export default function ConfissaoDivida() {
   const props = useContext(AuthContext)
   const router = useRouter()
-  const { search } = useLocation()
-  const searchParams = new URLSearchParams(search)
-  const devedor = searchParams.get('company_name')
-  const documento = searchParams.get('document')
-  const valor = searchParams.get('value')
-  const proximoPagamento = searchParams.get('next_payment')
-  const proximoPagamentoPA = searchParams.get('next_payment_ny')
-  const cidade = searchParams.get('city')
-  const data = searchParams.get('date')
-  const id = searchParams.get('code')
-  const reason = searchParams.get('reason')
-  const valueRequest = Number(searchParams.get('valueRequest'))
+
+  const devedor = router.query.company_name
+  const documento = router.query.document
+  const valor = router.query.value
+  const proximoPagamento = router.query.next_payment
+  const proximoPagamentoPA = router.query.next_payment_ny
+  const cidade = router.query.city
+  const data = router.query.date
+  const id = router.query.code
+  const reason = router.query.reason
+  const valueRequest = Number(router.query.valueRequest)
   const confissaoDivida = {
     id,
     devedor,
