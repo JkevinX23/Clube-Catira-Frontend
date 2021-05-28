@@ -751,6 +751,7 @@ export interface IncreaseProps {
   reason: string
   option?: number
   option_id?: number
+  document_id: number
   Associate?: {
     id: number
     fantasy_name: string
@@ -971,4 +972,32 @@ export interface PDVProps {
 export interface RecoveryProps {
   password: string
   token: string
+}
+
+export interface RequestDocument {
+  value: number
+  type: number
+}
+export interface ConfissaoDividaProps {
+  id: string
+  devedor: string
+  documento: string
+  valor: string
+  proximoPagamento: string
+  proximoPagamentoPA: string
+  cidade: string
+  data: string
+  reason?: string
+  valueRequest?: number
+}
+export interface ResponseConfissaoDividaProps {
+  id: number
+  value: number
+  type: string
+  associate_name: string
+  associate_document: string
+  next_payment: string
+  next_payment_ny: string
+  city: string
+  date: string
 }

@@ -1,14 +1,16 @@
 import Button from 'components/Button'
-import { postIncrease } from 'Context/Action/Increases'
+import { emitirDocumento } from 'Context/Action/Increases'
 import { useState } from 'react'
 import { toast } from 'react-toastify'
 import { FormatCurrency } from 'utils/Masks'
+import { useRouter } from 'next/router'
 
 import * as S from './styles'
 const RequestCreditIncrease = () => {
   const [value, setValue] = useState(0.0)
   const [valueFormated, setValueFormated] = useState('0,00')
   const [reason, setReason] = useState('')
+  const route = useRouter()
 
   async function handleSubmit() {
     try {
@@ -18,12 +20,22 @@ const RequestCreditIncrease = () => {
         )
         return
       }
-      await postIncrease({ reason, value })
-      toast.success(
-        `Um aumento de CT$: ${value} foi solicitado. Iremos analisar seu pedido.`
-      )
-      setValue(0)
-      setReason('')
+      const { data } = await emitirDocumento({ type: 1, value })
+      toast.success(`Leia atentamente o documento de confissão de dívida.`)
+      route.push('/associado/documentos/confissaoDivida', {
+        query: {
+          code: data.id,
+          devedor: data.associate_name,
+          documento: data.associate_name,
+          valor: data.value,
+          proximoPagamento: data.next_payment,
+          proximoPagamentoPA: data.next_payment_ny,
+          data: data.date,
+          cidade: data.city,
+          reason,
+          valueRequest: value
+        }
+      })
     } catch (err) {
       console.log(err)
       toast.warn('Infelizmente não foi possível realizar a sua solicitação')

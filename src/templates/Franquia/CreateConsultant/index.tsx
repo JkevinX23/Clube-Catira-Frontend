@@ -101,25 +101,27 @@ const CreateConsultant = () => {
       return
     }
     const data = {
-      cep,
-      city,
-      company_name,
-      contact1,
-      document,
-      email,
-      franchise_id,
-      identification,
       name,
+      identification,
+      document,
+      contact1,
+      contact2,
+      cep,
+      state,
+      city,
       neighborhood,
+      street,
       number,
+      complement,
+      email,
+
+      company_name,
+      franchise_id,
       password,
       percentage,
-      state,
-      status,
-      street,
-      complement,
-      contact2
+      status
     } as PostConsultantProps
+    /// Reference point
 
     try {
       await postConsultant(cleanObject(data))
