@@ -6,7 +6,6 @@ import AuthContext from 'Context/Reduces/Auth'
 import { Container } from './styles'
 import { toast } from 'react-toastify'
 import { postFile } from 'Context/Action/File'
-import { Data } from '@styled-icons/boxicons-regular'
 
 export default function ImageInput({ cat }) {
   const props = useContext(AuthContext)
@@ -18,7 +17,6 @@ export default function ImageInput({ cat }) {
   const ref = useRef()
 
   useEffect(() => {
-    console.log(props.client.img)
     props &&
       props.client &&
       props.client.img !== null &&

@@ -12,6 +12,7 @@ import CardAssociates, {
 } from 'components/CardAssociatesNA'
 import { GetAssociatesNA } from 'Context/Action/Associates'
 import { GetAssociatesNoAuth } from 'Types'
+import { Data } from 'templates/VoucherPDF/styles'
 
 export type AssociateProps = {
   MenuProps?: MenuProps
@@ -24,9 +25,23 @@ const Associates = ({ MenuProps }: AssociateProps) => {
   const [filter, setFilter] = useState('')
   const [search, SetSearch] = useState('')
 
+  function embaralha(lista: any) {
+    let indice = lista.length
+
+    while (indice) {
+      // atenção para o pós-incremento indice--
+      const indiceAleatorio = Math.floor(Math.random() * indice--)
+      ;[lista[indice], lista[indiceAleatorio]] = [
+        lista[indiceAleatorio],
+        lista[indice]
+      ]
+    }
+  }
+
   useEffect(() => {
     async function loadAssociates() {
       const { data } = await GetAssociatesNA()
+      embaralha(data)
       setAllAssociates(data)
 
       const cidades: string[] = []

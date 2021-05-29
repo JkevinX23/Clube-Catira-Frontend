@@ -15,6 +15,8 @@ import { GetCategoriesNA, GetConsultantsNoAuth } from 'Types'
 // import { postFile } from 'Context/Action/File'
 import { createAssociateNA } from 'Context/Action/Associates'
 import ImageInput from 'components/ImageInput'
+import { SyntheticEvent } from 'Types'
+import { postFile } from 'Context/Action/File'
 
 type pageProps = {
   categories: GetCategoriesNA[]
@@ -22,6 +24,7 @@ type pageProps = {
 }
 const CreatePJ = ({ categories, consultants }: pageProps) => {
   const router = useRouter()
+  const [file, setFile] = useState<FormData>()
   const [description, setDescription] = useState('')
   const [site, setSite] = useState('')
   const [facebook, setFacebook] = useState('')
@@ -51,26 +54,26 @@ const CreatePJ = ({ categories, consultants }: pageProps) => {
     query: { id }
   } = router
 
-  // const [imagePreviewUrl, setImagePreviewUrl] = useState<
-  //   string | ArrayBuffer | null
-  // >('/img/preview-clube.webp')
+  const [imagePreviewUrl, setImagePreviewUrl] = useState<
+    string | ArrayBuffer | null
+  >('/img/preview-clube.webp')
 
-  // function handleImageChange(e: SyntheticEvent) {
-  //   e.preventDefault()
-  //   if (window.FileReader) {
-  //     if (e.target.files[0]) {
-  //       const reader = new FileReader()
-  //       const file = e.target.files[0]
-  //       const data = new FormData()
-  //       data.append('file', e.target.files[0])
-  //       setFile(data)
-  //       reader.onloadend = () => {
-  //         setImagePreviewUrl(reader.result)
-  //       }
-  //       reader.readAsDataURL(file)
-  //     }
-  //   }
-  // }
+  function handleImageChange(e: SyntheticEvent) {
+    e.preventDefault()
+    if (window.FileReader) {
+      if (e.target.files[0]) {
+        const reader = new FileReader()
+        const file = e.target.files[0]
+        const data = new FormData()
+        data.append('file', e.target.files[0])
+        setFile(data)
+        reader.onloadend = () => {
+          setImagePreviewUrl(reader.result)
+        }
+        reader.readAsDataURL(file)
+      }
+    }
+  }
 
   useEffect(() => {
     if (document) {
@@ -136,6 +139,21 @@ const CreatePJ = ({ categories, consultants }: pageProps) => {
       return
     }
 
+    if (!file) {
+      toast.warn('File not found')
+      return
+    }
+
+    let data
+    try {
+      const resp = await postFile(file)
+      data = resp.data
+    } catch (err) {
+      console.log(err)
+      toast.error('Erro ao carregar Logo.  ' + err)
+      return
+    }
+
     try {
       const payload = {
         description,
@@ -154,7 +172,7 @@ const CreatePJ = ({ categories, consultants }: pageProps) => {
         state,
         complement,
         credit,
-        file_id,
+        file_id: data.id,
         category_id,
 
         status,
@@ -448,15 +466,21 @@ const CreatePJ = ({ categories, consultants }: pageProps) => {
 
           <S.InlineWrapper>
             <S.TextWrapper items={3}>
-              {/* <input
+              <input
                 type="file"
                 accept="image/*"
-                onChange={(e) => handleImageChange(e)}
+                onChange={
+                  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+                  // @ts-ignore: Unreachable code error
+                  (e) => handleImageChange(e)
+                }
               />
-              <S.Image src={imagePreviewUrl} /> */}
-              <S.ImageWrapper>
+              {/* // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+                // @ts-ignore: Unreachable code error */}
+              <S.Image src={imagePreviewUrl} />
+              {/* <S.ImageWrapper>
                 <ImageInput cat={{ setFile_id }} />
-              </S.ImageWrapper>
+              </S.ImageWrapper> */}
             </S.TextWrapper>
             <S.TextWrapper items={1}>
               <S.Label>Descrição</S.Label>
