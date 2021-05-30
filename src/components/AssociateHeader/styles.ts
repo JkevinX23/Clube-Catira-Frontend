@@ -57,7 +57,6 @@ export const Icon = styled.div`
   height: 4rem;
   cursor: pointer;
   padding-left: 1rem;
-  padding-top: 1rem;
   padding-right: 1rem;
   color: #444;
   &:last-child {
@@ -76,4 +75,15 @@ export const Icon = styled.div`
 export const SpanTolltip = styled.p`
   font-size: 1.4rem;
   max-width: 20rem;
+`
+export const MenuPDV = styled.span`
+  margin-left: 1rem;
+  display: flex;
+  flex-direction: column;
+  cursor: pointer;
+  span {
+    color: #555;
+    font-size: 1.2rem;
+    padding-top: 0.5rem;
+  }
 `

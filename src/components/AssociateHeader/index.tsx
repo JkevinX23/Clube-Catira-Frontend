@@ -6,6 +6,7 @@ import { useContext, useEffect, useState } from 'react'
 import AuthContext from 'Context/Reduces/Auth'
 import { FormatCurrency } from 'utils/Masks'
 import ReactTooltip from 'react-tooltip'
+import Image from 'next/image'
 
 export type AssociateHeaderProps = {
   associate: string
@@ -87,6 +88,18 @@ const AssociateHeader = ({
           <ExitIcon />
           <span>Sair</span>
         </S.Icon>
+
+        <Link href="/pdv">
+          <S.MenuPDV>
+            <Image
+              src="/img/catira-icon-72x72.png"
+              alt="PDV"
+              width={28}
+              height={28}
+            />
+            <span>PDV</span>
+          </S.MenuPDV>
+        </Link>
       </S.Row>
     </S.Wrapper>
   )

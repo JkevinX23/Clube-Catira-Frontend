@@ -77,38 +77,24 @@ const AssociateMenu = () => {
       <S.MenuFull aria-hidden={!isOpen} isOpen={isOpen}>
         <CloseIcon aria-label="Close Menu" onClick={() => setIsOpen(false)} />
         <S.MenuNav>
-          <S.MenuLink>
-            Ofertas
-            <S.Options>
-              <Link href="/home-associado">
-                <li>Ofertas</li>
-              </Link>
-              <Link href="/create-offer">
-                <li>Criar Ofertas</li>
-              </Link>
-
-              <Link href="/associado/minhas-ofertas">
-                <li>Minhas Ofertas</li>
-              </Link>
-            </S.Options>
-          </S.MenuLink>
-
-          <S.MenuLink>
-            Catiras
-            <S.Options>
-              <Link href="/associado/ofertas-direcionadas">
-                <li>Ofertas Diretas</li>
-              </Link>
-
-              <Link href="/associado/compra-venda">
-                <li>Compra/Venda</li>
-              </Link>
-            </S.Options>
-          </S.MenuLink>
+          <Link href="/home-associado">
+            <S.MenuLink>Ofertas</S.MenuLink>
+          </Link>
+          <Link href="/create-offer">
+            <S.MenuLink>Criar Ofertas</S.MenuLink>
+          </Link>
+          <Link href="/associado/minhas-ofertas">
+            <S.MenuLink>Minhas Ofertas</S.MenuLink>
+          </Link>
+          <Link href="/associado/ofertas-direcionadas">
+            <S.MenuLink>Ofertas Diretas</S.MenuLink>
+          </Link>
+          <Link href="/associado/compra-venda">
+            <S.MenuLink>Compra/Venda</S.MenuLink>
+          </Link>
           <Link href="/associado/associados">
             <S.MenuLink>Associados</S.MenuLink>
           </Link>
-
           <Link href="/associado/meus-creditos">
             <S.MenuLink>Extrato</S.MenuLink>
           </Link>

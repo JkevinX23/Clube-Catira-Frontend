@@ -20,8 +20,8 @@ const CreateOfferAssociate = () => {
   const [consumer_cards, setConsumerCards] = useState(1)
   const [quantity, setQuantity] = useState(1)
   const [isDirect, setIsDirect] = useState(false)
-  const [associates, setAssociates] = useState<any>([])
   const [direct, setDirectID] = useState<any>(null)
+  const [associates, setAssociates] = useState<any>([])
   const [options, setOptions] = useState<any>(null)
 
   //////CLIENT.IMAGE_ID

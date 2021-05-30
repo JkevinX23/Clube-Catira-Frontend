@@ -977,6 +977,7 @@ export interface RecoveryProps {
 export interface RequestDocument {
   value: number
   type: number
+  associate_id?: number
 }
 export interface ConfissaoDividaProps {
   id: string
