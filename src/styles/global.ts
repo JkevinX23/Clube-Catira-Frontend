@@ -19,6 +19,25 @@ const GlobalStyled = createGlobalStyle`
   src: local('Montserrat Regular'), local('Montserrat-Regular'),
        url('/fonts/montserrat-v15-latin-regular.woff2') format('woff2'),
 }
+
+@font-face {
+  font-family: 'TimesNewRoman';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: local('TimesNewRoman Regular'), local('TimesNewRoman-Regular'),
+       url('/fonts/times-new-roman.ttf') format('ttf'),
+}
+
+@font-face {
+  font-family: 'TimesNewRoman';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: local('TimesNewRoman Bold'), local('TimesNewRoman-Bold'),
+       url('/fonts/times-new-roman-bold.ttf') format('ttf'),
+}
+
 /* montserrat-600 - latin */
 @font-face {
   font-family: 'Montserrat';
@@ -28,6 +47,8 @@ const GlobalStyled = createGlobalStyle`
   src: local('Montserrat SemiBold'), local('Montserrat-SemiBold'),
        url('/fonts/montserrat-v15-latin-600.woff2') format('woff2'),
 }
+
+
   *{
     margin: 0;
     padding: 0;
