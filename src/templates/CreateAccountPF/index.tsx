@@ -1,3 +1,4 @@
+/* eslint-disable react/no-string-refs */
 import Button from 'components/Button'
 import Footer from 'components/Footer'
 import Menu from 'components/Menu'
@@ -48,6 +49,8 @@ const CreatePF = ({ categories, consultants }: pageProps) => {
   const [status, setStatus] = useState(1)
   const [consultant_id, setconsultant_id] = useState(0)
   const [file_id, setFile_id] = useState(0)
+  const [accept, setAccept] = useState(false)
+
   const {
     query: { id }
   } = router
@@ -123,6 +126,12 @@ const CreatePF = ({ categories, consultants }: pageProps) => {
   }, [cep])
 
   async function handlesubmit() {
+    if (!accept) {
+      toast.warn(
+        'Aceite os termos de adesão para se cadastrar no CLUBE DA CATIRA'
+      )
+      return
+    }
     if (!isEmail(email)) {
       toast.error('Email Invalido')
       return
@@ -203,6 +212,10 @@ const CreatePF = ({ categories, consultants }: pageProps) => {
           err
       )
     }
+  }
+
+  function onCheck(event: any) {
+    setAccept(event.target.checked || false)
   }
   return (
     <S.Wrapper>
@@ -516,6 +529,19 @@ const CreatePF = ({ categories, consultants }: pageProps) => {
               />
             </S.TextWrapper>
           </S.InlineWrapper>
+          <S.TextWrapper items={1}>
+            <S.LabelTerms htmlFor="checkbox">
+              <input
+                id="checkbox"
+                type="checkbox"
+                onChange={(e) => onCheck(e)}
+                defaultChecked={false}
+              />{' '}
+              CONCORDO COM OS{' '}
+              <a href="#">TERMOS DE ADESÃO DO CLUBE DA CATIRA</a> E AFIRMO QUE
+              AS INFOMRAÇÕES PREENCHIDAS ESTÃO CORRETAS.
+            </S.LabelTerms>
+          </S.TextWrapper>
 
           <Button
             fullWidth

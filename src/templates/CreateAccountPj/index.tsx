@@ -50,6 +50,7 @@ const CreatePJ = ({ categories, consultants }: pageProps) => {
   const [status, setStatus] = useState(1)
   const [consultant_id, setconsultant_id] = useState(0)
   const [file_id, setFile_id] = useState(0)
+  const [accept, setAccept] = useState(false)
   const {
     query: { id }
   } = router
@@ -114,6 +115,12 @@ const CreatePJ = ({ categories, consultants }: pageProps) => {
   }, [cep])
 
   async function handlesubmit() {
+    if (!accept) {
+      toast.warn(
+        'Aceite os termos de adesão para se cadastrar no CLUBE DA CATIRA'
+      )
+      return
+    }
     if (!isEmail(email)) {
       toast.error('Email Invalido')
       return
@@ -193,6 +200,10 @@ const CreatePJ = ({ categories, consultants }: pageProps) => {
         'Algo de errado aconteceu, verifique os dados. Se persistir, contate o administrador do sistema'
       )
     }
+  }
+
+  function onCheck(event: any) {
+    setAccept(event.target.checked || false)
   }
   return (
     <S.Wrapper>
@@ -513,6 +524,21 @@ const CreatePJ = ({ categories, consultants }: pageProps) => {
               />
             </S.TextWrapper>
           </S.InlineWrapper>
+
+          <S.TextWrapper items={1}>
+            <S.LabelTerms htmlFor="checkbox">
+              <input
+                id="checkbox"
+                type="checkbox"
+                onChange={(e) => onCheck(e)}
+                defaultChecked={false}
+              />{' '}
+              CONCORDO COM OS{' '}
+              <a href="#">TERMOS DE ADESÃO DO CLUBE DA CATIRA</a> E AFIRMO QUE
+              AS INFOMRAÇÕES PREENCHIDAS ESTÃO CORRETAS.
+            </S.LabelTerms>
+          </S.TextWrapper>
+
           <Button
             fullWidth
             background="orange"

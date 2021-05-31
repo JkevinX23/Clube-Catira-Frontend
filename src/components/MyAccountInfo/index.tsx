@@ -116,6 +116,11 @@ const MyAccountInfo = ({
           <p>{representative_name}</p>
           <p>{email}</p>
         </S.WrapperText>
+
+        <S.Adesao onClick={() => window.open('/adesao', '_blank')}>
+          <b>Termos de adesão</b>
+        </S.Adesao>
+
         {file !== null && (
           <S.Buttons>
             <div>

@@ -44,6 +44,35 @@ export const Title = styled.p`
     margin-top: 2rem;
   `}
 `
+export const Adesao = styled.p`
+  ${({ theme }) => css`
+    color: ${theme.colors.blue};
+    margin-bottom: 1rem;
+    font-size: ${theme.font.sizes.medium};
+    margin-top: 2rem;
+    cursor: pointer;
+    &:hover {
+      &::after {
+        content: '';
+        display: block;
+        height: 0.3rem;
+        background-color: ${theme.colors.blue};
+        animation: hoverAnimation 0.2s forwards;
+      }
+      @keyframes hoverAnimation {
+        from {
+          width: 0;
+          left: 50%;
+        }
+        to {
+          width: 80%;
+          left: 0;
+        }
+      }
+    }
+  `}
+`
+
 export const WrapperText = styled.div`
   ${({ theme }) => css`
     p {

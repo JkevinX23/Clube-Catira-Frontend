@@ -16,6 +16,11 @@ export const DecorationLineWrapper = styled.div<DecorationProps>`
     margin-bottom: ${!isPrimary ? '20px' : '0px'};
   `}
 `
+
+export const LabelTerms = styled.label`
+  font-size: 1.4rem;
+`
+
 export const MenuWrapper = styled.div`
   ${({ theme }) => css`
     background-color: ${theme.colors.white};

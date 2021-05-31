@@ -112,6 +112,9 @@ export const TextWrapper = styled.div<TextWrapperProps>`
     padding-right: 1rem;
   `}
 `
+export const LabelTerms = styled.label`
+  font-size: 1.4rem;
+`
 
 type AreaProps = {
   isDescription?: boolean
