@@ -534,8 +534,8 @@ const CreatePJ = ({ categories, consultants }: pageProps) => {
                 defaultChecked={false}
               />{' '}
               CONCORDO COM OS{' '}
-              <a href="#">TERMOS DE ADESÃO DO CLUBE DA CATIRA</a> E AFIRMO QUE
-              AS INFOMRAÇÕES PREENCHIDAS ESTÃO CORRETAS.
+              <a href="/adesao">TERMOS DE ADESÃO DO CLUBE DA CATIRA</a> E AFIRMO
+              QUE AS INFOMRAÇÕES PREENCHIDAS ESTÃO CORRETAS.
             </S.LabelTerms>
           </S.TextWrapper>
 
