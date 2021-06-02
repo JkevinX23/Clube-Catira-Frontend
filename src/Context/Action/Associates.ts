@@ -55,4 +55,4 @@ export const updateAssociate = async (data: PutAssociatePropsAssociate) =>
 
 export const hasDirectOffer = async () => api.get<HasDirectProps>('hasdirect')
 export const documentAdesao = async (data: RequestDocument) =>
-  api.post<AdesaoProps>('/document', data)
+  api.post<AdesaoProps>('/documents', data)
