@@ -140,7 +140,7 @@ const MyAccountInfo = ({
         </S.WrapperText>
 
         <S.Adesao onClick={() => handleAdesao()}>
-          <b>Termos de adesão</b>
+          <b>Contrato de adesão</b>
         </S.Adesao>
 
         {file !== null && (

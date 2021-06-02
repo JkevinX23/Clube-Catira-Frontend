@@ -537,9 +537,9 @@ const CreatePF = ({ categories, consultants }: pageProps) => {
                 onChange={(e) => onCheck(e)}
                 defaultChecked={false}
               />{' '}
-              CONCORDO COM OS{' '}
-              <a href="/adesao">TERMOS DE ADESÃO DO CLUBE DA CATIRA</a> E AFIRMO
-              QUE AS INFOMRAÇÕES PREENCHIDAS ESTÃO CORRETAS.
+              CONCORDO COM O{' '}
+              <a href="/adesao">CONTRATO DE ADESÃO DO CLUBE DA CATIRA</a> E
+              AFIRMO QUE AS INFOMRAÇÕES PREENCHIDAS ESTÃO CORRETAS.
             </S.LabelTerms>
           </S.TextWrapper>
 

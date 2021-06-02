@@ -29,19 +29,21 @@ export default function Adesao() {
           Catira Intermediações de Negócios Ltda, &nbsp;
         </S.SpanStyled2>
         <S.SpanStyled3>
-          inscrita no CNPJ/MF sob o número&nbsp;
-          <S.SpanStyled2>33.691.559/0001-64</S.SpanStyled2>, com sede na Av.
-          Deusdedith Salgado, nº 3955 Salvaterra - Juiz de Fora/MG, CEP
-          36.033-007 doravante denominado simplesmente CLUBE, e, de outro
-          lado,&nbsp;
+          inscrita no{' '}
+          <S.SpanStyled2>
+            CNPJ/MF sob o número 33.691.559/0001-64{' '}
+          </S.SpanStyled2>
+          , com sede na Av. Deusdedith Salgado, nº 3955 Salvaterra - Juiz de
+          Fora/MG, CEP 36.033-007 doravante denominado simplesmente{' '}
+          <S.SpanStyled2>CLUBE</S.SpanStyled2>, e, de outro lado,&nbsp;
         </S.SpanStyled3>
         <S.SpanStyled2>{associate_name}&nbsp;</S.SpanStyled2>
         <S.SpanStyled3>
           inscrito no <S.SpanStyled2>{associate_document}</S.SpanStyled2>&nbsp;
-          <S.SpanStyled2>047.819.626-10</S.SpanStyled2>, com sede na {address}
+          , com sede na {address}
           {', '}
           doravante denominado simplesmente{' '}
-          <S.SpanStyled2>ASSOCIADO</S.SpanStyled2>
+          <S.SpanStyled2>ASSOCIADO.</S.SpanStyled2>
         </S.SpanStyled3>
       </S.P2>
       <S.P2 dir="ltr">
