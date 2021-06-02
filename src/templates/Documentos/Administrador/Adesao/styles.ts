@@ -121,3 +121,28 @@ export const Body = styled.div`
   box-shadow: 0 0 0.5cm rgba(0, 123, 255, 0.5);
   padding: 4rem;
 `
+export const Button = styled.div`
+  @media print {
+    display: none;
+  }
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+  padding-bottom: 5rem;
+  button {
+    font-size: 22px;
+    padding: 1rem 3rem;
+    background: #007bff;
+    border: 0;
+    color: white;
+    cursor: pointer;
+    border: 1px solid #007bff;
+
+    &:hover {
+      background: white;
+      color: #007bff;
+      border: 1px solid #007bff;
+    }
+  }
+`

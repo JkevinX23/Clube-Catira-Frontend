@@ -1,5 +1,6 @@
 import { toast } from 'react-toastify'
 import { useRouter } from 'next/router'
+import { postIncrease } from 'Context/Action/Increases'
 
 import * as S from './styles'
 
@@ -13,11 +14,19 @@ export default function Documento() {
   const cidade = router.query.cidade
   const data = router.query.data
   const valueRequest = Number(router.query.valueRequest)
+  const id = router.query.code
+  const reason = router.query.reason
 
   async function handleSubmit() {
-    if (valueRequest) {
+    if (reason && valueRequest) {
       window.print()
-      router.push('/administrador')
+      await postIncrease({
+        reason: reason as string,
+        value: valueRequest,
+        document_id: Number(id)
+      })
+      toast.success('Solicitação realizada com sucesso.')
+      router.push('/associado/meus-creditos')
     } else {
       toast.warn('Erro ao processar sua solicitação, tente novamente.')
     }

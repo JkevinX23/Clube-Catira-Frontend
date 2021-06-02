@@ -72,22 +72,22 @@ const DocumentsReportAdm = () => {
           '/administrador/documentos/confissaoDivida' +
             '?code=' +
             data.id +
-            '?devedor=' +
+            '&devedor=' +
             data.associate_name +
-            '?documento=' +
+            '&documento=' +
             data.associate_document +
-            '?valor=' +
+            '&valor=' +
             data.value +
-            '?proximoPagamento=' +
+            '&proximoPagamento=' +
             data.next_payment +
-            '?proximoPagamentoPA=' +
+            '&proximoPagamentoPA=' +
             data.next_payment_ny +
-            '?data=' +
+            '&data=' +
             data.date +
-            '?cidade=' +
+            '&cidade=' +
             data.city +
-            '?reason= ' +
-            '?valueRequest=' +
+            '&reason= ' +
+            '&valueRequest=' +
             documentValue,
           '_blank'
         )
@@ -116,15 +116,15 @@ const DocumentsReportAdm = () => {
           '/administrador/documentos/adesao' +
             '?code=' +
             data.id +
-            '?associate_name=' +
+            '&associate_name=' +
             data.associate_name +
-            '?associate_document=' +
+            '&associate_document=' +
             data.associate_document +
-            '?address=' +
+            '&address=' +
             data.address +
-            '?date=' +
+            '&date=' +
             data.date +
-            '?percentage=' +
+            '&percentage=' +
             data.percentage,
           '_blank'
         )

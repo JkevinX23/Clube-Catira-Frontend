@@ -1,14 +1,25 @@
 import * as S from './styles'
-import { useRouter } from 'next/router'
 export default function Adesao() {
-  const router = useRouter()
-  const associate_name = router.query.associate_name
-  const associate_document = router.query.associate_document
-  const address = router.query.address
-  const date = router.query.date
-  const percentage = router.query.percentage
+  let associate_name
+  let associate_document
+  let address
+  let date
+  let percentage
+
+  if (typeof window !== 'undefined') {
+    const urlParams = new URLSearchParams(window.location.search)
+    associate_name = urlParams.get('associate_name')
+    associate_document = urlParams.get('associate_document')
+    address = urlParams.get('address')
+    date = urlParams.get('date')
+    percentage = urlParams.get('percentage')
+  }
+
   return (
     <S.Body>
+      <S.Button>
+        <button onClick={() => window.print()}> IMPRIMIR </button>
+      </S.Button>
       <p>
         <br />
       </p>
@@ -39,10 +50,9 @@ export default function Adesao() {
         </S.SpanStyled3>
         <S.SpanStyled2>{associate_name}&nbsp;</S.SpanStyled2>
         <S.SpanStyled3>
-          inscrito no <S.SpanStyled2>{associate_document}</S.SpanStyled2>&nbsp;
-          , com sede na {address}
-          {', '}
-          doravante denominado simplesmente{' '}
+          inscrito no <S.SpanStyled2>{associate_document}</S.SpanStyled2>, com
+          sede na {address}
+          {', '}doravante denominado simplesmente{' '}
           <S.SpanStyled2>ASSOCIADO.</S.SpanStyled2>
         </S.SpanStyled3>
       </S.P2>

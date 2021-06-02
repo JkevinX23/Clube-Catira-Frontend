@@ -1,4 +1,3 @@
-import { postIncrease } from 'Context/Action/Increases'
 import { toast } from 'react-toastify'
 import { useRouter } from 'next/router'
 
@@ -6,32 +5,35 @@ import * as S from './styles'
 
 export default function Documento() {
   const router = useRouter()
-  console.log(router.query)
-  const devedor = router.query.devedor
-  const documento = router.query.documento
-  const valor = router.query.valor
-  const proximoPagamento = router.query.proximoPagamento
-  const proximoPagamentoPA = router.query.proximoPagamentoPA
-  const cidade = router.query.cidade
-  const data = router.query.data
-  const id = router.query.code
-  const reason = router.query.reason
-  const valueRequest = Number(router.query.valueRequest)
-
+  const urlParams = ''
+  let devedor = ''
+  let documento = ''
+  let valor = ''
+  let proximoPagamento = ''
+  let proximoPagamentoPA = ''
+  let cidade = ''
+  let data = ''
+  let valueRequest = 0
+  if (typeof window !== 'undefined') {
+    const urlParams = new URLSearchParams(window.location.search)
+    devedor = urlParams.get('devedor') || ''
+    documento = urlParams.get('documento') || ''
+    valor = urlParams.get('valor') || ''
+    proximoPagamento = urlParams.get('proximoPagamento') || ''
+    proximoPagamentoPA = urlParams.get('proximoPagamentoPA') || ''
+    cidade = urlParams.get('cidade') || ''
+    data = urlParams.get('data') || ''
+    valueRequest = Number(urlParams.get('valueRequest')) || 0
+  }
   async function handleSubmit() {
-    if (reason && valueRequest) {
+    if (valueRequest) {
       window.print()
-      await postIncrease({
-        reason: reason as string,
-        value: valueRequest,
-        document_id: Number(id)
-      })
-      toast.success('Solicitação realizada com sucesso.')
-      router.push('/associado/meus-creditos')
+      router.push('/administrador')
     } else {
       toast.warn('Erro ao processar sua solicitação, tente novamente.')
     }
   }
+
   return (
     <div id="Printable">
       <S.Wrapper>
@@ -155,7 +157,7 @@ export default function Documento() {
         </S.Footer>
       </S.Wrapper>
       <S.Button>
-        <button onClick={() => handleSubmit()}> CONCORDAR E IMPRIMIR </button>
+        <button onClick={() => handleSubmit()}> IMPRIMIR </button>
       </S.Button>
     </div>
   )
