@@ -67,39 +67,78 @@ const DocumentsReportAdm = () => {
           value: documentValue,
           associate_id: id
         })
-        toast.success('Solicitação realizada com sucesso.')
-        route.push({
-          pathname: '/administrador/documentos/confissaoDivida',
-          query: {
-            code: data.id,
-            devedor: data.associate_name,
-            documento: data.associate_document,
-            valor: data.value,
-            proximoPagamento: data.next_payment,
-            proximoPagamentoPA: data.next_payment_ny,
-            data: data.date,
-            cidade: data.city,
-            reason: '',
-            valueRequest: documentValue
-          }
-        })
+
+        window.open(
+          '/administrador/documentos/confissaoDivida' +
+            '?code=' +
+            data.id +
+            '?devedor=' +
+            data.associate_name +
+            '?documento=' +
+            data.associate_document +
+            '?valor=' +
+            data.value +
+            '?proximoPagamento=' +
+            data.next_payment +
+            '?proximoPagamentoPA=' +
+            data.next_payment_ny +
+            '?data=' +
+            data.date +
+            '?cidade=' +
+            data.city +
+            '?reason= ' +
+            '?valueRequest=' +
+            documentValue,
+          '_blank'
+        )
+
+        // route.push({
+        //   pathname: '/administrador/documentos/confissaoDivida',
+        //   query: {
+        //     code: data.id,
+        //     devedor: data.associate_name,
+        //     documento: data.associate_document,
+        //     valor: data.value,
+        //     proximoPagamento: data.next_payment,
+        //     proximoPagamentoPA: data.next_payment_ny,
+        //     data: data.date,
+        //     cidade: data.city,
+        //     reason: '',
+        //     valueRequest: documentValue
+        //   }
+        // })
       } else if (tipo === 2) {
         const { data } = await documentAdesao({
           type: 2,
           associate_id: id
         })
-        toast.success('Solicitação realizada com sucesso.')
-        route.push({
-          pathname: '/administrador/documentos/adesao',
-          query: {
-            code: data.id,
-            associate_name: data.associate_name,
-            associate_document: data.associate_document,
-            address: data.address,
-            date: data.date,
-            percentage: data.percentage
-          }
-        })
+        window.open(
+          '/administrador/documentos/adesao' +
+            '?code=' +
+            data.id +
+            '?associate_name=' +
+            data.associate_name +
+            '?associate_document=' +
+            data.associate_document +
+            '?address=' +
+            data.address +
+            '?date=' +
+            data.date +
+            '?percentage=' +
+            data.percentage,
+          '_blank'
+        )
+        // route.push({
+        //   pathname: '/administrador/documentos/adesao',
+        //   query: {
+        //     code: data.id,
+        //     associate_name: data.associate_name,
+        //     associate_document: data.associate_document,
+        //     address: data.address,
+        //     date: data.date,
+        //     percentage: data.percentage
+        //   }
+        // })
       }
     } catch (err) {
       console.log(err)
