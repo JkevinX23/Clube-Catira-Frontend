@@ -3,8 +3,9 @@ import * as S from './styles'
 import { useState } from 'react'
 import Button from 'components/Button'
 import { postFile } from 'Context/Action/File'
-import { updateAssociate } from 'Context/Action/Associates'
+import { documentAdesao, updateAssociate } from 'Context/Action/Associates'
 import { toast } from 'react-toastify'
+import { useRouter } from 'next/router'
 
 export type MyAccountInfoProps = {
   img: string
@@ -33,6 +34,7 @@ const MyAccountInfo = ({
   representative_name,
   email
 }: MyAccountInfoProps) => {
+  const route = useRouter()
   const [file, setFile] = useState<any>(null)
   const [imagePreviewUrl, setImagePreviewUrl] = useState<
     string | ArrayBuffer | null
@@ -52,6 +54,26 @@ const MyAccountInfo = ({
         }
         reader.readAsDataURL(file)
       }
+    }
+  }
+
+  async function handleAdesao() {
+    try {
+      const { data } = await documentAdesao({ type: 2 })
+      route.push({
+        pathname: '/associado/documentos/adesao',
+        query: {
+          code: data.id,
+          associate_name: data.associate_name,
+          associate_document: data.associate_document,
+          address: data.address,
+          date: data.date,
+          percentage: data.percentage
+        }
+      })
+    } catch (err) {
+      console.error(err)
+      toast.error(err)
     }
   }
 
@@ -117,7 +139,7 @@ const MyAccountInfo = ({
           <p>{email}</p>
         </S.WrapperText>
 
-        <S.Adesao onClick={() => window.open('/adesao', '_blank')}>
+        <S.Adesao onClick={() => handleAdesao()}>
           <b>Termos de adesão</b>
         </S.Adesao>
 

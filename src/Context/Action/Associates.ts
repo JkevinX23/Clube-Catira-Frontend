@@ -10,7 +10,9 @@ import {
   GetCreditsProps,
   PutAssociatePropsAssociate,
   ContactAssociateProps,
-  HasDirectProps
+  HasDirectProps,
+  RequestDocument,
+  AdesaoProps
 } from 'Types'
 
 export const getAssociatesAdmin = async () =>
@@ -52,3 +54,5 @@ export const updateAssociate = async (data: PutAssociatePropsAssociate) =>
   api.put('/associate', data)
 
 export const hasDirectOffer = async () => api.get<HasDirectProps>('hasdirect')
+export const documentAdesao = async (data: RequestDocument) =>
+  api.post<AdesaoProps>('/document', data)

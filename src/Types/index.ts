@@ -975,7 +975,7 @@ export interface RecoveryProps {
 }
 
 export interface RequestDocument {
-  value: number
+  value?: number
   type: number
   associate_id?: number
 }
@@ -1001,4 +1001,13 @@ export interface ResponseConfissaoDividaProps {
   next_payment_ny: string
   city: string
   date: string
+}
+export interface AdesaoProps {
+  id: number
+  type: string
+  associate_name: string
+  associate_document: string
+  address: string
+  date: string
+  percentage: string
 }
