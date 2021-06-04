@@ -44,7 +44,7 @@ export default function ImageInput({ cat }) {
       const { id, url } = response.data
       setFile(id)
       setPreview(url)
-      cat && cat.setFile && cat.setFile_id(id)
+      cat && cat.setFile && cat.setFile(id)
     } catch (err) {
       toast.error('Error -> ' + err)
       toast.error({ err })
