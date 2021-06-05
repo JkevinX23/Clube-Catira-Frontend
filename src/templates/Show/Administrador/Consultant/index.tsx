@@ -321,6 +321,8 @@ const ShowConsultant = ({ id }: props) => {
                   required
                   onChange={(e) => setPercentage(Number(e.target.value))}
                   value={percentage}
+                  step={0.1}
+                  type="number"
                 />
               </S.TextWrapper>
               <S.SelectWrapper>

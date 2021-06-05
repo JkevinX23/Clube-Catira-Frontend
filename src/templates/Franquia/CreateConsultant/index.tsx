@@ -133,14 +133,6 @@ const CreateConsultant = () => {
     }
   }
 
-  useEffect(() => {
-    async function loadFranchises() {
-      const { data } = await getFranchise()
-      setFranchises(data)
-    }
-
-    loadFranchises()
-  }, [])
   return (
     <S.Wrapper>
       <S.FormWrapper>
@@ -305,6 +297,8 @@ const CreateConsultant = () => {
                 required
                 onChange={(e) => setPercentage(Number(e.target.value))}
                 value={percentage}
+                step={0.1}
+                type="number"
               />
             </S.TextWrapper>
             <S.TextWrapper items={3} />
