@@ -72,7 +72,7 @@ const ShowOffer = ({ id }: props) => {
         <S.SelectWrapper>
           <S.Label>Associado</S.Label>
           <S.Select disabled>
-            <option value="none" selected disabled hidden>
+            <option selected disabled>
               {associate}
             </option>
           </S.Select>
