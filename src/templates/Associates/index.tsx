@@ -19,31 +19,43 @@ export type AssociateProps = {
 }
 
 const Associates = ({ MenuProps }: AssociateProps) => {
+  const [loading, setLoading] = useState(true)
   const [citys, setCitys] = useState<string[]>([])
   const [associates, setAssociates] = useState<any>([])
   const [allAssociates, setAllAssociates] = useState<any>([])
   const [filter, setFilter] = useState('')
   const [search, SetSearch] = useState('')
 
-  function embaralha(lista: any) {
-    let indice = lista.length
+  // function embaralha(lista: any) {
+  //   let indice = lista.length
 
-    while (indice) {
-      // atenção para o pós-incremento indice--
-      const indiceAleatorio = Math.floor(Math.random() * indice--)
-      ;[lista[indice], lista[indiceAleatorio]] = [
-        lista[indiceAleatorio],
-        lista[indice]
-      ]
-    }
-  }
+  //   while (indice) {
+  //     // atenção para o pós-incremento indice--
+  //     const indiceAleatorio = Math.floor(Math.random() * indice--)
+  //     ;[lista[indice], lista[indiceAleatorio]] = [
+  //       lista[indiceAleatorio],
+  //       lista[indice]
+  //     ]
+  //   }
+  // }
 
   useEffect(() => {
     async function loadAssociates() {
       const { data } = await GetAssociatesNA()
-      embaralha(data)
-      setAllAssociates(data)
 
+      setAllAssociates(
+        data.sort(function (a, b) {
+          if (a.fantasy_name.toLowerCase() > b.fantasy_name.toLowerCase()) {
+            return 1
+          }
+          if (a.fantasy_name.toLowerCase() < b.fantasy_name.toLowerCase()) {
+            return -1
+          }
+          // a must be equal to b
+          return 0
+        })
+      )
+      setLoading(false)
       const cidades: string[] = []
       data.map((ass) => {
         if (cidades.indexOf(`${ass.city}/${ass.state}`) === -1) {
@@ -140,7 +152,11 @@ const Associates = ({ MenuProps }: AssociateProps) => {
         </S.ContentWrapper>
       )}
 
-      {associates.length < 1 && (
+      {associates.length < 1 && loading ? (
+        <S.ContentWrapper>
+          <S.TextWrapper>Carregando associados... </S.TextWrapper>
+        </S.ContentWrapper>
+      ) : (
         <S.ContentWrapper>
           <S.TextWrapper>Nenhum associado encontrado</S.TextWrapper>
         </S.ContentWrapper>

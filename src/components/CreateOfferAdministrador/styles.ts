@@ -134,4 +134,5 @@ export const Select = styled.select`
 `
 export const SelectWrapper = styled.div`
   width: 100%;
+  font-size: 1.4rem;
 `

@@ -24,7 +24,7 @@ const ShowConsultant = ({ id }: props) => {
   const [contact2, setContact2] = useState('')
   const [password, setPassword] = useState('')
   const [passwordConfirm, setPasswordConfirm] = useState('')
-  const [percentage, setPercentage] = useState(10)
+  const [percentage, setPercentage] = useState(0.5)
   const [status, setStatus] = useState(1)
 
   const [cep, setCep] = useState('')
@@ -76,6 +76,7 @@ const ShowConsultant = ({ id }: props) => {
         setNumber(data.Address?.number || '')
         setComplement(data.Address?.complement || '')
         setStatus(data.status)
+        setPercentage(data.percentage)
       } catch (err) {
         toast.error('Erro de conexão, caso persista, contate o administrador')
       }

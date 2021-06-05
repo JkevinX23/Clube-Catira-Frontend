@@ -1,9 +1,11 @@
+import Select from 'react-select'
 import Button from 'components/Button'
 import * as S from './styles'
 import { useState, useEffect } from 'react'
 import { postOffers } from 'Context/Action/Offer'
 import { getAssociates } from 'Context/Action/Associates'
 import { toast } from 'react-toastify'
+import { GetAssociatesAdmin } from 'Types'
 import { cleanObject } from 'utils/Validation'
 import ImageInput from 'components/ImageInput'
 
@@ -17,7 +19,7 @@ const CreateOfferAdmin = () => {
   const [consumer_cards, setConsumerCards] = useState(1)
   const [quantity, setQuantity] = useState(0)
   const [isDirect, setIsDirect] = useState(false)
-  const [associateId, setAssociateId] = useState(0)
+  const [associateId, setAssociateId] = useState<any>(0)
   const [direct, setDirectID] = useState<any>(null)
 
   function handleIlimited() {
@@ -51,10 +53,19 @@ const CreateOfferAdmin = () => {
     }
   }
 
+  function compare(a: GetAssociatesAdmin, b: GetAssociatesAdmin) {
+    if (a.fantasy_name.toLowerCase() < b.fantasy_name.toLowerCase()) return -1
+    if (a.fantasy_name.toLowerCase() > b.fantasy_name.toLowerCase()) return 1
+    return 0
+  }
+
   useEffect(() => {
     async function loadAssociates() {
       const { data } = await getAssociates()
-      setAssociates(data)
+      const opt = data
+        .sort(compare)
+        .map((e) => ({ value: e.id, label: `${e.fantasy_name} - ${e.id}` }))
+      setAssociates(opt)
     }
     loadAssociates()
   }, [])
@@ -76,18 +87,16 @@ const CreateOfferAdmin = () => {
 
       <S.WrapperField>
         <S.SelectWrapper>
-          <S.Label>Associado</S.Label>
-          <S.Select onChange={(e) => setAssociateId(Number(e.target.value))}>
-            <option value={0} selected disabled hidden>
-              Selecione
-            </option>
-            {associates &&
-              associates.map((ass: any) => (
-                <option key={ass.id} value={ass.id}>
-                  {ass.id} - {ass.fantasy_name}
-                </option>
-              ))}
-          </S.Select>
+          <S.SelectWrapper>
+            <S.Label>Associado</S.Label>
+            <Select
+              isClearable
+              className="react-select-container"
+              placeholder="Selecione"
+              options={associates}
+              onChange={(e) => setAssociateId(e?.value)}
+            />
+          </S.SelectWrapper>
         </S.SelectWrapper>
 
         <S.Label>Vai para uma empresa específica</S.Label>
@@ -112,17 +121,13 @@ const CreateOfferAdmin = () => {
         {isDirect && (
           <S.SelectWrapper>
             <S.Label>Associado</S.Label>
-            <S.Select onChange={(e) => setDirectID(e.target.value)}>
-              <option value="none" selected disabled hidden>
-                Selecione
-              </option>
-              {associates &&
-                associates.map((ass: any) => (
-                  <option key={ass.id} value={ass.id}>
-                    {ass.id} - {ass.fantasy_name}
-                  </option>
-                ))}
-            </S.Select>
+            <Select
+              isClearable
+              className="react-select-container"
+              placeholder="Selecione"
+              options={associates}
+              onChange={(e) => setDirectID(e?.value)}
+            />
           </S.SelectWrapper>
         )}
 
