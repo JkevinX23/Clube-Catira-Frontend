@@ -893,6 +893,24 @@ export interface AdminProfileProps {
   address_id: number
   Address: Address
 }
+export interface AdminPutProps {
+  name?: string
+  email?: string
+  company_name?: string
+  contact?: string
+  document?: string
+  password?: string
+  oldPassword?: string
+  getway_email?: string
+  getway_token?: string
+  cep?: string
+  state?: string
+  city?: string
+  street?: string
+  neighborhood?: string
+  number?: string
+  complement?: string
+}
 
 export interface FranchiseProfileProps {
   id: number

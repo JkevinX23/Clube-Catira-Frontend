@@ -9,7 +9,7 @@ import { getCategoriesAdmin } from 'Context/Action/Category'
 import { getConsultants } from 'Context/Action/Consultant'
 import { postFile } from 'Context/Action/File'
 import { showAssociate, updateAssociateAdmin } from 'Context/Action/Associates'
-import { getAdminProfile } from 'Context/Action/Admin'
+import { getAdminProfile, putAdmin } from 'Context/Action/Admin'
 
 const ShowProfileAdministrador = () => {
   const [profile, setProfile] = useState<any>()
@@ -32,6 +32,11 @@ const ShowProfileAdministrador = () => {
 
   const [password, setPassword] = useState('')
   const [passwordConfirm, setPasswordConfirm] = useState('')
+  const [oldPassword, setOldPassword] = useState('')
+
+  const [emailError, setEmailError] = useState(false)
+  const [passwordError, setPassWordError] = useState(false)
+  const [documentError, setDocumentError] = useState(false)
 
   useEffect(() => {
     async function loadProfile() {
@@ -78,6 +83,94 @@ const ShowProfileAdministrador = () => {
       setCep(cepMask(cep))
     }
   }, [cep])
+
+  async function handleUpdate() {
+    setEmailError(false)
+    setPassWordError(false)
+    setDocumentError(false)
+    if (!isEmail(email)) {
+      setEmailError(true)
+      return
+    }
+    if (password !== passwordConfirm) {
+      toast.warn('As senhas não coorespondem.')
+      setPassWordError(true)
+      return
+    }
+    if (password && !oldPassword) {
+      toast.warn('Para alterar a senha, informe a semha antiga.')
+      setPassWordError(true)
+      return
+    }
+
+    if (document.length === 14) {
+      if (!validarCPF(document)) {
+        setDocumentError(true)
+        return
+      }
+    } else {
+      if (!validarCNPJ(document)) {
+        setDocumentError(true)
+        return
+      }
+    }
+
+    if (password && password.length < 6) {
+      toast.info('Sua senha deve ter pelo menos 6 caracteres.')
+      return
+    }
+    const payload = {
+      name,
+      email,
+      company_name,
+      contact,
+      document,
+      password,
+      getway_email,
+      getway_token,
+      cep,
+      city,
+      complement,
+      neighborhood,
+      street,
+      number,
+      state,
+      oldPassword
+    }
+
+    try {
+      await putAdmin(cleanObject(payload))
+      toast.success('Perfil atualizada com sucesso!')
+      const { data } = await getAdminProfile()
+      setProfile(data)
+      setName(data.name)
+      setContact(data.contact)
+      setEmail(data.email)
+      setCompanyName(data.company_name)
+      setDocument(data.document)
+      setGetwayEmail(data.getway_email)
+      setGetwayToken(data.getway_token)
+
+      setCep(data.Address.cep)
+      setState(data.Address.state)
+      setCity(data.Address.city)
+      setNeighborhood(data.Address.neighborhood)
+      setStreet(data.Address.street)
+      setNumber(data.Address.number)
+
+      setComplement(data.Address.complement || '')
+      setPasswordConfirm('')
+      setOldPassword('')
+
+      setEmailError(false)
+      setPassWordError(false)
+      setDocumentError(false)
+    } catch (err) {
+      toast.error(
+        'Algo de errado aconteceu, verifique os dados. Se persistir, contate o administrador do sistema'
+      )
+    }
+  }
 
   return (
     <S.Wrapper>
@@ -230,7 +323,7 @@ const ShowProfileAdministrador = () => {
           </S.InlineWrapper>
 
           <S.InlineWrapper>
-            <S.TextWrapper items={1}>
+            <S.TextWrapper items={2}>
               <TextField
                 label="Complemento"
                 required
@@ -238,10 +331,7 @@ const ShowProfileAdministrador = () => {
                 value={complement}
               />
             </S.TextWrapper>
-          </S.InlineWrapper>
-
-          <S.InlineWrapper>
-            <S.TextWrapper items={3}>
+            <S.TextWrapper items={2}>
               <TextField
                 label="Contato"
                 required
@@ -249,9 +339,21 @@ const ShowProfileAdministrador = () => {
                 value={contact}
               />
             </S.TextWrapper>
+          </S.InlineWrapper>
+
+          <S.InlineWrapper>
             <S.TextWrapper items={3}>
               <TextField
                 label="Senha Atual"
+                required
+                onChange={(e) => setOldPassword(e.target.value)}
+                type="password"
+                value={password}
+              />
+            </S.TextWrapper>
+            <S.TextWrapper items={3}>
+              <TextField
+                label="Nova senha"
                 required
                 onChange={(e) => setPassword(e.target.value)}
                 type="password"
@@ -260,7 +362,7 @@ const ShowProfileAdministrador = () => {
             </S.TextWrapper>
             <S.TextWrapper items={3}>
               <TextField
-                label="Nova Senha"
+                label="Confirme Nova Senha"
                 required
                 onChange={(e) => setPasswordConfirm(e.target.value)}
                 type="password"
@@ -270,10 +372,7 @@ const ShowProfileAdministrador = () => {
           </S.InlineWrapper>
 
           <S.InlineWrapper>
-            <S.TextWrapper items={1}>
-              <S.Label>Observações Gerais</S.Label>
-              <S.TextArea />
-            </S.TextWrapper>
+            <S.TextWrapper items={1}></S.TextWrapper>
           </S.InlineWrapper>
 
           <S.InlineWrapper>
@@ -289,7 +388,7 @@ const ShowProfileAdministrador = () => {
               size="large"
               background="green"
               radius="radius100"
-              // onClick={handlesubmit}
+              onClick={handleUpdate}
             >
               ATUALIZAR
             </Button>
