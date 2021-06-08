@@ -201,10 +201,23 @@ const CreateAssociate = () => {
       toast.success('Associado criado com sucesso')
 
       resetValues()
-    } catch (err) {
-      toast.error(
-        'Algo de errado aconteceu, verifique os dados. Se persistir, contate o administrador do sistema'
-      )
+    } catch (error) {
+      switch (error.response.status) {
+        case 400:
+          toast.error('Erro no processo de validação dos dados.')
+          return
+        case 401:
+          toast.error('Email já cadastrado.')
+          return
+        case 409:
+          toast.error('Transaction Failed.')
+          return
+        default:
+          toast.error(
+            'Algo de errado aconteceu, verifique os dados. Se persistir, contate o administrador do sistema. ' +
+              error.response.data
+          )
+      }
     }
   }
 
