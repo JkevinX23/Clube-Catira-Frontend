@@ -132,6 +132,72 @@ const CreatePF = ({ categories, consultants }: pageProps) => {
       )
       return
     }
+
+    if (!description) {
+      toast.error('A Descrição é obrigatória.')
+      return
+    }
+
+    if (!fantasy_name) {
+      toast.error('Nome fantasia é obrigatório.')
+      return
+    }
+    if (!document) {
+      toast.error('Documento obrigatório, seja CPF ou CNPJ.')
+      return
+    }
+    if (!response_name) {
+      toast.error('Informe o nome do representante.')
+      return
+    }
+    if (!contact1) {
+      toast.error('Informe ao menos um número para contato.')
+      return
+    }
+
+    if (!cep) {
+      toast.error('Endereço obrigatório: Informe o CEP.')
+      return
+    }
+
+    if (!street) {
+      toast.error('Endereço obrigatório: Informe a rua.')
+      return
+    }
+
+    if (!number) {
+      toast.error('Endereço obrigatório: Informe o núemro.')
+      return
+    }
+
+    if (!neighborhood) {
+      toast.error('Endereço obrigatório: Informe o bairro.')
+      return
+    }
+
+    if (!city) {
+      toast.error('Endereço obrigatório: Informe sua cidade.')
+      return
+    }
+
+    if (!state) {
+      toast.error('Endereço obrigatório: Informe seu estado.')
+      return
+    }
+
+    if (!credit) {
+      toast.error('Informe quanto deseja de crédito inicial. ')
+      return
+    }
+    if (!category_id) {
+      toast.error('Informe uma categoria.')
+      return
+    }
+
+    if (!consultant_id) {
+      toast.error('Informe um consultor.')
+      return
+    }
     if (!isEmail(email)) {
       toast.error('Email Invalido')
       return
