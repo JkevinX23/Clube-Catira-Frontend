@@ -195,10 +195,31 @@ const CreatePJ = ({ categories, consultants }: pageProps) => {
       toast.success(
         'Parabens, seu registro foi criado com sucesso. Iremos analisar seus dados e assim que possível aprovaremos seu cadastro.'
       )
-    } catch (err) {
-      toast.error(
-        'Algo de errado aconteceu, verifique os dados. Se persistir, contate o administrador do sistema'
-      )
+    } catch (error) {
+      if (error.response) {
+        switch (error.response.status) {
+          case 400:
+            toast.error('Erro no processo de validação dos dados.')
+            return
+          case 401:
+            toast.error('Email já cadastrado.')
+            return
+          case 409:
+            toast.error('Transaction Failed.')
+            return
+          default:
+            toast.error(
+              'Algo de errado aconteceu' +
+                'Code: ' +
+                error.response.status +
+                'Msg: ' +
+                error.reponse.data
+            )
+        }
+      } else {
+        toast.error('Submit failed')
+        return
+      }
     }
   }
 
