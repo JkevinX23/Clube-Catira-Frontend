@@ -1,18 +1,19 @@
 import Select from 'react-select'
-import { GetAssociatesAdmin } from 'Types'
+import { GetAssociatesAdmin, GetAssociatesNoAuth } from 'Types'
 
 import Button from 'components/Button'
 import * as S from './styles'
 import { useState, useEffect } from 'react'
 import { postOffers } from 'Context/Action/Offer'
-import { getAssociates } from 'Context/Action/Associates'
+import { getAssociates, GetAssociatesNA } from 'Context/Action/Associates'
 import { toast } from 'react-toastify'
 import { cleanObject } from 'utils/Validation'
 import ImageInput from 'components/ImageInput'
+import { FormatCurrency } from 'utils/Masks'
 
 const CreateOfferFranchise = () => {
   const [file, setFile] = useState(1)
-
+  const [valueFormated, setValueFormated] = useState('0,00')
   const [associates, setAssociates] = useState<any>([])
   const [isIlimmited, setIlimited] = useState(true)
   const [title, setTitle] = useState('')
@@ -23,6 +24,7 @@ const CreateOfferFranchise = () => {
   const [isDirect, setIsDirect] = useState(false)
   const [associateId, setAssociateId] = useState<any>(0)
   const [direct, setDirectID] = useState<any>(null)
+  const [allAssociates, setAllAss] = useState<any>([])
 
   function handleIlimited() {
     setIlimited(true)
@@ -43,7 +45,8 @@ const CreateOfferFranchise = () => {
       consumer_cards,
       quantity: !isIlimmited ? quantity : 0,
       file_id: file,
-      associate_id: associateId
+      associate_id: associateId,
+      directed_id: direct
     }
 
     try {
@@ -55,7 +58,10 @@ const CreateOfferFranchise = () => {
     }
   }
 
-  function compare(a: GetAssociatesAdmin, b: GetAssociatesAdmin) {
+  function compare(
+    a: GetAssociatesAdmin | GetAssociatesNoAuth,
+    b: GetAssociatesAdmin | GetAssociatesNoAuth
+  ) {
     if (a.fantasy_name.toLowerCase() < b.fantasy_name.toLowerCase()) return -1
     if (a.fantasy_name.toLowerCase() > b.fantasy_name.toLowerCase()) return 1
     return 0
@@ -69,8 +75,34 @@ const CreateOfferFranchise = () => {
         .map((e) => ({ value: e.id, label: `${e.fantasy_name} - ${e.id}` }))
       setAssociates(opt)
     }
+
+    async function loadAllAssociates() {
+      try {
+        const { data } = await GetAssociatesNA()
+        const opt = data
+          .sort(compare)
+          .map((e) => ({ value: e.id, label: `${e.fantasy_name} - ${e.id}` }))
+        setAllAss(opt)
+      } catch (err) {
+        console.log(err)
+        toast.error('Erro ao carregar todos os associados.')
+      }
+    }
     loadAssociates()
+    loadAllAssociates()
   }, [])
+
+  function mascaraMoeda(value: string) {
+    const onlyDigits = value
+      .split('')
+      .filter((s: any) => /\d/.test(s))
+      .join('')
+      .padStart(2, '0')
+    const digitsFloat = onlyDigits.slice(0, -2) + '.' + onlyDigits.slice(-2)
+    if (Number(digitsFloat) >= 9999999) return
+    setValueFormated(FormatCurrency(Number(digitsFloat)))
+    setValueOffer(Number(digitsFloat))
+  }
 
   return (
     <S.Wrapper>
@@ -125,20 +157,19 @@ const CreateOfferFranchise = () => {
               isClearable
               className="react-select-container"
               placeholder="Selecione"
-              options={associates}
+              options={allAssociates}
               onChange={(e) => setDirectID(e?.value)}
             />
           </S.SelectWrapper>
         )}
 
         <S.Label>Insira o valor</S.Label>
-        <S.Input
-          min="0"
-          type="number"
-          onChange={(e) => setValueOffer(Number(e.target.value))}
-          value={value_offer.toFixed(2)}
-          step="0.1"
-        />
+        <S.InputDiv>
+          <S.Input
+            onChange={(e) => mascaraMoeda(e.target.value)}
+            value={valueFormated}
+          />
+        </S.InputDiv>
 
         <S.Label>Dividir em quantos &#34;Cartões de Consumo&#34;</S.Label>
         <S.Input
