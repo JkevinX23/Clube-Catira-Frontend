@@ -1,6 +1,8 @@
 import HeaderDash from 'components/Consultant/HeaderDash'
 import Footer from 'components/Footer'
 import { HomeAdminProps } from 'Types'
+import CreateOffer from 'components/Consultant/Offer'
+
 import * as S from './styles'
 
 import Sidebar from 'components/Consultant/Sidebar'
@@ -9,7 +11,7 @@ import Button from 'components/Button'
 import OfferTable from 'templates/TablesConsultant/Offers'
 import ShowOffer from 'templates/Show/Consultant/Offer'
 
-const OfferAdmin = ({ name, role }: HomeAdminProps) => {
+const OfferConsultant = ({ name, role }: HomeAdminProps) => {
   const [selector, setSelector] = useState(1)
   const [id, setId] = useState<number>(0)
 
@@ -30,7 +32,23 @@ const OfferAdmin = ({ name, role }: HomeAdminProps) => {
           <HeaderDash name={name} role={role} />
         </S.WrapperHeader>
         <S.ButtonChange>
-          {selector !== 1 && (
+          {selector === 1 ? (
+            <Button
+              radius="radius100"
+              background="green"
+              onClick={() => setSelector(2)}
+            >
+              Cadastrar nova oferta
+            </Button>
+          ) : selector === 2 ? (
+            <Button
+              radius="radius100"
+              background="green"
+              onClick={() => setSelector(1)}
+            >
+              Gerenciar Ofertas
+            </Button>
+          ) : (
             <Button
               radius="radius100"
               background="green"
@@ -40,7 +58,11 @@ const OfferAdmin = ({ name, role }: HomeAdminProps) => {
             </Button>
           )}
         </S.ButtonChange>
-        {selector === 1 ? (
+        {selector === 2 ? (
+          <S.CreateFranchise>
+            <CreateOffer />
+          </S.CreateFranchise>
+        ) : selector === 1 ? (
           <S.Table>
             <OfferTable setId={setId} />
           </S.Table>
@@ -57,5 +79,4 @@ const OfferAdmin = ({ name, role }: HomeAdminProps) => {
     </S.Wrapper>
   )
 }
-
-export default OfferAdmin
+export default OfferConsultant
