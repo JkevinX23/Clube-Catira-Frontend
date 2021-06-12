@@ -71,7 +71,8 @@ export default function HistoryAssociateTable() {
         8: 'Cancelada',
         9: 'Cancelada',
         10: 'Aprovado',
-        11: 'Bloqueado'
+        11: 'Bloqueado',
+        12: 'Revogado'
       }
     },
     {

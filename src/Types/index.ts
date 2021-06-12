@@ -763,6 +763,23 @@ export interface IncreaseProps {
   }
 }
 
+export interface AdjustmentProps {
+  status?: number
+  value: number
+  description: string
+  option?: number
+  associate_id?: number
+  Associate?: {
+    id: number
+    fantasy_name: string
+    document: string
+    representative: string
+    contact1: string
+    email: string
+    status: number
+  }
+}
+
 export interface IncreaseUpdateProps {
   id: number
   value?: number

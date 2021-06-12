@@ -23,8 +23,18 @@ const ListAssociatesDetails = ({ HeaderProps }: PageProps) => {
   useEffect(() => {
     async function loadAssociates() {
       const { data } = await GetAssociates()
-      setAllAssociates(data)
-      setAssociates(data)
+
+      const order = data.sort(function (a, b) {
+        if (a.fantasy_name.toLowerCase() > b.fantasy_name.toLowerCase()) {
+          return 1
+        }
+        if (a.fantasy_name.toLowerCase() < b.fantasy_name.toLowerCase()) {
+          return -1
+        }
+        return 0
+      })
+      setAllAssociates(order)
+      setAssociates(order)
 
       const cidades: string[] = []
       data.map((ass) => {
