@@ -162,6 +162,15 @@ export default function HistoryAssociateTable() {
               hist[i - 1].credits + revData[i].value
             )
           })
+        } else if (revData[i].type === 7 && revData[i].status === 10) {
+          hist.push({
+            ...revData[i],
+            dateFormated: FormatDateByFNS(revData[i].date),
+            credits: hist[i - 1].credits + revData[i].value,
+            formatCredits: FormatCurrency(
+              hist[i - 1].credits + revData[i].value
+            )
+          })
         } else {
           hist.push({
             ...revData[i],
