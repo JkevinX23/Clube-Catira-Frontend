@@ -348,7 +348,7 @@ const ShowProfileAdministrador = () => {
                 required
                 onChange={(e) => setOldPassword(e.target.value)}
                 type="password"
-                value={password}
+                value={oldPassword}
               />
             </S.TextWrapper>
             <S.TextWrapper items={3}>
