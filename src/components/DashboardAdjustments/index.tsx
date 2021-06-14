@@ -198,7 +198,7 @@ const AdjustmentsCard = () => {
               data={adjustments}
               options={{
                 exportButton: true,
-                pageSize: 5,
+                pageSize: 3,
                 pageSizeOptions: [5, 10, 20, 50],
                 emptyRowsWhenPaging: false
               }}
