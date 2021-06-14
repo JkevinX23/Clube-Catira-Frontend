@@ -13,6 +13,7 @@ export type CardPendingOffDashProps = {
 
 const CardPendingOffDash = ({ pending_offers }: CardPendingOffDashProps) => {
   const [offs, setOffs] = useState(pending_offers)
+  const [toMap, setToMap] = useState<PendingAssociateProps[]>()
 
   useEffect(() => {
     setOffs(pending_offers)
@@ -38,12 +39,16 @@ const CardPendingOffDash = ({ pending_offers }: CardPendingOffDashProps) => {
     }
   }
 
+  useEffect(() => {
+    setToMap([offs[0], offs[1], offs[2]])
+  }, [offs])
+
   return (
     <S.Wrapper>
       <S.Title>Ofertas Pendentes</S.Title>
       <S.Content>
-        {offs &&
-          offs.map((associate, i) => (
+        {toMap &&
+          toMap.map((associate, i) => (
             <PendingAssociate
               key={i}
               id={associate.id}

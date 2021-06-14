@@ -9,7 +9,7 @@ export const Wrapper = styled.div`
     max-width: 35rem;
     align-items: center;
     box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.47);
-    height: 35rem;
+    height: 40rem;
   `}
 `
 export const Sub = styled.p`
