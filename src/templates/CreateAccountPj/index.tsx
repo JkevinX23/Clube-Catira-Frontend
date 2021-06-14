@@ -438,6 +438,9 @@ const CreatePJ = ({ categories, consultants }: pageProps) => {
                 required
                 onChange={(e) => setCredit(e.target.value)}
                 value={credit}
+                step=".01"
+                min="0"
+                type="number"
               />
             </S.TextWrapper>
             <S.TextWrapper items={3}>

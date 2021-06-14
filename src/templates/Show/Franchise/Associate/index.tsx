@@ -21,8 +21,6 @@ const ShowAssociate = ({ id }: props) => {
   const [consultants, setConsultants] = useState<any>([])
   const [file, setFile] = useState<any>()
 
-  const [hidden, setHidden] = useState(false)
-
   const [description, setDescription] = useState('')
   const [site, setSite] = useState('')
   const [facebook, setFacebook] = useState('')
@@ -45,7 +43,7 @@ const ShowAssociate = ({ id }: props) => {
   const [password, setPassword] = useState('')
   const [passwordConfirm, setPasswordConfirm] = useState('')
   const [percentage, setPercentage] = useState(10)
-  const [credit, setCredit] = useState(0)
+  const [credit, setCredit] = useState(0.1)
   const [status, setStatus] = useState(1)
   const [type, setType] = useState(1)
   const [consultant_id, setconsultant_id] = useState(0)
@@ -492,6 +490,9 @@ const ShowAssociate = ({ id }: props) => {
                 required
                 onChange={(e) => setCredit(Number(e.target.value))}
                 value={credit}
+                step=".01"
+                min="0"
+                type="number"
               />
             </S.TextWrapper>
           </S.InlineWrapper>
