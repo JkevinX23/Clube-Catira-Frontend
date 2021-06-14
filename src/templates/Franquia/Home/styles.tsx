@@ -35,7 +35,9 @@ export const WrapperCards = styled.div`
   justify-content: space-between;
 `
 
-export const WrapperFooter = styled.div``
+export const WrapperFooter = styled.div`
+  margin-top: 8rem;
+`
 export const WrapperReports = styled.div`
   display: flex;
   justify-content: space-between;

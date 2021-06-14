@@ -9,7 +9,7 @@ export const Wrapper = styled.div`
     width: 100%;
     height: 40rem;
     padding: 2rem;
-    max-width: 36rem;
+    max-width: 82rem;
     box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.47);
   `}
 `
@@ -91,4 +91,18 @@ export const TextArea = styled.textarea`
   box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
   transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
   padding: 1rem;
+`
+export const Section = styled.div`
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+`
+export const Form = styled.div`
+  width: 40rem;
+  padding-right: 2rem;
+`
+export const Table = styled.div`
+  display: block;
+  width: 100%;
+  z-index: 0;
 `

@@ -40,7 +40,11 @@ const CardPendingOffDash = ({ pending_offers }: CardPendingOffDashProps) => {
   }
 
   useEffect(() => {
-    setToMap([offs[0], offs[1], offs[2]])
+    if (offs) {
+      if (offs.length > 2) setToMap([offs[0], offs[1], offs[2]])
+      else if (offs.length === 2) setToMap([offs[0], offs[1]])
+      else if (offs.length === 1) setToMap([offs[0]])
+    }
   }, [offs])
 
   return (

@@ -769,6 +769,8 @@ export interface AdjustmentProps {
   description: string
   option?: number
   associate_id?: number
+  performedBy?: string
+  associate?: string
   Associate?: {
     id: number
     fantasy_name: string
