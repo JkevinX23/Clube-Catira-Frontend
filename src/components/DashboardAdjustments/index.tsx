@@ -170,8 +170,12 @@ const AdjustmentsCard = () => {
             <S.Label>Insira o valor</S.Label>
             <S.InputDiv>
               <input
-                onChange={(e) => mascaraMoeda(e.target.value)}
-                value={adjustmentValueFormatted}
+                min="-9999999"
+                defaultValue="0"
+                type="number"
+                onChange={(e) => setAdjVal(Number(e.target.value))}
+                value={adjustmentValue}
+                step="0.1"
               />
             </S.InputDiv>
           </S.SelectWrapper>
