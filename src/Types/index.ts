@@ -419,16 +419,31 @@ export interface ShowOfferAssociateProps {
 export interface GetAssociatesAdmin {
   id: number
   fantasy_name: string
+  company_name: string
+  document: string
+  representative: string
+  category: string
+  site: string
+  facebook: string
+  instagram: string
+  description: string
+  cep: string
+  state: string
+  city: string
+  neighborhood: string
+  street: string
+  number: string
+  complement: string
+  contact1: string
+  contact2: string
+  email: string
+  franchise: string
+  consultant: string
+  balance: number
   credit: number
+  percentage: number
   status: number
-  Consultant: {
-    id: number
-    identification: string
-    Franchise: {
-      id: number
-      name: string
-    }
-  }
+  type: number
 }
 
 export interface GetAssociatesNoAuth {
