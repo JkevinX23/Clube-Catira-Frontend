@@ -17,7 +17,7 @@ const CreateOfferAdmin = () => {
   const [description, setDescription] = useState('')
   const [value_offer, setValueOffer] = useState(0)
   const [consumer_cards, setConsumerCards] = useState(1)
-  const [quantity, setQuantity] = useState(0)
+  const [quantity, setQuantity] = useState(1)
   const [isDirect, setIsDirect] = useState(false)
   const [associateId, setAssociateId] = useState<any>(0)
   const [direct, setDirectID] = useState<any>(null)

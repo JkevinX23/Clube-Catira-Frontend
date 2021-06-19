@@ -88,17 +88,17 @@ const DetailsOffer = ({
             break
           case 403:
             toast.error(
-              'Oferta não válida para este usuario. Tente sair e realizar um novo login no sistema.'
+              '[403] Oferta não válida para este usuario. Tente sair e realizar um novo login no sistema.'
             )
             break
           case 406:
             toast.warn(
-              'A quantidade informada está acima da disponibilidade dessa oferta.'
+              '[406] A quantidade informada está acima da disponibilidade dessa oferta.'
             )
             break
           case 408:
             toast.error(
-              'Ocorreu um erro ao processar sua transação. Tente novamente.'
+              '[408] Ocorreu um erro ao processar sua transação. Tente novamente.'
             )
             break
           default:
