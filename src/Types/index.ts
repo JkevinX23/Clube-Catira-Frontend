@@ -444,6 +444,7 @@ export interface GetAssociatesAdmin {
   percentage: number
   status: number
   type: number
+  catz_fee: number
 }
 
 export interface GetAssociatesNoAuth {
@@ -539,6 +540,7 @@ export interface PostAssociateProps {
   category_id: number
   consultant_id: number
   category_suggestion?: string
+  catz_fee?: number
 }
 
 export interface PutAssociateProps {
@@ -571,6 +573,7 @@ export interface PutAssociateProps {
   category_id?: number
   consultant_id?: number
   category_suggestion?: string
+  catz_fee?: number
 }
 
 export interface CategoriesProps {
@@ -624,6 +627,7 @@ export interface ShowAssociateProps {
   category_suggestion_id: number
   consultant_id: number
   address_id: number
+  catz_fee: number
   File: {
     url: string
     id: number

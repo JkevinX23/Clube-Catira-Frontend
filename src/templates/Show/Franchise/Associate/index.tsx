@@ -49,6 +49,7 @@ const ShowAssociate = ({ id }: props) => {
   const [consultant_id, setconsultant_id] = useState(0)
   const [file_id, setFile_id] = useState(0)
   const [fileUrl, setFileUrl] = useState('')
+  const [catz_fee, setCatz_fee] = useState(0)
 
   const [imagePreviewUrl, setImagePreviewUrl] = useState<
     string | ArrayBuffer | null
@@ -102,6 +103,7 @@ const ShowAssociate = ({ id }: props) => {
       setCategory_id(data.category_id || 0)
       setconsultant_id(data.consultant_id)
       setFileUrl(data.File.url)
+      setCatz_fee(data.catz_fee)
     }
     loadAssociate()
   }, [id])
@@ -210,7 +212,8 @@ const ShowAssociate = ({ id }: props) => {
         type,
         facebook,
         instagram,
-        site
+        site,
+        catz_fee
       }
       await updateAssociateAdmin(cleanObject(payload))
       toast.success('Associado atualizado com sucesso!')
@@ -493,6 +496,17 @@ const ShowAssociate = ({ id }: props) => {
                 step=".01"
                 min="0"
                 type="number"
+              />
+            </S.TextWrapper>
+            <S.TextWrapper items={3}>
+              <TextField
+                label="Porcentagem em CATZ"
+                required
+                onChange={(e) => setCatz_fee(Number(e.target.value))}
+                step=".01"
+                min="0"
+                type="number"
+                value={catz_fee}
               />
             </S.TextWrapper>
           </S.InlineWrapper>

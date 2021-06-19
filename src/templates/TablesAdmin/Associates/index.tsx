@@ -90,6 +90,11 @@ export default function ListAssociates({ setId }: props) {
       type: string
     },
     {
+      title: 'Porcentagem Catz',
+      field: 'catz_fee',
+      type: string
+    },
+    {
       title: 'Site',
       field: 'site',
       type: string

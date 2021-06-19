@@ -44,6 +44,7 @@ const CreateAssociate = () => {
   const [type, setType] = useState(1)
   const [consultant_id, setconsultant_id] = useState(0)
   const [file_id, setFile_id] = useState(0)
+  const [catz_fee, setCatz_fee] = useState(0)
 
   const [imagePreviewUrl, setImagePreviewUrl] = useState<
     string | ArrayBuffer | null
@@ -260,7 +261,8 @@ const CreateAssociate = () => {
         type,
         facebook,
         instagram,
-        site
+        site,
+        catz_fee
       }
       await createAssociateAdmin(cleanObject(payload))
       toast.success('Associado criado com sucesso')
@@ -599,6 +601,17 @@ const CreateAssociate = () => {
           </S.InlineWrapper>
 
           <S.InlineWrapper>
+            <S.TextWrapper items={3}>
+              <TextField
+                label="Porcentagem em CATZ"
+                required
+                onChange={(e) => setCatz_fee(Number(e.target.value))}
+                step=".01"
+                min="0"
+                type="number"
+                value={catz_fee}
+              />
+            </S.TextWrapper>
             <S.TextWrapper items={3}>
               <TextField
                 label="Senha"
