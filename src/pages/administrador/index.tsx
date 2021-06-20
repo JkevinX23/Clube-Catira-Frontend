@@ -44,7 +44,7 @@ export default function HomeAdmin() {
           break
       }
     }
-  }, [props.option, router])
+  }, [props, router])
 
   return (
     <div>

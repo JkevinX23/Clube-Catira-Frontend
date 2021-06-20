@@ -88,7 +88,7 @@ export default function Documento() {
             </p>
           }
           <p>
-            <b>Parágrafo Primeiro: </b>CCaso não atenda aos associados do Clube
+            <b>Parágrafo Primeiro: </b>Caso não atenda aos associados do Clube
             da Catira, na forma de produtos ou serviços, nas condições expostas
             acima, após o período de 01 ano, o CREDOR tem o direito de receber
             em moeda corrente circulante o valor da dívida ou parte faltante.
@@ -128,12 +128,12 @@ export default function Documento() {
             <div>
               <span>_________________________________________________</span>
               <br />
-              <p>CREDOR</p>
+              <p>Catira Negocios e Intermediações LTDA</p>
             </div>
             <div>
               <span>_________________________________________________</span>
               <br />
-              <p>DEVEDOR</p>
+              <p>{devedor}</p>
             </div>
           </S.TFooter>
           <br />
