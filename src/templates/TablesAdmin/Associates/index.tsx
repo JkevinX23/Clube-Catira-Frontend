@@ -175,7 +175,7 @@ export default function ListAssociates({ setId }: props) {
     },
     {
       title: 'Tipo',
-      field: 'status',
+      field: 'type',
       lookup: {
         1: 'Visivel',
         2: 'Oculto'
