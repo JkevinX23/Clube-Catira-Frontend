@@ -88,7 +88,15 @@ const DocumentsReportAdm = () => {
             data.city +
             '&reason= ' +
             '&valueRequest=' +
-            documentValue,
+            documentValue +
+            '&endereco=' +
+            data.address +
+            '&responsavel=' +
+            data.responsible +
+            '&contato1=' +
+            data.contact1 +
+            '&contato2=' +
+            data.contact2,
           '_blank'
         )
 

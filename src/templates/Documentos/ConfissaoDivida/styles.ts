@@ -39,6 +39,11 @@ export const PreFooter = styled.div`
   padding-bottom: 1rem;
   font-size: 15px;
   text-align: center;
+  @media print {
+    i {
+      display: none;
+    }
+  }
 `
 
 export const Footer = styled.div`

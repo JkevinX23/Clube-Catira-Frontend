@@ -1057,6 +1057,10 @@ export interface ResponseConfissaoDividaProps {
   next_payment_ny: string
   city: string
   date: string
+  responsible: string
+  contact1: string
+  contact2: string
+  address: string
 }
 export interface AdesaoProps {
   id: number

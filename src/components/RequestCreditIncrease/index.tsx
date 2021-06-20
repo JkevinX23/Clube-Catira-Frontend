@@ -34,7 +34,11 @@ const RequestCreditIncrease = () => {
           data: data.date,
           cidade: data.city,
           reason,
-          valueRequest: value
+          valueRequest: value,
+          endereco: data.address,
+          responsavel: data.responsible,
+          contato1: data.contact1,
+          contato2: data.contact2
         }
       })
     } catch (err) {

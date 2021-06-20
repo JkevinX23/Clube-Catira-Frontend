@@ -9,13 +9,15 @@ export default function Documento() {
   const devedor = router.query.devedor
   const documento = router.query.documento
   const valor = router.query.valor
-  const proximoPagamento = router.query.proximoPagamento
-  const proximoPagamentoPA = router.query.proximoPagamentoPA
-  const cidade = router.query.cidade
   const data = router.query.data
   const valueRequest = Number(router.query.valueRequest)
   const id = router.query.code
   const reason = router.query.reason
+
+  const endereco = router.query.endereco
+  const responsavel = router.query.responsavel
+  const contato1 = router.query.contato1
+  const contato2 = router.query.contato2
 
   async function handleSubmit() {
     if (reason && valueRequest) {
@@ -37,17 +39,26 @@ export default function Documento() {
         <h1>INSTRUMENTO PARTICULAR DE CONFISSÃO DE DÍVIDA</h1>
         <S.Subtitle>
           <h6>
-            CREDOR: CATIRA NEGOCIOS E INTERMEDIACOES LTDA, CNPJ:
+            CREDOR: Catira Negócios e Intermediações Ltda, CNPJ:
             33.691.559/0001-64
           </h6>
           {
             <h6>
-              DEVEDOR: {devedor}, {documento}
+              DEVEDOR: {devedor}, {documento}, situada em {endereco},
+              representado(a) por {responsavel} e atendendo nos seguintes
+              telefones: {contato1} e {contato2}
             </h6>
           }
         </S.Subtitle>
 
         <S.BodyDocument>
+          {
+            <p>
+              Pelo presente instrumento particular e na melhor forma de direito,
+              confessam e assumem como líquida e certa a dívida a seguir
+              descrita:
+            </p>
+          }
           {
             <p>
               <b>CLÁUSULA PRIMEIRA: </b>Ressalvadas quaisquer outras obrigações
@@ -59,42 +70,28 @@ export default function Documento() {
           {
             <p>
               <b>CLÁUSULA SEGUNDA: </b> Embora reconhecendo como boa a origem da
-              dívida, o DEVEDOR, compromete-se a pagar todo dia 05 (cinco) de
-              cada mês, a partir de {proximoPagamento}, e até que encerre o
-              montante devido, 50% do seu rendimento mensal proveniente da
-              empresa Catira Negócios e Intermediações Ltda, inscrita no CNPJ
-              33.691.559/0001-64, a qual detêm 25% das cotas de participação.
+              dívida, o DEVEDOR, compromete-se a pagar no período de 01 ano, a
+              partir da data de assinatura deste, na forma de produtos ou
+              serviços oferecidos dentro da plataforma Clube da Catira, sendo
+              que não poderá deixar de atender por um valor mínimo referente a
+              1/12 do valor total da dívida mensalmente.
             </p>
           }
           <p>
-            <b>Parágrafo Primeiro: </b>Caso venha a dispor das suas cotas de
-            participação na empresa acima referida acontecerá o vencimento
-            integral e antecipado do débito, sujeitando a DEVEDOR, além da
-            execução do presente instrumento, ao pagamento do valor integral do
-            débito, sobre o qual incidirá a aplicação de multa instituída na
-            forma da Lei.
+            <b>Parágrafo Primeiro: </b>CCaso não atenda aos associados do Clube
+            da Catira, na forma de produtos ou serviços, nas condições expostas
+            acima, após o período de 01 ano, o CREDOR tem o direito de receber
+            em moeda corrente circulante o valor da dívida ou parte faltante.
           </p>
-
           {
             <p>
-              <b>Parágrafo Segundo: </b>Caso a empresa referida acima venha a
-              falência ou não aja faturamento suficiente para que o DEVEDOR
-              honre com o pagamento da dívida durante o ano de 2021, a forma de
-              pagamento será transformada em parcelas mensais, pagas sempre no
-              dia 05 de cada mês, a partir de janeiro de
-              {proximoPagamentoPA}, no valor de, meio salário mínimo vigente nas
-              datas de pagamento, cada parcela, até que seja pago todo montante
-              da dívida.
+              <b>Parágrafo Segundo: </b>O não pagamento de qualquer parcela no
+              seu vencimento, importará no vencimento integral e antecipado do
+              débito, sujeitando a DEVEDOR, além da execução do presente
+              instrumento, ao pagamento do valor integral do débito, sobre o
+              qual incidirá a aplicação de multa instituída na forma da Lei.
             </p>
           }
-          <p>
-            <b>Parágrafo Terceiro: </b>O não pagamento de qualquer parcela no
-            seu vencimento, importará no vencimento integral e antecipado do
-            débito, sujeitando a DEVEDOR, além da execução do presente
-            instrumento, ao pagamento do valor integral do débito, sobre o qual
-            incidirá a aplicação de multa instituída na forma da Lei.
-          </p>
-
           <p>
             <b>CLÁUSULA TERCEIRA: </b>À DÍVIDA ora reconhecida e assumida pelo
             DEVEDOR, como líquida, certa e exigível, no valor acima mencionado,
@@ -115,13 +112,7 @@ export default function Documento() {
             na presença de duas testemunhas.
           </p>
         </S.BodyDocument>
-        <S.PreFooter>
-          {
-            <p>
-              {cidade}, {data}
-            </p>
-          }
-        </S.PreFooter>
+        <S.PreFooter>{<p>Juiz de Fora, {data}</p>}</S.PreFooter>
         <S.Footer>
           <S.TFooter>
             <div>
@@ -153,6 +144,14 @@ export default function Documento() {
           </S.TFooter>
         </S.Footer>
       </S.Wrapper>
+      <S.PreFooter>
+        {' '}
+        <i>
+          {' '}
+          *Assinar, reconhecer firma e encaminhar ao seu consultor Clube da
+          Catira. Assim feito basta aguardar a liberação do limite desejado.
+        </i>
+      </S.PreFooter>
       <S.Button>
         <button onClick={() => handleSubmit()}> CONCORDAR E IMPRIMIR </button>
       </S.Button>
