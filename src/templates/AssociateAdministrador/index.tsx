@@ -25,8 +25,8 @@ const AssociatesAdmin = ({ name, role }: HomeAdminProps) => {
     }
   }, [id])
 
-  function handleChange() {
-    setSelector(1)
+  function handleChange(value: number) {
+    setSelector(value)
     setId(0)
   }
 
@@ -40,21 +40,21 @@ const AssociatesAdmin = ({ name, role }: HomeAdminProps) => {
           <Button
             radius="radius100"
             background="black"
-            onClick={() => setSelector(1)}
+            onClick={() => handleChange(1)}
           >
             Tabela Basica
           </Button>
           <Button
             radius="radius100"
             background="black"
-            onClick={() => setSelector(2)}
+            onClick={() => handleChange(2)}
           >
             Tabela Essencial
           </Button>
           <Button
             radius="radius100"
             background="black"
-            onClick={() => setSelector(3)}
+            onClick={() => handleChange(3)}
           >
             Tabela Completa
           </Button>
@@ -62,7 +62,7 @@ const AssociatesAdmin = ({ name, role }: HomeAdminProps) => {
             <Button
               radius="radius100"
               background="green"
-              onClick={() => setSelector(4)}
+              onClick={() => handleChange(4)}
             >
               Cadastrar novo associado
             </Button>
@@ -70,7 +70,7 @@ const AssociatesAdmin = ({ name, role }: HomeAdminProps) => {
             <Button
               radius="radius100"
               background="green"
-              onClick={handleChange}
+              onClick={() => handleChange(1)}
             >
               Voltar
             </Button>
@@ -93,9 +93,11 @@ const AssociatesAdmin = ({ name, role }: HomeAdminProps) => {
             <CompleteTable setId={setId} />
           </S.Table>
         ) : (
-          <S.CreateFranchise>
-            <ShowAssociate id={id} />
-          </S.CreateFranchise>
+          id !== 0 && (
+            <S.CreateFranchise>
+              <ShowAssociate id={id} />
+            </S.CreateFranchise>
+          )
         )}
       </S.WrapperContent>
       <SidebarAdmin />
