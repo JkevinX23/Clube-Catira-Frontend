@@ -58,7 +58,7 @@ export const CreateFranchise = styled.div`
 export const ButtonChange = styled.div`
   display: flex;
   width: 100%;
-  justify-content: flex-end;
+  justify-content: space-around;
   padding-left: 5%;
   padding-right: 5%;
   padding-top: 2rem;

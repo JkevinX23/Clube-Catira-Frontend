@@ -445,6 +445,7 @@ export interface GetAssociatesAdmin {
   status: number
   type: number
   catz_fee: number
+  qtd_offers: number
 }
 
 export interface GetAssociatesNoAuth {

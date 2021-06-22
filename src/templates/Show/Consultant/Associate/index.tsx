@@ -1,15 +1,9 @@
 import Button from 'components/Button'
 import TextField from 'components/TextField'
 import { useEffect, useState } from 'react'
-import { SyntheticEvent } from 'Types'
 import * as S from './styles'
 import { cellphoneeMask, cepMask, cpfCnpjMask } from 'utils/Masks'
-import { isEmail, validarCPF, validarCNPJ, cleanObject } from 'utils/Validation'
-import { toast } from 'react-toastify'
-import { getCategoriesAdmin } from 'Context/Action/Category'
-import { getConsultants } from 'Context/Action/Consultant'
-import { postFile } from 'Context/Action/File'
-import { showAssociate, updateAssociateAdmin } from 'Context/Action/Associates'
+import { showAssociate } from 'Context/Action/Associates'
 
 type props = {
   id: number
@@ -17,11 +11,6 @@ type props = {
 
 const ShowAssociate = ({ id }: props) => {
   const [categories, setCategories] = useState<any>([])
-  const [consultants, setConsultants] = useState<any>([])
-  const [file, setFile] = useState<any>()
-
-  const [hidden, setHidden] = useState(false)
-
   const [description, setDescription] = useState('')
   const [site, setSite] = useState('')
   const [facebook, setFacebook] = useState('')
@@ -41,14 +30,11 @@ const ShowAssociate = ({ id }: props) => {
   const [complement, setComplement] = useState('')
   const [contact1, setContact1] = useState('')
   const [contact2, setContact2] = useState('')
-  const [password, setPassword] = useState('')
-  const [passwordConfirm, setPasswordConfirm] = useState('')
   const [percentage, setPercentage] = useState(10)
   const [credit, setCredit] = useState(0)
   const [status, setStatus] = useState(1)
   const [type, setType] = useState(1)
   const [consultant_id, setconsultant_id] = useState(0)
-  const [file_id, setFile_id] = useState(0)
   const [fileUrl, setFileUrl] = useState('/img/preview-clube.webp')
 
   useEffect(() => {
@@ -113,100 +99,13 @@ const ShowAssociate = ({ id }: props) => {
     }
   }, [cep])
 
-  useEffect(() => {
-    async function loadCategories() {
-      const { data } = await getCategoriesAdmin()
-      setCategories(data)
-    }
-
-    async function loadConsultants() {
-      const { data } = await getConsultants()
-      setConsultants(
-        data.filter((a) => a.status === 1).sort((a, b) => b.id - a.id)
-      )
-    }
-
-    loadCategories()
-    loadConsultants()
-  }, [])
-
-  async function handlesubmit() {
-    if (!isEmail(email)) {
-      toast.error('Email Invalido')
-      return
-    }
-    if (password !== passwordConfirm) {
-      toast.warn('As senhas não coorespondem.')
-      return
-    }
-    if (document.length === 14) {
-      if (!validarCPF(document)) {
-        toast.warn('CPF inválido')
-        return
-      }
-    } else {
-      if (!validarCNPJ(document)) {
-        toast.warn('CNPJ inválido')
-        return
-      }
-    }
-
-    if (password && password.length < 6) {
-      toast.info('Sua senha deve ter pelo menos 6 caracteres.')
-      return
-    }
-
-    try {
-      let file_id
-      if (file) {
-        const { data } = await postFile(file)
-        file_id = data.id
-      }
-      const payload = {
-        id,
-        description,
-        fantasy_name,
-        document,
-        company_name,
-        representative: response_name,
-        contact1,
-        email,
-        password,
-        cep,
-        city,
-        neighborhood,
-        number,
-        state,
-        complement,
-        credit,
-        file_id,
-        category_id,
-        percentage,
-        status,
-        street,
-        contact2,
-        consultant_id,
-        type,
-        facebook,
-        instagram,
-        site
-      }
-      await updateAssociateAdmin(cleanObject(payload))
-      toast.success('Associado atualizado com sucesso!')
-    } catch (err) {
-      toast.error(
-        'Algo de errado aconteceu, verifique os dados. Se persistir, contate o administrador do sistema'
-      )
-    }
-  }
-
   return (
     <S.Wrapper>
       <S.FormWrapper>
         <S.TextFieldWrapper>
           <S.InlineWrapper>
             <S.TextWrapper items={3}>
-              <S.Image src={fileUrl} width={256} height={182} />
+              <S.Image src={fileUrl} width={300} height={182} />
             </S.TextWrapper>
             <S.TextWrapper items={1}>
               <S.Label>Descrição</S.Label>
@@ -367,7 +266,7 @@ const ShowAssociate = ({ id }: props) => {
             <S.TextWrapper items={3}>
               <S.WrapperRadio>
                 <S.Label>SITUAÇÃO</S.Label>
-                <S.RadioLabel onClick={() => setStatus(0)}>
+                <S.RadioLabel>
                   <S.InputRadio
                     type="radio"
                     id="sim"
@@ -377,7 +276,7 @@ const ShowAssociate = ({ id }: props) => {
                   />
                   Pendente
                 </S.RadioLabel>
-                <S.RadioLabel onClick={() => setStatus(1)}>
+                <S.RadioLabel>
                   <S.InputRadio
                     type="radio"
                     id="sim"
@@ -388,7 +287,7 @@ const ShowAssociate = ({ id }: props) => {
                   Ativo
                 </S.RadioLabel>
 
-                <S.RadioLabel onClick={() => setStatus(2)}>
+                <S.RadioLabel>
                   <S.InputRadio
                     type="radio"
                     id="nao"
@@ -404,7 +303,7 @@ const ShowAssociate = ({ id }: props) => {
             <S.TextWrapper items={1}>
               <S.WrapperRadio>
                 <S.Label>TIPO</S.Label>
-                <S.RadioLabel onClick={() => setType(2)}>
+                <S.RadioLabel>
                   <S.InputRadio
                     type="radio"
                     id="oculto"
@@ -414,7 +313,7 @@ const ShowAssociate = ({ id }: props) => {
                   Oculto
                 </S.RadioLabel>
 
-                <S.RadioLabel onClick={() => setType(1)}>
+                <S.RadioLabel>
                   <S.InputRadio
                     type="radio"
                     id="visivel"

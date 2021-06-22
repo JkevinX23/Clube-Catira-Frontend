@@ -24,6 +24,10 @@ export const GetAssociatesNA = async () =>
 export const GetAssociates = async () =>
   api.get<GetAssociatesAuth[]>('/associate')
 
+//Rota criada pra específicar o nível da listagem (Básica, essencial ou completa)
+export const GetAssociatesList = async (type: number) =>
+  api.get<GetAssociatesAdmin[]>('/associate/list?type=' + type)
+
 export const createAssociateAdmin = async (data: PostAssociateProps) =>
   api.post('/associate-auth', data)
 

@@ -12,11 +12,15 @@ module.exports = withPWA({
 module.exports = {
   publicRuntimeConfig: {
     // Will be available on both server and client
-    backendUrl: 'http://192.168.1.104:3334/'
+    backendUrl: 'https://svr.aliancadescontos.com/'
   }
 }
 module.exports = {
   images: {
-    domains: ['192.168.1.104', 'svr.rededetrocas.com']
+    domains: [
+      '192.168.1.104',
+      'svr.rededetrocas.com',
+      'svr.aliancadescontos.com'
+    ]
   }
 }
