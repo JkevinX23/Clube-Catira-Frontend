@@ -21,7 +21,7 @@ const AssociatesAdmin = ({ name, role }: HomeAdminProps) => {
 
   useEffect(() => {
     if (id !== 0) {
-      setSelector(3)
+      setSelector(5)
     }
   }, [id])
 
