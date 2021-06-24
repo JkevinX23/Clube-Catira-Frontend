@@ -159,7 +159,7 @@ const CreateOfferAdmin = () => {
           onChange={(e) => setConsumerCards(Number(e.target.value))}
         />
 
-        {isDirect && (
+        {!isDirect && (
           <div>
             <S.Label>Quantidade Disponível</S.Label>
             <S.WrapperRadio>
