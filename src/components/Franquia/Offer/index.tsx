@@ -12,7 +12,7 @@ import ImageInput from 'components/ImageInput'
 import { FormatCurrency } from 'utils/Masks'
 
 const CreateOfferFranchise = () => {
-  const [file, setFile] = useState(1)
+  const [file, setFile] = useState(0)
   const [valueFormated, setValueFormated] = useState('0,00')
   const [associates, setAssociates] = useState<any>([])
   const [isIlimmited, setIlimited] = useState(true)
@@ -38,16 +38,26 @@ const CreateOfferFranchise = () => {
   }
 
   async function handleOffer() {
-    const data = {
-      title,
-      description,
-      value_offer: value_offer | 0,
-      consumer_cards,
-      quantity: !isIlimmited ? quantity : 0,
-      file_id: file,
-      associate_id: associateId,
-      directed_id: direct
-    }
+    const data = isDirect
+      ? {
+          title,
+          description,
+          value_offer: value_offer || 0.0,
+          consumer_cards: 1,
+          quantity: 1,
+          file_id: file,
+          directed_id: direct,
+          associate_id: associateId
+        }
+      : {
+          title,
+          description,
+          value_offer: value_offer || 0.0,
+          consumer_cards,
+          quantity: !isIlimmited ? quantity : 0,
+          associate_id: associateId,
+          file_id: file
+        }
 
     try {
       await postOffers(cleanObject(data))
@@ -178,43 +188,45 @@ const CreateOfferFranchise = () => {
           defaultValue="1"
           onChange={(e) => setConsumerCards(Number(e.target.value))}
         />
+        {!isDirect && (
+          <div>
+            <S.Label>Quantidade Disponível</S.Label>
+            <S.WrapperRadio>
+              <S.RadioLabel onClick={handleLimited}>
+                <S.InputRadio
+                  type="radio"
+                  id="limitada"
+                  name="limit"
+                  value="limitada"
+                />
+                Limitada
+              </S.RadioLabel>
 
-        <S.Label>Quantidade Disponível</S.Label>
-        <S.WrapperRadio>
-          <S.RadioLabel onClick={handleLimited}>
-            <S.InputRadio
-              type="radio"
-              id="limitada"
-              name="limit"
-              value="limitada"
-            />
-            Limitada
-          </S.RadioLabel>
+              <S.RadioLabel onClick={handleIlimited}>
+                <S.InputRadio
+                  type="radio"
+                  id="ilimitada"
+                  name="limit"
+                  value="ilimitada"
+                  defaultChecked
+                />
+                Ilimitada
+              </S.RadioLabel>
+            </S.WrapperRadio>
 
-          <S.RadioLabel onClick={handleIlimited}>
-            <S.InputRadio
-              type="radio"
-              id="ilimitada"
-              name="limit"
-              value="ilimitada"
-              defaultChecked
-            />
-            Ilimitada
-          </S.RadioLabel>
-        </S.WrapperRadio>
-
-        {!isIlimmited && (
-          <>
-            <S.Label>Insira a quantidade</S.Label>
-            <S.Input
-              min="1"
-              type="number"
-              defaultValue="1"
-              onChange={(e) => setQuantity(Number(e.target.value))}
-            />
-          </>
+            {!isIlimmited && (
+              <>
+                <S.Label>Insira a quantidade</S.Label>
+                <S.Input
+                  min="1"
+                  type="number"
+                  defaultValue="1"
+                  onChange={(e) => setQuantity(Number(e.target.value))}
+                />
+              </>
+            )}
+          </div>
         )}
-
         <S.WrapperButton>
           <Button
             background="black"
