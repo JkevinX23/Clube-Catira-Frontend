@@ -686,6 +686,7 @@ export interface ResponsePostCatira {
     code: string
     date: string
   }
+  status?: number
 }
 
 export interface MyOffersProps {

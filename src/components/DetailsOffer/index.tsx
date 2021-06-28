@@ -68,7 +68,12 @@ const DetailsOffer = ({
       setStatus(1)
       toast.success('Aguarde, estamos processando sua solicitação')
       const { data } = await PurschaseOffer(payload)
-      const { checkout } = data
+      const { checkout, status } = data
+      if (status && status === 220) {
+        toast.success('Compra realizada com sucesso! ')
+        route.push('/associado/vouchers')
+        return
+      }
       setCode(checkout.code)
       setStatus(2)
       route.push(
