@@ -7,21 +7,19 @@ import Button from 'components/Button'
 import { FormatCurrency } from 'utils/Masks'
 import { emitirDocumento } from 'Context/Action/Increases'
 import { toast } from 'react-toastify'
-import { useRouter } from 'next/router'
 
 export type ReportCardDashProps = {
   direct: number
   pending: number
 }
 
-const DocumentsReportAdm = () => {
+const DocumentsReportFranchise = () => {
   const [id, setId] = useState<any>(0)
   const [tipo, setTipo] = useState<any>(1)
   const [associates, setAssociates] = useState<any>(null)
   const [tipos, setTipos] = useState<any>(null)
   const [documentValueFormatted, setDocValFormatted] = useState('0,00')
   const [documentValue, setDocVal] = useState(0)
-  const route = useRouter()
   function compare(a: GetAssociatesAdmin, b: GetAssociatesAdmin) {
     if (a.fantasy_name.toLowerCase() < b.fantasy_name.toLowerCase()) return -1
     if (a.fantasy_name.toLowerCase() > b.fantasy_name.toLowerCase()) return 1
@@ -69,7 +67,7 @@ const DocumentsReportAdm = () => {
         })
 
         window.open(
-          '/administrador/documentos/confissaoDivida' +
+          '/franquia/documentos/confissaoDivida' +
             '?code=' +
             data.id +
             '&devedor=' +
@@ -105,7 +103,7 @@ const DocumentsReportAdm = () => {
           associate_id: id
         })
         window.open(
-          '/administrador/documentos/adesao' +
+          '/franquia/documentos/adesao' +
             '?code=' +
             data.id +
             '&associate_name=' +
@@ -176,4 +174,4 @@ const DocumentsReportAdm = () => {
   )
 }
 
-export default DocumentsReportAdm
+export default DocumentsReportFranchise

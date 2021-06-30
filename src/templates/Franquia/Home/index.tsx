@@ -8,6 +8,7 @@ import ReportCardDash from 'components/ReportCardDash'
 import CardPendingOffDash from 'components/CardPendingOffDash'
 import SidebarFranchise from 'components/Franquia/Sidebar'
 import AdjustmentsCard from 'components/DashboardAdjustments'
+import DocumentsReportFranchise from 'components/Franquia/DashboardDocuments'
 
 const HomeFranchise = ({ name, role, page_data }: HomeDashAdminProps) => {
   return (
@@ -54,7 +55,10 @@ const HomeFranchise = ({ name, role, page_data }: HomeDashAdminProps) => {
             <CardPendingOffDash pending_offers={page_data.pending_offers} />
           </S.DashNewAssociate>
         </S.WrapperReports>
-        <AdjustmentsCard />
+        <S.Row>
+          <DocumentsReportFranchise />
+          <AdjustmentsCard />
+        </S.Row>
       </S.WrapperContent>
       <SidebarFranchise />
       <S.WrapperFooter>

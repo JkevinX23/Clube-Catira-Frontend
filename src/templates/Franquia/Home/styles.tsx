@@ -49,3 +49,7 @@ export const DashNewAssociate = styled.div`
   width: 100%;
   justify-content: center;
 `
+export const Row = styled.div`
+  display: flex;
+  gap: 4rem;
+`
