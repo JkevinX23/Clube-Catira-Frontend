@@ -204,7 +204,8 @@ const AdjustmentsCard = () => {
                 exportButton: true,
                 pageSize: 3,
                 pageSizeOptions: [5, 10, 20, 50],
-                emptyRowsWhenPaging: false
+                emptyRowsWhenPaging: false,
+                exportAllData: true
               }}
               localization={{
                 body: {

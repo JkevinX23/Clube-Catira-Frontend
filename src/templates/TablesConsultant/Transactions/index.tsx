@@ -67,7 +67,7 @@ export default function TransactionTableAdmin() {
           title="Transações"
           columns={columns}
           data={[]}
-          options={{ exportButton: true }}
+          options={{ exportButton: true, exportAllData: true }}
           localization={{
             header: { actions: 'Ações' },
             body: {

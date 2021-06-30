@@ -95,7 +95,7 @@ export default function TableListVouchers({ id, setTrasnsactionId }: Props) {
           title={`Vouchers gerados pela transação Nº${id}`}
           columns={columns}
           data={data}
-          options={{ exportButton: true }}
+          options={{ exportButton: true, exportAllData: true }}
           localization={{
             header: { actions: 'Ações' },
             body: {

@@ -121,7 +121,7 @@ export default function IncreasesTable() {
           title="Aumentos"
           columns={columns}
           data={increases}
-          options={{ exportButton: true }}
+          options={{ exportButton: true, exportAllData: true }}
           localization={{
             header: { actions: 'Ações' },
             body: {

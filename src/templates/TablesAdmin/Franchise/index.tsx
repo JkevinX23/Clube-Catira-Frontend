@@ -82,7 +82,7 @@ export default function ListFranchise({ setId }: props) {
           title="Franquias"
           columns={columns}
           data={data}
-          options={{ exportButton: true }}
+          options={{ exportButton: true, exportAllData: true }}
           localization={{
             header: { actions: 'Ações' },
             body: {

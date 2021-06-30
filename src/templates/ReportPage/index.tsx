@@ -19,6 +19,7 @@ export default function ReportAdminPage() {
           dateInit: startDate,
           dateEnd: endDate
         })
+        console.log(data)
         setPayload(data)
       } catch (err) {
         toast.warn('Algo de errado ocorreu.')

@@ -76,7 +76,7 @@ export default function ListAssociates({ setId }: props) {
           title="Associados"
           columns={columns}
           data={data}
-          options={{ exportButton: true }}
+          options={{ exportButton: true, exportAllData: true }}
           localization={{
             header: { actions: 'Ações' },
             body: {

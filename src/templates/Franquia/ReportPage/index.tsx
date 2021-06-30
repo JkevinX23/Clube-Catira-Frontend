@@ -20,6 +20,7 @@ export default function ReportFranchisePage() {
           dateEnd: endDate
         })
         setPayload(data)
+        console.log({ data })
       } catch (err) {
         toast.warn('Algo de errado ocorreu.')
       }

@@ -151,7 +151,7 @@ export default function TableListVouchers({
           } Nº${id}`}
           columns={isSale ? columnsVenda : columnsCompra}
           data={data}
-          options={{ exportButton: true }}
+          options={{ exportButton: true, exportAllData: true }}
           localization={{
             header: { actions: 'Imprimir' },
             body: {

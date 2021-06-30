@@ -81,7 +81,7 @@ export default function ListConsultants({ setId }: props) {
           title="Consultores"
           columns={columns}
           data={data}
-          options={{ exportButton: true }}
+          options={{ exportButton: true, exportAllData: true }}
           localization={{
             header: { actions: 'Ações' },
             body: {

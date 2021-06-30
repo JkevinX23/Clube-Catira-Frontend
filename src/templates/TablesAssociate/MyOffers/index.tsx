@@ -121,7 +121,7 @@ export default function TableListMyOffers() {
           title="Minhas Ofertas"
           columns={columns}
           data={data}
-          options={{ exportButton: true }}
+          options={{ exportButton: true, exportAllData: true }}
           localization={{
             header: { actions: 'Desativar' },
             body: {

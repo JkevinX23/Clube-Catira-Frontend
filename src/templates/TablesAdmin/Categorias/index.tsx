@@ -92,7 +92,7 @@ export default function TableCategories() {
           title="Categorias"
           columns={columns}
           data={categories}
-          options={{ exportButton: true }}
+          options={{ exportButton: true, exportAllData: true }}
           localization={{
             header: { actions: 'Ações' },
             body: {
