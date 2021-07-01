@@ -2,6 +2,7 @@ import Button from 'components/Button'
 import { updateAssociate } from 'Context/Action/Associates'
 import { useState } from 'react'
 import { toast } from 'react-toastify'
+import { cleanObject } from 'utils/Validation'
 import * as S from './styles'
 
 type descProps = {
@@ -19,7 +20,8 @@ const MyAccountDesc = (social: descProps) => {
 
   async function handleChange() {
     try {
-      await updateAssociate({ site, facebook, instagram, description })
+      const data = { site, facebook, instagram, description }
+      await updateAssociate(cleanObject(data))
       toast.success('Dados atualizados com sucesso!')
     } catch (err) {
       console.log(err)
