@@ -23,6 +23,7 @@ const CreateOfferAssociate = () => {
   const [direct, setDirectID] = useState<any>(null)
   const [associates, setAssociates] = useState<any>([])
   const [options, setOptions] = useState<any>(null)
+  const [hasConsummer, setHasConsummer] = useState(false)
 
   //////CLIENT.IMAGE_ID
   const [file, setFile] = useState<number>(0)
@@ -174,12 +175,39 @@ const CreateOfferAssociate = () => {
           />
         </S.InputDiv>
         {!isDirect && (
+          <S.WrapperField>
+            <S.Label>Deseja dividir essa oferta em cartões de consumo?</S.Label>
+            <S.WrapperRadio>
+              <S.RadioLabel onClick={() => setHasConsummer(true)}>
+                <S.InputRadio
+                  type="radio"
+                  id="hasConsummer_sim"
+                  name="hasConsummer"
+                  value="sim"
+                />
+                Sim
+              </S.RadioLabel>
+
+              <S.RadioLabel onClick={() => setHasConsummer(false)}>
+                <S.InputRadio
+                  type="radio"
+                  id="hasConsummer_nao"
+                  name="hasConsummer"
+                  value="nao"
+                  defaultChecked
+                />
+                Não
+              </S.RadioLabel>
+            </S.WrapperRadio>
+          </S.WrapperField>
+        )}
+
+        {!isDirect && hasConsummer && (
           <>
             <S.Label>Dividir em quantos &#34;Cartões de Consumo&#34;</S.Label>
             <S.Input
               min="1"
               type="number"
-              defaultValue={1}
               onChange={(e) => setConsumerCards(Number(e.target.value))}
               value={consumer_cards}
             />
@@ -206,7 +234,6 @@ const CreateOfferAssociate = () => {
                   id="ilimitada"
                   name="limit"
                   value="ilimitada"
-                  checked={isIlimmited}
                 />
                 Ilimitada
               </S.RadioLabel>
@@ -218,7 +245,6 @@ const CreateOfferAssociate = () => {
                 <S.Input
                   min="1"
                   type="number"
-                  defaultValue="1"
                   value={quantity}
                   onChange={(e) => setQuantity(Number(e.target.value))}
                 />
