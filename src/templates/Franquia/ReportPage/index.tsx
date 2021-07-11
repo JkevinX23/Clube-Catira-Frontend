@@ -84,7 +84,7 @@ export default function ReportFranchisePage() {
                   TOTAL ARRECADADO:{' '}
                   {FormatCurrency(
                     (payload as GetFranchiseReport).report.detalhesConsultor.reduce(
-                      (c, b) => c + b.totalLiquidoTransacoes,
+                      (c, b) => c + Number(b.totalLiquidoTransacoes),
                       0
                     )
                   )}
@@ -93,7 +93,7 @@ export default function ReportFranchisePage() {
                   TOTAL A REPASSAR AOS CONSULTORES:{' '}
                   {FormatCurrency(
                     (payload as GetFranchiseReport).report.detalhesConsultor.reduce(
-                      (c, b) => c + b.comissao,
+                      (c, b) => c + Number(b.comissao),
                       0
                     )
                   )}
@@ -102,7 +102,7 @@ export default function ReportFranchisePage() {
                   TOTAL A REPASSAR A FRANQUEADORA:
                   {FormatCurrency(
                     (payload as GetFranchiseReport).report.detalhesConsultor.reduce(
-                      (c, b) => c + b.totalLiquidoTransacoes,
+                      (c, b) => c + Number(b.totalLiquidoTransacoes),
                       0
                     ) *
                       ((payload as GetFranchiseReport).report.porcentagem / 100)
